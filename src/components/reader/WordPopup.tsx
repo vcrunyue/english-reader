@@ -11,6 +11,7 @@ interface WordPopupProps {
   position: { x: number; y: number };
   isSaved: boolean;
   onSave: (word: string) => void;
+  onMouseEnter?: () => void;
   onClose: () => void;
 }
 
@@ -20,6 +21,7 @@ export default function WordPopup({
   position,
   isSaved,
   onSave,
+  onMouseEnter,
   onClose,
 }: WordPopupProps) {
   const ref = useRef<HTMLDivElement>(null);
@@ -43,6 +45,7 @@ export default function WordPopup({
       ref={ref}
       className="fixed z-50 bg-white rounded-xl shadow-xl border border-gray-200 p-3 min-w-[180px] max-w-[240px]"
       style={{ left: position.x, top: position.y }}
+      onMouseEnter={onMouseEnter}
       onMouseLeave={onClose}
     >
       <div className="flex items-center gap-2 mb-1">

@@ -37,8 +37,8 @@ export default async function ArticlePage({ params }: Props) {
         </header>
 
         {/* 正文 */}
-        <div className="flex-1 overflow-y-auto px-8 py-6 max-w-3xl">
-          <h1 className="text-xl font-bold mb-1">{article.title}</h1>
+        <div className="flex-1 overflow-y-auto px-6 py-6 max-w-4xl">
+          <h1 className="text-2xl font-bold mb-1">{article.title}</h1>
           <p className="text-xs text-gray-400 mb-6">
             {article.source} · {article.date}
           </p>
@@ -47,7 +47,7 @@ export default async function ArticlePage({ params }: Props) {
       </div>
 
       {/* 右侧面板 */}
-      <aside className="w-1/6 min-w-[180px] max-w-[280px] border-l border-gray-200 bg-gray-50 overflow-y-auto">
+      <aside className="w-[220px] shrink-0 border-l border-gray-200 bg-gray-50 overflow-y-auto">
         <WordPanelWrapper content={article.content} />
       </aside>
     </div>

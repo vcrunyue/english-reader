@@ -25,9 +25,9 @@ export function tokenize(text: string): Array<{ word: string; index: number }> {
 }
 
 const DIFFICULTY_COLORS: Record<Difficulty, string> = {
-  cet4: 'border-b-2 border-green-300 bg-green-50 hover:bg-green-100',
-  cet6: 'border-b-2 border-yellow-300 bg-yellow-50 hover:bg-yellow-100',
-  postgrad: 'border-b-2 border-red-300 bg-red-50 hover:bg-red-100',
+  cet4: 'bg-green-100 hover:bg-green-200 px-0.5',
+  cet6: 'bg-yellow-100 hover:bg-yellow-200 px-0.5',
+  postgrad: 'bg-red-100 hover:bg-red-200 px-0.5',
 };
 
 const DIFFICULTY_DOT_COLORS: Record<Difficulty, string> = {

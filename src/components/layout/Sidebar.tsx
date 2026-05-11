@@ -25,13 +25,13 @@ export default function Sidebar() {
 
   return (
     <aside
-      className={`flex flex-col bg-gray-50 border-r border-gray-200 transition-all duration-200 ${
+      className={`flex flex-col bg-gray-50 border-r border-gray-200 transition-all duration-200 overflow-hidden ${
         collapsed ? 'w-14' : 'w-48'
       }`}
     >
       <button
         onClick={() => setCollapsed(!collapsed)}
-        className="flex items-center justify-center h-12 border-b border-gray-200 hover:bg-gray-100 transition-colors"
+        className="flex items-center justify-center h-12 border-b border-gray-200 hover:bg-gray-100 transition-colors shrink-0"
         title={collapsed ? '展开侧边栏' : '收起侧边栏'}
       >
         {collapsed ? <ChevronRight size={18} /> : <ChevronLeft size={18} />}
@@ -44,15 +44,17 @@ export default function Sidebar() {
             <Link
               key={href}
               href={href}
-              className={`flex items-center gap-3 px-3 py-2.5 mx-1 rounded-lg text-sm transition-colors ${
+              className={`flex items-center gap-3 px-3 py-2.5 mx-1 rounded-lg text-sm transition-colors whitespace-nowrap ${
                 isActive
                   ? 'bg-blue-100 text-blue-700 font-medium'
                   : 'text-gray-600 hover:bg-gray-100'
               } ${collapsed ? 'justify-center' : ''}`}
               title={collapsed ? label : undefined}
             >
-              <Icon size={18} />
-              {!collapsed && <span>{label}</span>}
+              <Icon size={18} className="shrink-0" />
+              <span className={`transition-opacity duration-200 ${collapsed ? 'opacity-0' : 'opacity-100'}`}>
+                {label}
+              </span>
             </Link>
           );
         })}

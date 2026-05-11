@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useMemo, useCallback } from 'react';
+import React, { useState, useMemo, useCallback, useRef } from 'react';
 import type { VocabMap, VocabEntry } from '@/types';
 import { useAppContext } from '@/context/AppContext';
 import { lookupWord, getDifficultyColor } from '@/lib/vocab';
@@ -22,6 +22,7 @@ export default function ArticleBody({ content, vocab }: ArticleBodyProps) {
   const { knownWords, highlightEnabled, saveWordToCollection, isWordInCollection } =
     useAppContext();
   const [popup, setPopup] = useState<PopupData | null>(null);
+  const closeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const paragraphs = useMemo(
     () => content.split(/\n\n+/).filter(p => p.trim()),
@@ -42,6 +43,17 @@ export default function ArticleBody({ content, vocab }: ArticleBodyProps) {
     },
     [popup, saveWordToCollection],
   );
+
+  const clearCloseTimer = useCallback(() => {
+    if (closeTimerRef.current) {
+      clearTimeout(closeTimerRef.current);
+      closeTimerRef.current = null;
+    }
+  }, []);
+
+  const scheduleClose = useCallback(() => {
+    closeTimerRef.current = setTimeout(() => setPopup(null), 200);
+  }, []);
 
   return (
     <div className="relative">
@@ -67,19 +79,23 @@ export default function ArticleBody({ content, vocab }: ArticleBodyProps) {
                 knownWords,
                 highlightEnabled,
                 setPopup,
+                scheduleClose,
+                clearCloseTimer,
               )}
             </Tag>
           );
         }
 
         return (
-          <p key={pIdx} className="mb-3 leading-[1.8] text-[15px] text-gray-800 font-serif">
+          <p key={pIdx} className="mb-3 leading-[1.8] text-[17px] text-gray-800 font-serif">
             {renderTextWithHighlights(
               text,
               vocab,
               knownWords,
               highlightEnabled,
               setPopup,
+              scheduleClose,
+              clearCloseTimer,
             )}
           </p>
         );
@@ -92,6 +108,7 @@ export default function ArticleBody({ content, vocab }: ArticleBodyProps) {
           position={{ x: popup.x, y: popup.y }}
           isSaved={isWordInCollection(popup.word)}
           onSave={handleSave}
+          onMouseEnter={clearCloseTimer}
           onClose={() => setPopup(null)}
         />
       )}
@@ -105,6 +122,8 @@ function renderTextWithHighlights(
   knownWords: Set<string>,
   enabled: boolean,
   setPopup: (p: PopupData | null) => void,
+  scheduleClose: () => void,
+  clearCloseTimer: () => void,
 ): React.ReactNode[] {
   const parts = text.split(/(\b[a-zA-Z]+(?:[''][a-zA-Z]+)?\b)/g);
   const known = new Set(knownWords);
@@ -139,7 +158,7 @@ function renderTextWithHighlights(
             y: rect.bottom + 4,
           });
         }}
-        onMouseLeave={() => setPopup(null)}
+        onMouseLeave={scheduleClose}
       >
         {part}
       </span>

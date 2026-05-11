@@ -32,18 +32,16 @@ export default function ArticleCard({ article }: { article: ArticleMeta }) {
         </span>
       </div>
 
-      <div className="p-3 space-y-2">
-        <h3 className="font-semibold text-sm leading-snug line-clamp-2 group-hover:text-blue-600 transition-colors">
+      <div className="p-4 space-y-2">
+        <h3 className="font-semibold text-base leading-snug line-clamp-2 group-hover:text-blue-600 transition-colors">
           {article.title}
         </h3>
-        <div className="flex items-center gap-2">
-          <span className="text-xs text-gray-500">{article.source}</span>
-          <span
-            className={`text-xs px-1.5 py-0.5 rounded-full font-medium ${DIFFICULTY_STYLES[article.difficulty] ?? ''}`}
-          >
-            {getDifficultyLabel(article.difficulty)}
-          </span>
-        </div>
+        <div className="text-xs text-gray-500">{article.source}</div>
+        <span
+          className={`inline-block text-xs px-1.5 py-0.5 rounded-full font-medium ${DIFFICULTY_STYLES[article.difficulty] ?? ''}`}
+        >
+          {getDifficultyLabel(article.difficulty)}
+        </span>
       </div>
     </Link>
   );
