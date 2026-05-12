@@ -19,8 +19,9 @@ const menuItems = [
   { href: '/stats', label: '学习统计', icon: BarChart3 },
 ];
 
-const itemBase =
+const itemCls =
   'flex items-center gap-3 mx-2 rounded-lg text-[13px] transition-all duration-400 ease-out whitespace-nowrap px-3 py-2';
+const inactiveCls = 'text-[#78716C] hover:bg-[#EDE9E0] hover:text-[#5C3D2E] cursor-pointer';
 
 export default function Sidebar() {
   const [collapsed, setCollapsed] = useState(false);
@@ -29,15 +30,18 @@ export default function Sidebar() {
   return (
     <aside
       className={`flex flex-col bg-[#F7F5F0] border-r border-[#E8E4DD] transition-[width] duration-400 ease-out overflow-hidden shrink-0 ${
-        collapsed ? 'w-[60px]' : 'w-[152px]'
+        collapsed ? 'w-[60px]' : 'w-36'
       }`}
     >
-      <nav className="flex-1 py-3 space-y-1">
-        {/* 折叠按钮 */}
-        <button
+      <nav className="flex-1 py-3 space-y-1.5">
+        {/* 折叠按钮 — 用 div，和 Link 渲染的 a 标签一致 */}
+        <div
           onClick={() => setCollapsed(!collapsed)}
-          className={`${itemBase} text-[#78716C] hover:bg-[#EDE9E0] hover:text-[#5C3D2E]`}
+          className={`${itemCls} ${inactiveCls}`}
           title={collapsed ? '展开侧边栏' : '收起侧边栏'}
+          role="button"
+          tabIndex={0}
+          onKeyDown={e => (e.key === 'Enter' || e.key === ' ') && setCollapsed(!collapsed)}
         >
           {collapsed ? (
             <ChevronRight size={18} className="shrink-0" />
@@ -51,19 +55,18 @@ export default function Sidebar() {
           >
             收起
           </span>
-        </button>
+        </div>
 
-        {/* 菜单项 */}
         {menuItems.map(({ href, label, icon: Icon }) => {
           const isActive = pathname === href;
           return (
             <Link
               key={href}
               href={href}
-              className={`${itemBase} ${
+              className={`${itemCls} ${
                 isActive
                   ? 'bg-[#E8DCC8] text-[#5C3D2E] font-medium'
-                  : 'text-[#78716C] hover:bg-[#EDE9E0] hover:text-[#5C3D2E]'
+                  : inactiveCls
               }`}
               title={collapsed ? label : undefined}
             >
