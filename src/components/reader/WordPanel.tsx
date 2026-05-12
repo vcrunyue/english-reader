@@ -40,7 +40,7 @@ export default function WordPanel({ words }: WordPanelProps) {
       <div className="flex gap-1 p-2">
         <button
           onClick={() => setTab('words')}
-          className={`flex-1 text-[13px] py-1.5 rounded-md font-medium transition-colors ${
+          className={`flex-1 text-[13px] py-1.5 rounded-md font-medium transition-colors font-zh-serif ${
             tab === 'words'
               ? 'bg-[#E8DCC8] text-[#5C3D2E]'
               : 'bg-transparent text-[#78716C] hover:bg-[#EDE9E0]'

@@ -30,7 +30,7 @@ export default function FilterBar({
   return (
     <div className="flex flex-col gap-3">
       {/* 难度行 */}
-      <div className="flex items-center gap-1.5">
+      <div className="flex items-center gap-2.5">
         <span className="text-sm text-[#78716C] font-medium w-10 shrink-0 font-zh-serif">
           难度
         </span>
@@ -53,7 +53,7 @@ export default function FilterBar({
       </div>
 
       {/* 来源行 */}
-      <div className="flex items-center gap-1.5 flex-wrap">
+      <div className="flex items-center gap-2.5 flex-wrap">
         <span className="text-sm text-[#78716C] font-medium w-10 shrink-0 font-zh-serif">
           来源
         </span>

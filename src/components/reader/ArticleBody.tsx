@@ -88,7 +88,7 @@ export default function ArticleBody({ content, vocab }: ArticleBodyProps) {
         }
 
         return (
-          <p key={pIdx} className="mb-4 leading-[1.85] text-[18px] text-[#2D2B28] font-serif">
+          <p key={pIdx} className="mb-4 leading-[1.85] text-[18px] text-[#2D2B28] font-serif [text-indent:2em]">
             {renderTextWithHighlights(
               text,
               vocab,

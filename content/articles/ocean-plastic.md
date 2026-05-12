@@ -6,7 +6,6 @@ topic: "environment"
 date: "2026-04-28"
 ---
 
-## Scientists Discover New Method to Remove Ocean Plastic
 
 Marine researchers have developed a groundbreaking technique for removing microplastics from ocean water. The method uses a biodegradable compound that causes plastic particles to clump together, making them easier to extract.
 

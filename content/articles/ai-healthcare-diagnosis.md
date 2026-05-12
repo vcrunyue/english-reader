@@ -6,7 +6,6 @@ topic: "technology"
 date: "2026-04-10"
 ---
 
-## AI Systems Now Match Doctors in Diagnosing Complex Diseases
 
 Artificial intelligence systems have reached a significant milestone in medical diagnosis, matching or exceeding the accuracy of experienced physicians in identifying several complex conditions. A landmark study published in the Lancet Digital Health journal has validated AI diagnostic tools across multiple medical specialties.
 

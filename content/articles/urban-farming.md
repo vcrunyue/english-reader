@@ -6,7 +6,6 @@ topic: "environment"
 date: "2026-03-15"
 ---
 
-## Urban Farming Transforms City Landscapes Across Asia
 
 Cities across Asia are increasingly turning to urban farming as a solution to food security challenges. From rooftop gardens in Singapore to vertical farms in Tokyo, urban agriculture is reshaping how city residents access fresh produce.
 

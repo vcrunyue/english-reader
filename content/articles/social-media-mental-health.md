@@ -6,7 +6,6 @@ topic: "science"
 date: "2026-04-20"
 ---
 
-## Social Media and Mental Health: What the Research Shows
 
 A comprehensive new study has examined the relationship between social media use and mental health among young adults. The findings paint a complex picture that challenges simplistic narratives about technology and wellbeing.
 

@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation';
 import { getArticleBySlug, getAllArticleSlugs } from '@/lib/articles';
 import HighlightToggle from '@/components/reader/HighlightToggle';
+import DifficultyLegend from '@/components/reader/DifficultyLegend';
 import { getDifficultyLabel } from '@/lib/vocab';
 import ArticleReader from './ArticleReader';
 import WordPanelWrapper from './WordPanelWrapper';
@@ -24,14 +25,15 @@ export default async function ArticlePage({ params }: Props) {
       <div className="flex-1 flex flex-col min-w-0">
         {/* 顶栏 */}
         <header className="flex items-center gap-4 px-6 py-3 border-b border-[#E8E4DD] bg-[#FEFCF5] sticky top-0 z-10">
-          <a href="/" className="text-[13px] text-[#78716C] hover:text-[#C88C4A] transition-colors">
+          <a href="/" className="text-sm text-[#78716C] hover:text-[#C88C4A] transition-colors font-zh-serif">
             ← 返回
           </a>
           <div className="flex items-center gap-2 ml-auto">
-            <span className="text-[13px] text-[#78716C]">高亮</span>
+            <span className="text-sm text-[#78716C] font-zh-serif">高亮</span>
             <HighlightToggle />
+            <DifficultyLegend />
           </div>
-          <span className="text-xs text-[#78716C] bg-[#EDE9E0] px-2 py-0.5 rounded-md">
+          <span className="text-sm text-[#78716C] bg-[#EDE9E0] px-2.5 py-1 rounded-md font-zh-serif">
             {getDifficultyLabel(article.difficulty)}
           </span>
         </header>

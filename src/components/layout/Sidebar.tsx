@@ -15,7 +15,7 @@ import {
 const menuItems = [
   { href: '/', label: '开始学习', icon: BookOpen },
   { href: '/import', label: '导入文章', icon: FilePlus },
-  { href: '/collection', label: '生词收藏夹', icon: Star },
+  { href: '/collection', label: '生词收藏', icon: Star },
   { href: '/stats', label: '学习统计', icon: BarChart3 },
 ];
 

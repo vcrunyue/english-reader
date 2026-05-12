@@ -6,7 +6,6 @@ topic: "environment"
 date: "2026-03-22"
 ---
 
-## Global Climate Summit Reaches Historic Agreement
 
 World leaders have reached a historic agreement at the Global Climate Summit in Geneva. After two weeks of intense negotiations, nearly 200 countries committed to reducing carbon emissions by fifty percent before the year 2035.
 

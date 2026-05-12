@@ -6,7 +6,6 @@ topic: "technology"
 date: "2026-05-05"
 ---
 
-## Quantum Computing Breakthrough Brings Practical Applications Closer
 
 A team of physicists has achieved a milestone in quantum error correction, bringing the prospect of practical quantum computing significantly closer to realization. The development addresses one of the most intractable obstacles that has constrained the field for decades.
 

@@ -6,7 +6,6 @@ topic: "science"
 date: "2026-05-08"
 ---
 
-## NASA Unveils Detailed Plan for Permanent Mars Colony
 
 NASA has released its most comprehensive blueprint to date for establishing a permanent human presence on Mars. The document outlines a phased approach spanning two decades, with the first crewed missions targeted for the early 2040s.
 

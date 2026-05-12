@@ -6,7 +6,6 @@ topic: "technology"
 date: "2026-04-15"
 ---
 
-## How AI Is Transforming Education
 
 Artificial intelligence is rapidly changing the way students learn and teachers teach. From personalized learning platforms to automated grading systems, AI tools are becoming increasingly common in classrooms around the world.
 

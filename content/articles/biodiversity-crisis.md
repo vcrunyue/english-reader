@@ -7,7 +7,6 @@ date: "2026-02-18"
 
 ---
 
-## Global Biodiversity in Crisis: One Million Species at Risk
 
 A landmark United Nations report has warned that approximately one million animal and plant species face extinction, many within decades. The decline in biodiversity is accelerating at a rate unprecedented in human history, threatening ecosystems that provide essential services to humanity.
 
