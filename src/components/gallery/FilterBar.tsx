@@ -26,17 +26,17 @@ export default function FilterBar({
   onSourceChange,
 }: FilterBarProps) {
   return (
-    <div className="flex flex-wrap items-center gap-4">
+    <div className="flex flex-wrap items-center gap-x-8 gap-y-3">
       {/* 难度筛选 */}
       <div className="flex items-center gap-1.5">
-        <span className="text-[13px] text-[#78716C] font-medium mr-1 font-zh-serif">难度</span>
+        <span className="text-sm text-[#78716C] font-medium mr-1 font-zh-serif">难度</span>
         {DIFFICULTIES.map(({ key, label, style }) => (
           <button
             key={key}
             onClick={() => onDifficultyChange(key)}
-            className={`text-[13px] px-3 py-1 rounded-md border transition-all duration-200 ${
+            className={`text-sm px-3 py-1.5 rounded-md border transition-colors duration-200 min-w-[44px] ${
               selectedDifficulty === key
-                ? `${style} border-transparent shadow-sm`
+                ? `${style} border-transparent`
                 : 'bg-transparent text-[#78716C] border-[#D8D2C8] hover:border-[#C88C4A] hover:text-[#5C3D2E]'
             }`}
           >
@@ -45,19 +45,16 @@ export default function FilterBar({
         ))}
       </div>
 
-      {/* 分隔 */}
-      <span className="text-[#D8D2C8] select-none">|</span>
-
       {/* 来源筛选 */}
       <div className="flex items-center gap-1.5">
-        <span className="text-[13px] text-[#78716C] font-medium mr-1 font-zh-serif">来源</span>
+        <span className="text-sm text-[#78716C] font-medium mr-1 font-zh-serif">来源</span>
         {['all', ...sources].map(s => (
           <button
             key={s}
             onClick={() => onSourceChange(s)}
-            className={`text-[13px] px-3 py-1 rounded-md border transition-all duration-200 ${
+            className={`text-sm px-3 py-1.5 rounded-md border transition-colors duration-200 min-w-[44px] ${
               selectedSource === s
-                ? 'bg-[#EDE0C8] text-[#5C3D2E] border-transparent shadow-sm'
+                ? 'bg-[#EDE0C8] text-[#5C3D2E] border-transparent'
                 : 'bg-transparent text-[#78716C] border-[#D8D2C8] hover:border-[#C88C4A] hover:text-[#5C3D2E]'
             }`}
           >
