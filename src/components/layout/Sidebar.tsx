@@ -29,10 +29,10 @@ export default function Sidebar() {
   return (
     <aside
       className={`flex flex-col bg-[#F7F5F0] border-r border-[#E8E4DD] transition-[width] duration-400 ease-out overflow-hidden shrink-0 ${
-        collapsed ? 'w-[60px]' : 'w-[168px]'
+        collapsed ? 'w-[60px]' : 'w-[152px]'
       }`}
     >
-      <nav className="flex-1 py-3 space-y-0.5">
+      <nav className="flex-1 py-3 space-y-1">
         {/* 折叠按钮 */}
         <button
           onClick={() => setCollapsed(!collapsed)}
