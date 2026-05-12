@@ -25,9 +25,9 @@ export default function ArticleCard({ article }: { article: ArticleMeta }) {
       className="block rounded-xl overflow-hidden border border-[#E8E4DD] hover:shadow-md hover:border-[#C88C4A]/40 transition-all duration-200 group bg-white/60"
     >
       <div
-        className={`h-32 bg-gradient-to-br ${getGradient(article.topic)} flex items-center justify-center`}
+        className={`h-24 bg-gradient-to-br ${getGradient(article.topic)} flex items-center justify-center`}
       >
-        <span className="text-white/80 text-3xl font-display">
+        <span className="text-white/70 text-2xl font-display">
           {article.source.slice(0, 2).toUpperCase()}
         </span>
       </div>
