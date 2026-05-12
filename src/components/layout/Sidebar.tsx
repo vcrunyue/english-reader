@@ -32,30 +32,28 @@ export default function Sidebar() {
         collapsed ? 'w-[60px]' : 'w-[168px]'
       }`}
     >
-      {/* 折叠按钮 */}
-      <div className="pt-3" />
-
-      <button
-        onClick={() => setCollapsed(!collapsed)}
-        className={`${itemBase} text-[#78716C] hover:bg-[#EDE9E0] hover:text-[#5C3D2E]`}
-        title={collapsed ? '展开侧边栏' : '收起侧边栏'}
-      >
-        {collapsed ? (
-          <ChevronRight size={18} className="shrink-0" />
-        ) : (
-          <ChevronLeft size={18} className="shrink-0" />
-        )}
-        <span
-          className={`transition-all duration-400 ease-out ${
-            collapsed ? 'opacity-0 w-0 overflow-hidden delay-0' : 'opacity-100 w-auto delay-150'
-          }`}
-        >
-          收起
-        </span>
-      </button>
-
-      {/* 菜单项 */}
       <nav className="flex-1 py-3 space-y-0.5">
+        {/* 折叠按钮 */}
+        <button
+          onClick={() => setCollapsed(!collapsed)}
+          className={`${itemBase} text-[#78716C] hover:bg-[#EDE9E0] hover:text-[#5C3D2E]`}
+          title={collapsed ? '展开侧边栏' : '收起侧边栏'}
+        >
+          {collapsed ? (
+            <ChevronRight size={18} className="shrink-0" />
+          ) : (
+            <ChevronLeft size={18} className="shrink-0" />
+          )}
+          <span
+            className={`transition-all duration-400 ease-out ${
+              collapsed ? 'opacity-0 w-0 overflow-hidden delay-0' : 'opacity-100 w-auto delay-150'
+            }`}
+          >
+            收起
+          </span>
+        </button>
+
+        {/* 菜单项 */}
         {menuItems.map(({ href, label, icon: Icon }) => {
           const isActive = pathname === href;
           return (
