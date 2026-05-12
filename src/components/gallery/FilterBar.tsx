@@ -29,7 +29,7 @@ export default function FilterBar({
     <div className="flex flex-wrap items-center gap-4">
       {/* 难度筛选 */}
       <div className="flex items-center gap-1.5">
-        <span className="text-[13px] text-[#78716C] font-medium mr-1">难度</span>
+        <span className="text-[13px] text-[#78716C] font-medium mr-1 font-zh-serif">难度</span>
         {DIFFICULTIES.map(({ key, label, style }) => (
           <button
             key={key}
@@ -50,7 +50,7 @@ export default function FilterBar({
 
       {/* 来源筛选 */}
       <div className="flex items-center gap-1.5">
-        <span className="text-[13px] text-[#78716C] font-medium mr-1">来源</span>
+        <span className="text-[13px] text-[#78716C] font-medium mr-1 font-zh-serif">来源</span>
         {['all', ...sources].map(s => (
           <button
             key={s}

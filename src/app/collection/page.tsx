@@ -20,7 +20,7 @@ export default function CollectionPage() {
       <h1 className="font-display text-2xl text-[#2D2B28] mb-8">生词收藏夹</h1>
 
       {words.length === 0 && (
-        <p className="text-[#78716C] text-center py-12">
+        <p className="text-[#78716C] text-center py-12 font-zh-serif">
           还没有收藏的生词。阅读文章时点击 ⭐ 即可收藏。
         </p>
       )}

@@ -25,28 +25,26 @@ export default function Sidebar() {
 
   return (
     <aside
-      className={`flex flex-col bg-[#F7F5F0] border-r border-[#E8E4DD] transition-[width] duration-300 ease-out overflow-hidden shrink-0 ${
-        collapsed ? 'w-14' : 'w-48'
+      className={`flex flex-col bg-[#F7F5F0] border-r border-[#E8E4DD] transition-[width] duration-400 ease-out overflow-hidden shrink-0 ${
+        collapsed ? 'w-[60px]' : 'w-48'
       }`}
     >
       <button
         onClick={() => setCollapsed(!collapsed)}
-        className="flex items-center justify-center h-12 border-b border-[#E8E4DD] hover:bg-[#EDE9E0] transition-colors shrink-0 text-[#78716C]"
+        className="flex items-center justify-center h-11 border-b border-[#E8E4DD] hover:bg-[#EDE9E0] transition-colors shrink-0 text-[#78716C]"
         title={collapsed ? '展开侧边栏' : '收起侧边栏'}
       >
         {collapsed ? <ChevronRight size={18} /> : <ChevronLeft size={18} />}
       </button>
 
-      <nav className="flex-1 py-3">
+      <nav className="flex-1 py-3 space-y-0.5">
         {menuItems.map(({ href, label, icon: Icon }) => {
           const isActive = pathname === href;
           return (
             <Link
               key={href}
               href={href}
-              className={`flex items-center gap-3 mx-2 rounded-lg text-[13px] transition-colors whitespace-nowrap ${
-                collapsed ? 'justify-center px-0 py-2.5' : 'px-3 py-2.5'
-              } ${
+              className={`flex items-center gap-3 mx-2 rounded-lg text-[13px] transition-all duration-400 ease-out whitespace-nowrap px-3 py-2 ${
                 isActive
                   ? 'bg-[#E8DCC8] text-[#5C3D2E] font-medium'
                   : 'text-[#78716C] hover:bg-[#EDE9E0] hover:text-[#5C3D2E]'
@@ -55,8 +53,8 @@ export default function Sidebar() {
             >
               <Icon size={18} className="shrink-0" />
               <span
-                className={`transition-all duration-300 ease-out ${
-                  collapsed ? 'opacity-0 w-0 overflow-hidden' : 'opacity-100 w-auto delay-75'
+                className={`transition-all duration-400 ease-out ${
+                  collapsed ? 'opacity-0 w-0 overflow-hidden delay-0' : 'opacity-100 w-auto delay-150'
                 }`}
               >
                 {label}

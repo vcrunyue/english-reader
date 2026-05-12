@@ -62,11 +62,11 @@ export default function WordPanel({ words }: WordPanelProps) {
 
       <div className="flex-1 overflow-y-auto px-2 pb-2">
         {tab === 'sentences' && (
-          <p className="text-xs text-[#78716C] text-center mt-8">句子分析功能即将推出</p>
+          <p className="text-xs text-[#78716C] text-center mt-8 font-zh-serif">句子分析功能即将推出</p>
         )}
 
         {tab === 'words' && words.length === 0 && (
-          <p className="text-xs text-[#78716C] text-center mt-8">本文暂无生词</p>
+          <p className="text-xs text-[#78716C] text-center mt-8 font-zh-serif">本文暂无生词</p>
         )}
 
         {tab === 'words' &&
