@@ -1,12 +1,23 @@
 @import "tailwindcss";
 
 :root {
-  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
-  --font-serif: 'Georgia', 'Noto Serif', 'Times New Roman', serif;
+  --font-sans: 'Noto Sans SC', system-ui, -apple-system, sans-serif;
+  --font-serif: 'Lora', 'Noto Serif', 'Times New Roman', serif;
+  --font-display: 'DM Serif Display', 'Georgia', serif;
+  --color-bg: #FEFCF5;
+  --color-bg-sidebar: #F7F5F0;
+  --color-text: #2D2B28;
+  --color-text-muted: #78716C;
+  --color-accent: #C88C4A;
+  --color-border: #E8E4DD;
 }
 
 .font-serif {
   font-family: var(--font-serif);
+}
+
+.font-display {
+  font-family: var(--font-display);
 }
 
 ::-webkit-scrollbar {
@@ -24,6 +35,6 @@
 }
 
 ::selection {
-  background-color: #bfdbfe;
-  color: #1e3a5f;
+  background-color: #E8DCC8;
+  color: #2D2B28;
 }

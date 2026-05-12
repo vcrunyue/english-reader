@@ -43,29 +43,27 @@ export default function WordPopup({
   return (
     <div
       ref={ref}
-      className="fixed z-50 bg-white rounded-xl shadow-xl border border-gray-200 p-3 min-w-[180px] max-w-[240px]"
+      className="fixed z-50 bg-[#FEFCF5] rounded-xl shadow-lg border border-[#E8E4DD] p-3 min-w-[180px] max-w-[240px]"
       style={{ left: position.x, top: position.y }}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onClose}
     >
       <div className="flex items-center gap-2 mb-1">
-        <span
-          className={`w-2.5 h-2.5 rounded-full ${getDifficultyDotColor(entry.difficulty)}`}
-        />
-        <span className="font-semibold text-sm">{word}</span>
-        <span className="text-[10px] text-gray-400">
+        <span className={`w-2.5 h-2.5 rounded-full ${getDifficultyDotColor(entry.difficulty)}`} />
+        <span className="font-semibold text-sm text-[#2D2B28]">{word}</span>
+        <span className="text-[11px] text-[#78716C]">
           {getDifficultyLabel(entry.difficulty)}
         </span>
       </div>
-      <p className="text-xs text-gray-500 mb-0.5">{entry.pos}</p>
-      <p className="text-sm text-gray-800 mb-2">{entry.definition}</p>
+      <p className="text-xs text-[#78716C] mb-0.5">{entry.pos}</p>
+      <p className="text-sm text-[#2D2B28] mb-2">{entry.definition}</p>
       <button
         onClick={() => onSave(word)}
         disabled={isSaved}
-        className={`flex items-center gap-1 text-xs px-2 py-1 rounded-lg transition-colors ${
+        className={`flex items-center gap-1 text-xs px-2 py-1 rounded-md transition-colors ${
           isSaved
-            ? 'bg-yellow-50 text-yellow-600'
-            : 'bg-gray-100 text-gray-600 hover:bg-yellow-100 hover:text-yellow-700'
+            ? 'bg-[#EDE9E0] text-[#C88C4A]'
+            : 'bg-[#EDE9E0] text-[#78716C] hover:bg-[#E8DCC8] hover:text-[#5C3D2E]'
         }`}
       >
         <Star size={12} fill={isSaved ? 'currentColor' : 'none'} />

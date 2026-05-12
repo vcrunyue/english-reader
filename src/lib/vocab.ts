@@ -25,15 +25,15 @@ export function tokenize(text: string): Array<{ word: string; index: number }> {
 }
 
 const DIFFICULTY_COLORS: Record<Difficulty, string> = {
-  cet4: 'bg-green-100 hover:bg-green-200 px-0.5',
-  cet6: 'bg-yellow-100 hover:bg-yellow-200 px-0.5',
-  postgrad: 'bg-red-100 hover:bg-red-200 px-0.5',
+  cet4: 'bg-[#D4E8D0] hover:bg-[#B8D8B0] px-0.5',
+  cet6: 'bg-[#F5E6C8] hover:bg-[#EED9A8] px-0.5',
+  postgrad: 'bg-[#F0D3D3] hover:bg-[#E8B8B8] px-0.5',
 };
 
 const DIFFICULTY_DOT_COLORS: Record<Difficulty, string> = {
-  cet4: 'bg-green-500',
-  cet6: 'bg-yellow-500',
-  postgrad: 'bg-red-500',
+  cet4: 'bg-[#7CB868]',
+  cet6: 'bg-[#D4A84C]',
+  postgrad: 'bg-[#C86868]',
 };
 
 const DIFFICULTY_LABELS: Record<Difficulty, string> = {

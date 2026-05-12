@@ -40,20 +40,20 @@ export default function WordPanel({ words }: WordPanelProps) {
       <div className="flex gap-1 p-2">
         <button
           onClick={() => setTab('words')}
-          className={`flex-1 text-xs py-1.5 rounded-lg font-medium transition-colors ${
+          className={`flex-1 text-[13px] py-1.5 rounded-md font-medium transition-colors ${
             tab === 'words'
-              ? 'bg-blue-600 text-white'
-              : 'bg-gray-100 text-gray-500 hover:bg-gray-200'
+              ? 'bg-[#E8DCC8] text-[#5C3D2E]'
+              : 'bg-transparent text-[#78716C] hover:bg-[#EDE9E0]'
           }`}
         >
           词汇
         </button>
         <button
           onClick={() => setTab('sentences')}
-          className={`flex-1 text-xs py-1.5 rounded-lg font-medium transition-colors ${
+          className={`flex-1 text-[13px] py-1.5 rounded-md font-medium transition-colors ${
             tab === 'sentences'
-              ? 'bg-blue-600 text-white'
-              : 'bg-gray-100 text-gray-500 hover:bg-gray-200'
+              ? 'bg-[#E8DCC8] text-[#5C3D2E]'
+              : 'bg-transparent text-[#78716C] hover:bg-[#EDE9E0]'
           }`}
         >
           句子
@@ -62,11 +62,11 @@ export default function WordPanel({ words }: WordPanelProps) {
 
       <div className="flex-1 overflow-y-auto px-2 pb-2">
         {tab === 'sentences' && (
-          <p className="text-xs text-gray-400 text-center mt-8">句子分析功能即将推出</p>
+          <p className="text-xs text-[#78716C] text-center mt-8">句子分析功能即将推出</p>
         )}
 
         {tab === 'words' && words.length === 0 && (
-          <p className="text-xs text-gray-400 text-center mt-8">本文暂无生词</p>
+          <p className="text-xs text-[#78716C] text-center mt-8">本文暂无生词</p>
         )}
 
         {tab === 'words' &&
@@ -75,23 +75,23 @@ export default function WordPanel({ words }: WordPanelProps) {
             return (
               <div
                 key={word}
-                className="flex items-start gap-2 py-2 border-b border-gray-100 last:border-0 group"
+                className="flex items-start gap-2 py-2 border-b border-[#E8E4DD] last:border-0 group"
               >
                 <span
                   className={`w-2 h-2 rounded-full mt-1.5 shrink-0 ${getDifficultyDotColor(entry.difficulty)}`}
                 />
                 <div className="flex-1 min-w-0">
-                  <span className="text-sm font-medium">{word}</span>
-                  <span className="text-[10px] text-gray-400 ml-1">{entry.pos}</span>
-                  <p className="text-xs text-gray-500 truncate">{entry.definition}</p>
+                  <span className="text-sm font-medium text-[#2D2B28]">{word}</span>
+                  <span className="text-[10px] text-[#78716C] ml-1">{entry.pos}</span>
+                  <p className="text-xs text-[#78716C] truncate">{entry.definition}</p>
                 </div>
-                <div className="flex items-center gap-0.5 shrink-0 opacity-60 group-hover:opacity-100 transition-opacity">
+                <div className="flex items-center gap-0.5 shrink-0 opacity-0 group-hover:opacity-100 transition-opacity">
                   <button
                     onClick={() => handleSave({ word, entry })}
                     disabled={saved}
                     title="收藏"
                     className={`p-1 rounded ${
-                      saved ? 'text-yellow-500' : 'text-gray-400 hover:text-yellow-500'
+                      saved ? 'text-[#C88C4A]' : 'text-[#78716C] hover:text-[#C88C4A]'
                     }`}
                   >
                     <Star size={14} fill={saved ? 'currentColor' : 'none'} />
@@ -99,7 +99,7 @@ export default function WordPanel({ words }: WordPanelProps) {
                   <button
                     onClick={() => handleMarkKnown(word)}
                     title="已认识"
-                    className="p-1 rounded text-gray-400 hover:text-green-500"
+                    className="p-1 rounded text-[#78716C] hover:text-[#7CB868]"
                   >
                     <Check size={14} />
                   </button>

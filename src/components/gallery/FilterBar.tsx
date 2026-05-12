@@ -11,7 +11,12 @@ interface FilterBarProps {
   onSourceChange: (s: string) => void;
 }
 
-const DIFFICULTIES: Array<Difficulty | 'all'> = ['all', 'cet4', 'cet6', 'postgrad'];
+const DIFFICULTIES: Array<{ key: Difficulty | 'all'; label: string; style: string }> = [
+  { key: 'all', label: '全部', style: 'bg-[#EDE9E0] text-[#5C3D2E]' },
+  { key: 'cet4', label: '四级', style: 'bg-[#D4E8D0] text-[#3A5C34]' },
+  { key: 'cet6', label: '六级', style: 'bg-[#F5E6C8] text-[#5C4A1E]' },
+  { key: 'postgrad', label: '考研', style: 'bg-[#F0D3D3] text-[#5C2A2A]' },
+];
 
 export default function FilterBar({
   selectedDifficulty,
@@ -21,47 +26,42 @@ export default function FilterBar({
   onSourceChange,
 }: FilterBarProps) {
   return (
-    <div className="flex flex-wrap items-center gap-3">
+    <div className="flex flex-wrap items-center gap-4">
+      {/* 难度筛选 */}
       <div className="flex items-center gap-1.5">
-        <span className="text-xs text-gray-500 font-medium">难度:</span>
-        {DIFFICULTIES.map(d => (
+        <span className="text-[13px] text-[#78716C] font-medium mr-1">难度</span>
+        {DIFFICULTIES.map(({ key, label, style }) => (
           <button
-            key={d}
-            onClick={() => onDifficultyChange(d)}
-            className={`text-xs px-2 py-1 rounded-full transition-colors ${
-              selectedDifficulty === d
-                ? 'bg-blue-600 text-white'
-                : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+            key={key}
+            onClick={() => onDifficultyChange(key)}
+            className={`text-[13px] px-3 py-1 rounded-md border transition-all duration-200 ${
+              selectedDifficulty === key
+                ? `${style} border-transparent shadow-sm`
+                : 'bg-transparent text-[#78716C] border-[#D8D2C8] hover:border-[#C88C4A] hover:text-[#5C3D2E]'
             }`}
           >
-            {d === 'all' ? '全部' : getDifficultyLabel(d)}
+            {label}
           </button>
         ))}
       </div>
 
+      {/* 分隔 */}
+      <span className="text-[#D8D2C8] select-none">|</span>
+
+      {/* 来源筛选 */}
       <div className="flex items-center gap-1.5">
-        <span className="text-xs text-gray-500 font-medium">来源:</span>
-        <button
-          onClick={() => onSourceChange('all')}
-          className={`text-xs px-2 py-1 rounded-full transition-colors ${
-            selectedSource === 'all'
-              ? 'bg-blue-600 text-white'
-              : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
-          }`}
-        >
-          全部
-        </button>
-        {sources.map(s => (
+        <span className="text-[13px] text-[#78716C] font-medium mr-1">来源</span>
+        {['all', ...sources].map(s => (
           <button
             key={s}
             onClick={() => onSourceChange(s)}
-            className={`text-xs px-2 py-1 rounded-full transition-colors ${
+            className={`text-[13px] px-3 py-1 rounded-md border transition-all duration-200 ${
               selectedSource === s
-                ? 'bg-blue-600 text-white'
-                : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                ? 'bg-[#EDE0C8] text-[#5C3D2E] border-transparent shadow-sm'
+                : 'bg-transparent text-[#78716C] border-[#D8D2C8] hover:border-[#C88C4A] hover:text-[#5C3D2E]'
             }`}
           >
-            {s}
+            {s === 'all' ? '全部' : s}
           </button>
         ))}
       </div>

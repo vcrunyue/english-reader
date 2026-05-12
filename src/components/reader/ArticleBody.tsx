@@ -55,6 +55,12 @@ export default function ArticleBody({ content, vocab }: ArticleBodyProps) {
     closeTimerRef.current = setTimeout(() => setPopup(null), 200);
   }, []);
 
+  const headingClasses: Record<string, string> = {
+    h1: 'font-display text-xl',
+    h2: 'font-display text-lg',
+    h3: 'font-display text-base',
+  };
+
   return (
     <div className="relative">
       {paragraphs.map((text, pIdx) => {
@@ -63,15 +69,10 @@ export default function ArticleBody({ content, vocab }: ArticleBodyProps) {
           const level = headingMatch[1].length;
           const headingText = headingMatch[2];
           const Tag = `h${level}` as 'h1' | 'h2' | 'h3';
-          const headingClasses = {
-            h1: 'text-xl',
-            h2: 'text-lg',
-            h3: 'text-base',
-          };
           return (
             <Tag
               key={pIdx}
-              className={`font-bold text-gray-900 mb-3 mt-6 first:mt-0 ${headingClasses[Tag]}`}
+              className={`text-[#2D2B28] mb-3 mt-6 first:mt-0 ${headingClasses[Tag]}`}
             >
               {renderTextWithHighlights(
                 headingText,
@@ -87,7 +88,7 @@ export default function ArticleBody({ content, vocab }: ArticleBodyProps) {
         }
 
         return (
-          <p key={pIdx} className="mb-3 leading-[1.8] text-[17px] text-gray-800 font-serif">
+          <p key={pIdx} className="mb-4 leading-[1.85] text-[18px] text-[#2D2B28] font-serif">
             {renderTextWithHighlights(
               text,
               vocab,
@@ -148,8 +149,9 @@ function renderTextWithHighlights(
     return (
       <span
         key={i}
-        className={`relative cursor-pointer ${colorClass}`}
+        className={`relative cursor-pointer rounded-sm ${colorClass}`}
         onMouseEnter={e => {
+          clearCloseTimer();
           const rect = e.currentTarget.getBoundingClientRect();
           setPopup({
             word: part,

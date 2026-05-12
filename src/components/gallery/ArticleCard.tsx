@@ -3,42 +3,42 @@ import type { ArticleMeta } from '@/types';
 import { getDifficultyLabel } from '@/lib/vocab';
 
 const DIFFICULTY_STYLES: Record<string, string> = {
-  cet4: 'bg-green-100 text-green-700',
-  cet6: 'bg-yellow-100 text-yellow-700',
-  postgrad: 'bg-red-100 text-red-700',
+  cet4: 'bg-[#D4E8D0] text-[#3A5C34]',
+  cet6: 'bg-[#F5E6C8] text-[#5C4A1E]',
+  postgrad: 'bg-[#F0D3D3] text-[#5C2A2A]',
 };
 
 const TOPIC_GRADIENTS: Record<string, string> = {
-  technology: 'from-blue-400 to-cyan-300',
-  environment: 'from-emerald-400 to-green-300',
-  science: 'from-purple-400 to-pink-300',
+  technology: 'from-[#D4C8B8] to-[#C8B8A8]',
+  environment: 'from-[#C0CFC0] to-[#B0C0A8]',
+  science: 'from-[#C8C0D8] to-[#B8B0C8]',
 };
 
 function getGradient(topic: string): string {
-  return TOPIC_GRADIENTS[topic] ?? 'from-gray-400 to-gray-300';
+  return TOPIC_GRADIENTS[topic] ?? 'from-[#D0C8C0] to-[#C0B8B0]';
 }
 
 export default function ArticleCard({ article }: { article: ArticleMeta }) {
   return (
     <Link
       href={`/article/${article.slug}`}
-      className="block rounded-xl overflow-hidden border border-gray-200 hover:shadow-lg hover:border-blue-300 transition-all group"
+      className="block rounded-xl overflow-hidden border border-[#E8E4DD] hover:shadow-md hover:border-[#C88C4A]/40 transition-all duration-200 group bg-white/60"
     >
       <div
-        className={`h-36 bg-gradient-to-br ${getGradient(article.topic)} flex items-center justify-center`}
+        className={`h-32 bg-gradient-to-br ${getGradient(article.topic)} flex items-center justify-center`}
       >
-        <span className="text-white text-3xl font-bold opacity-60">
+        <span className="text-white/80 text-3xl font-display">
           {article.source.slice(0, 2).toUpperCase()}
         </span>
       </div>
 
       <div className="p-4 space-y-2">
-        <h3 className="font-semibold text-base leading-snug line-clamp-2 group-hover:text-blue-600 transition-colors">
+        <h3 className="font-display text-base leading-snug line-clamp-2 text-[#2D2B28] group-hover:text-[#C88C4A] transition-colors">
           {article.title}
         </h3>
-        <div className="text-xs text-gray-500">{article.source}</div>
+        <div className="text-[13px] text-[#78716C]">{article.source}</div>
         <span
-          className={`inline-block text-xs px-1.5 py-0.5 rounded-full font-medium ${DIFFICULTY_STYLES[article.difficulty] ?? ''}`}
+          className={`inline-block text-xs px-2 py-0.5 rounded-md font-medium ${DIFFICULTY_STYLES[article.difficulty] ?? ''}`}
         >
           {getDifficultyLabel(article.difficulty)}
         </span>
