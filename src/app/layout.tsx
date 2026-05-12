@@ -24,7 +24,7 @@ export default function RootLayout({
       <body className="flex h-screen overflow-hidden bg-[#FEFCF5] text-[#2D2B28] antialiased">
         <AppProvider>
           <Sidebar />
-          <main className="flex-1 overflow-y-auto">{children}</main>
+          <main className="flex-1 overflow-y-auto" style={{ scrollbarGutter: 'stable' }}>{children}</main>
         </AppProvider>
       </body>
     </html>
