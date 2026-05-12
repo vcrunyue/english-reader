@@ -4,7 +4,7 @@ import { useState } from 'react';
 import type { VocabEntry } from '@/types';
 import { getDifficultyDotColor } from '@/lib/vocab';
 import { useAppContext } from '@/context/AppContext';
-import { Star, Check } from 'lucide-react';
+import { Star, Check, Eye, EyeOff } from 'lucide-react';
 
 interface PanelWord {
   word: string;
@@ -12,18 +12,17 @@ interface PanelWord {
 }
 
 interface WordPanelProps {
-  words: PanelWord[];
+  unknownWords: PanelWord[];
+  knownArticleWords: PanelWord[];
+  onMarkKnown: (word: string) => void;
 }
 
 type Tab = 'words' | 'sentences';
 
-export default function WordPanel({ words }: WordPanelProps) {
+export default function WordPanel({ unknownWords, knownArticleWords, onMarkKnown }: WordPanelProps) {
   const [tab, setTab] = useState<Tab>('words');
-  const { markKnown, saveWordToCollection, isWordInCollection } = useAppContext();
-
-  const handleMarkKnown = (word: string) => {
-    markKnown(word);
-  };
+  const [showKnown, setShowKnown] = useState(true);
+  const { saveWordToCollection, isWordInCollection } = useAppContext();
 
   const handleSave = (w: PanelWord) => {
     saveWordToCollection({
@@ -33,6 +32,50 @@ export default function WordPanel({ words }: WordPanelProps) {
       date: new Date().toISOString().split('T')[0],
       articleTitle: '',
     });
+  };
+
+  const renderWordRow = (w: PanelWord, faded: boolean) => {
+    const saved = isWordInCollection(w.word);
+    return (
+      <div
+        key={w.word}
+        className={`flex items-start gap-2 py-2 border-b border-[#E8E4DD] last:border-0 group ${
+          faded ? 'opacity-40 hover:opacity-70' : ''
+        }`}
+      >
+        <span
+          className={`w-2 h-2 rounded-full mt-1.5 shrink-0 ${faded ? 'bg-[#C0B8A8]' : getDifficultyDotColor(w.entry.difficulty)}`}
+        />
+        <div className="flex-1 min-w-0">
+          <span className={`text-sm font-medium ${faded ? 'text-[#A09888]' : 'text-[#2D2B28]'}`}>
+            {w.word}
+          </span>
+          <span className="text-[10px] text-[#78716C] ml-1">{w.entry.pos}</span>
+          <p className="text-xs text-[#78716C] truncate">{w.entry.definition}</p>
+        </div>
+        {!faded && (
+          <div className="flex items-center gap-0.5 shrink-0 opacity-0 group-hover:opacity-100 transition-opacity">
+            <button
+              onClick={() => handleSave(w)}
+              disabled={saved}
+              title="收藏"
+              className={`p-1 rounded ${
+                saved ? 'text-[#C88C4A]' : 'text-[#78716C] hover:text-[#C88C4A]'
+              }`}
+            >
+              <Star size={14} fill={saved ? 'currentColor' : 'none'} />
+            </button>
+            <button
+              onClick={() => onMarkKnown(w.word)}
+              title="已认识"
+              className="p-1 rounded text-[#78716C] hover:text-[#7CB868]"
+            >
+              <Check size={14} />
+            </button>
+          </div>
+        )}
+      </div>
+    );
   };
 
   return (
@@ -50,7 +93,7 @@ export default function WordPanel({ words }: WordPanelProps) {
         </button>
         <button
           onClick={() => setTab('sentences')}
-          className={`flex-1 text-[13px] py-1.5 rounded-md font-medium transition-colors ${
+          className={`flex-1 text-[13px] py-1.5 rounded-md font-medium transition-colors font-zh-serif ${
             tab === 'sentences'
               ? 'bg-[#E8DCC8] text-[#5C3D2E]'
               : 'bg-transparent text-[#78716C] hover:bg-[#EDE9E0]'
@@ -65,48 +108,30 @@ export default function WordPanel({ words }: WordPanelProps) {
           <p className="text-xs text-[#78716C] text-center mt-8 font-zh-serif">句子分析功能即将推出</p>
         )}
 
-        {tab === 'words' && words.length === 0 && (
+        {tab === 'words' && unknownWords.length === 0 && knownArticleWords.length === 0 && (
           <p className="text-xs text-[#78716C] text-center mt-8 font-zh-serif">本文暂无生词</p>
         )}
 
-        {tab === 'words' &&
-          words.map(({ word, entry }) => {
-            const saved = isWordInCollection(word);
-            return (
-              <div
-                key={word}
-                className="flex items-start gap-2 py-2 border-b border-[#E8E4DD] last:border-0 group"
-              >
-                <span
-                  className={`w-2 h-2 rounded-full mt-1.5 shrink-0 ${getDifficultyDotColor(entry.difficulty)}`}
-                />
-                <div className="flex-1 min-w-0">
-                  <span className="text-sm font-medium text-[#2D2B28]">{word}</span>
-                  <span className="text-[10px] text-[#78716C] ml-1">{entry.pos}</span>
-                  <p className="text-xs text-[#78716C] truncate">{entry.definition}</p>
-                </div>
-                <div className="flex items-center gap-0.5 shrink-0 opacity-0 group-hover:opacity-100 transition-opacity">
-                  <button
-                    onClick={() => handleSave({ word, entry })}
-                    disabled={saved}
-                    title="收藏"
-                    className={`p-1 rounded ${
-                      saved ? 'text-[#C88C4A]' : 'text-[#78716C] hover:text-[#C88C4A]'
-                    }`}
-                  >
-                    <Star size={14} fill={saved ? 'currentColor' : 'none'} />
-                  </button>
-                  <button
-                    onClick={() => handleMarkKnown(word)}
-                    title="已认识"
-                    className="p-1 rounded text-[#78716C] hover:text-[#7CB868]"
-                  >
-                    <Check size={14} />
-                  </button>
-                </div>
+        {tab === 'words' && (
+          <>
+            {/* 生词区 */}
+            {unknownWords.map(w => renderWordRow(w, false))}
+
+            {/* 已认识区 */}
+            {knownArticleWords.length > 0 && (
+              <div className="mt-3 pt-2 border-t border-[#E8E4DD]">
+                <button
+                  onClick={() => setShowKnown(!showKnown)}
+                  className="flex items-center gap-1 text-[11px] text-[#A09888] hover:text-[#78716C] transition-colors mb-1 font-zh-serif"
+                >
+                  {showKnown ? <Eye size={12} /> : <EyeOff size={12} />}
+                  已认识 · {knownArticleWords.length}
+                </button>
+                {showKnown && knownArticleWords.map(w => renderWordRow(w, true))}
               </div>
-            );
-          })}
+            )}
+          </>
+        )}
       </div>
     </div>
   );

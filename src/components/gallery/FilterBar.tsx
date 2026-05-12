@@ -25,7 +25,7 @@ export default function FilterBar({
   onSourceChange,
 }: FilterBarProps) {
   const btnBase =
-    'text-sm px-3 py-1.5 rounded-md border border-[#D8D2C8] transition-colors duration-200';
+    'text-sm px-3 py-1.5 rounded-md border border-[#D8D2C8] transition-colors duration-200 font-zh-serif';
 
   return (
     <div className="flex flex-col gap-3">

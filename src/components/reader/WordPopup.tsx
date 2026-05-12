@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from 'react';
 import type { VocabEntry } from '@/types';
-import { getDifficultyDotColor, getDifficultyLabel } from '@/lib/vocab';
+import { getDifficultyDotColor } from '@/lib/vocab';
 import { Star } from 'lucide-react';
 
 interface WordPopupProps {
@@ -43,20 +43,17 @@ export default function WordPopup({
   return (
     <div
       ref={ref}
-      className="fixed z-50 bg-[#FEFCF5] rounded-xl shadow-lg border border-[#E8E4DD] p-3 min-w-[180px] max-w-[240px]"
+      className="fixed z-50 bg-[#FEFCF5] rounded-xl shadow-lg border border-[#E8E4DD] p-3 min-w-[180px] max-w-[260px]"
       style={{ left: position.x, top: position.y }}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onClose}
     >
       <div className="flex items-center gap-2 mb-1">
-        <span className={`w-2.5 h-2.5 rounded-full ${getDifficultyDotColor(entry.difficulty)}`} />
+        <span className={`w-2.5 h-2.5 rounded-full shrink-0 ${getDifficultyDotColor(entry.difficulty)}`} />
         <span className="font-semibold text-sm text-[#2D2B28]">{word}</span>
-        <span className="text-[11px] text-[#78716C]">
-          {getDifficultyLabel(entry.difficulty)}
-        </span>
+        <span className="text-xs text-[#78716C]">{entry.pos}</span>
+        <span className="text-sm text-[#2D2B28]">{entry.definition}</span>
       </div>
-      <p className="text-xs text-[#78716C] mb-0.5">{entry.pos}</p>
-      <p className="text-sm text-[#2D2B28] mb-2">{entry.definition}</p>
       <button
         onClick={() => onSave(word)}
         disabled={isSaved}

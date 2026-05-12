@@ -30,10 +30,14 @@ export default async function ArticlePage({ params }: Props) {
           </a>
           <div className="flex items-center gap-2 ml-auto">
             <span className="text-sm text-[#78716C] font-zh-serif">高亮</span>
-            <HighlightToggle />
             <DifficultyLegend />
+            <HighlightToggle />
           </div>
-          <span className="text-sm text-[#78716C] bg-[#EDE9E0] px-2.5 py-1 rounded-md font-zh-serif">
+          <span className={`text-sm px-2.5 py-1 rounded-md font-zh-serif ${
+            article.difficulty === 'cet4' ? 'bg-[#D4E8D0] text-[#3A5C34]' :
+            article.difficulty === 'cet6' ? 'bg-[#F5E6C8] text-[#5C4A1E]' :
+            'bg-[#F0D3D3] text-[#5C2A2A]'
+          }`}>
             {getDifficultyLabel(article.difficulty)}
           </span>
         </header>
