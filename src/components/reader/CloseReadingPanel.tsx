@@ -17,11 +17,11 @@ export default function CloseReadingPanel({
   return (
     <div className="h-full overflow-y-auto flex flex-col">
       <div className="px-4 py-3">
-        <span className="text-[14px] font-medium text-[#5C3D2E] font-zh-serif">
+        <span className="text-[15px] font-bold text-[#5C3D2E] font-zh-serif">
           精读
         </span>
-        <span className="text-[12px] text-[#A09888] ml-2 font-zh-serif">
-          第 {selectedParagraph + 1} 段{totalParagraphs > 0 && ` / ${totalParagraphs}`}
+        <span className="text-[14px] text-[#A09888] ml-2 font-zh-serif">
+          第 {selectedParagraph + 1} 段
         </span>
       </div>
 
@@ -33,10 +33,10 @@ export default function CloseReadingPanel({
         ) : (
           current.map((pair, i) => (
             <div key={i} className="pb-3 border-b border-[#E8E4DD] last:border-0 last:pb-0">
-              <p className="text-[14px] text-[#2D2B28] leading-relaxed font-serif">
+              <p className="text-[18px] text-[#2D2B28] leading-relaxed font-serif">
                 {pair.en}
               </p>
-              <p className="text-[13px] text-[#78716C] leading-relaxed mt-1.5 font-zh-serif">
+              <p className="text-[18px] text-[#78716C] leading-relaxed mt-1.5 font-zh-serif font-bold">
                 {pair.zh}
               </p>
             </div>

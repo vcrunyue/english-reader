@@ -34,7 +34,7 @@ export default function Sidebar() {
   return (
     <aside
       className={`flex flex-col bg-[#F7F5F0] border-r border-[#E8E4DD] transition-[width] duration-[400ms] ease-out overflow-hidden shrink-0 ${
-        collapsed ? 'w-[60px]' : 'w-[136px]'
+        collapsed ? 'w-[54px]' : 'w-[130px]'
       }`}
     >
       <nav className="flex-1 py-3 space-y-1.5">
@@ -54,7 +54,7 @@ export default function Sidebar() {
               collapsed ? 'opacity-0 w-0 overflow-hidden delay-0' : 'opacity-100 w-auto delay-150'
             }`}
           >
-            收起
+            收起边栏
           </span>
         </button>
 
