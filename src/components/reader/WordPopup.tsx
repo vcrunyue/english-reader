@@ -43,29 +43,32 @@ export default function WordPopup({
   return (
     <div
       ref={ref}
-      className="fixed z-50 bg-[#FEFCF5] rounded-xl shadow-lg border border-[#E8E4DD] p-3 min-w-[180px] max-w-[260px]"
+      className="fixed z-50 bg-[#FEFCF5] rounded-xl shadow-lg border border-[#E8E4DD] p-3 min-w-[200px] max-w-[280px]"
       style={{ left: position.x, top: position.y }}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onClose}
     >
-      <div className="flex items-center gap-2 mb-1">
+      <div className="flex items-center gap-2">
         <span className={`w-2.5 h-2.5 rounded-full shrink-0 ${getDifficultyDotColor(entry.difficulty)}`} />
         <span className="font-semibold text-sm text-[#2D2B28]">{word}</span>
-        <span className="text-xs text-[#78716C]">{entry.pos}</span>
-        <span className="text-sm text-[#2D2B28]">{entry.definition}</span>
+        <button
+          onClick={() => onSave(word)}
+          disabled={isSaved}
+          className={`ml-auto flex items-center gap-1 text-xs px-2 py-0.5 rounded-md transition-colors shrink-0 ${
+            isSaved
+              ? 'bg-[#EDE9E0] text-[#C88C4A]'
+              : 'bg-[#EDE9E0] text-[#78716C] hover:bg-[#E8DCC8] hover:text-[#5C3D2E]'
+          }`}
+        >
+          <Star size={11} fill={isSaved ? 'currentColor' : 'none'} />
+          {isSaved ? '已收藏' : '收藏'}
+        </button>
       </div>
-      <button
-        onClick={() => onSave(word)}
-        disabled={isSaved}
-        className={`flex items-center gap-1 text-xs px-2 py-1 rounded-md transition-colors ${
-          isSaved
-            ? 'bg-[#EDE9E0] text-[#C88C4A]'
-            : 'bg-[#EDE9E0] text-[#78716C] hover:bg-[#E8DCC8] hover:text-[#5C3D2E]'
-        }`}
-      >
-        <Star size={12} fill={isSaved ? 'currentColor' : 'none'} />
-        {isSaved ? '已收藏' : '收藏'}
-      </button>
+      <p className="text-[13px] text-[#78716C] mt-1.5 leading-relaxed">
+        <span className="text-[#5C3D2E] font-medium">{entry.pos}</span>
+        <span className="mx-1.5 text-[#D8D2C8]">·</span>
+        {entry.definition}
+      </p>
     </div>
   );
 }

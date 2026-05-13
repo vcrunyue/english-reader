@@ -17,6 +17,7 @@ import {
 
 interface AppContextType {
   knownWords: Set<string>;
+  knownWordDates: Record<string, string>;
   markKnown: (word: string) => void;
   unmarkKnown: (word: string) => void;
   savedWords: Record<string, SavedWord>;
@@ -35,13 +36,16 @@ const AppContext = createContext<AppContextType | null>(null);
 
 export function AppProvider({ children }: { children: React.ReactNode }) {
   const [knownWords, setKnownWords] = useState<Set<string>>(new Set());
+  const [knownWordDates, setKnownWordDates] = useState<Record<string, string>>({});
   const [savedWords, setSavedWords] = useState<Record<string, SavedWord>>({});
   const [highlightEnabled, setHighlightEnabledState] = useState(true);
   const [closeReadingEnabled, setCloseReadingEnabledState] = useState(false);
   const [selectedParagraph, setSelectedParagraph] = useState(0);
 
   useEffect(() => {
-    setKnownWords(new Set(getKnownWords()));
+    const dates = getKnownWords();
+    setKnownWords(new Set(Object.keys(dates)));
+    setKnownWordDates(dates);
     setSavedWords(getSavedWords());
     setHighlightEnabledState(getHighlightEnabled());
     setCloseReadingEnabledState(getCloseReadingEnabled());
@@ -49,14 +53,22 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
 
   const markKnown = useCallback((word: string) => {
     addKnownWord(word);
-    setKnownWords(prev => new Set(prev).add(word.toLowerCase()));
+    const lower = word.toLowerCase();
+    setKnownWords(prev => new Set(prev).add(lower));
+    setKnownWordDates(prev => ({ ...prev, [lower]: new Date().toISOString().split('T')[0] }));
   }, []);
 
   const unmarkKnown = useCallback((word: string) => {
     removeKnownWord(word);
+    const lower = word.toLowerCase();
     setKnownWords(prev => {
       const next = new Set(prev);
-      next.delete(word.toLowerCase());
+      next.delete(lower);
+      return next;
+    });
+    setKnownWordDates(prev => {
+      const next = { ...prev };
+      delete next[lower];
       return next;
     });
   }, []);
@@ -105,6 +117,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     <AppContext.Provider
       value={{
         knownWords,
+        knownWordDates,
         markKnown,
         unmarkKnown,
         savedWords,

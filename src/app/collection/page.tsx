@@ -2,8 +2,15 @@
 
 import { useAppContext } from '@/context/AppContext';
 import { getDifficultyDotColor, getDifficultyLabel } from '@/lib/vocab';
+import type { Difficulty } from '@/types';
 import { X } from 'lucide-react';
 import type { SavedWord } from '@/types';
+
+const DIFFICULTY_BADGE: Record<Difficulty, string> = {
+  cet4: 'bg-[#D4E8D0] text-[#3A5C34]',
+  cet6: 'bg-[#F5E6C8] text-[#5C4A1E]',
+  postgrad: 'bg-[#F0D3D3] text-[#5C2A2A]',
+};
 
 export default function CollectionPage() {
   const { savedWords, removeWordFromCollection } = useAppContext();
@@ -30,7 +37,7 @@ export default function CollectionPage() {
             .map((w: SavedWord) => (
               <div
                 key={w.word}
-                className="flex items-center gap-3 py-2.5 px-3 rounded-lg hover:bg-[#EDE9E0] group transition-colors"
+                className="flex items-center gap-3 py-2.5 px-3 rounded-lg hover:bg-[#F2EFE8] group transition-colors"
               >
                 <span
                   className={`w-2.5 h-2.5 rounded-full shrink-0 ${getDifficultyDotColor(w.difficulty)}`}
@@ -39,7 +46,7 @@ export default function CollectionPage() {
                   <span className="font-medium text-sm text-[#2D2B28]">{w.word}</span>
                   <span className="text-[13px] text-[#78716C] ml-2">{w.definition}</span>
                 </div>
-                <span className="text-[10px] text-[#78716C] bg-[#EDE9E0] px-1.5 py-0.5 rounded-md">
+                <span className={`text-[10px] px-1.5 py-0.5 rounded-md ${DIFFICULTY_BADGE[w.difficulty]}`}>
                   {getDifficultyLabel(w.difficulty)}
                 </span>
                 <span className="text-[10px] text-[#78716C]">{w.date}</span>

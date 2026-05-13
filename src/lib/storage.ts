@@ -7,20 +7,31 @@ const STORAGE_KEYS = {
   closeReadingEnabled: 'eng_close_reading',
 } as const;
 
-export function getKnownWords(): string[] {
-  if (typeof window === 'undefined') return [];
+export function getKnownWords(): Record<string, string> {
+  if (typeof window === 'undefined') return {};
   try {
     const raw = localStorage.getItem(STORAGE_KEYS.knownWords);
-    return raw ? JSON.parse(raw) : [];
+    if (!raw) return {};
+    const parsed = JSON.parse(raw);
+    // migrate old string[] format
+    if (Array.isArray(parsed)) {
+      const migrated: Record<string, string> = {};
+      const today = new Date().toISOString().split('T')[0];
+      for (const w of parsed) migrated[w] = today;
+      localStorage.setItem(STORAGE_KEYS.knownWords, JSON.stringify(migrated));
+      return migrated;
+    }
+    return parsed;
   } catch {
-    return [];
+    return {};
   }
 }
 
 export function addKnownWord(word: string): void {
   const words = getKnownWords();
-  if (!words.includes(word.toLowerCase())) {
-    words.push(word.toLowerCase());
+  const key = word.toLowerCase();
+  if (!(key in words)) {
+    words[key] = new Date().toISOString().split('T')[0];
     localStorage.setItem(STORAGE_KEYS.knownWords, JSON.stringify(words));
   }
 }
@@ -62,7 +73,8 @@ export function getHighlightEnabled(): boolean {
 }
 
 export function removeKnownWord(word: string): void {
-  const words = getKnownWords().filter(w => w !== word.toLowerCase());
+  const words = getKnownWords();
+  delete words[word.toLowerCase()];
   localStorage.setItem(STORAGE_KEYS.knownWords, JSON.stringify(words));
 }
 
