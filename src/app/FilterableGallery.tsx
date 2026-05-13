@@ -124,7 +124,7 @@ export default function FilterableGallery({ articles }: { articles: ArticleMeta[
             <div
               key={`${generation}-${article.slug}`}
               className="animate-card-enter"
-              style={{ animationDelay: `${i * 100}ms` }}
+              style={{ animationDelay: `${i * 150}ms` }}
             >
               <ArticleCard article={article} layout="grid" />
             </div>
@@ -139,7 +139,7 @@ export default function FilterableGallery({ articles }: { articles: ArticleMeta[
             <div
               key={`${generation}-${article.slug}`}
               className="animate-card-enter"
-              style={{ animationDelay: `${i * 100}ms` }}
+              style={{ animationDelay: `${i * 150}ms` }}
             >
               <ArticleCard article={article} layout="list" />
             </div>

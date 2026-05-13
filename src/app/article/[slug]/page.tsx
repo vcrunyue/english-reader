@@ -58,7 +58,7 @@ export default async function ArticlePage({ params }: Props) {
         </header>
 
         {/* 正文 */}
-        <div className="flex-1 overflow-y-auto py-8">
+        <div className="flex-1 overflow-y-auto pt-[47px] pb-8">
           <div className="px-8">
             <h1 className="font-display text-3xl text-[#2D2B28] mb-2">{article.title}</h1>
             <p className="text-[13px] text-[#78716C] mb-8">

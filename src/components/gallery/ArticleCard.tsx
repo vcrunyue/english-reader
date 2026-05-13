@@ -5,7 +5,7 @@ import Link from 'next/link';
 import type { ArticleMeta } from '@/types';
 import { getDifficultyLabel } from '@/lib/vocab';
 import { useAppContext } from '@/context/AppContext';
-import { Bookmark, Check } from 'lucide-react';
+import { Bookmark } from 'lucide-react';
 
 const DIFFICULTY_STYLES: Record<string, string> = {
   cet4: 'bg-[#D4E8D0] text-[#3A5C34]',
@@ -23,11 +23,6 @@ function getGradient(topic: string): string {
   return TOPIC_GRADIENTS[topic] ?? 'from-[#D0C8C0] to-[#C0B8B0]';
 }
 
-function readingTime(wordCount: number): string {
-  const min = Math.max(1, Math.ceil(wordCount / 200));
-  return `~${min} min`;
-}
-
 interface ArticleCardProps {
   article: ArticleMeta;
   layout?: 'grid' | 'list';
@@ -39,7 +34,6 @@ export default function ArticleCard({ article, layout = 'grid' }: ArticleCardPro
     saveArticleToCollection,
     removeArticleFromCollection,
     isArticleRead,
-    markAsRead,
     unmarkAsRead,
   } = useAppContext();
   const saved = isArticleInCollection(article.slug);
@@ -61,14 +55,8 @@ export default function ArticleCard({ article, layout = 'grid' }: ArticleCardPro
   const handleReadToggle = (e: React.MouseEvent) => {
     e.stopPropagation();
     e.preventDefault();
-    if (read) {
-      unmarkAsRead(article.slug);
-    } else {
-      markAsRead(article.slug);
-    }
+    unmarkAsRead(article.slug);
   };
-
-  const time = readingTime(article.wordCount);
 
   // ---------- list layout ----------
   if (layout === 'list') {
@@ -76,9 +64,7 @@ export default function ArticleCard({ article, layout = 'grid' }: ArticleCardPro
       <div className="relative group">
         <Link
           href={`/article/${article.slug}`}
-          className={`flex rounded-xl overflow-hidden border border-[#E8E4DD] group-hover:shadow-md group-hover:border-[#C88C4A]/40 group-hover:-translate-y-1 group-hover:scale-[1.01] transition-all duration-300 bg-white/60 ${
-            read ? 'opacity-80' : ''
-          }`}
+          className="flex rounded-xl overflow-hidden border border-[#E8E4DD] group-hover:shadow-md group-hover:border-[#C88C4A]/40 group-hover:-translate-y-1 group-hover:scale-[1.01] transition-all duration-300 bg-white/60"
         >
           {/* cover */}
           <div className="w-28 shrink-0 overflow-hidden">
@@ -117,19 +103,18 @@ export default function ArticleCard({ article, layout = 'grid' }: ArticleCardPro
               <span>{article.source}</span>
               <span className="text-[#D8D2C8]">·</span>
               <span>{article.date}</span>
-              <span className="text-[#D8D2C8]">·</span>
-              <span>{time}</span>
-              <span className="text-[#D8D2C8]">·</span>
-              <button
-                onClick={handleReadToggle}
-                className={`flex items-center gap-0.5 transition-colors ${
-                  read ? 'text-[#A0A090] hover:text-[#78716C]' : 'text-[#C8C4B8] hover:text-[#A0A090]'
-                }`}
-                title={read ? '标为未读' : '标为已读'}
-              >
-                <Check size={11} />
-                {read ? '已读' : '未读'}
-              </button>
+              {read && (
+                <>
+                  <span className="text-[#D8D2C8]">·</span>
+                  <button
+                    onClick={handleReadToggle}
+                    className="text-[#A0A090] hover:text-[#78716C] transition-colors"
+                    title="标为未读"
+                  >
+                    已读
+                  </button>
+                </>
+              )}
             </div>
           </div>
         </Link>
@@ -155,9 +140,7 @@ export default function ArticleCard({ article, layout = 'grid' }: ArticleCardPro
     <div className="relative group h-full">
       <Link
         href={`/article/${article.slug}`}
-        className={`flex flex-col h-full rounded-xl overflow-hidden border border-[#E8E4DD] group-hover:shadow-lg group-hover:border-[#C88C4A]/50 group-hover:-translate-y-1 group-hover:scale-[1.02] transition-all duration-300 bg-white/60 ${
-          read ? 'opacity-80' : ''
-        }`}
+        className="flex flex-col h-full rounded-xl overflow-hidden border border-[#E8E4DD] group-hover:shadow-lg group-hover:border-[#C88C4A]/50 group-hover:-translate-y-1 group-hover:scale-[1.02] transition-all duration-300 bg-white/60"
       >
         {/* cover */}
         <div className="h-24 overflow-hidden shrink-0">
@@ -186,7 +169,7 @@ export default function ArticleCard({ article, layout = 'grid' }: ArticleCardPro
           </h3>
           <div className="flex-1" />
 
-          {/* meta row: diff · source · date · time · read */}
+          {/* meta row: diff · source · date · read */}
           <div className="flex items-center gap-1.5 flex-wrap text-[13px] text-[#78716C]">
             <span
               className={`inline-block text-[11px] px-1.5 py-0.5 rounded-md font-medium ${DIFFICULTY_STYLES[article.difficulty] ?? ''}`}
@@ -197,19 +180,18 @@ export default function ArticleCard({ article, layout = 'grid' }: ArticleCardPro
             <span>{article.source}</span>
             <span className="text-[#D8D2C8]">·</span>
             <span>{article.date}</span>
-            <span className="text-[#D8D2C8]">·</span>
-            <span>{time}</span>
-            <span className="text-[#D8D2C8]">·</span>
-            <button
-              onClick={handleReadToggle}
-              className={`flex items-center gap-0.5 transition-colors ${
-                read ? 'text-[#A0A090] hover:text-[#78716C]' : 'text-[#C8C4B8] hover:text-[#A0A090]'
-              }`}
-              title={read ? '标为未读' : '标为已读'}
-            >
-              <Check size={11} />
-              {read ? '已读' : '未读'}
-            </button>
+            {read && (
+              <>
+                <span className="text-[#D8D2C8]">·</span>
+                <button
+                  onClick={handleReadToggle}
+                  className="text-[#A0A090] hover:text-[#78716C] transition-colors"
+                  title="标为未读"
+                >
+                  已读
+                </button>
+              </>
+            )}
           </div>
         </div>
       </Link>
