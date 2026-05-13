@@ -9,6 +9,9 @@ import WordPopup from './WordPopup';
 interface ArticleBodyProps {
   content: string;
   vocab: VocabMap;
+  onParagraphSelect?: (index: number) => void;
+  closeReadingEnabled?: boolean;
+  selectedParagraph?: number;
 }
 
 interface PopupData {
@@ -18,7 +21,7 @@ interface PopupData {
   y: number;
 }
 
-export default function ArticleBody({ content, vocab }: ArticleBodyProps) {
+export default function ArticleBody({ content, vocab, onParagraphSelect, closeReadingEnabled, selectedParagraph }: ArticleBodyProps) {
   const { knownWords, highlightEnabled, saveWordToCollection, isWordInCollection } =
     useAppContext();
   const [popup, setPopup] = useState<PopupData | null>(null);
@@ -87,8 +90,17 @@ export default function ArticleBody({ content, vocab }: ArticleBodyProps) {
           );
         }
 
+        const isSelected = closeReadingEnabled && selectedParagraph === pIdx;
         return (
-          <p key={pIdx} className="mb-4 leading-[1.85] text-[18px] text-[#2D2B28] font-serif [text-indent:2em]">
+          <p
+            key={pIdx}
+            className={`mb-4 leading-[1.85] text-[18px] text-[#2D2B28] font-serif [text-indent:2em] ${
+              closeReadingEnabled
+                ? 'cursor-pointer rounded-lg transition-shadow duration-200 hover:shadow-[0_2px_12px_rgba(200,140,74,0.12)]'
+                : ''
+            } ${isSelected ? 'shadow-[0_2px_12px_rgba(200,140,74,0.18)] ring-1 ring-[#C88C4A]/20' : ''}`}
+            onClick={closeReadingEnabled ? () => onParagraphSelect?.(pIdx) : undefined}
+          >
             {renderTextWithHighlights(
               text,
               vocab,

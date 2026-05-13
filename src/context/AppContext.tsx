@@ -11,6 +11,8 @@ import {
   removeSavedWord,
   getHighlightEnabled,
   setHighlightEnabled,
+  getCloseReadingEnabled,
+  setCloseReadingEnabled,
 } from '@/lib/storage';
 
 interface AppContextType {
@@ -23,6 +25,10 @@ interface AppContextType {
   isWordInCollection: (word: string) => boolean;
   highlightEnabled: boolean;
   toggleHighlight: () => void;
+  closeReadingEnabled: boolean;
+  toggleCloseReading: () => void;
+  selectedParagraph: number;
+  selectParagraph: (index: number) => void;
 }
 
 const AppContext = createContext<AppContextType | null>(null);
@@ -31,11 +37,14 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
   const [knownWords, setKnownWords] = useState<Set<string>>(new Set());
   const [savedWords, setSavedWords] = useState<Record<string, SavedWord>>({});
   const [highlightEnabled, setHighlightEnabledState] = useState(true);
+  const [closeReadingEnabled, setCloseReadingEnabledState] = useState(false);
+  const [selectedParagraph, setSelectedParagraph] = useState(0);
 
   useEffect(() => {
     setKnownWords(new Set(getKnownWords()));
     setSavedWords(getSavedWords());
     setHighlightEnabledState(getHighlightEnabled());
+    setCloseReadingEnabledState(getCloseReadingEnabled());
   }, []);
 
   const markKnown = useCallback((word: string) => {
@@ -79,6 +88,19 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     });
   }, []);
 
+  const toggleCloseReading = useCallback(() => {
+    setCloseReadingEnabledState(prev => {
+      const next = !prev;
+      setCloseReadingEnabled(next);
+      if (next) setSelectedParagraph(0);
+      return next;
+    });
+  }, []);
+
+  const selectParagraph = useCallback((index: number) => {
+    setSelectedParagraph(index);
+  }, []);
+
   return (
     <AppContext.Provider
       value={{
@@ -91,6 +113,10 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
         isWordInCollection,
         highlightEnabled,
         toggleHighlight,
+        closeReadingEnabled,
+        toggleCloseReading,
+        selectedParagraph,
+        selectParagraph,
       }}
     >
       {children}

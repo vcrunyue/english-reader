@@ -3,10 +3,12 @@
 import { useState, useEffect } from 'react';
 import type { VocabMap } from '@/types';
 import { loadVocab } from '@/lib/vocab';
+import { useAppContext } from '@/context/AppContext';
 import ArticleBody from '@/components/reader/ArticleBody';
 
 export default function ArticleReader({ content }: { content: string }) {
   const [vocab, setVocab] = useState<VocabMap | null>(null);
+  const { closeReadingEnabled, selectedParagraph, selectParagraph } = useAppContext();
 
   useEffect(() => {
     loadVocab().then(setVocab);
@@ -18,5 +20,13 @@ export default function ArticleReader({ content }: { content: string }) {
     );
   }
 
-  return <ArticleBody content={content} vocab={vocab} />;
+  return (
+    <ArticleBody
+      content={content}
+      vocab={vocab}
+      closeReadingEnabled={closeReadingEnabled}
+      selectedParagraph={selectedParagraph}
+      onParagraphSelect={selectParagraph}
+    />
+  );
 }

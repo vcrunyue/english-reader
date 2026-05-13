@@ -1,10 +1,11 @@
 import { notFound } from 'next/navigation';
-import { getArticleBySlug, getAllArticleSlugs } from '@/lib/articles';
+import { getArticleBySlug, getAllArticleSlugs, extractTranslations, stripTranslationLines } from '@/lib/articles';
 import HighlightToggle from '@/components/reader/HighlightToggle';
+import CloseReadingToggle from '@/components/reader/CloseReadingToggle';
 import DifficultyLegend from '@/components/reader/DifficultyLegend';
 import { getDifficultyLabel } from '@/lib/vocab';
 import ArticleReader from './ArticleReader';
-import PanelContainer from './PanelContainer';
+import ReadingPanelArea from './ReadingPanelArea';
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -19,6 +20,9 @@ export default async function ArticlePage({ params }: Props) {
   const article = getArticleBySlug(slug);
   if (!article) notFound();
 
+  const translations = extractTranslations(article.content);
+  const cleanContent = stripTranslationLines(article.content);
+
   return (
     <div className="flex h-full">
       {/* 主内容区 */}
@@ -28,8 +32,10 @@ export default async function ArticlePage({ params }: Props) {
           <a href="/" className="text-sm text-[#78716C] hover:text-[#C88C4A] transition-colors font-zh-serif">
             ← 返回
           </a>
-          <div className="flex items-center gap-2 ml-auto">
-            <span className="text-sm text-[#78716C] font-zh-serif">高亮</span>
+          <div className="flex items-center gap-3 ml-auto">
+            <span className="text-sm text-[#78716C] font-zh-serif">精读</span>
+            <CloseReadingToggle />
+            <span className="text-sm text-[#78716C] font-zh-serif ml-2">高亮</span>
             <DifficultyLegend />
             <HighlightToggle />
           </div>
@@ -48,12 +54,12 @@ export default async function ArticlePage({ params }: Props) {
           <p className="text-[13px] text-[#78716C] mb-8">
             {article.source} · {article.date}
           </p>
-          <ArticleReader content={article.content} />
+          <ArticleReader content={cleanContent} />
         </div>
       </div>
 
-      {/* 右侧面板 */}
-      <PanelContainer content={article.content} />
+      {/* 右侧面板 — 精读开启时显示翻译，关闭时无面板 */}
+      <ReadingPanelArea translations={translations} />
     </div>
   );
 }

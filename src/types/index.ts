@@ -23,6 +23,11 @@ export interface VocabEntry {
 
 export type VocabMap = Record<string, VocabEntry>;
 
+export interface SentencePair {
+  en: string;
+  zh: string;
+}
+
 export interface SavedWord {
   word: string;
   definition: string;

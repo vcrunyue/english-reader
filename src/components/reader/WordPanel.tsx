@@ -66,7 +66,7 @@ export default function WordPanel({
           <span className="text-[10px] text-[#78716C] ml-1">{w.entry.pos}</span>
           <p className="text-xs text-[#78716C] truncate">{w.entry.definition}</p>
         </div>
-        <div className="flex items-center gap-1 shrink-0 mt-0.5 ml-0.5 opacity-0 group-hover:opacity-100 transition-opacity">
+        <div className="flex items-center gap-1 shrink-0 mt-1 ml-0 opacity-0 group-hover:opacity-100 transition-opacity">
           {isKnown ? (
             <button
               onClick={() => onUnmarkKnown(w.word)}

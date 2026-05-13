@@ -4,6 +4,7 @@ const STORAGE_KEYS = {
   knownWords: 'eng_known_words',
   savedWords: 'eng_saved_words',
   highlightEnabled: 'eng_highlight',
+  closeReadingEnabled: 'eng_close_reading',
 } as const;
 
 export function getKnownWords(): string[] {
@@ -67,4 +68,17 @@ export function removeKnownWord(word: string): void {
 
 export function setHighlightEnabled(enabled: boolean): void {
   localStorage.setItem(STORAGE_KEYS.highlightEnabled, String(enabled));
+}
+
+export function getCloseReadingEnabled(): boolean {
+  if (typeof window === 'undefined') return false;
+  try {
+    return localStorage.getItem(STORAGE_KEYS.closeReadingEnabled) === 'true';
+  } catch {
+    return false;
+  }
+}
+
+export function setCloseReadingEnabled(enabled: boolean): void {
+  localStorage.setItem(STORAGE_KEYS.closeReadingEnabled, String(enabled));
 }
