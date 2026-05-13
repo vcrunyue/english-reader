@@ -25,15 +25,15 @@ export default async function ArticlePage({ params }: Props) {
       <div className="flex-1 flex flex-col min-w-0">
         {/* 顶栏 */}
         <header className="flex items-center gap-4 px-6 py-3 border-b border-[#E8E4DD] bg-[#FEFCF5] sticky top-0 z-10">
-          <a href="/" className="text-sm text-[#78716C] hover:text-[#C88C4A] transition-colors font-zh-serif">
+          <a href="/" className="text-sm text-[#78716C] hover:text-[#C88C4A] transition-colors font-zh-serif font-bold">
             ← 返回
           </a>
           <div className="flex items-center gap-2 ml-auto">
-            <span className="text-sm text-[#78716C] font-zh-serif">高亮</span>
+            <span className="text-sm text-[#78716C] font-zh-serif font-bold">高亮</span>
             <DifficultyLegend />
             <HighlightToggle />
           </div>
-          <span className={`text-sm px-2.5 py-1 rounded-md font-zh-serif ${
+          <span className={`text-sm px-2.5 py-1 rounded-md font-zh-serif font-bold ${
             article.difficulty === 'cet4' ? 'bg-[#D4E8D0] text-[#3A5C34]' :
             article.difficulty === 'cet6' ? 'bg-[#F5E6C8] text-[#5C4A1E]' :
             'bg-[#F0D3D3] text-[#5C2A2A]'
