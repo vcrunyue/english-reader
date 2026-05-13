@@ -17,10 +17,10 @@ export default function CloseReadingPanel({
   return (
     <div className="h-full overflow-y-auto flex flex-col">
       <div className="px-4 py-3">
-        <span className="text-[15px] font-bold text-[#5C3D2E] font-zh-serif">
+        <span className="text-[20px] font-bold text-[#5C3D2E] font-zh-serif">
           精读
         </span>
-        <span className="text-[14px] text-[#A09888] ml-2 font-zh-serif">
+        <span className="text-[20px] text-[#A09888] ml-2 font-zh-serif font-bold">
           第 {selectedParagraph + 1} 段
         </span>
       </div>
@@ -33,10 +33,10 @@ export default function CloseReadingPanel({
         ) : (
           current.map((pair, i) => (
             <div key={i} className="pb-3 border-b border-[#E8E4DD] last:border-0 last:pb-0">
-              <p className="text-[18px] text-[#2D2B28] leading-relaxed font-serif">
+              <p className="text-[16px] text-[#2D2B28] leading-relaxed font-serif">
                 {pair.en}
               </p>
-              <p className="text-[18px] text-[#78716C] leading-relaxed mt-1.5 font-zh-serif font-bold">
+              <p className="text-[16px] text-[#78716C] leading-relaxed mt-1.5 font-zh-serif font-bold">
                 {pair.zh}
               </p>
             </div>
@@ -46,10 +46,10 @@ export default function CloseReadingPanel({
 
       {/* 句子分析占位 */}
       <div className="border-t border-[#E8E4DD] px-4 py-3">
-        <span className="text-[12px] font-medium text-[#5C3D2E] font-zh-serif">
+        <span className="text-[16px] font-bold text-[#5C3D2E] font-zh-serif">
           句子分析
         </span>
-        <p className="text-[11px] text-[#A09888] mt-2 font-zh-serif">
+        <p className="text-[14px] text-[#A09888] mt-2 font-zh-serif">
           句子成分分析 · 即将推出
         </p>
       </div>
