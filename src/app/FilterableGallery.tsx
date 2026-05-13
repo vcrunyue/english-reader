@@ -73,6 +73,9 @@ export default function FilterableGallery({ articles }: { articles: ArticleMeta[
     }
   }, []);
 
+  // Force remount on filter/sort changes so CSS animation replays
+  const generation = `${difficulty}|${source}|${sort}|${randomSeed}`;
+
   return (
     <div className="space-y-3">
       <FilterBar
@@ -119,9 +122,9 @@ export default function FilterableGallery({ articles }: { articles: ArticleMeta[
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7">
           {filtered.map((article, i) => (
             <div
-              key={article.slug}
+              key={`${generation}-${article.slug}`}
               className="animate-card-enter"
-              style={{ animationDelay: `${i * 250}ms` }}
+              style={{ animationDelay: `${i * 100}ms` }}
             >
               <ArticleCard article={article} layout="grid" />
             </div>
@@ -134,9 +137,9 @@ export default function FilterableGallery({ articles }: { articles: ArticleMeta[
         <div className="flex flex-col gap-4">
           {filtered.map((article, i) => (
             <div
-              key={article.slug}
+              key={`${generation}-${article.slug}`}
               className="animate-card-enter"
-              style={{ animationDelay: `${i * 250}ms` }}
+              style={{ animationDelay: `${i * 100}ms` }}
             >
               <ArticleCard article={article} layout="list" />
             </div>
