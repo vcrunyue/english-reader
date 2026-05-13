@@ -32,7 +32,7 @@ export default function Sidebar() {
   return (
     <aside
       className={`flex flex-col bg-[#F7F5F0] border-r border-[#E8E4DD] transition-[width] duration-400 ease-out overflow-hidden shrink-0 ${
-        collapsed ? 'w-[60px]' : 'w-[140px]'
+        collapsed ? 'w-[60px]' : 'w-[136px]'
       }`}
     >
       <nav className="flex-1 py-3 space-y-1.5">

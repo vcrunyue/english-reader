@@ -1,6 +1,6 @@
 export default function ImportPage() {
   return (
-    <div className="max-w-2xl mx-auto px-6 py-8">
+    <div className="max-w-2xl mx-auto px-8 py-10">
       <h1 className="font-display text-4xl text-[#2D2B28] mb-10">导入文章</h1>
       <div className="border-2 border-dashed border-[#D8D2C8] rounded-xl p-12 text-center">
         <p className="text-[#78716C] mb-2 font-zh-serif">文章导入功能即将上线</p>

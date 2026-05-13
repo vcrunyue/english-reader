@@ -16,7 +16,7 @@ export default function CollectionPage() {
   };
 
   return (
-    <div className="max-w-2xl mx-auto px-6 py-8">
+    <div className="max-w-2xl mx-auto px-8 py-10">
       <h1 className="font-display text-4xl text-[#2D2B28] mb-10">生词收藏</h1>
 
       {words.length === 0 && (
