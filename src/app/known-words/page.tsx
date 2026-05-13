@@ -90,7 +90,7 @@ export default function KnownWordsPage() {
               <button
                 onClick={() => unmarkKnown(word)}
                 className="opacity-0 group-hover:opacity-100 p-1 text-[#78716C] hover:text-red-400 transition-all"
-                title="移出熟词"
+                aria-label="移出熟词"
               >
                 <X size={14} />
               </button>

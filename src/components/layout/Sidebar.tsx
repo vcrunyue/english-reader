@@ -41,8 +41,8 @@ export default function Sidebar() {
         {/* 折叠按钮 */}
         <button
           onClick={() => setCollapsed(!collapsed)}
-          className={`${itemCls} ${inactiveCls}`}
-          title={collapsed ? '展开侧边栏' : '收起侧边栏'}
+          className={`${itemCls} ${inactiveCls} bg-transparent border-0`}
+          aria-label={collapsed ? '展开侧边栏' : '收起侧边栏'}
         >
           {collapsed ? (
             <ChevronRight size={18} className="shrink-0" />
@@ -69,7 +69,7 @@ export default function Sidebar() {
                   ? 'bg-[#E8DCC8] text-[#5C3D2E] font-bold'
                   : inactiveCls
               }`}
-              title={collapsed ? label : undefined}
+              aria-label={collapsed ? label : undefined}
             >
               <Icon size={18} className="shrink-0" />
               <span

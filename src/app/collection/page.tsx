@@ -84,7 +84,7 @@ export default function CollectionPage() {
                 <button
                   onClick={() => handleRemove(w.word)}
                   className="opacity-0 group-hover:opacity-100 p-1 text-[#78716C] hover:text-red-400 transition-all"
-                  title="删除"
+                  aria-label="删除"
                 >
                   <X size={14} />
                 </button>

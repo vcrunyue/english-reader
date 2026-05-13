@@ -11,7 +11,7 @@ export default function HighlightToggle() {
       className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors duration-200 ${
         highlightEnabled ? 'bg-[#B08844]' : 'bg-[#D8D2C8]'
       }`}
-      title={highlightEnabled ? '关闭高亮' : '开启高亮'}
+      aria-label={highlightEnabled ? '关闭高亮' : '开启高亮'}
     >
       <span
         className={`absolute left-0.5 inline-block h-5 w-5 rounded-full bg-white shadow-sm transition-transform duration-200 ${

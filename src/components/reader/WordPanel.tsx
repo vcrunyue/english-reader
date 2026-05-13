@@ -70,7 +70,7 @@ export default function WordPanel({
           {isKnown ? (
             <button
               onClick={() => onUnmarkKnown(w.word)}
-              title="移回生词"
+              aria-label="移回生词"
               className="p-1 rounded text-[#78716C] hover:text-[#C88C4A]"
             >
               <Undo2 size={15} />
@@ -80,14 +80,14 @@ export default function WordPanel({
               <button
                 onClick={() => handleSave(w)}
                 disabled={saved}
-                title="收藏"
+                aria-label="收藏"
                 className={`p-1 rounded ${saved ? 'text-[#C88C4A]' : 'text-[#78716C] hover:text-[#C88C4A]'}`}
               >
                 <Star size={15} fill={saved ? 'currentColor' : 'none'} />
               </button>
               <button
                 onClick={() => onMarkKnown(w.word)}
-                title="已认识"
+                aria-label="已认识"
                 className="p-1 rounded text-[#78716C] hover:text-[#7CB868]"
               >
                 <Check size={15} />

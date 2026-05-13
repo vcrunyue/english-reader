@@ -109,7 +109,7 @@ export default function ArticleCard({ article, layout = 'grid' }: ArticleCardPro
                   <button
                     onClick={handleReadToggle}
                     className="text-[#A0A090] hover:text-[#78716C] transition-colors"
-                    title="标为未读"
+                    aria-label="标为未读"
                   >
                     已读
                   </button>
@@ -126,7 +126,6 @@ export default function ArticleCard({ article, layout = 'grid' }: ArticleCardPro
               ? 'opacity-100 bg-[#FEFCF5]/90 text-[#C88C4A] shadow-sm'
               : 'opacity-0 group-hover:opacity-100 bg-[#FEFCF5]/80 text-[#78716C] hover:text-[#C88C4A] hover:bg-[#FEFCF5] shadow-sm'
           }`}
-          title={saved ? '取消收藏' : '收藏文章'}
           aria-label={saved ? '取消收藏' : '收藏文章'}
         >
           <Bookmark size={15} fill={saved ? 'currentColor' : 'none'} />
@@ -186,7 +185,7 @@ export default function ArticleCard({ article, layout = 'grid' }: ArticleCardPro
                 <button
                   onClick={handleReadToggle}
                   className="text-[#A0A090] hover:text-[#78716C] transition-colors"
-                  title="标为未读"
+                  aria-label="标为未读"
                 >
                   已读
                 </button>
