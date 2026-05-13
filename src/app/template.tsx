@@ -1,22 +1,24 @@
 'use client';
 
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function Template({ children }: { children: React.ReactNode }) {
   const [visible, setVisible] = useState(false);
-  const prevKey = useRef<string>('');
 
   useEffect(() => {
-    // trigger exit animation on old content then enter on new
     setVisible(false);
-    const t = setTimeout(() => setVisible(true), 50);
-    return () => clearTimeout(t);
+    const t = requestAnimationFrame(() => setVisible(true));
+    return () => cancelAnimationFrame(t);
   }, [children]);
 
   return (
     <div
-      className="h-full transition-opacity duration-300 ease-out"
-      style={{ opacity: visible ? 1 : 0 }}
+      className="h-full"
+      style={{
+        opacity: visible ? 1 : 0,
+        transform: visible ? 'translateY(0) scale(1)' : 'translateY(8px) scale(0.995)',
+        transition: 'opacity 500ms cubic-bezier(0.16, 1, 0.3, 1), transform 500ms cubic-bezier(0.16, 1, 0.3, 1)',
+      }}
     >
       {children}
     </div>

@@ -43,20 +43,12 @@ export default async function ArticlePage({ params }: Props) {
         </header>
 
         {/* 正文 */}
-        <div className="flex-1 overflow-y-auto px-8 py-8 max-w-4xl relative">
-          {/* 顶部毛玻璃渐变 */}
-          <div className="sticky top-0 -mt-8 pt-8 z-10 pointer-events-none">
-            <div className="absolute inset-0 bg-gradient-to-b from-[#FEFCF5] via-[#FEFCF5]/80 to-transparent h-16 backdrop-blur-[2px]" />
-          </div>
+        <div className="flex-1 overflow-y-auto px-8 py-8 max-w-4xl">
           <h1 className="font-display text-2xl text-[#2D2B28] mb-2">{article.title}</h1>
           <p className="text-[13px] text-[#78716C] mb-8">
             {article.source} · {article.date}
           </p>
           <ArticleReader content={article.content} />
-          {/* 底部毛玻璃渐变 */}
-          <div className="sticky bottom-0 z-10 pointer-events-none">
-            <div className="absolute inset-0 bg-gradient-to-t from-[#FEFCF5] via-[#FEFCF5]/80 to-transparent h-16 -top-16 backdrop-blur-[2px]" />
-          </div>
         </div>
       </div>
 

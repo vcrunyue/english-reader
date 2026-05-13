@@ -124,17 +124,21 @@ export default function WordPanel({
         </button>
       </div>
 
-      <div className="flex-1 overflow-y-auto px-2 pb-2">
+      <div className="flex-1 overflow-y-auto px-2 pb-2" key={tab}>
         {tab === 'sentences' && (
-          <p className="text-xs text-[#78716C] text-center mt-8 font-zh-serif">句子分析功能即将推出</p>
+          <div className="animate-in">
+            <p className="text-xs text-[#78716C] text-center mt-8 font-zh-serif">句子分析功能即将推出</p>
+          </div>
         )}
 
         {tab === 'words' && unknownWords.length === 0 && knownArticleWords.length === 0 && (
-          <p className="text-xs text-[#78716C] text-center mt-8 font-zh-serif">本文暂无生词</p>
+          <div className="animate-in">
+            <p className="text-xs text-[#78716C] text-center mt-8 font-zh-serif">本文暂无生词</p>
+          </div>
         )}
 
         {tab === 'words' && (
-          <>
+          <div className="animate-in">
             {unknownWords.map(w => renderWordRow(w, false))}
 
             {knownArticleWords.length > 0 && (
@@ -149,7 +153,7 @@ export default function WordPanel({
                 {showKnown && knownArticleWords.map(w => renderWordRow(w, true))}
               </div>
             )}
-          </>
+          </div>
         )}
       </div>
     </div>
