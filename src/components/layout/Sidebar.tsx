@@ -39,9 +39,12 @@ export default function Sidebar() {
     >
       <nav className="flex-1 py-3 space-y-1.5">
         {/* 折叠按钮 */}
-        <button
+        <div
           onClick={() => setCollapsed(!collapsed)}
-          className={`${itemCls} ${inactiveCls} bg-transparent border-0`}
+          className={`${itemCls} ${inactiveCls}`}
+          role="button"
+          tabIndex={0}
+          onKeyDown={e => (e.key === 'Enter' || e.key === ' ') && setCollapsed(!collapsed)}
           aria-label={collapsed ? '展开侧边栏' : '收起侧边栏'}
         >
           {collapsed ? (
@@ -56,7 +59,7 @@ export default function Sidebar() {
           >
             收起边栏
           </span>
-        </button>
+        </div>
 
         {menuItems.map(({ href, label, icon: Icon }) => {
           const isActive = pathname === href;
