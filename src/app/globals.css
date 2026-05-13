@@ -64,5 +64,5 @@
 }
 
 .animate-card-enter {
-  animation: card-enter 500ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation: card-enter 600ms cubic-bezier(0.16, 1, 0.3, 1) both;
 }

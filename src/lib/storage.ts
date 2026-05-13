@@ -147,3 +147,9 @@ export function markArticleRead(slug: string): void {
 export function isArticleRead(slug: string): boolean {
   return slug in getReadArticles();
 }
+
+export function unmarkArticleRead(slug: string): void {
+  const articles = getReadArticles();
+  delete articles[slug];
+  localStorage.setItem(STORAGE_KEYS.readArticles, JSON.stringify(articles));
+}

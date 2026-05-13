@@ -31,15 +31,16 @@ function readingTime(wordCount: number): string {
 interface ArticleCardProps {
   article: ArticleMeta;
   layout?: 'grid' | 'list';
-  featured?: boolean;
 }
 
-export default function ArticleCard({ article, layout = 'grid', featured = false }: ArticleCardProps) {
+export default function ArticleCard({ article, layout = 'grid' }: ArticleCardProps) {
   const {
     isArticleInCollection,
     saveArticleToCollection,
     removeArticleFromCollection,
     isArticleRead,
+    markAsRead,
+    unmarkAsRead,
   } = useAppContext();
   const saved = isArticleInCollection(article.slug);
   const read = isArticleRead(article.slug);
@@ -57,6 +58,16 @@ export default function ArticleCard({ article, layout = 'grid', featured = false
     }
   };
 
+  const handleReadToggle = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    e.preventDefault();
+    if (read) {
+      unmarkAsRead(article.slug);
+    } else {
+      markAsRead(article.slug);
+    }
+  };
+
   const time = readingTime(article.wordCount);
 
   // ---------- list layout ----------
@@ -65,7 +76,7 @@ export default function ArticleCard({ article, layout = 'grid', featured = false
       <div className="relative group">
         <Link
           href={`/article/${article.slug}`}
-          className={`flex rounded-xl overflow-hidden border border-[#E8E4DD] hover:shadow-md hover:border-[#C88C4A]/40 hover:-translate-y-0.5 transition-all duration-200 bg-white/60 ${
+          className={`flex rounded-xl overflow-hidden border border-[#E8E4DD] group-hover:shadow-md group-hover:border-[#C88C4A]/40 group-hover:-translate-y-0.5 transition-all duration-300 bg-white/60 ${
             read ? 'opacity-80' : ''
           }`}
         >
@@ -96,26 +107,30 @@ export default function ArticleCard({ article, layout = 'grid', featured = false
                 {article.title}
               </h3>
             </div>
-            <div className="flex items-center gap-2 flex-wrap text-[13px] text-[#78716C]">
+            <div className="flex items-center gap-1.5 flex-wrap text-[13px] text-[#78716C]">
+              <span
+                className={`inline-block text-[11px] px-1.5 py-0.5 rounded-md font-medium ${DIFFICULTY_STYLES[article.difficulty] ?? ''}`}
+              >
+                {getDifficultyLabel(article.difficulty)}
+              </span>
+              <span className="text-[#D8D2C8]">·</span>
               <span>{article.source}</span>
               <span className="text-[#D8D2C8]">·</span>
               <span>{article.date}</span>
               <span className="text-[#D8D2C8]">·</span>
               <span>{time}</span>
-              {read && (
-                <>
-                  <span className="text-[#D8D2C8]">·</span>
-                  <span className="flex items-center gap-0.5 text-[#A0A090]">
-                    <Check size={11} /> 已读
-                  </span>
-                </>
-              )}
+              <span className="text-[#D8D2C8]">·</span>
+              <button
+                onClick={handleReadToggle}
+                className={`flex items-center gap-0.5 transition-colors ${
+                  read ? 'text-[#A0A090] hover:text-[#78716C]' : 'text-[#C8C4B8] hover:text-[#A0A090]'
+                }`}
+                title={read ? '标为未读' : '标为已读'}
+              >
+                <Check size={11} />
+                {read ? '已读' : '未读'}
+              </button>
             </div>
-            <span
-              className={`inline-block text-xs px-2 py-0.5 rounded-md font-medium self-start ${DIFFICULTY_STYLES[article.difficulty] ?? ''}`}
-            >
-              {getDifficultyLabel(article.difficulty)}
-            </span>
           </div>
         </Link>
 
@@ -140,12 +155,12 @@ export default function ArticleCard({ article, layout = 'grid', featured = false
     <div className="relative group h-full">
       <Link
         href={`/article/${article.slug}`}
-        className={`flex flex-col h-full rounded-xl overflow-hidden border border-[#E8E4DD] hover:shadow-lg hover:border-[#C88C4A]/50 hover:-translate-y-1 hover:scale-[1.02] transition-all duration-300 bg-white/60 ${
+        className={`flex flex-col h-full rounded-xl overflow-hidden border border-[#E8E4DD] group-hover:shadow-lg group-hover:border-[#C88C4A]/50 group-hover:-translate-y-1 group-hover:scale-[1.02] transition-all duration-300 bg-white/60 ${
           read ? 'opacity-80' : ''
         }`}
       >
         {/* cover */}
-        <div className={`${featured ? 'h-32' : 'h-24'} overflow-hidden shrink-0`}>
+        <div className="h-24 overflow-hidden shrink-0">
           {hasCover ? (
             <img
               src={article.coverImage}
@@ -157,7 +172,7 @@ export default function ArticleCard({ article, layout = 'grid', featured = false
             <div
               className={`h-full bg-gradient-to-br ${getGradient(article.topic)} flex items-center justify-center transition-transform duration-300 group-hover:scale-105`}
             >
-              <span className={`${featured ? 'text-3xl' : 'text-2xl'} text-white/70 font-display`}>
+              <span className="text-white/70 text-2xl font-display">
                 {(article.source || '?').slice(0, 2).toUpperCase()}
               </span>
             </div>
@@ -166,33 +181,36 @@ export default function ArticleCard({ article, layout = 'grid', featured = false
 
         {/* body */}
         <div className="p-4 flex flex-col flex-1 gap-2">
-          <h3 className={`font-display leading-snug line-clamp-2 text-[#2D2B28] group-hover:text-[#C88C4A] transition-colors min-h-[2.75rem] ${featured ? 'text-lg' : 'text-base'}`}>
+          <h3 className="font-display text-base leading-snug line-clamp-2 text-[#2D2B28] group-hover:text-[#C88C4A] transition-colors min-h-[2.75rem]">
             {article.title}
           </h3>
           <div className="flex-1" />
 
-          {/* meta row */}
+          {/* meta row: diff · source · date · time · read */}
           <div className="flex items-center gap-1.5 flex-wrap text-[13px] text-[#78716C]">
+            <span
+              className={`inline-block text-[11px] px-1.5 py-0.5 rounded-md font-medium ${DIFFICULTY_STYLES[article.difficulty] ?? ''}`}
+            >
+              {getDifficultyLabel(article.difficulty)}
+            </span>
+            <span className="text-[#D8D2C8]">·</span>
             <span>{article.source}</span>
             <span className="text-[#D8D2C8]">·</span>
             <span>{article.date}</span>
             <span className="text-[#D8D2C8]">·</span>
             <span>{time}</span>
-            {read && (
-              <>
-                <span className="text-[#D8D2C8]">·</span>
-                <span className="flex items-center gap-0.5 text-[#A0A090]">
-                  <Check size={11} /> 已读
-                </span>
-              </>
-            )}
+            <span className="text-[#D8D2C8]">·</span>
+            <button
+              onClick={handleReadToggle}
+              className={`flex items-center gap-0.5 transition-colors ${
+                read ? 'text-[#A0A090] hover:text-[#78716C]' : 'text-[#C8C4B8] hover:text-[#A0A090]'
+              }`}
+              title={read ? '标为未读' : '标为已读'}
+            >
+              <Check size={11} />
+              {read ? '已读' : '未读'}
+            </button>
           </div>
-
-          <span
-            className={`inline-block text-xs px-2 py-0.5 rounded-md font-medium self-start ${DIFFICULTY_STYLES[article.difficulty] ?? ''}`}
-          >
-            {getDifficultyLabel(article.difficulty)}
-          </span>
         </div>
       </Link>
 

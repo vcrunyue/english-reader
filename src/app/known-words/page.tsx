@@ -50,7 +50,7 @@ export default function KnownWordsPage() {
 
       {vocab && knownWords.size === 0 && (
         <p className="text-[#78716C] text-center py-12 font-zh-serif">
-          还没有熟词。阅读文章时点击 ✓ 即可添加。
+          还没有熟词。阅读文章时点击熟词按钮即可添加。
         </p>
       )}
 

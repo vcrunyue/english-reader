@@ -18,6 +18,7 @@ import {
   removeSavedArticle,
   getReadArticles,
   markArticleRead,
+  unmarkArticleRead,
 } from '@/lib/storage';
 
 interface AppContextType {
@@ -41,6 +42,7 @@ interface AppContextType {
   isArticleInCollection: (slug: string) => boolean;
   readArticles: Record<string, string>;
   markAsRead: (slug: string) => void;
+  unmarkAsRead: (slug: string) => void;
   isArticleRead: (slug: string) => boolean;
 }
 
@@ -156,6 +158,15 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     });
   }, []);
 
+  const unmarkAsRead = useCallback((slug: string) => {
+    unmarkArticleRead(slug);
+    setReadArticles(prev => {
+      const next = { ...prev };
+      delete next[slug];
+      return next;
+    });
+  }, []);
+
   const isRead = useCallback(
     (slug: string) => slug in readArticles,
     [readArticles],
@@ -184,6 +195,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
         isArticleInCollection,
         readArticles,
         markAsRead,
+        unmarkAsRead,
         isArticleRead: isRead,
       }}
     >

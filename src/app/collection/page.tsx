@@ -42,7 +42,7 @@ export default function CollectionPage() {
 
       {words.length === 0 && (
         <p className="text-[#78716C] text-center py-12 font-zh-serif">
-          还没有收藏的生词。阅读文章时点击 ⭐ 即可收藏。
+          还没有收藏的生词。阅读文章时点击收藏按钮即可收藏。
         </p>
       )}
 
