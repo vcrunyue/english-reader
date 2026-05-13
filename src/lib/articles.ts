@@ -70,6 +70,9 @@ export function extractTranslations(content: string): SentencePair[][] {
     for (let i = 0; i < lines.length; i++) {
       const line = lines[i].trim();
       if (!line) continue;
+      if (line.startsWith('#')) {
+        continue;
+      }
       if (line.startsWith('§')) {
         const zh = line.replace(/^§\s*/, '');
         const en = pairs.length > 0 ? pairs[pairs.length - 1].en : '';

@@ -15,7 +15,7 @@ export default function CloseReadingPanel({
   const current = translations[selectedParagraph] ?? [];
 
   return (
-    <div className="shrink-0 w-[320px] border-l border-[#E8E4DD] bg-[#F7F5F0] overflow-y-auto flex flex-col">
+    <div className="h-full overflow-y-auto flex flex-col">
       <div className="px-4 py-3 border-b border-[#E8E4DD]">
         <span className="text-[14px] font-medium text-[#5C3D2E] font-zh-serif">
           精读
