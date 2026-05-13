@@ -6,10 +6,15 @@ import { loadVocab, analyzeText } from '@/lib/vocab';
 import { useAppContext } from '@/context/AppContext';
 import WordPanel from '@/components/reader/WordPanel';
 
-export default function WordPanelWrapper({ content }: { content: string }) {
+interface Props {
+  content: string;
+  onTabChange?: (tab: 'words' | 'sentences') => void;
+}
+
+export default function WordPanelWrapper({ content, onTabChange }: Props) {
   const [vocab, setVocab] = useState<VocabMap | null>(null);
   const [knownInArticle, setKnownInArticle] = useState<Set<string>>(new Set());
-  const { knownWords, markKnown } = useAppContext();
+  const { knownWords, markKnown, unmarkKnown } = useAppContext();
 
   useEffect(() => {
     loadVocab().then(setVocab);
@@ -38,13 +43,17 @@ export default function WordPanelWrapper({ content }: { content: string }) {
     [markKnown],
   );
 
-  const handleUnmarkKnown = useCallback((word: string) => {
-    setKnownInArticle(prev => {
-      const next = new Set(prev);
-      next.delete(word);
-      return next;
-    });
-  }, []);
+  const handleUnmarkKnown = useCallback(
+    (word: string) => {
+      unmarkKnown(word);
+      setKnownInArticle(prev => {
+        const next = new Set(prev);
+        next.delete(word);
+        return next;
+      });
+    },
+    [unmarkKnown],
+  );
 
   return (
     <WordPanel
@@ -52,6 +61,7 @@ export default function WordPanelWrapper({ content }: { content: string }) {
       knownArticleWords={knownArticleWords}
       onMarkKnown={handleMarkKnown}
       onUnmarkKnown={handleUnmarkKnown}
+      onTabChange={onTabChange}
     />
   );
 }

@@ -16,6 +16,7 @@ interface WordPanelProps {
   knownArticleWords: PanelWord[];
   onMarkKnown: (word: string) => void;
   onUnmarkKnown: (word: string) => void;
+  onTabChange?: (tab: 'words' | 'sentences') => void;
 }
 
 type Tab = 'words' | 'sentences';
@@ -25,10 +26,16 @@ export default function WordPanel({
   knownArticleWords,
   onMarkKnown,
   onUnmarkKnown,
+  onTabChange,
 }: WordPanelProps) {
   const [tab, setTab] = useState<Tab>('words');
   const [showKnown, setShowKnown] = useState(true);
   const { saveWordToCollection, isWordInCollection } = useAppContext();
+
+  const handleTabChange = (t: Tab) => {
+    setTab(t);
+    onTabChange?.(t);
+  };
 
   const handleSave = (w: PanelWord) => {
     saveWordToCollection({
@@ -74,9 +81,7 @@ export default function WordPanel({
                 onClick={() => handleSave(w)}
                 disabled={saved}
                 title="收藏"
-                className={`p-1 rounded ${
-                  saved ? 'text-[#C88C4A]' : 'text-[#78716C] hover:text-[#C88C4A]'
-                }`}
+                className={`p-1 rounded ${saved ? 'text-[#C88C4A]' : 'text-[#78716C] hover:text-[#C88C4A]'}`}
               >
                 <Star size={15} fill={saved ? 'currentColor' : 'none'} />
               </button>
@@ -98,7 +103,7 @@ export default function WordPanel({
     <div className="flex flex-col h-full">
       <div className="flex gap-1 p-2">
         <button
-          onClick={() => setTab('words')}
+          onClick={() => handleTabChange('words')}
           className={`flex-1 text-[13px] py-1.5 rounded-md font-medium transition-colors font-zh-serif ${
             tab === 'words'
               ? 'bg-[#E8DCC8] text-[#5C3D2E]'
@@ -108,7 +113,7 @@ export default function WordPanel({
           词汇
         </button>
         <button
-          onClick={() => setTab('sentences')}
+          onClick={() => handleTabChange('sentences')}
           className={`flex-1 text-[13px] py-1.5 rounded-md font-medium transition-colors font-zh-serif ${
             tab === 'sentences'
               ? 'bg-[#E8DCC8] text-[#5C3D2E]'

@@ -4,7 +4,7 @@ import HighlightToggle from '@/components/reader/HighlightToggle';
 import DifficultyLegend from '@/components/reader/DifficultyLegend';
 import { getDifficultyLabel } from '@/lib/vocab';
 import ArticleReader from './ArticleReader';
-import WordPanelWrapper from './WordPanelWrapper';
+import PanelContainer from './PanelContainer';
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -53,9 +53,7 @@ export default async function ArticlePage({ params }: Props) {
       </div>
 
       {/* 右侧面板 */}
-      <aside className="w-[220px] shrink-0 border-l border-[#E8E4DD] bg-[#F7F5F0] overflow-y-auto">
-        <WordPanelWrapper content={article.content} />
-      </aside>
+      <PanelContainer content={article.content} />
     </div>
   );
 }
