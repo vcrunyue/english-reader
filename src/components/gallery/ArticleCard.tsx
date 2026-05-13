@@ -76,7 +76,7 @@ export default function ArticleCard({ article, layout = 'grid' }: ArticleCardPro
       <div className="relative group">
         <Link
           href={`/article/${article.slug}`}
-          className={`flex rounded-xl overflow-hidden border border-[#E8E4DD] group-hover:shadow-md group-hover:border-[#C88C4A]/40 group-hover:-translate-y-0.5 transition-all duration-300 bg-white/60 ${
+          className={`flex rounded-xl overflow-hidden border border-[#E8E4DD] group-hover:shadow-md group-hover:border-[#C88C4A]/40 group-hover:-translate-y-1 group-hover:scale-[1.01] transition-all duration-300 bg-white/60 ${
             read ? 'opacity-80' : ''
           }`}
         >

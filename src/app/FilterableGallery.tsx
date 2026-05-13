@@ -1,27 +1,45 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useCallback } from 'react';
 import type { ArticleMeta, Difficulty } from '@/types';
 import ArticleCard from '@/components/gallery/ArticleCard';
 import FilterBar from '@/components/gallery/FilterBar';
-import { LayoutGrid, List, Shuffle } from 'lucide-react';
 
 type ViewMode = 'grid' | 'list';
-type SortMode = 'default' | 'difficulty' | 'wordCount' | 'random';
-
-const DIFFICULTY_ORDER: Record<Difficulty, number> = { cet4: 0, cet6: 1, postgrad: 2 };
+type SortMode = 'default' | 'wordCount' | 'random';
 
 const btnBase =
   'text-sm px-3 py-1.5 rounded-md border border-[#D8D2C8] transition-colors duration-200 font-zh-serif';
 
-const toggleBtnBase =
-  'p-1.5 rounded-md border border-[#D8D2C8] transition-colors duration-200';
+const activeCls = 'bg-[#EDE9E0] text-[#5C3D2E]';
+const inactiveCls = 'bg-transparent text-[#78716C] hover:border-[#C88C4A] hover:text-[#5C3D2E]';
+
+const VIEW_OPTIONS: Array<{ key: ViewMode; label: string }> = [
+  { key: 'grid', label: '网格' },
+  { key: 'list', label: '列表' },
+];
+
+const SORT_OPTIONS: Array<{ key: SortMode; label: string }> = [
+  { key: 'default', label: '默认' },
+  { key: 'wordCount', label: '字数' },
+  { key: 'random', label: '随机' },
+];
+
+function shuffleArray<T>(arr: T[]): T[] {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
 
 export default function FilterableGallery({ articles }: { articles: ArticleMeta[] }) {
   const [difficulty, setDifficulty] = useState<Difficulty | 'all'>('all');
   const [source, setSource] = useState('all');
   const [view, setView] = useState<ViewMode>('grid');
   const [sort, setSort] = useState<SortMode>('default');
+  const [randomSeed, setRandomSeed] = useState(0);
 
   const sources = useMemo(
     () => [...new Set(articles.map(a => a.source))],
@@ -36,31 +54,27 @@ export default function FilterableGallery({ articles }: { articles: ArticleMeta[
     });
 
     switch (sort) {
-      case 'difficulty':
-        result = [...result].sort(
-          (a, b) => DIFFICULTY_ORDER[a.difficulty] - DIFFICULTY_ORDER[b.difficulty],
-        );
-        break;
       case 'wordCount':
         result = [...result].sort((a, b) => b.wordCount - a.wordCount);
         break;
       case 'random':
-        result = [...result].sort(() => Math.random() - 0.5);
+        result = shuffleArray(result);
         break;
     }
 
     return result;
-  }, [articles, difficulty, source, sort]);
+    // randomSeed is intentionally in deps to force re-shuffle on each "随机" click
+  }, [articles, difficulty, source, sort, randomSeed]);
 
-  const SORT_OPTIONS: Array<{ key: SortMode; label: string; icon?: React.ReactNode }> = [
-    { key: 'default', label: '默认' },
-    { key: 'difficulty', label: '难度' },
-    { key: 'wordCount', label: '字数' },
-    { key: 'random', label: '随机', icon: <Shuffle size={13} /> },
-  ];
+  const handleSort = useCallback((key: SortMode) => {
+    setSort(key);
+    if (key === 'random') {
+      setRandomSeed(s => s + 1);
+    }
+  }, []);
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-3">
       <FilterBar
         selectedDifficulty={difficulty}
         selectedSource={source}
@@ -74,41 +88,26 @@ export default function FilterableGallery({ articles }: { articles: ArticleMeta[
         <span className="text-[15px] text-[#78716C] font-bold w-10 shrink-0 font-zh-serif -mt-px ml-0.5">
           显示
         </span>
-        {/* 视图切换 */}
-        <div className="flex gap-1">
-          <button
-            onClick={() => setView('grid')}
-            className={`${toggleBtnBase} ${view === 'grid' ? 'bg-[#EDE9E0] text-[#5C3D2E]' : 'text-[#78716C] hover:border-[#C88C4A] hover:text-[#5C3D2E]'}`}
-            title="网格视图"
-            role="radio"
-            aria-checked={view === 'grid'}
-          >
-            <LayoutGrid size={16} />
-          </button>
-          <button
-            onClick={() => setView('list')}
-            className={`${toggleBtnBase} ${view === 'list' ? 'bg-[#EDE9E0] text-[#5C3D2E]' : 'text-[#78716C] hover:border-[#C88C4A] hover:text-[#5C3D2E]'}`}
-            title="列表视图"
-            role="radio"
-            aria-checked={view === 'list'}
-          >
-            <List size={16} />
-          </button>
-        </div>
-        {/* 排序选项 */}
-        {SORT_OPTIONS.map(({ key, label, icon }) => {
+        {VIEW_OPTIONS.map(({ key, label }) => {
+          const active = view === key;
+          return (
+            <button
+              key={key}
+              onClick={() => setView(key)}
+              className={`${btnBase} ${active ? activeCls : inactiveCls}`}
+            >
+              {label}
+            </button>
+          );
+        })}
+        {SORT_OPTIONS.map(({ key, label }) => {
           const active = sort === key;
           return (
             <button
               key={key}
-              onClick={() => setSort(key)}
-              className={`${btnBase} flex items-center gap-1 ${
-                active
-                  ? 'bg-[#EDE9E0] text-[#5C3D2E]'
-                  : 'bg-transparent text-[#78716C] hover:border-[#C88C4A] hover:text-[#5C3D2E]'
-              }`}
+              onClick={() => handleSort(key)}
+              className={`${btnBase} ${active ? activeCls : inactiveCls}`}
             >
-              {icon}
               {label}
             </button>
           );
@@ -122,7 +121,7 @@ export default function FilterableGallery({ articles }: { articles: ArticleMeta[
             <div
               key={article.slug}
               className="animate-card-enter"
-              style={{ animationDelay: `${Math.min(i * 100, 1500)}ms` }}
+              style={{ animationDelay: `${i * 250}ms` }}
             >
               <ArticleCard article={article} layout="grid" />
             </div>
@@ -137,7 +136,7 @@ export default function FilterableGallery({ articles }: { articles: ArticleMeta[
             <div
               key={article.slug}
               className="animate-card-enter"
-              style={{ animationDelay: `${Math.min(i * 100, 1500)}ms` }}
+              style={{ animationDelay: `${i * 250}ms` }}
             >
               <ArticleCard article={article} layout="list" />
             </div>
