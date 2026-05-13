@@ -60,6 +60,11 @@ export function getHighlightEnabled(): boolean {
   }
 }
 
+export function removeKnownWord(word: string): void {
+  const words = getKnownWords().filter(w => w !== word.toLowerCase());
+  localStorage.setItem(STORAGE_KEYS.knownWords, JSON.stringify(words));
+}
+
 export function setHighlightEnabled(enabled: boolean): void {
   localStorage.setItem(STORAGE_KEYS.highlightEnabled, String(enabled));
 }

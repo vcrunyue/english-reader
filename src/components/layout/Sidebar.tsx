@@ -7,6 +7,7 @@ import {
   BookOpen,
   FilePlus,
   Star,
+  ClipboardCheck,
   BarChart3,
   ChevronLeft,
   ChevronRight,
@@ -16,6 +17,7 @@ const menuItems = [
   { href: '/', label: '开始学习', icon: BookOpen },
   { href: '/import', label: '导入文章', icon: FilePlus },
   { href: '/collection', label: '生词收藏', icon: Star },
+  { href: '/known-words', label: '熟词收藏', icon: ClipboardCheck },
   { href: '/stats', label: '学习统计', icon: BarChart3 },
 ];
 

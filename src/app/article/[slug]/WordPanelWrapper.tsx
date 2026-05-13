@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useMemo, useCallback } from 'react';
-import type { VocabMap, VocabEntry } from '@/types';
+import type { VocabMap } from '@/types';
 import { loadVocab, analyzeText } from '@/lib/vocab';
 import { useAppContext } from '@/context/AppContext';
 import WordPanel from '@/components/reader/WordPanel';
@@ -17,10 +17,9 @@ export default function WordPanelWrapper({ content }: { content: string }) {
 
   const allWords = useMemo(() => {
     if (!vocab) return [];
-    return analyzeText(content, vocab, new Set()); // don't filter known words
+    return analyzeText(content, vocab, new Set());
   }, [content, vocab]);
 
-  // split into unknown and known-in-article
   const unknownWords = useMemo(
     () => allWords.filter(w => !knownInArticle.has(w.word) && !knownWords.has(w.word)),
     [allWords, knownInArticle, knownWords],
@@ -39,11 +38,20 @@ export default function WordPanelWrapper({ content }: { content: string }) {
     [markKnown],
   );
 
+  const handleUnmarkKnown = useCallback((word: string) => {
+    setKnownInArticle(prev => {
+      const next = new Set(prev);
+      next.delete(word);
+      return next;
+    });
+  }, []);
+
   return (
     <WordPanel
       unknownWords={unknownWords}
       knownArticleWords={knownArticleWords}
       onMarkKnown={handleMarkKnown}
+      onUnmarkKnown={handleUnmarkKnown}
     />
   );
 }

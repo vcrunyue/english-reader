@@ -5,6 +5,7 @@ import type { SavedWord } from '@/types';
 import {
   getKnownWords,
   addKnownWord,
+  removeKnownWord,
   getSavedWords,
   saveWord,
   removeSavedWord,
@@ -15,6 +16,7 @@ import {
 interface AppContextType {
   knownWords: Set<string>;
   markKnown: (word: string) => void;
+  unmarkKnown: (word: string) => void;
   savedWords: Record<string, SavedWord>;
   saveWordToCollection: (word: SavedWord) => void;
   removeWordFromCollection: (word: string) => void;
@@ -39,6 +41,15 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
   const markKnown = useCallback((word: string) => {
     addKnownWord(word);
     setKnownWords(prev => new Set(prev).add(word.toLowerCase()));
+  }, []);
+
+  const unmarkKnown = useCallback((word: string) => {
+    removeKnownWord(word);
+    setKnownWords(prev => {
+      const next = new Set(prev);
+      next.delete(word.toLowerCase());
+      return next;
+    });
   }, []);
 
   const saveWordToCollection = useCallback((word: SavedWord) => {
@@ -73,6 +84,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
       value={{
         knownWords,
         markKnown,
+        unmarkKnown,
         savedWords,
         saveWordToCollection,
         removeWordFromCollection,
