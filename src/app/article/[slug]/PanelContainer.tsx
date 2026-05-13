@@ -22,7 +22,7 @@ export default function PanelContainer({ content }: { content: string }) {
             absolute right-0 top-1/2 -translate-y-1/2
             w-5 h-12 bg-[#F7F5F0] border border-r-0 border-[#E8E4DD] rounded-l-md
             flex items-center justify-center
-            transition-all duration-700 ease-out
+            transition-all duration-[900ms] ease-out
             opacity-0 group-hover/toggle:opacity-100
             ${collapsed ? 'translate-x-1 group-hover/toggle:translate-x-0' : 'translate-x-0'}
           `}
@@ -38,7 +38,7 @@ export default function PanelContainer({ content }: { content: string }) {
       </div>
 
       <aside
-        className={`border-l border-[#E8E4DD] bg-[#F7F5F0] overflow-hidden transition-[width] duration-700 ease-out ${
+        className={`border-l border-[#E8E4DD] bg-[#F7F5F0] overflow-hidden transition-[width] duration-[900ms] ease-out ${
           collapsed ? 'w-0 border-l-0' : expanded ? 'w-[360px]' : 'w-[220px]'
         }`}
       >
