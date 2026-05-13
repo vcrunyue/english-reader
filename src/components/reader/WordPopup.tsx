@@ -1,6 +1,7 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 import type { VocabEntry } from '@/types';
 import { getDifficultyDotColor } from '@/lib/vocab';
 import { Star } from 'lucide-react';
@@ -25,6 +26,11 @@ export default function WordPopup({
   onClose,
 }: WordPopupProps) {
   const ref = useRef<HTMLDivElement>(null);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     if (!ref.current) return;
@@ -40,7 +46,7 @@ export default function WordPopup({
     ref.current.style.top = `${y}px`;
   }, [position]);
 
-  return (
+  const content = (
     <div
       ref={ref}
       className="fixed z-50 bg-[#FEFCF5] rounded-xl shadow-lg border border-[#E8E4DD] p-3 min-w-[200px] max-w-[280px]"
@@ -71,4 +77,7 @@ export default function WordPopup({
       </p>
     </div>
   );
+
+  if (!mounted) return null;
+  return createPortal(content, document.body);
 }
