@@ -13,6 +13,10 @@ import {
   setHighlightEnabled,
   getCloseReadingEnabled,
   setCloseReadingEnabled,
+  getSavedArticles,
+  saveArticle,
+  removeSavedArticle,
+  isArticleSaved,
 } from '@/lib/storage';
 
 interface AppContextType {
@@ -30,6 +34,10 @@ interface AppContextType {
   toggleCloseReading: () => void;
   selectedParagraph: number;
   selectParagraph: (index: number) => void;
+  savedArticles: Record<string, string>;
+  saveArticleToCollection: (slug: string) => void;
+  removeArticleFromCollection: (slug: string) => void;
+  isArticleInCollection: (slug: string) => boolean;
 }
 
 const AppContext = createContext<AppContextType | null>(null);
@@ -41,12 +49,14 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
   const [highlightEnabled, setHighlightEnabledState] = useState(true);
   const [closeReadingEnabled, setCloseReadingEnabledState] = useState(false);
   const [selectedParagraph, setSelectedParagraph] = useState(0);
+  const [savedArticles, setSavedArticles] = useState<Record<string, string>>({});
 
   useEffect(() => {
     const dates = getKnownWords();
     setKnownWords(new Set(Object.keys(dates)));
     setKnownWordDates(dates);
     setSavedWords(getSavedWords());
+    setSavedArticles(getSavedArticles());
     setHighlightEnabledState(getHighlightEnabled());
     setCloseReadingEnabledState(getCloseReadingEnabled());
   }, []);
@@ -113,6 +123,25 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     setSelectedParagraph(index);
   }, []);
 
+  const saveArticleToCollection = useCallback((slug: string) => {
+    saveArticle(slug);
+    setSavedArticles(prev => ({ ...prev, [slug]: new Date().toISOString().split('T')[0] }));
+  }, []);
+
+  const removeArticleFromCollection = useCallback((slug: string) => {
+    removeSavedArticle(slug);
+    setSavedArticles(prev => {
+      const next = { ...prev };
+      delete next[slug];
+      return next;
+    });
+  }, []);
+
+  const isArticleInCollection = useCallback(
+    (slug: string) => slug in savedArticles,
+    [savedArticles],
+  );
+
   return (
     <AppContext.Provider
       value={{
@@ -130,6 +159,10 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
         toggleCloseReading,
         selectedParagraph,
         selectParagraph,
+        savedArticles,
+        saveArticleToCollection,
+        removeArticleFromCollection,
+        isArticleInCollection,
       }}
     >
       {children}

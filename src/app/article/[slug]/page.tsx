@@ -7,6 +7,7 @@ import DifficultyLegend from '@/components/reader/DifficultyLegend';
 import { getDifficultyLabel } from '@/lib/vocab';
 import ArticleReader from './ArticleReader';
 import PanelContainer from './PanelContainer';
+import ArticleBookmarkButton from '@/components/reader/ArticleBookmarkButton';
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -44,6 +45,7 @@ export default async function ArticlePage({ params }: Props) {
               <HighlightToggle />
             </div>
           </div>
+          <ArticleBookmarkButton slug={article.slug} />
           <span className={`text-sm px-2.5 py-1 rounded-md font-zh-serif ${
             article.difficulty === 'cet4' ? 'bg-[#D4E8D0] text-[#3A5C34]' :
             article.difficulty === 'cet6' ? 'bg-[#F5E6C8] text-[#5C4A1E]' :

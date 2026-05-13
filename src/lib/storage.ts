@@ -3,6 +3,7 @@ import type { SavedWord } from '@/types';
 const STORAGE_KEYS = {
   knownWords: 'eng_known_words',
   savedWords: 'eng_saved_words',
+  savedArticles: 'eng_saved_articles',
   highlightEnabled: 'eng_highlight',
   closeReadingEnabled: 'eng_close_reading',
 } as const;
@@ -93,4 +94,33 @@ export function getCloseReadingEnabled(): boolean {
 
 export function setCloseReadingEnabled(enabled: boolean): void {
   localStorage.setItem(STORAGE_KEYS.closeReadingEnabled, String(enabled));
+}
+
+export function getSavedArticles(): Record<string, string> {
+  if (typeof window === 'undefined') return {};
+  try {
+    const raw = localStorage.getItem(STORAGE_KEYS.savedArticles);
+    return raw ? JSON.parse(raw) : {};
+  } catch {
+    return {};
+  }
+}
+
+export function saveArticle(slug: string): void {
+  const articles = getSavedArticles();
+  if (!(slug in articles)) {
+    articles[slug] = new Date().toISOString().split('T')[0];
+    localStorage.setItem(STORAGE_KEYS.savedArticles, JSON.stringify(articles));
+  }
+}
+
+export function removeSavedArticle(slug: string): void {
+  const articles = getSavedArticles();
+  delete articles[slug];
+  localStorage.setItem(STORAGE_KEYS.savedArticles, JSON.stringify(articles));
+}
+
+export function isArticleSaved(slug: string): boolean {
+  const articles = getSavedArticles();
+  return slug in articles;
 }
