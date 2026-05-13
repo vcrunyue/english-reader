@@ -22,7 +22,7 @@ export default function PanelContainer({ content }: { content: string }) {
             absolute left-0 top-1/2 -translate-y-1/2
             w-7 h-14 bg-[#F7F5F0] border border-[#E8E4DD] rounded-l-full
             flex items-center justify-center pl-0.5
-            transition-all duration-300 ease-out
+            transition-all duration-500 ease-out
             opacity-0 group-hover/toggle:opacity-100
             ${collapsed ? 'translate-x-1 group-hover/toggle:translate-x-0' : 'translate-x-0'}
           `}
