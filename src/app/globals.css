@@ -50,5 +50,5 @@
 }
 
 .animate-in {
-  animation: fade-in 350ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation: fade-in 500ms cubic-bezier(0.16, 1, 0.3, 1) both;
 }
