@@ -13,7 +13,7 @@ export default function CloseReadingPanelWrapper({ translations }: Props) {
 
   return (
     <div
-      className={`shrink-0 overflow-hidden transition-[width] duration-500 ease-out ${
+      className={`shrink-0 overflow-hidden transition-[width] duration-700 ease-out ${
         closeReadingEnabled ? 'w-[600px]' : 'w-0'
       }`}
     >

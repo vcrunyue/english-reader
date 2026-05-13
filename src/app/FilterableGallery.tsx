@@ -97,7 +97,7 @@ export default function FilterableGallery({ articles }: { articles: ArticleMeta[
   }, [difficulty, source, view, sort]);
 
   return (
-    <div className="space-y-[30px]">
+    <div className="space-y-3">
       <FilterBar
         selectedDifficulty={difficulty}
         selectedSource={source}
