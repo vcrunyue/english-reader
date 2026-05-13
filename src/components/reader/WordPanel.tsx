@@ -104,7 +104,7 @@ export default function WordPanel({
       <div className="flex gap-1 p-2">
         <button
           onClick={() => handleTabChange('words')}
-          className={`flex-1 text-[13px] py-1.5 rounded-md font-medium transition-colors font-zh-serif ${
+          className={`flex-1 text-[13px] py-1.5 rounded-md font-bold transition-colors font-zh-serif ${
             tab === 'words'
               ? 'bg-[#E8DCC8] text-[#5C3D2E]'
               : 'bg-transparent text-[#78716C] hover:bg-[#EDE9E0]'
@@ -114,7 +114,7 @@ export default function WordPanel({
         </button>
         <button
           onClick={() => handleTabChange('sentences')}
-          className={`flex-1 text-[13px] py-1.5 rounded-md font-medium transition-colors font-zh-serif ${
+          className={`flex-1 text-[13px] py-1.5 rounded-md font-bold transition-colors font-zh-serif ${
             tab === 'sentences'
               ? 'bg-[#E8DCC8] text-[#5C3D2E]'
               : 'bg-transparent text-[#78716C] hover:bg-[#EDE9E0]'

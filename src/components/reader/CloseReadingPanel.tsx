@@ -16,7 +16,7 @@ export default function CloseReadingPanel({
 
   return (
     <div className="h-full overflow-y-auto flex flex-col">
-      <div className="px-4 py-3 border-b border-[#E8E4DD]">
+      <div className="px-4 py-3">
         <span className="text-[14px] font-medium text-[#5C3D2E] font-zh-serif">
           精读
         </span>
