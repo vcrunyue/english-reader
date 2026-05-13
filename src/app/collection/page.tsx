@@ -2,7 +2,7 @@
 
 import { useAppContext } from '@/context/AppContext';
 import { getDifficultyDotColor, getDifficultyLabel } from '@/lib/vocab';
-import { Trash2 } from 'lucide-react';
+import { X } from 'lucide-react';
 import type { SavedWord } from '@/types';
 
 export default function CollectionPage() {
@@ -10,9 +10,7 @@ export default function CollectionPage() {
   const words = Object.values(savedWords);
 
   const handleRemove = (word: string) => {
-    if (confirm(`确定删除 "${word}" 吗？`)) {
-      removeWordFromCollection(word);
-    }
+    removeWordFromCollection(word);
   };
 
   return (
@@ -50,7 +48,7 @@ export default function CollectionPage() {
                   className="opacity-0 group-hover:opacity-100 p-1 text-[#78716C] hover:text-red-400 transition-all"
                   title="删除"
                 >
-                  <Trash2 size={14} />
+                  <X size={14} />
                 </button>
               </div>
             ))}
