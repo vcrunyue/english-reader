@@ -9,7 +9,7 @@ export default function CloseReadingToggle() {
     <button
       onClick={toggleCloseReading}
       className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors duration-200 ${
-        closeReadingEnabled ? 'bg-[#8B6F4C]' : 'bg-[#D8D2C8]'
+        closeReadingEnabled ? 'bg-[#B08844]' : 'bg-[#D8D2C8]'
       }`}
       title={closeReadingEnabled ? '关闭精读' : '开启精读'}
     >

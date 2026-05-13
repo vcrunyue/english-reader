@@ -96,9 +96,9 @@ export default function ArticleBody({ content, vocab, onParagraphSelect, closeRe
             key={pIdx}
             className={`mb-4 leading-[1.85] text-[18px] text-[#2D2B28] font-serif [text-indent:2em] ${
               closeReadingEnabled
-                ? 'cursor-pointer rounded-lg transition-shadow duration-200 hover:shadow-[0_2px_12px_rgba(200,140,74,0.12)]'
+                ? 'cursor-pointer rounded-lg transition-shadow duration-200 hover:shadow-[0_2px_16px_rgba(180,120,60,0.18)]'
                 : ''
-            } ${isSelected ? 'shadow-[0_2px_12px_rgba(200,140,74,0.18)] ring-1 ring-[#C88C4A]/20' : ''}`}
+            } ${isSelected ? 'shadow-[0_2px_16px_rgba(180,120,60,0.22)] ring-1 ring-[#B08844]/25' : ''}`}
             onClick={closeReadingEnabled ? () => onParagraphSelect?.(pIdx) : undefined}
           >
             {renderTextWithHighlights(

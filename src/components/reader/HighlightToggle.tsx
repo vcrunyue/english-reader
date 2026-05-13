@@ -9,7 +9,7 @@ export default function HighlightToggle() {
     <button
       onClick={toggleHighlight}
       className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors duration-200 ${
-        highlightEnabled ? 'bg-[#C88C4A]' : 'bg-[#D8D2C8]'
+        highlightEnabled ? 'bg-[#B08844]' : 'bg-[#D8D2C8]'
       }`}
       title={highlightEnabled ? '关闭高亮' : '开启高亮'}
     >

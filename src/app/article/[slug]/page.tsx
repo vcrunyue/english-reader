@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation';
 import { getArticleBySlug, getAllArticleSlugs, stripTranslationLines } from '@/lib/articles';
 import HighlightToggle from '@/components/reader/HighlightToggle';
 import CloseReadingToggle from '@/components/reader/CloseReadingToggle';
+import CloseReadingLegend from '@/components/reader/CloseReadingLegend';
 import DifficultyLegend from '@/components/reader/DifficultyLegend';
 import { getDifficultyLabel } from '@/lib/vocab';
 import ArticleReader from './ArticleReader';
@@ -31,12 +32,17 @@ export default async function ArticlePage({ params }: Props) {
           <a href="/" className="text-sm text-[#78716C] hover:text-[#C88C4A] transition-colors font-zh-serif">
             ← 返回
           </a>
-          <div className="flex items-center gap-3 ml-auto">
-            <span className="text-sm text-[#78716C] font-zh-serif">精读</span>
-            <CloseReadingToggle />
-            <span className="text-sm text-[#78716C] font-zh-serif ml-2">高亮</span>
-            <DifficultyLegend />
-            <HighlightToggle />
+          <div className="flex items-center gap-5 ml-auto">
+            <div className="flex items-center gap-1.5">
+              <span className="text-sm text-[#78716C] font-zh-serif">精读</span>
+              <CloseReadingLegend />
+              <CloseReadingToggle />
+            </div>
+            <div className="flex items-center gap-1.5">
+              <span className="text-sm text-[#78716C] font-zh-serif">高亮</span>
+              <DifficultyLegend />
+              <HighlightToggle />
+            </div>
           </div>
           <span className={`text-sm px-2.5 py-1 rounded-md font-zh-serif ${
             article.difficulty === 'cet4' ? 'bg-[#D4E8D0] text-[#3A5C34]' :
@@ -48,7 +54,7 @@ export default async function ArticlePage({ params }: Props) {
         </header>
 
         {/* 正文 */}
-        <div className="flex-1 overflow-y-auto px-8 py-8 max-w-4xl">
+        <div className="flex-1 overflow-y-auto px-8 py-8">
           <h1 className="font-display text-2xl text-[#2D2B28] mb-2">{article.title}</h1>
           <p className="text-[13px] text-[#78716C] mb-8">
             {article.source} · {article.date}
