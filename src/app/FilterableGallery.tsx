@@ -97,7 +97,7 @@ export default function FilterableGallery({ articles }: { articles: ArticleMeta[
   }, [difficulty, source, view, sort]);
 
   return (
-    <div className="space-y-5">
+    <div className="space-y-[30px]">
       <FilterBar
         selectedDifficulty={difficulty}
         selectedSource={source}
@@ -154,7 +154,7 @@ export default function FilterableGallery({ articles }: { articles: ArticleMeta[
 
       {/* list view */}
       {view === 'list' && (
-        <div className="flex flex-col gap-1.5">
+        <div className="flex flex-col gap-3">
           {filtered.map((article, i) => (
             <div
               key={`${generation}-${article.slug}`}
