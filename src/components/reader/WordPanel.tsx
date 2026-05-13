@@ -57,7 +57,7 @@ export default function WordPanel({
         }`}
       >
         <span
-          className={`w-2 h-2 rounded-full mt-[11px] shrink-0 ${isKnown ? 'bg-[#C0B8A8]' : getDifficultyDotColor(w.entry.difficulty)}`}
+          className={`w-2 h-2 rounded-full mt-[11px] ml-[5px] shrink-0 ${isKnown ? 'bg-[#C0B8A8]' : getDifficultyDotColor(w.entry.difficulty)}`}
         />
         <div className="flex-1 min-w-0 pl-[5px]">
           <span className={`text-sm font-medium ${isKnown ? 'text-[#A09888]' : 'text-[#2D2B28]'}`}>
