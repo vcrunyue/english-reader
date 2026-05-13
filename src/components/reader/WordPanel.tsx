@@ -127,7 +127,7 @@ export default function WordPanel({
       <div className="flex-1 overflow-y-auto px-2 pb-2" key={tab}>
         {tab === 'sentences' && (
           <div className="animate-in">
-            <p className="text-xs text-[#78716C] text-center mt-8 font-zh-serif">句子分析功能即将推出</p>
+            <p className="text-xs text-[#78716C] text-center mt-8 font-zh-serif">好句收藏 · 即将推出</p>
           </div>
         )}
 
