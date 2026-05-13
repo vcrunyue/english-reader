@@ -29,7 +29,7 @@ export default function CloseReadingLegend() {
 
       {show && (
         <div
-          className="absolute right-0 top-full mt-2 z-50 bg-[#FEFCF5] border border-[#E8E4DD] rounded-xl shadow-lg p-3 min-w-[220px]"
+          className="absolute left-1/2 -translate-x-1/2 top-full mt-2 z-50 bg-[#FEFCF5] border border-[#E8E4DD] rounded-xl shadow-lg p-3 min-w-[220px] animate-popup-in"
           onMouseEnter={handleMouseEnter}
         >
           <p className="text-sm font-medium text-[#2D2B28] mb-2 font-zh-serif">精读模式</p>

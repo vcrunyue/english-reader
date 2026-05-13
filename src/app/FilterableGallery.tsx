@@ -139,7 +139,7 @@ export default function FilterableGallery({ articles }: { articles: ArticleMeta[
 
       {/* grid view */}
       {view === 'grid' && (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7 mt-[15px]">
           {filtered.map((article, i) => (
             <div
               key={`${generation}-${article.slug}`}
@@ -154,7 +154,7 @@ export default function FilterableGallery({ articles }: { articles: ArticleMeta[
 
       {/* list view */}
       {view === 'list' && (
-        <div className="flex flex-col gap-3">
+        <div className="flex flex-col gap-3 mt-[15px]">
           {filtered.map((article, i) => (
             <div
               key={`${generation}-${article.slug}`}

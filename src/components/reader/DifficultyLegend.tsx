@@ -35,7 +35,7 @@ export default function DifficultyLegend() {
 
       {show && (
         <div
-          className="absolute right-0 top-full mt-2 z-50 bg-[#FEFCF5] border border-[#E8E4DD] rounded-xl shadow-lg p-3 min-w-[200px]"
+          className="absolute left-1/2 -translate-x-1/2 top-full mt-2 z-50 bg-[#FEFCF5] border border-[#E8E4DD] rounded-xl shadow-lg p-3 min-w-[200px] animate-popup-in"
           onMouseEnter={handleMouseEnter}
         >
           <p className="text-sm font-medium text-[#2D2B28] mb-2 font-zh-serif">高亮难度说明</p>
