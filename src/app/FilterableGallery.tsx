@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useMemo, useCallback } from 'react';
+import { useState, useMemo, useCallback, useEffect } from 'react';
 import type { ArticleMeta, Difficulty } from '@/types';
 import ArticleCard from '@/components/gallery/ArticleCard';
 import FilterBar from '@/components/gallery/FilterBar';
@@ -76,8 +76,28 @@ export default function FilterableGallery({ articles }: { articles: ArticleMeta[
   // Force remount on filter/sort changes so CSS animation replays
   const generation = `${difficulty}|${source}|${sort}|${randomSeed}`;
 
+  // Persist filter state across navigations
+  const FILTER_KEY = 'eng_filter_state';
+
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem(FILTER_KEY);
+      if (saved) {
+        const s = JSON.parse(saved);
+        setDifficulty(s.difficulty ?? 'all');
+        setSource(s.source ?? 'all');
+        setView(s.view ?? 'grid');
+        setSort(s.sort ?? 'default');
+      }
+    } catch { /* ignore */ }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem(FILTER_KEY, JSON.stringify({ difficulty, source, view, sort }));
+  }, [difficulty, source, view, sort]);
+
   return (
-    <div className="space-y-3">
+    <div className="space-y-5">
       <FilterBar
         selectedDifficulty={difficulty}
         selectedSource={source}
@@ -134,7 +154,7 @@ export default function FilterableGallery({ articles }: { articles: ArticleMeta[
 
       {/* list view */}
       {view === 'list' && (
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-1.5">
           {filtered.map((article, i) => (
             <div
               key={`${generation}-${article.slug}`}

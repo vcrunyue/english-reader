@@ -61,10 +61,10 @@ export default function ArticleCard({ article, layout = 'grid' }: ArticleCardPro
   // ---------- list layout ----------
   if (layout === 'list') {
     return (
-      <div className="relative group">
+      <div className="relative group hover:-translate-y-1 hover:scale-[1.01] transition-all duration-300">
         <Link
           href={`/article/${article.slug}`}
-          className="flex rounded-xl overflow-hidden border border-[#E8E4DD] group-hover:shadow-md group-hover:border-[#C88C4A]/40 group-hover:-translate-y-1 group-hover:scale-[1.01] transition-all duration-300 bg-white/60"
+          className="flex rounded-xl overflow-hidden border border-[#E8E4DD] group-hover:shadow-md group-hover:border-[#C88C4A]/40 transition-all duration-300 bg-white/60"
         >
           {/* cover */}
           <div className="w-28 shrink-0 overflow-hidden">
@@ -137,10 +137,10 @@ export default function ArticleCard({ article, layout = 'grid' }: ArticleCardPro
 
   // ---------- grid layout ----------
   return (
-    <div className="relative group h-full">
+    <div className="relative group h-full hover:-translate-y-1 hover:scale-[1.02] transition-all duration-300">
       <Link
         href={`/article/${article.slug}`}
-        className="flex flex-col h-full rounded-xl overflow-hidden border border-[#E8E4DD] group-hover:shadow-lg group-hover:border-[#C88C4A]/50 group-hover:-translate-y-1 group-hover:scale-[1.02] transition-all duration-300 bg-white/60"
+        className="flex flex-col h-full rounded-xl overflow-hidden border border-[#E8E4DD] group-hover:shadow-lg group-hover:border-[#C88C4A]/50 transition-all duration-300 bg-white/60"
       >
         {/* cover */}
         <div className="h-24 overflow-hidden shrink-0">
