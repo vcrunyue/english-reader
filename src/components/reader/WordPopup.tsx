@@ -49,7 +49,7 @@ export default function WordPopup({
   const content = (
     <div
       ref={ref}
-      className="fixed z-50 bg-[#FEFCF5] rounded-xl shadow-lg border border-[#E8E4DD] p-3 min-w-[200px] max-w-[280px]"
+      className="fixed z-50 bg-[#FEFCF5] rounded-xl shadow-lg border border-[#E8E4DD] p-3 min-w-[200px] max-w-[280px] animate-popup-in"
       style={{ left: position.x, top: position.y }}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onClose}

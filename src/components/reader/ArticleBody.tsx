@@ -169,7 +169,7 @@ function renderTextWithHighlights(
             word: part,
             entry,
             x: rect.left,
-            y: rect.bottom,
+            y: rect.bottom + 10,
           });
         }}
         onMouseLeave={scheduleClose}
