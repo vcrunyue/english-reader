@@ -1,11 +1,11 @@
 import { notFound } from 'next/navigation';
-import { getArticleBySlug, getAllArticleSlugs, extractTranslations, stripTranslationLines } from '@/lib/articles';
+import { getArticleBySlug, getAllArticleSlugs, stripTranslationLines } from '@/lib/articles';
 import HighlightToggle from '@/components/reader/HighlightToggle';
 import CloseReadingToggle from '@/components/reader/CloseReadingToggle';
 import DifficultyLegend from '@/components/reader/DifficultyLegend';
 import { getDifficultyLabel } from '@/lib/vocab';
 import ArticleReader from './ArticleReader';
-import ReadingPanelArea from './ReadingPanelArea';
+import PanelContainer from './PanelContainer';
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -20,7 +20,6 @@ export default async function ArticlePage({ params }: Props) {
   const article = getArticleBySlug(slug);
   if (!article) notFound();
 
-  const translations = extractTranslations(article.content);
   const cleanContent = stripTranslationLines(article.content);
 
   return (
@@ -58,8 +57,8 @@ export default async function ArticlePage({ params }: Props) {
         </div>
       </div>
 
-      {/* 右侧面板 — 精读开启时显示翻译，关闭时无面板 */}
-      <ReadingPanelArea translations={translations} />
+      {/* 右侧面板 */}
+      <PanelContainer content={cleanContent} />
     </div>
   );
 }
