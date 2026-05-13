@@ -15,9 +15,9 @@ export default function Template({ children }: { children: React.ReactNode }) {
     <div
       className="h-full"
       style={{
-        opacity: visible ? 1 : 0.45,
-        transform: visible ? 'translateY(0) scale(1)' : 'translateY(8px) scale(0.995)',
-        transition: 'opacity 1250ms cubic-bezier(0.16, 1, 0.3, 1), transform 1250ms cubic-bezier(0.16, 1, 0.3, 1)',
+        opacity: visible ? 1 : 0.6,
+        filter: visible ? 'blur(0px)' : 'blur(6px)',
+        transition: 'opacity 1250ms cubic-bezier(0.22, 1, 0.36, 1), filter 1250ms cubic-bezier(0.22, 1, 0.36, 1)',
       }}
     >
       {children}
