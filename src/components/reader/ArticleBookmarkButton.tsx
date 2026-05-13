@@ -29,6 +29,7 @@ export default function ArticleBookmarkButton({ slug }: Props) {
           : 'text-[#78716C] hover:bg-[#EDE9E0] hover:text-[#C88C4A]'
       }`}
       title={saved ? '取消收藏' : '收藏文章'}
+      aria-label={saved ? '取消收藏' : '收藏文章'}
     >
       <Bookmark size={15} fill={saved ? 'currentColor' : 'none'} />
       {saved ? '已收藏' : '收藏'}

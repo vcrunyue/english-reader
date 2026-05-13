@@ -1,10 +1,11 @@
 'use client';
 
+import { useState } from 'react';
 import Link from 'next/link';
 import type { ArticleMeta } from '@/types';
 import { getDifficultyLabel } from '@/lib/vocab';
 import { useAppContext } from '@/context/AppContext';
-import { Bookmark } from 'lucide-react';
+import { Bookmark, Check } from 'lucide-react';
 
 const DIFFICULTY_STYLES: Record<string, string> = {
   cet4: 'bg-[#D4E8D0] text-[#3A5C34]',
@@ -22,10 +23,29 @@ function getGradient(topic: string): string {
   return TOPIC_GRADIENTS[topic] ?? 'from-[#D0C8C0] to-[#C0B8B0]';
 }
 
-export default function ArticleCard({ article }: { article: ArticleMeta }) {
-  const { isArticleInCollection, saveArticleToCollection, removeArticleFromCollection } =
-    useAppContext();
+function readingTime(wordCount: number): string {
+  const min = Math.max(1, Math.ceil(wordCount / 200));
+  return `~${min} min`;
+}
+
+interface ArticleCardProps {
+  article: ArticleMeta;
+  layout?: 'grid' | 'list';
+  featured?: boolean;
+}
+
+export default function ArticleCard({ article, layout = 'grid', featured = false }: ArticleCardProps) {
+  const {
+    isArticleInCollection,
+    saveArticleToCollection,
+    removeArticleFromCollection,
+    isArticleRead,
+  } = useAppContext();
   const saved = isArticleInCollection(article.slug);
+  const read = isArticleRead(article.slug);
+  const [imgFailed, setImgFailed] = useState(false);
+
+  const hasCover = !!article.coverImage && !imgFailed;
 
   const handleToggle = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -37,34 +57,146 @@ export default function ArticleCard({ article }: { article: ArticleMeta }) {
     }
   };
 
+  const time = readingTime(article.wordCount);
+
+  // ---------- list layout ----------
+  if (layout === 'list') {
+    return (
+      <div className="relative group">
+        <Link
+          href={`/article/${article.slug}`}
+          className={`flex rounded-xl overflow-hidden border border-[#E8E4DD] hover:shadow-md hover:border-[#C88C4A]/40 hover:-translate-y-0.5 transition-all duration-200 bg-white/60 ${
+            read ? 'opacity-80' : ''
+          }`}
+        >
+          {/* cover */}
+          <div className="w-28 shrink-0 overflow-hidden">
+            {hasCover ? (
+              <img
+                src={article.coverImage}
+                alt=""
+                className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                onError={() => setImgFailed(true)}
+              />
+            ) : (
+              <div
+                className={`h-full min-h-[6rem] bg-gradient-to-br ${getGradient(article.topic)} flex items-center justify-center transition-transform duration-300 group-hover:scale-105`}
+              >
+                <span className="text-white/70 text-lg font-display">
+                  {(article.source || '?').slice(0, 2).toUpperCase()}
+                </span>
+              </div>
+            )}
+          </div>
+
+          {/* info */}
+          <div className="flex-1 p-4 flex flex-col gap-1.5 min-w-0">
+            <div className="flex items-start gap-2">
+              <h3 className="font-display text-base leading-snug line-clamp-2 text-[#2D2B28] group-hover:text-[#C88C4A] transition-colors flex-1">
+                {article.title}
+              </h3>
+            </div>
+            <div className="flex items-center gap-2 flex-wrap text-[13px] text-[#78716C]">
+              <span>{article.source}</span>
+              <span className="text-[#D8D2C8]">·</span>
+              <span>{article.date}</span>
+              <span className="text-[#D8D2C8]">·</span>
+              <span>{time}</span>
+              {read && (
+                <>
+                  <span className="text-[#D8D2C8]">·</span>
+                  <span className="flex items-center gap-0.5 text-[#A0A090]">
+                    <Check size={11} /> 已读
+                  </span>
+                </>
+              )}
+            </div>
+            <span
+              className={`inline-block text-xs px-2 py-0.5 rounded-md font-medium self-start ${DIFFICULTY_STYLES[article.difficulty] ?? ''}`}
+            >
+              {getDifficultyLabel(article.difficulty)}
+            </span>
+          </div>
+        </Link>
+
+        <button
+          onClick={handleToggle}
+          className={`absolute top-2 right-2 z-10 p-1.5 rounded-full transition-all duration-200 ${
+            saved
+              ? 'opacity-100 bg-[#FEFCF5]/90 text-[#C88C4A] shadow-sm'
+              : 'opacity-0 group-hover:opacity-100 bg-[#FEFCF5]/80 text-[#78716C] hover:text-[#C88C4A] hover:bg-[#FEFCF5] shadow-sm'
+          }`}
+          title={saved ? '取消收藏' : '收藏文章'}
+          aria-label={saved ? '取消收藏' : '收藏文章'}
+        >
+          <Bookmark size={15} fill={saved ? 'currentColor' : 'none'} />
+        </button>
+      </div>
+    );
+  }
+
+  // ---------- grid layout ----------
   return (
-    <div className="relative group">
+    <div className="relative group h-full">
       <Link
         href={`/article/${article.slug}`}
-        className="block rounded-xl overflow-hidden border border-[#E8E4DD] hover:shadow-md hover:border-[#C88C4A]/40 transition-all duration-200 bg-white/60"
+        className={`flex flex-col h-full rounded-xl overflow-hidden border border-[#E8E4DD] hover:shadow-lg hover:border-[#C88C4A]/50 hover:-translate-y-1 hover:scale-[1.02] transition-all duration-300 bg-white/60 ${
+          read ? 'opacity-80' : ''
+        }`}
       >
-        <div
-          className={`h-24 bg-gradient-to-br ${getGradient(article.topic)} flex items-center justify-center`}
-        >
-          <span className="text-white/70 text-2xl font-display">
-            {article.source.slice(0, 2).toUpperCase()}
-          </span>
+        {/* cover */}
+        <div className={`${featured ? 'h-32' : 'h-24'} overflow-hidden shrink-0`}>
+          {hasCover ? (
+            <img
+              src={article.coverImage}
+              alt=""
+              className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+              onError={() => setImgFailed(true)}
+            />
+          ) : (
+            <div
+              className={`h-full bg-gradient-to-br ${getGradient(article.topic)} flex items-center justify-center transition-transform duration-300 group-hover:scale-105`}
+            >
+              <span className={`${featured ? 'text-3xl' : 'text-2xl'} text-white/70 font-display`}>
+                {(article.source || '?').slice(0, 2).toUpperCase()}
+              </span>
+            </div>
+          )}
         </div>
 
-        <div className="p-4 space-y-2">
-          <h3 className="font-display text-base leading-snug line-clamp-2 text-[#2D2B28] group-hover:text-[#C88C4A] transition-colors">
+        {/* body */}
+        <div className="p-4 flex flex-col flex-1 gap-2">
+          <h3 className={`font-display leading-snug line-clamp-2 text-[#2D2B28] group-hover:text-[#C88C4A] transition-colors min-h-[2.75rem] ${featured ? 'text-lg' : 'text-base'}`}>
             {article.title}
           </h3>
-          <div className="text-[13px] text-[#78716C]">{article.source}</div>
+          <div className="flex-1" />
+
+          {/* meta row */}
+          <div className="flex items-center gap-1.5 flex-wrap text-[13px] text-[#78716C]">
+            <span>{article.source}</span>
+            <span className="text-[#D8D2C8]">·</span>
+            <span>{article.date}</span>
+            <span className="text-[#D8D2C8]">·</span>
+            <span>{time}</span>
+            {read && (
+              <>
+                <span className="text-[#D8D2C8]">·</span>
+                <span className="flex items-center gap-0.5 text-[#A0A090]">
+                  <Check size={11} /> 已读
+                </span>
+              </>
+            )}
+          </div>
+
           <span
-            className={`inline-block text-xs px-2 py-0.5 rounded-md font-medium ${DIFFICULTY_STYLES[article.difficulty] ?? ''}`}
+            className={`inline-block text-xs px-2 py-0.5 rounded-md font-medium self-start ${DIFFICULTY_STYLES[article.difficulty] ?? ''}`}
           >
             {getDifficultyLabel(article.difficulty)}
           </span>
         </div>
       </Link>
 
-      {/* 收藏按钮 */}
+      {/* bookmark */}
       <button
         onClick={handleToggle}
         className={`absolute top-2 right-2 z-10 p-1.5 rounded-full transition-all duration-200 ${
@@ -73,6 +205,7 @@ export default function ArticleCard({ article }: { article: ArticleMeta }) {
             : 'opacity-0 group-hover:opacity-100 bg-[#FEFCF5]/80 text-[#78716C] hover:text-[#C88C4A] hover:bg-[#FEFCF5] shadow-sm'
         }`}
         title={saved ? '取消收藏' : '收藏文章'}
+        aria-label={saved ? '取消收藏' : '收藏文章'}
       >
         <Bookmark size={15} fill={saved ? 'currentColor' : 'none'} />
       </button>

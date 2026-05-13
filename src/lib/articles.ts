@@ -5,21 +5,30 @@ import type { Article, ArticleMeta, SentencePair } from '@/types';
 
 const articlesDir = path.join(process.cwd(), 'content/articles');
 
+function countWords(text: string): number {
+  const words = text.match(/\b[a-zA-Z]+\b/g);
+  return words ? words.length : 0;
+}
+
 export function getAllArticleMetas(): ArticleMeta[] {
   if (!fs.existsSync(articlesDir)) return [];
   const files = fs.readdirSync(articlesDir).filter(f => f.endsWith('.md'));
   return files.map(filename => {
     const slug = filename.replace(/\.md$/, '');
     const raw = fs.readFileSync(path.join(articlesDir, filename), 'utf-8');
-    const { data } = matter(raw);
+    const { data, content } = matter(raw);
+    const cleanContent = content
+      .replace(/^#{1,3}\s+.+$/gm, '')
+      .replace(/^§.*$/gm, '');
     return {
       slug,
       title: data.title ?? slug,
       source: data.source ?? '',
-      difficulty: data.difficulty ?? 'cet4',
+      difficulty: (['cet4', 'cet6', 'postgrad'].includes(data.difficulty) ? data.difficulty : 'cet4') as ArticleMeta['difficulty'],
       topic: data.topic ?? '',
       coverImage: data.coverImage ?? null,
       date: data.date ?? '',
+      wordCount: countWords(cleanContent),
     };
   });
 }
@@ -29,14 +38,18 @@ export function getArticleBySlug(slug: string): Article | null {
   if (!fs.existsSync(filePath)) return null;
   const raw = fs.readFileSync(filePath, 'utf-8');
   const { data, content } = matter(raw);
+  const cleanContent = content
+    .replace(/^#{1,3}\s+.+$/gm, '')
+    .replace(/^§.*$/gm, '');
   return {
     slug,
     title: data.title ?? slug,
     source: data.source ?? '',
-    difficulty: data.difficulty ?? 'cet4',
+    difficulty: (['cet4', 'cet6', 'postgrad'].includes(data.difficulty) ? data.difficulty : 'cet4') as ArticleMeta['difficulty'],
     topic: data.topic ?? '',
     coverImage: data.coverImage ?? null,
     date: data.date ?? '',
+    wordCount: countWords(cleanContent),
     content,
   };
 }

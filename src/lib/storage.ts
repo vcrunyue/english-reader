@@ -4,6 +4,7 @@ const STORAGE_KEYS = {
   knownWords: 'eng_known_words',
   savedWords: 'eng_saved_words',
   savedArticles: 'eng_saved_articles',
+  readArticles: 'eng_read_articles',
   highlightEnabled: 'eng_highlight',
   closeReadingEnabled: 'eng_close_reading',
 } as const;
@@ -123,4 +124,26 @@ export function removeSavedArticle(slug: string): void {
 export function isArticleSaved(slug: string): boolean {
   const articles = getSavedArticles();
   return slug in articles;
+}
+
+export function getReadArticles(): Record<string, string> {
+  if (typeof window === 'undefined') return {};
+  try {
+    const raw = localStorage.getItem(STORAGE_KEYS.readArticles);
+    return raw ? JSON.parse(raw) : {};
+  } catch {
+    return {};
+  }
+}
+
+export function markArticleRead(slug: string): void {
+  const articles = getReadArticles();
+  if (!(slug in articles)) {
+    articles[slug] = new Date().toISOString().split('T')[0];
+    localStorage.setItem(STORAGE_KEYS.readArticles, JSON.stringify(articles));
+  }
+}
+
+export function isArticleRead(slug: string): boolean {
+  return slug in getReadArticles();
 }

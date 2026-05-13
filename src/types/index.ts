@@ -8,6 +8,7 @@ export interface ArticleMeta {
   topic: string;
   coverImage?: string;
   date: string;
+  wordCount: number;
 }
 
 export interface Article extends ArticleMeta {

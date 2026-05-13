@@ -24,7 +24,7 @@ const menuItems = [
 ];
 
 const itemCls =
-  'flex items-center gap-3 mx-2 rounded-lg text-[13px] font-semibold transition-all duration-400 ease-out whitespace-nowrap px-3 py-2';
+  'flex items-center gap-3 mx-2 rounded-lg text-[13px] font-semibold transition-all duration-[400ms] ease-out whitespace-nowrap px-3 py-2';
 const inactiveCls = 'text-[#78716C] hover:bg-[#EDE9E0] hover:text-[#5C3D2E] cursor-pointer';
 
 export default function Sidebar() {
@@ -33,19 +33,16 @@ export default function Sidebar() {
 
   return (
     <aside
-      className={`flex flex-col bg-[#F7F5F0] border-r border-[#E8E4DD] transition-[width] duration-400 ease-out overflow-hidden shrink-0 ${
+      className={`flex flex-col bg-[#F7F5F0] border-r border-[#E8E4DD] transition-[width] duration-[400ms] ease-out overflow-hidden shrink-0 ${
         collapsed ? 'w-[60px]' : 'w-[136px]'
       }`}
     >
       <nav className="flex-1 py-3 space-y-1.5">
-        {/* 折叠按钮 — 用 div，和 Link 渲染的 a 标签一致 */}
-        <div
+        {/* 折叠按钮 */}
+        <button
           onClick={() => setCollapsed(!collapsed)}
           className={`${itemCls} ${inactiveCls}`}
           title={collapsed ? '展开侧边栏' : '收起侧边栏'}
-          role="button"
-          tabIndex={0}
-          onKeyDown={e => (e.key === 'Enter' || e.key === ' ') && setCollapsed(!collapsed)}
         >
           {collapsed ? (
             <ChevronRight size={18} className="shrink-0" />
@@ -53,13 +50,13 @@ export default function Sidebar() {
             <ChevronLeft size={18} className="shrink-0" />
           )}
           <span
-            className={`transition-all duration-400 ease-out ${
+            className={`transition-all duration-[400ms] ease-out ${
               collapsed ? 'opacity-0 w-0 overflow-hidden delay-0' : 'opacity-100 w-auto delay-150'
             }`}
           >
             收起
           </span>
-        </div>
+        </button>
 
         {menuItems.map(({ href, label, icon: Icon }) => {
           const isActive = pathname === href;
@@ -76,7 +73,7 @@ export default function Sidebar() {
             >
               <Icon size={18} className="shrink-0" />
               <span
-                className={`transition-all duration-400 ease-out ${
+                className={`transition-all duration-[400ms] ease-out ${
                   collapsed ? 'opacity-0 w-0 overflow-hidden delay-0' : 'opacity-100 w-auto delay-150'
                 }`}
               >

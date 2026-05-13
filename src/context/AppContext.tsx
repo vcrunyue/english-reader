@@ -16,7 +16,8 @@ import {
   getSavedArticles,
   saveArticle,
   removeSavedArticle,
-  isArticleSaved,
+  getReadArticles,
+  markArticleRead,
 } from '@/lib/storage';
 
 interface AppContextType {
@@ -38,6 +39,9 @@ interface AppContextType {
   saveArticleToCollection: (slug: string) => void;
   removeArticleFromCollection: (slug: string) => void;
   isArticleInCollection: (slug: string) => boolean;
+  readArticles: Record<string, string>;
+  markAsRead: (slug: string) => void;
+  isArticleRead: (slug: string) => boolean;
 }
 
 const AppContext = createContext<AppContextType | null>(null);
@@ -50,6 +54,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
   const [closeReadingEnabled, setCloseReadingEnabledState] = useState(false);
   const [selectedParagraph, setSelectedParagraph] = useState(0);
   const [savedArticles, setSavedArticles] = useState<Record<string, string>>({});
+  const [readArticles, setReadArticles] = useState<Record<string, string>>({});
 
   useEffect(() => {
     const dates = getKnownWords();
@@ -57,6 +62,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     setKnownWordDates(dates);
     setSavedWords(getSavedWords());
     setSavedArticles(getSavedArticles());
+    setReadArticles(getReadArticles());
     setHighlightEnabledState(getHighlightEnabled());
     setCloseReadingEnabledState(getCloseReadingEnabled());
   }, []);
@@ -142,6 +148,19 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     [savedArticles],
   );
 
+  const markAsRead = useCallback((slug: string) => {
+    markArticleRead(slug);
+    setReadArticles(prev => {
+      if (slug in prev) return prev;
+      return { ...prev, [slug]: new Date().toISOString().split('T')[0] };
+    });
+  }, []);
+
+  const isRead = useCallback(
+    (slug: string) => slug in readArticles,
+    [readArticles],
+  );
+
   return (
     <AppContext.Provider
       value={{
@@ -163,6 +182,9 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
         saveArticleToCollection,
         removeArticleFromCollection,
         isArticleInCollection,
+        readArticles,
+        markAsRead,
+        isArticleRead: isRead,
       }}
     >
       {children}

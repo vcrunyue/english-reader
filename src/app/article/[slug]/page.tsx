@@ -8,6 +8,7 @@ import { getDifficultyLabel } from '@/lib/vocab';
 import ArticleReader from './ArticleReader';
 import PanelContainer from './PanelContainer';
 import ArticleBookmarkButton from '@/components/reader/ArticleBookmarkButton';
+import ArticleReadMarker from '@/components/reader/ArticleReadMarker';
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -26,11 +27,12 @@ export default async function ArticlePage({ params }: Props) {
 
   return (
     <div className="flex h-full">
+      <ArticleReadMarker slug={article.slug} />
       {/* 主内容区 */}
       <div className="flex-1 flex flex-col min-w-0">
         {/* 顶栏 */}
         <header className="flex items-center gap-4 px-6 py-3 border-b border-[#E8E4DD] bg-[#FEFCF5] sticky top-0 z-10">
-          <a href="/" className="text-sm text-[#78716C] hover:text-[#C88C4A] transition-colors font-zh-serif">
+          <a href="/" className="text-sm text-[#78716C] hover:text-[#C88C4A] transition-colors font-zh-serif" aria-label="返回首页">
             ← 返回
           </a>
           <div className="flex items-center gap-5 ml-auto mr-2">
