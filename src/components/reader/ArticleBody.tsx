@@ -141,32 +141,48 @@ function renderTextWithHighlights(
   const parts = text.split(/(\b[a-zA-Z]+(?:[''][a-zA-Z]+)?\b)/g);
   const known = new Set(knownWords);
 
-  return parts.map((part, i) => {
+  // First pass: identify which parts are highlighted words
+  const items = parts.map(part => {
     const isWord = /^[a-zA-Z]/.test(part);
-    if (!isWord) {
-      return <span key={i}>{part}</span>;
-    }
-
-    if (!enabled) {
-      return <span key={i}>{part}</span>;
-    }
-
+    if (!isWord || !enabled) return { text: part, hl: false, entry: null as VocabEntry | null };
     const entry = lookupWord(part, vocab, known);
-    if (!entry) {
-      return <span key={i}>{part}</span>;
+    return { text: part, hl: !!entry, entry };
+  });
+
+  // Second pass: merge consecutive highlighted words with separators between them
+  const result: React.ReactNode[] = [];
+  let i = 0;
+  let runKey = 0;
+
+  while (i < items.length) {
+    if (!items[i].hl) {
+      result.push(<span key={runKey++}>{items[i].text}</span>);
+      i++;
+      continue;
+    }
+
+    // Start a highlighted run
+    const runStart = i;
+    let combined = items[i].text;
+    const entry = items[i].entry!;
+    i++;
+    // Absorb separator + next highlighted word
+    while (i + 1 < items.length && !items[i].hl && items[i + 1].hl) {
+      combined += items[i].text + items[i + 1].text;
+      i += 2;
     }
 
     const colorClass = getDifficultyColor(entry.difficulty);
-
-    return (
+    const word = items[runStart].text;
+    result.push(
       <span
-        key={i}
+        key={runKey++}
         className={`relative cursor-pointer ${colorClass}`}
         onMouseEnter={e => {
           clearCloseTimer();
           const rect = e.currentTarget.getBoundingClientRect();
           setPopup({
-            word: part,
+            word,
             entry,
             x: rect.left,
             y: rect.bottom + 10,
@@ -174,8 +190,10 @@ function renderTextWithHighlights(
         }}
         onMouseLeave={scheduleClose}
       >
-        {part}
-      </span>
+        {combined}
+      </span>,
     );
-  });
+  }
+
+  return result;
 }

@@ -11,7 +11,6 @@ export default function CloseReadingPanel({
   translations,
   selectedParagraph,
 }: CloseReadingPanelProps) {
-  const totalParagraphs = translations.length;
   const current = translations[selectedParagraph] ?? [];
 
   return (
@@ -20,7 +19,7 @@ export default function CloseReadingPanel({
         <span className="text-[20px] font-bold text-[#5C3D2E] font-zh-serif">
           精读
         </span>
-        <span className="text-[20px] text-[#A09888] ml-2 font-zh-serif font-bold">
+        <span className="text-[16px] text-[#A09888] ml-4 font-zh-serif font-bold">
           第 {selectedParagraph + 1} 段
         </span>
       </div>
@@ -36,9 +35,11 @@ export default function CloseReadingPanel({
               <p className="text-[16px] text-[#2D2B28] leading-relaxed font-serif">
                 {pair.en}
               </p>
-              <p className="text-[16px] text-[#78716C] leading-relaxed mt-1.5 font-zh-serif font-bold">
-                {pair.zh}
-              </p>
+              {pair.zh && (
+                <p className="text-[16px] text-[#78716C] leading-relaxed mt-1.5 font-zh-serif font-bold">
+                  {pair.zh}
+                </p>
+              )}
             </div>
           ))
         )}

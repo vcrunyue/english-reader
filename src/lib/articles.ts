@@ -2,6 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
 import type { Article, ArticleMeta, SentencePair } from '@/types';
+import { splitEnglishSentences } from './translate';
 
 const articlesDir = path.join(process.cwd(), 'content/articles');
 
@@ -65,25 +66,28 @@ export function getAllArticleSlugs(): string[] {
 export function extractTranslations(content: string): SentencePair[][] {
   const paragraphs = content.split(/\n\n+/).filter(p => p.trim());
   return paragraphs.map(para => {
-    const lines = para.split(/\n/);
-    const pairs: SentencePair[] = [];
-    for (let i = 0; i < lines.length; i++) {
-      const line = lines[i].trim();
-      if (!line) continue;
-      if (line.startsWith('#')) {
-        continue;
-      }
-      if (line.startsWith('§')) {
-        const zh = line.replace(/^§\s*/, '');
-        const en = pairs.length > 0 ? pairs[pairs.length - 1].en : '';
-        if (en) {
-          pairs[pairs.length - 1] = { en, zh };
+    const lines = para.split(/\n/).map(l => l.trim()).filter(l => l && !l.startsWith('#'));
+    const hasTranslations = lines.some(l => l.startsWith('§'));
+
+    if (hasTranslations) {
+      // Line-based: each English sentence on its own line, § for Chinese
+      const pairs: SentencePair[] = [];
+      for (const line of lines) {
+        if (line.startsWith('§')) {
+          const zh = line.replace(/^§\s*/, '');
+          if (pairs.length > 0) {
+            pairs[pairs.length - 1] = { ...pairs[pairs.length - 1], zh };
+          }
+        } else {
+          pairs.push({ en: line, zh: '' });
         }
-      } else {
-        pairs.push({ en: line, zh: '' });
       }
+      return pairs.filter(p => p.en);
     }
-    return pairs.filter(p => p.en);
+
+    // No translations: split joined text into sentences
+    const text = lines.join(' ');
+    return splitEnglishSentences(text).map(en => ({ en, zh: '' }));
   }).filter(para => para.length > 0);
 }
 
