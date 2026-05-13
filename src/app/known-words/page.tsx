@@ -24,7 +24,7 @@ export default function KnownWordsPage() {
 
   return (
     <div className="max-w-2xl mx-auto px-8 py-10">
-      <h1 className="font-display text-5xl text-[#2D2B28] mb-10">熟词收藏</h1>
+      <h1 className="font-display text-4xl text-[#2D2B28] mb-10">熟词收藏</h1>
 
       {!vocab && (
         <p className="text-[#78716C] text-center py-12 font-zh-serif">加载中...</p>

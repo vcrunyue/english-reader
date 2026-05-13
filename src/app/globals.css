@@ -4,7 +4,7 @@
   --font-sans: 'Noto Sans SC', system-ui, -apple-system, sans-serif;
   --font-serif: 'Lora', 'Noto Serif', 'Times New Roman', serif;
   --font-display: 'DM Serif Display', 'Georgia', serif;
-  --font-zh-serif: 'ZCOOL XiaoWei', 'Noto Serif SC', 'STSong', serif;
+  --font-zh-serif: 'Noto Serif SC', 'STSong', 'SimSun', 'Songti SC', serif;
   --color-bg: #FEFCF5;
   --color-bg-sidebar: #F7F5F0;
   --color-text: #2D2B28;
@@ -23,7 +23,6 @@
 
 .font-zh-serif {
   font-family: var(--font-zh-serif);
-  font-weight: 700;
 }
 
 ::-webkit-scrollbar {
