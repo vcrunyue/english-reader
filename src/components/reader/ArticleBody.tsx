@@ -96,9 +96,9 @@ export default function ArticleBody({ content, vocab, onParagraphSelect, closeRe
             key={pIdx}
             className={`leading-[1.85] text-[18px] text-[#2D2B28] font-serif [text-indent:2em] ${
               closeReadingEnabled
-                ? 'cursor-pointer transition-colors duration-200 hover:bg-[#F3EFE6] py-3 -mx-8 px-8'
+                ? 'cursor-pointer transition-colors duration-200 hover:bg-[#F3EFE6] py-2 -mx-8 px-8'
                 : 'mb-4'
-            } ${isSelected ? 'bg-[#EBE6DA] -mx-8 px-8 py-3' : ''}`}
+            } ${isSelected ? 'bg-[#EBE6DA] -mx-8 px-8 py-2' : ''}`}
             onClick={closeReadingEnabled ? () => onParagraphSelect?.(pIdx) : undefined}
           >
             {renderTextWithHighlights(
@@ -161,7 +161,7 @@ function renderTextWithHighlights(
     return (
       <span
         key={i}
-        className={`relative cursor-pointer rounded-sm ${colorClass}`}
+        className={`relative cursor-pointer ${colorClass}`}
         onMouseEnter={e => {
           clearCloseTimer();
           const rect = e.currentTarget.getBoundingClientRect();
