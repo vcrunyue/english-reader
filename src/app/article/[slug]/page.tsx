@@ -1,12 +1,12 @@
 import { notFound } from 'next/navigation';
-import { getArticleBySlug, getAllArticleSlugs, stripTranslationLines } from '@/lib/articles';
+import { getArticleBySlug, getAllArticleSlugs, stripTranslationLines, extractTranslations } from '@/lib/articles';
 import HighlightToggle from '@/components/reader/HighlightToggle';
 import CloseReadingToggle from '@/components/reader/CloseReadingToggle';
 import CloseReadingLegend from '@/components/reader/CloseReadingLegend';
 import DifficultyLegend from '@/components/reader/DifficultyLegend';
 import { getDifficultyLabel } from '@/lib/vocab';
-import ArticleReader from './ArticleReader';
 import PanelContainer from './PanelContainer';
+import CloseReadingLayout from './CloseReadingLayout';
 import ArticleBookmarkButton from '@/components/reader/ArticleBookmarkButton';
 import ArticleReadMarker from '@/components/reader/ArticleReadMarker';
 
@@ -24,6 +24,7 @@ export default async function ArticlePage({ params }: Props) {
   if (!article) notFound();
 
   const cleanContent = stripTranslationLines(article.content);
+  const translations = extractTranslations(article.content);
 
   return (
     <div className="flex h-full">
@@ -57,16 +58,14 @@ export default async function ArticlePage({ params }: Props) {
           </span>
         </header>
 
-        {/* 正文 */}
-        <div className="flex-1 overflow-y-auto py-8">
-          <div className="px-8">
-            <h1 className="font-display text-3xl text-[#2D2B28] mb-2">{article.title}</h1>
-            <p className="text-[13px] text-[#78716C] mb-8">
-              {article.source} · {article.date}
-            </p>
-          </div>
-          <ArticleReader content={cleanContent} />
-        </div>
+        {/* 正文 + 精读面板 */}
+        <CloseReadingLayout
+          content={cleanContent}
+          translations={translations}
+          title={article.title}
+          source={article.source}
+          date={article.date}
+        />
       </div>
 
       {/* 右侧面板 */}
