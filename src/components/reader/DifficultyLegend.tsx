@@ -23,7 +23,7 @@ export default function DifficultyLegend() {
   };
 
   return (
-    <span className="relative inline-flex items-center" onMouseLeave={handleMouseLeave}>
+    <span className="relative inline-flex items-center -ml-0.5" onMouseLeave={handleMouseLeave}>
       <button
         type="button"
         className="text-[#78716C] hover:text-[#C88C4A] transition-colors cursor-help"

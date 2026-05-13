@@ -17,7 +17,7 @@ export default function CloseReadingLegend() {
   };
 
   return (
-    <span className="relative inline-flex items-center" onMouseLeave={handleMouseLeave}>
+    <span className="relative inline-flex items-center -ml-0.5" onMouseLeave={handleMouseLeave}>
       <button
         type="button"
         className="text-[#78716C] hover:text-[#B08844] transition-colors cursor-help"

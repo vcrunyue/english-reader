@@ -94,11 +94,11 @@ export default function ArticleBody({ content, vocab, onParagraphSelect, closeRe
         return (
           <p
             key={pIdx}
-            className={`mb-4 leading-[1.85] text-[18px] text-[#2D2B28] font-serif [text-indent:2em] ${
+            className={`leading-[1.85] text-[18px] text-[#2D2B28] font-serif [text-indent:2em] ${
               closeReadingEnabled
-                ? 'cursor-pointer rounded-lg transition-shadow duration-200 hover:shadow-[0_2px_16px_rgba(180,120,60,0.18)]'
-                : ''
-            } ${isSelected ? 'shadow-[0_2px_16px_rgba(180,120,60,0.22)] ring-1 ring-[#B08844]/25' : ''}`}
+                ? 'cursor-pointer transition-colors duration-200 hover:bg-[#F0EBDF] py-3 -mx-8 px-8'
+                : 'mb-4'
+            } ${isSelected ? 'bg-[#E3DCCE] -mx-8 px-8 py-3' : ''}`}
             onClick={closeReadingEnabled ? () => onParagraphSelect?.(pIdx) : undefined}
           >
             {renderTextWithHighlights(
