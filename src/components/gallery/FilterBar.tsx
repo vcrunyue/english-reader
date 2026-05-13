@@ -31,7 +31,7 @@ export default function FilterBar({
     <div className="flex flex-col gap-3">
       {/* 难度行 */}
       <div className="flex items-center gap-2.5">
-        <span className="text-sm text-[#78716C] font-medium w-10 shrink-0 font-zh-serif">
+        <span className="text-[15px] text-[#78716C] font-bold w-10 shrink-0 font-zh-serif -mt-px ml-0.5">
           难度
         </span>
         {DIFFICULTIES.map(({ key, label, activeBg }) => {
@@ -54,7 +54,7 @@ export default function FilterBar({
 
       {/* 来源行 */}
       <div className="flex items-center gap-2.5 flex-wrap">
-        <span className="text-sm text-[#78716C] font-medium w-10 shrink-0 font-zh-serif">
+        <span className="text-[15px] text-[#78716C] font-bold w-10 shrink-0 font-zh-serif -mt-px ml-0.5">
           来源
         </span>
         {['all', ...sources].map(s => {
