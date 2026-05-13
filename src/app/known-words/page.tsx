@@ -1,10 +1,9 @@
 'use client';
 
 import { useState, useEffect, useMemo } from 'react';
-import type { VocabMap } from '@/types';
+import type { VocabMap, Difficulty } from '@/types';
 import { loadVocab, getDifficultyDotColor, getDifficultyLabel } from '@/lib/vocab';
 import { useAppContext } from '@/context/AppContext';
-import type { Difficulty } from '@/types';
 import { X } from 'lucide-react';
 
 const DIFFICULTY_BADGE: Record<Difficulty, string> = {
@@ -13,8 +12,18 @@ const DIFFICULTY_BADGE: Record<Difficulty, string> = {
   postgrad: 'bg-[#F0D3D3] text-[#5C2A2A]',
 };
 
+const DIFFICULTY_FILTERS: Array<{ key: Difficulty | 'all'; label: string; active: string }> = [
+  { key: 'all', label: '全部', active: 'bg-[#EDE9E0] text-[#5C3D2E]' },
+  { key: 'cet4', label: '四级', active: 'bg-[#D4E8D0] text-[#3A5C34]' },
+  { key: 'cet6', label: '六级', active: 'bg-[#F5E6C8] text-[#5C4A1E]' },
+  { key: 'postgrad', label: '考研', active: 'bg-[#F0D3D3] text-[#5C2A2A]' },
+];
+
+const btnBase = 'text-sm px-3 py-1.5 rounded-md border border-[#D8D2C8] transition-colors duration-200 font-zh-serif';
+
 export default function KnownWordsPage() {
   const [vocab, setVocab] = useState<VocabMap | null>(null);
+  const [difficulty, setDifficulty] = useState<Difficulty | 'all'>('all');
   const { knownWords, knownWordDates, unmarkKnown } = useAppContext();
 
   useEffect(() => {
@@ -23,11 +32,13 @@ export default function KnownWordsPage() {
 
   const knownList = useMemo(() => {
     if (!vocab) return [];
-    return [...knownWords]
+    const all = [...knownWords]
       .map(word => ({ word, entry: vocab[word.toLowerCase()] }))
       .filter(item => item.entry)
       .sort((a, b) => a.word.localeCompare(b.word));
-  }, [vocab, knownWords]);
+    if (difficulty === 'all') return all;
+    return all.filter(item => item.entry.difficulty === difficulty);
+  }, [vocab, knownWords, difficulty]);
 
   return (
     <div className="max-w-2xl mx-auto px-8 py-10">
@@ -37,15 +48,30 @@ export default function KnownWordsPage() {
         <p className="text-[#78716C] text-center py-12 font-zh-serif">加载中...</p>
       )}
 
-      {vocab && knownList.length === 0 && (
+      {vocab && knownWords.size === 0 && (
         <p className="text-[#78716C] text-center py-12 font-zh-serif">
           还没有熟词。阅读文章时点击 ✓ 即可添加。
         </p>
       )}
 
-      {vocab && knownList.length > 0 && (
-        <div className="space-y-1">
-          {knownList.map(({ word, entry }) => {
+      {vocab && knownWords.size > 0 && (
+        <>
+          <div className="flex gap-2 mb-6">
+            {DIFFICULTY_FILTERS.map(({ key, label, active }) => (
+              <button
+                key={key}
+                onClick={() => setDifficulty(key)}
+                className={`${btnBase} ${difficulty === key ? active : 'text-[#78716C] hover:bg-[#EDE9E0]'}`}
+              >
+                {label}
+              </button>
+            ))}
+          </div>
+          {knownList.length === 0 ? (
+            <p className="text-[#78716C] text-center py-8 font-zh-serif">该难度暂无熟词</p>
+          ) : (
+            <div className="space-y-1">
+              {knownList.map(({ word, entry }) => {
             const date = knownWordDates[word.toLowerCase()];
             return (
             <div
@@ -70,7 +96,9 @@ export default function KnownWordsPage() {
               </button>
             </div>
           )})}
-        </div>
+            </div>
+          )}
+        </>
       )}
     </div>
   );
