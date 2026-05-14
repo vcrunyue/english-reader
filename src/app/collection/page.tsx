@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from 'react';
 import { useCollection } from '@/context/CollectionContext';
-import { getDifficultyDotColor, getDifficultyLabel, parseDefinitionParts } from '@/lib/vocab';
+import { getDifficultyDotColor, getDifficultyLabel } from '@/lib/vocab';
 import { getBadgeClass, DIFFICULTY_FILTERS } from '@/config/difficulty';
 import type { Difficulty, SavedWord } from '@/types';
 import { X } from 'lucide-react';
@@ -62,24 +62,14 @@ export default function CollectionPage() {
                 />
                 <div className="flex-1 min-w-0">
                   <span className="font-medium text-sm text-[#2D2B28]">{w.word}</span>
-                  {(() => {
-                    const parts = parseDefinitionParts(w.pos, w.definition);
-                    return parts.length === 1 ? (
-                      <p className="text-xs text-[#78716C] truncate mt-[4px]">
-                        <span className="text-[#5C3D2E] font-medium text-[11px] mr-1">{parts[0].pos}</span>
-                        {parts[0].def}
-                      </p>
-                    ) : (
-                      <div className="text-xs text-[#78716C] space-y-[10px] mt-[4px]">
-                        {parts.map((p, i) => (
-                          <p key={i} className="truncate">
-                            <span className="text-[#5C3D2E] font-medium text-[11px] mr-1">{p.pos}</span>
-                            {p.def}
-                          </p>
-                        ))}
-                      </div>
-                    );
-                  })()}
+                  {w.pos ? (
+                    <p className="text-xs text-[#78716C] truncate mt-[4px]">
+                      <span className="text-[#5C3D2E] font-medium text-[11px] mr-1">{w.pos}</span>
+                      {w.definition}
+                    </p>
+                  ) : (
+                    <p className="text-xs text-[#78716C] truncate mt-[4px]">{w.definition}</p>
+                  )}
                 </div>
                 <span className={`text-[10px] px-1.5 py-0.5 rounded-md ${getBadgeClass(w.difficulty)}`}>
                   {getDifficultyLabel(w.difficulty)}
