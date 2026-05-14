@@ -20,8 +20,9 @@ interface WordPopupProps {
   onAnimationEnd?: () => void;
 }
 
-const GAP = 6;
-const LEFT_SHIFT = 4;
+const GAP_BELOW = 4;
+const GAP_ABOVE = 8;
+const LEFT_SHIFT = 8;
 const VIEWPORT_PAD = 16;
 const FLIP_MARGIN = 8;
 
@@ -61,10 +62,10 @@ export default function WordPopup({
     }
     if (x < VIEWPORT_PAD - 12) x = VIEWPORT_PAD - 12;
 
-    // y: prefer below word, flip above if overflow
-    let y = wordBottom + GAP;
+    // y: prefer below word (4px), flip above (8px) if overflow
+    let y = wordBottom + GAP_BELOW;
     if (y + rect.height > vh - VIEWPORT_PAD) {
-      y = wordTop - rect.height - GAP;
+      y = wordTop - rect.height - GAP_ABOVE;
     }
     if (y < VIEWPORT_PAD - 12) y = VIEWPORT_PAD - 12;
 
