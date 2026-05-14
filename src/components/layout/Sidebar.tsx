@@ -24,7 +24,7 @@ const menuItems = [
 ];
 
 const itemCls =
-  'flex items-center gap-3 ml-[3px] mr-2 rounded-lg text-sm font-semibold transition-all duration-[400ms] ease-out whitespace-nowrap pl-2.5 pr-3 py-2';
+  'flex items-center gap-3 ml-[3px] mr-1.5 rounded-lg text-sm font-semibold transition-all duration-[400ms] ease-out whitespace-nowrap pl-2.5 pr-3 py-2';
 const inactiveCls = 'text-[#78716C] hover:bg-[#EDE9E0] hover:text-[#5C3D2E] cursor-pointer';
 
 export default function Sidebar() {
