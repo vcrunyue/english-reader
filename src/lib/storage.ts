@@ -9,147 +9,144 @@ const STORAGE_KEYS = {
   closeReadingEnabled: 'eng_close_reading',
 } as const;
 
-export function getKnownWords(): Record<string, string> {
-  if (typeof window === 'undefined') return {};
+// -- internal helpers -------------------------------------------------------
+
+function read<T>(key: string, fallback: T): T {
+  if (typeof window === 'undefined') return fallback;
   try {
-    const raw = localStorage.getItem(STORAGE_KEYS.knownWords);
-    if (!raw) return {};
-    const parsed = JSON.parse(raw);
-    // migrate old string[] format
-    if (Array.isArray(parsed)) {
-      const migrated: Record<string, string> = {};
-      const today = new Date().toISOString().split('T')[0];
-      for (const w of parsed) migrated[w] = today;
-      localStorage.setItem(STORAGE_KEYS.knownWords, JSON.stringify(migrated));
-      return migrated;
-    }
-    return parsed;
+    const raw = localStorage.getItem(key);
+    return raw ? JSON.parse(raw) : fallback;
   } catch {
-    return {};
+    return fallback;
   }
+}
+
+function write(key: string, value: unknown): void {
+  localStorage.setItem(key, JSON.stringify(value));
+}
+
+function today(): string {
+  return new Date().toISOString().split('T')[0];
+}
+
+// -- known words ------------------------------------------------------------
+
+export function getKnownWords(): Record<string, string> {
+  const parsed = read<unknown>(STORAGE_KEYS.knownWords, {});
+  // migrate old string[] format
+  if (Array.isArray(parsed)) {
+    const migrated: Record<string, string> = {};
+    const d = today();
+    for (const w of parsed) migrated[w] = d;
+    write(STORAGE_KEYS.knownWords, migrated);
+    return migrated;
+  }
+  return parsed as Record<string, string>;
 }
 
 export function addKnownWord(word: string): void {
   const words = getKnownWords();
   const key = word.toLowerCase();
   if (!(key in words)) {
-    words[key] = new Date().toISOString().split('T')[0];
-    localStorage.setItem(STORAGE_KEYS.knownWords, JSON.stringify(words));
-  }
-}
-
-export function getSavedWords(): Record<string, SavedWord> {
-  if (typeof window === 'undefined') return {};
-  try {
-    const raw = localStorage.getItem(STORAGE_KEYS.savedWords);
-    return raw ? JSON.parse(raw) : {};
-  } catch {
-    return {};
-  }
-}
-
-export function saveWord(word: SavedWord): void {
-  const words = getSavedWords();
-  words[word.word.toLowerCase()] = word;
-  localStorage.setItem(STORAGE_KEYS.savedWords, JSON.stringify(words));
-}
-
-export function removeSavedWord(word: string): void {
-  const words = getSavedWords();
-  delete words[word.toLowerCase()];
-  localStorage.setItem(STORAGE_KEYS.savedWords, JSON.stringify(words));
-}
-
-export function isWordSaved(word: string): boolean {
-  const words = getSavedWords();
-  return word.toLowerCase() in words;
-}
-
-export function getHighlightEnabled(): boolean {
-  if (typeof window === 'undefined') return true;
-  try {
-    return localStorage.getItem(STORAGE_KEYS.highlightEnabled) !== 'false';
-  } catch {
-    return true;
+    words[key] = today();
+    write(STORAGE_KEYS.knownWords, words);
   }
 }
 
 export function removeKnownWord(word: string): void {
   const words = getKnownWords();
   delete words[word.toLowerCase()];
-  localStorage.setItem(STORAGE_KEYS.knownWords, JSON.stringify(words));
+  write(STORAGE_KEYS.knownWords, words);
+}
+
+// -- saved words ------------------------------------------------------------
+
+export function getSavedWords(): Record<string, SavedWord> {
+  return read<Record<string, SavedWord>>(STORAGE_KEYS.savedWords, {});
+}
+
+export function saveWord(word: SavedWord): void {
+  const words = getSavedWords();
+  words[word.word.toLowerCase()] = word;
+  write(STORAGE_KEYS.savedWords, words);
+}
+
+export function removeSavedWord(word: string): void {
+  const words = getSavedWords();
+  delete words[word.toLowerCase()];
+  write(STORAGE_KEYS.savedWords, words);
+}
+
+export function isWordSaved(word: string): boolean {
+  return word.toLowerCase() in getSavedWords();
+}
+
+// -- highlight toggle -------------------------------------------------------
+
+export function getHighlightEnabled(): boolean {
+  if (typeof window === 'undefined') return true;
+  return localStorage.getItem(STORAGE_KEYS.highlightEnabled) !== 'false';
 }
 
 export function setHighlightEnabled(enabled: boolean): void {
   localStorage.setItem(STORAGE_KEYS.highlightEnabled, String(enabled));
 }
 
+// -- close reading toggle ---------------------------------------------------
+
 export function getCloseReadingEnabled(): boolean {
   if (typeof window === 'undefined') return false;
-  try {
-    return localStorage.getItem(STORAGE_KEYS.closeReadingEnabled) === 'true';
-  } catch {
-    return false;
-  }
+  return localStorage.getItem(STORAGE_KEYS.closeReadingEnabled) === 'true';
 }
 
 export function setCloseReadingEnabled(enabled: boolean): void {
   localStorage.setItem(STORAGE_KEYS.closeReadingEnabled, String(enabled));
 }
 
+// -- saved articles ---------------------------------------------------------
+
 export function getSavedArticles(): Record<string, string> {
-  if (typeof window === 'undefined') return {};
-  try {
-    const raw = localStorage.getItem(STORAGE_KEYS.savedArticles);
-    return raw ? JSON.parse(raw) : {};
-  } catch {
-    return {};
-  }
+  return read<Record<string, string>>(STORAGE_KEYS.savedArticles, {});
 }
 
 export function saveArticle(slug: string): void {
   const articles = getSavedArticles();
   if (!(slug in articles)) {
-    articles[slug] = new Date().toISOString().split('T')[0];
-    localStorage.setItem(STORAGE_KEYS.savedArticles, JSON.stringify(articles));
+    articles[slug] = today();
+    write(STORAGE_KEYS.savedArticles, articles);
   }
 }
 
 export function removeSavedArticle(slug: string): void {
   const articles = getSavedArticles();
   delete articles[slug];
-  localStorage.setItem(STORAGE_KEYS.savedArticles, JSON.stringify(articles));
+  write(STORAGE_KEYS.savedArticles, articles);
 }
 
 export function isArticleSaved(slug: string): boolean {
-  const articles = getSavedArticles();
-  return slug in articles;
+  return slug in getSavedArticles();
 }
 
+// -- read articles ----------------------------------------------------------
+
 export function getReadArticles(): Record<string, string> {
-  if (typeof window === 'undefined') return {};
-  try {
-    const raw = localStorage.getItem(STORAGE_KEYS.readArticles);
-    return raw ? JSON.parse(raw) : {};
-  } catch {
-    return {};
-  }
+  return read<Record<string, string>>(STORAGE_KEYS.readArticles, {});
 }
 
 export function markArticleRead(slug: string): void {
   const articles = getReadArticles();
   if (!(slug in articles)) {
-    articles[slug] = new Date().toISOString().split('T')[0];
-    localStorage.setItem(STORAGE_KEYS.readArticles, JSON.stringify(articles));
+    articles[slug] = today();
+    write(STORAGE_KEYS.readArticles, articles);
   }
-}
-
-export function isArticleRead(slug: string): boolean {
-  return slug in getReadArticles();
 }
 
 export function unmarkArticleRead(slug: string): void {
   const articles = getReadArticles();
   delete articles[slug];
-  localStorage.setItem(STORAGE_KEYS.readArticles, JSON.stringify(articles));
+  write(STORAGE_KEYS.readArticles, articles);
+}
+
+export function isArticleRead(slug: string): boolean {
+  return slug in getReadArticles();
 }
