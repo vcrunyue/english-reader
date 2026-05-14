@@ -98,9 +98,9 @@ export default function WordPopup({
         </button>
       </div>
       <p className="text-[13px] text-[#78716C] mt-1.5 leading-relaxed">
-        <span className="text-[#5C3D2E] font-medium -mt-px ml-[3px] inline-block">{entry.pos}</span>
+        <span className="text-[#5C3D2E] font-bold text-sm -mt-px ml-[3px] inline-block">{entry.pos}</span>
         <span className="ml-1.5 mr-px text-[#D8D2C8]">·</span>
-        <span className="relative top-[1px] -ml-[2px]">{entry.definition}</span>
+        <span className="relative top-[1px] -ml-[4px] font-semibold text-sm">{entry.definition}</span>
       </p>
     </div>,
     document.body,

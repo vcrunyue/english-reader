@@ -136,6 +136,7 @@ export default function ArticleBody({ content, vocab, onParagraphSelect, closeRe
 
       {popup && (
         <WordPopup
+          key={popup.word}
           word={popup.word}
           entry={popup.entry}
           wordLeft={popup.wordLeft}
