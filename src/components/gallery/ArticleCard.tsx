@@ -29,7 +29,7 @@ export default function ArticleCard({ article, layout = 'grid' }: ArticleCardPro
     saveArticleToCollection,
     removeArticleFromCollection,
     isArticleRead,
-    unmarkAsRead,
+    unmarkArticleRead,
   } = useAppContext();
   const saved = isArticleInCollection(article.slug);
   const read = isArticleRead(article.slug);
@@ -50,7 +50,7 @@ export default function ArticleCard({ article, layout = 'grid' }: ArticleCardPro
   const handleReadToggle = (e: React.MouseEvent) => {
     e.stopPropagation();
     e.preventDefault();
-    unmarkAsRead(article.slug);
+    unmarkArticleRead(article.slug);
   };
 
   // ---------- list layout ----------

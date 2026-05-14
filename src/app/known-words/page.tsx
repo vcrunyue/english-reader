@@ -13,7 +13,7 @@ const btnBase = 'text-sm px-3 py-1.5 rounded-md border border-[#D8D2C8] transiti
 export default function KnownWordsPage() {
   const vocab = useVocab();
   const [difficulty, setDifficulty] = useState<Difficulty | 'all'>('all');
-  const { knownWords, knownWordDates, unmarkKnown } = useAppContext();
+  const { knownWords, knownWordDates, unmarkWordKnown } = useAppContext();
 
   const knownList = useMemo(() => {
     if (!vocab) return [];
@@ -73,7 +73,7 @@ export default function KnownWordsPage() {
               </span>
               {date && <span className="text-[10px] text-[#78716C]">{date}</span>}
               <button
-                onClick={() => unmarkKnown(word)}
+                onClick={() => unmarkWordKnown(word)}
                 className="opacity-0 group-hover:opacity-100 p-1 text-[#78716C] hover:text-red-400 transition-all"
                 aria-label="移出熟词"
               >

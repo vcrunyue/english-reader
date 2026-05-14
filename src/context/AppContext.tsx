@@ -17,15 +17,15 @@ import {
   saveArticle,
   removeSavedArticle,
   getReadArticles,
-  markArticleRead,
-  unmarkArticleRead,
+  markArticleRead as storageMarkArticleRead,
+  unmarkArticleRead as storageUnmarkArticleRead,
 } from '@/lib/storage';
 
 interface AppContextType {
   knownWords: Set<string>;
   knownWordDates: Record<string, string>;
-  markKnown: (word: string) => void;
-  unmarkKnown: (word: string) => void;
+  markWordKnown: (word: string) => void;
+  unmarkWordKnown: (word: string) => void;
   savedWords: Record<string, SavedWord>;
   saveWordToCollection: (word: SavedWord) => void;
   removeWordFromCollection: (word: string) => void;
@@ -41,8 +41,8 @@ interface AppContextType {
   removeArticleFromCollection: (slug: string) => void;
   isArticleInCollection: (slug: string) => boolean;
   readArticles: Record<string, string>;
-  markAsRead: (slug: string) => void;
-  unmarkAsRead: (slug: string) => void;
+  markArticleRead: (slug: string) => void;
+  unmarkArticleRead: (slug: string) => void;
   isArticleRead: (slug: string) => boolean;
 }
 
@@ -69,14 +69,14 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     setCloseReadingEnabledState(getCloseReadingEnabled());
   }, []);
 
-  const markKnown = useCallback((word: string) => {
+  const markWordKnown = useCallback((word: string) => {
     addKnownWord(word);
     const lower = word.toLowerCase();
     setKnownWords(prev => new Set(prev).add(lower));
     setKnownWordDates(prev => ({ ...prev, [lower]: new Date().toISOString().split('T')[0] }));
   }, []);
 
-  const unmarkKnown = useCallback((word: string) => {
+  const unmarkWordKnown = useCallback((word: string) => {
     removeKnownWord(word);
     const lower = word.toLowerCase();
     setKnownWords(prev => {
@@ -150,16 +150,16 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     [savedArticles],
   );
 
-  const markAsRead = useCallback((slug: string) => {
-    markArticleRead(slug);
+  const markArticleRead = useCallback((slug: string) => {
+    storageMarkArticleRead(slug);
     setReadArticles(prev => {
       if (slug in prev) return prev;
       return { ...prev, [slug]: new Date().toISOString().split('T')[0] };
     });
   }, []);
 
-  const unmarkAsRead = useCallback((slug: string) => {
-    unmarkArticleRead(slug);
+  const unmarkArticleRead = useCallback((slug: string) => {
+    storageUnmarkArticleRead(slug);
     setReadArticles(prev => {
       const next = { ...prev };
       delete next[slug];
@@ -177,8 +177,8 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
       value={{
         knownWords,
         knownWordDates,
-        markKnown,
-        unmarkKnown,
+        markWordKnown,
+        unmarkWordKnown,
         savedWords,
         saveWordToCollection,
         removeWordFromCollection,
@@ -194,8 +194,8 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
         removeArticleFromCollection,
         isArticleInCollection,
         readArticles,
-        markAsRead,
-        unmarkAsRead,
+        markArticleRead,
+        unmarkArticleRead,
         isArticleRead: isRead,
       }}
     >

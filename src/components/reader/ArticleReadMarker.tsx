@@ -4,7 +4,8 @@ import { useEffect } from 'react';
 import { useAppContext } from '@/context/AppContext';
 
 export default function ArticleReadMarker({ slug }: { slug: string }) {
-  const { markAsRead } = useAppContext();
-  useEffect(() => { markAsRead(slug); }, [slug, markAsRead]);
+  const { markArticleRead } = useAppContext();
+  useEffect(() => { markArticleRead(slug); }, [slug, markArticleRead]);
   return null;
 }
+ArticleReadMarker.displayName = 'ArticleReadMarker';
