@@ -1,8 +1,9 @@
 'use client';
 
-import { useState, useEffect, useMemo } from 'react';
-import type { VocabMap, Difficulty } from '@/types';
-import { loadVocab, getDifficultyDotColor, getDifficultyLabel } from '@/lib/vocab';
+import { useState, useMemo } from 'react';
+import type { Difficulty } from '@/types';
+import { getDifficultyDotColor, getDifficultyLabel } from '@/lib/vocab';
+import { useVocab } from '@/context/VocabContext';
 import { getBadgeClass, DIFFICULTY_FILTERS } from '@/config/difficulty';
 import { useAppContext } from '@/context/AppContext';
 import { X } from 'lucide-react';
@@ -10,13 +11,9 @@ import { X } from 'lucide-react';
 const btnBase = 'text-sm px-3 py-1.5 rounded-md border border-[#D8D2C8] transition-colors duration-200 font-zh-serif';
 
 export default function KnownWordsPage() {
-  const [vocab, setVocab] = useState<VocabMap | null>(null);
+  const vocab = useVocab();
   const [difficulty, setDifficulty] = useState<Difficulty | 'all'>('all');
   const { knownWords, knownWordDates, unmarkKnown } = useAppContext();
-
-  useEffect(() => {
-    loadVocab().then(setVocab);
-  }, []);
 
   const knownList = useMemo(() => {
     if (!vocab) return [];

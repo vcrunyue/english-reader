@@ -1,18 +1,12 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import type { VocabMap } from '@/types';
-import { loadVocab } from '@/lib/vocab';
+import { useVocab } from '@/context/VocabContext';
 import { useAppContext } from '@/context/AppContext';
 import ArticleBody from '@/components/reader/ArticleBody';
 
 export default function ArticleReader({ content }: { content: string }) {
-  const [vocab, setVocab] = useState<VocabMap | null>(null);
+  const vocab = useVocab();
   const { closeReadingEnabled, selectedParagraph, selectParagraph } = useAppContext();
-
-  useEffect(() => {
-    loadVocab().then(setVocab);
-  }, []);
 
   if (!vocab) {
     return (

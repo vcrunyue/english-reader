@@ -1,8 +1,8 @@
 'use client';
 
-import { useState, useEffect, useMemo, useCallback } from 'react';
-import type { VocabMap } from '@/types';
-import { loadVocab, analyzeText } from '@/lib/vocab';
+import { useState, useMemo, useCallback } from 'react';
+import { analyzeText } from '@/lib/vocab';
+import { useVocab } from '@/context/VocabContext';
 import { useAppContext } from '@/context/AppContext';
 import WordPanel from '@/components/reader/WordPanel';
 
@@ -12,13 +12,9 @@ interface Props {
 }
 
 export default function WordPanelWrapper({ content, onTabChange }: Props) {
-  const [vocab, setVocab] = useState<VocabMap | null>(null);
+  const vocab = useVocab();
   const [knownInArticle, setKnownInArticle] = useState<Set<string>>(new Set());
   const { knownWords, markKnown, unmarkKnown } = useAppContext();
-
-  useEffect(() => {
-    loadVocab().then(setVocab);
-  }, []);
 
   const allWords = useMemo(() => {
     if (!vocab) return [];

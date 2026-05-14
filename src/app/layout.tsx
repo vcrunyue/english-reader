@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import { AppProvider } from '@/context/AppContext';
+import { VocabProvider } from '@/context/VocabContext';
 import Sidebar from '@/components/layout/Sidebar';
 
 export const metadata: Metadata = {
@@ -22,10 +23,12 @@ export default function RootLayout({
         />
       </head>
       <body className="flex h-screen overflow-hidden bg-[#FEFCF5] text-[#2D2B28] antialiased">
-        <AppProvider>
+        <VocabProvider>
+          <AppProvider>
           <Sidebar />
           <main className="flex-1 overflow-y-auto" style={{ scrollbarGutter: 'stable' }}>{children}</main>
-        </AppProvider>
+          </AppProvider>
+        </VocabProvider>
       </body>
     </html>
   );
