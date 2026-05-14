@@ -38,7 +38,7 @@ export default async function ArticlePage({ params }: Props) {
         <header className="flex items-center gap-4 px-6 py-3 border-b border-[#E8E4DD] bg-[#FEFCF5] sticky top-0 z-10">
           <Link
             href="/"
-            className="text-sm px-2.5 py-1 rounded-md transition-colors duration-200 font-zh-serif font-semibold text-[#78716C] hover:bg-[#EDE9E0] hover:text-[#C88C4A]"
+            className="text-base px-2.5 py-1 rounded-md transition-colors duration-200 font-zh-serif font-semibold text-[#78716C] hover:bg-[#EDE9E0] hover:text-[#C88C4A]"
           >
             返回
           </Link>

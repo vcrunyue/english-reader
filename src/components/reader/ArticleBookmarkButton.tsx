@@ -22,7 +22,7 @@ export default function ArticleBookmarkButton({ slug }: Props) {
   return (
     <button
       onClick={handleToggle}
-      className={`text-sm px-2.5 py-1 rounded-md transition-colors duration-200 font-zh-serif font-semibold ${
+      className={`text-base px-2.5 py-1 rounded-md transition-colors duration-200 font-zh-serif font-semibold ${
         saved
           ? 'bg-[#EDE0C8] text-[#5C3D2E]'
           : 'text-[#78716C] hover:bg-[#EDE9E0] hover:text-[#C88C4A]'
