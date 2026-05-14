@@ -1,6 +1,14 @@
 import type { SavedWord } from '@/types';
 
-const STORAGE_KEYS = {
+// ============================================================================
+// Storage abstraction layer
+//
+// All persistence goes through the functions below. To swap localStorage for
+// a backend API, replace the bodies of readJSON / writeJSON (and the two
+// boolean helpers) with fetch calls — the rest of the module stays identical.
+// ============================================================================
+
+export const STORAGE_KEYS = {
   knownWords: 'eng_known_words',
   savedWords: 'eng_saved_words',
   savedArticles: 'eng_saved_articles',
@@ -9,9 +17,11 @@ const STORAGE_KEYS = {
   closeReadingEnabled: 'eng_close_reading',
 } as const;
 
-// -- internal helpers -------------------------------------------------------
+export type StorageKey = (typeof STORAGE_KEYS)[keyof typeof STORAGE_KEYS];
 
-function read<T>(key: string, fallback: T): T {
+// -- JSON helpers (public — usable by tests / migration scripts) -------------
+
+export function readJSON<T>(key: string, fallback: T): T {
   if (typeof window === 'undefined') return fallback;
   try {
     const raw = localStorage.getItem(key);
@@ -21,7 +31,7 @@ function read<T>(key: string, fallback: T): T {
   }
 }
 
-function write(key: string, value: unknown): void {
+export function writeJSON(key: string, value: unknown): void {
   localStorage.setItem(key, JSON.stringify(value));
 }
 
@@ -32,13 +42,13 @@ function today(): string {
 // -- known words ------------------------------------------------------------
 
 export function getKnownWords(): Record<string, string> {
-  const parsed = read<unknown>(STORAGE_KEYS.knownWords, {});
+  const parsed = readJSON<unknown>(STORAGE_KEYS.knownWords, {});
   // migrate old string[] format
   if (Array.isArray(parsed)) {
     const migrated: Record<string, string> = {};
     const d = today();
     for (const w of parsed) migrated[w] = d;
-    write(STORAGE_KEYS.knownWords, migrated);
+    writeJSON(STORAGE_KEYS.knownWords, migrated);
     return migrated;
   }
   return parsed as Record<string, string>;
@@ -49,32 +59,32 @@ export function addKnownWord(word: string): void {
   const key = word.toLowerCase();
   if (!(key in words)) {
     words[key] = today();
-    write(STORAGE_KEYS.knownWords, words);
+    writeJSON(STORAGE_KEYS.knownWords, words);
   }
 }
 
 export function removeKnownWord(word: string): void {
   const words = getKnownWords();
   delete words[word.toLowerCase()];
-  write(STORAGE_KEYS.knownWords, words);
+  writeJSON(STORAGE_KEYS.knownWords, words);
 }
 
 // -- saved words ------------------------------------------------------------
 
 export function getSavedWords(): Record<string, SavedWord> {
-  return read<Record<string, SavedWord>>(STORAGE_KEYS.savedWords, {});
+  return readJSON<Record<string, SavedWord>>(STORAGE_KEYS.savedWords, {});
 }
 
 export function saveWord(word: SavedWord): void {
   const words = getSavedWords();
   words[word.word.toLowerCase()] = word;
-  write(STORAGE_KEYS.savedWords, words);
+  writeJSON(STORAGE_KEYS.savedWords, words);
 }
 
 export function removeSavedWord(word: string): void {
   const words = getSavedWords();
   delete words[word.toLowerCase()];
-  write(STORAGE_KEYS.savedWords, words);
+  writeJSON(STORAGE_KEYS.savedWords, words);
 }
 
 export function isWordSaved(word: string): boolean {
@@ -106,21 +116,21 @@ export function setCloseReadingEnabled(enabled: boolean): void {
 // -- saved articles ---------------------------------------------------------
 
 export function getSavedArticles(): Record<string, string> {
-  return read<Record<string, string>>(STORAGE_KEYS.savedArticles, {});
+  return readJSON<Record<string, string>>(STORAGE_KEYS.savedArticles, {});
 }
 
 export function saveArticle(slug: string): void {
   const articles = getSavedArticles();
   if (!(slug in articles)) {
     articles[slug] = today();
-    write(STORAGE_KEYS.savedArticles, articles);
+    writeJSON(STORAGE_KEYS.savedArticles, articles);
   }
 }
 
 export function removeSavedArticle(slug: string): void {
   const articles = getSavedArticles();
   delete articles[slug];
-  write(STORAGE_KEYS.savedArticles, articles);
+  writeJSON(STORAGE_KEYS.savedArticles, articles);
 }
 
 export function isArticleSaved(slug: string): boolean {
@@ -130,21 +140,21 @@ export function isArticleSaved(slug: string): boolean {
 // -- read articles ----------------------------------------------------------
 
 export function getReadArticles(): Record<string, string> {
-  return read<Record<string, string>>(STORAGE_KEYS.readArticles, {});
+  return readJSON<Record<string, string>>(STORAGE_KEYS.readArticles, {});
 }
 
 export function markArticleRead(slug: string): void {
   const articles = getReadArticles();
   if (!(slug in articles)) {
     articles[slug] = today();
-    write(STORAGE_KEYS.readArticles, articles);
+    writeJSON(STORAGE_KEYS.readArticles, articles);
   }
 }
 
 export function unmarkArticleRead(slug: string): void {
   const articles = getReadArticles();
   delete articles[slug];
-  write(STORAGE_KEYS.readArticles, articles);
+  writeJSON(STORAGE_KEYS.readArticles, articles);
 }
 
 export function isArticleRead(slug: string): boolean {
