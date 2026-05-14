@@ -41,28 +41,26 @@ export default function WordPopup({
   }, []);
 
   useLayoutEffect(() => {
-    if (!ref.current) return;
+    if (!ref.current || wordTop == null || wordBottom == null) return;
     const rect = ref.current.getBoundingClientRect();
     const vw = window.innerWidth;
     const vh = window.innerHeight;
-    let { x, y } = position;
+    let { x } = position;
     const gap = 6;
-    // Right edge overflow → flip left
-    if (x + rect.width > vw - 16) x = x - rect.width - 8;
-    // Popup above word: always use precise gap (pre-adjustment used estimated height)
-    // Popup below word: flip above only if it overflows bottom edge
-    if (wordTop != null && wordBottom != null && y < wordBottom) {
-      y = wordTop - rect.height - gap;
-    } else if (y + rect.height > vh - 16 && wordTop != null) {
+
+    // Always calculate y from word position — never depend on pre-adjusted estimate
+    let y = wordBottom + gap;
+    if (y + rect.height > vh - 16) {
       y = wordTop - rect.height - gap;
     }
-    // Left edge overflow
+
+    // Right edge overflow → flip left
+    if (x + rect.width > vw - 16) x = x - rect.width - 8;
     if (x < 4) x = 4;
-    // Top edge overflow
     if (y < 4) y = 4;
     ref.current.style.left = `${x}px`;
     ref.current.style.top = `${y}px`;
-  }, [position]);
+  }, [position, wordTop, wordBottom]);
 
   const content = (
     <div
@@ -91,7 +89,7 @@ export default function WordPopup({
       <p className="text-[13px] text-[#78716C] mt-1.5 leading-relaxed">
         <span className="text-[#5C3D2E] font-medium -mt-px ml-[3px] inline-block">{entry.pos}</span>
         <span className="ml-1.5 mr-px text-[#D8D2C8]">·</span>
-        <span className="relative top-[1px] -ml-px">{entry.definition}</span>
+        <span className="relative top-[1px] -ml-[2px]">{entry.definition}</span>
       </p>
     </div>
   );
