@@ -1,6 +1,7 @@
 'use client';
 
 import type { Difficulty } from '@/types';
+import { DIFFICULTY_FILTERS } from '@/config/difficulty';
 
 interface FilterBarProps {
   selectedDifficulty: Difficulty | 'all';
@@ -9,13 +10,6 @@ interface FilterBarProps {
   onDifficultyChange: (d: Difficulty | 'all') => void;
   onSourceChange: (s: string) => void;
 }
-
-const DIFFICULTIES: Array<{ key: Difficulty | 'all'; label: string; activeBg: string }> = [
-  { key: 'all', label: '全部', activeBg: 'bg-[#EDE9E0] text-[#5C3D2E]' },
-  { key: 'cet4', label: '四级', activeBg: 'bg-[#D4E8D0] text-[#3A5C34]' },
-  { key: 'cet6', label: '六级', activeBg: 'bg-[#F5E6C8] text-[#5C4A1E]' },
-  { key: 'postgrad', label: '考研', activeBg: 'bg-[#F0D3D3] text-[#5C2A2A]' },
-];
 
 export default function FilterBar({
   selectedDifficulty,
@@ -34,7 +28,7 @@ export default function FilterBar({
         <span className="text-[15px] text-[#78716C] font-bold w-10 shrink-0 font-zh-serif -mt-px ml-0.5">
           难度
         </span>
-        {DIFFICULTIES.map(({ key, label, activeBg }) => {
+        {DIFFICULTY_FILTERS.map(({ key, label, activeClass }) => {
           const active = selectedDifficulty === key;
           return (
             <button
@@ -42,7 +36,7 @@ export default function FilterBar({
               onClick={() => onDifficultyChange(key)}
               className={`${btnBase} ${
                 active
-                  ? activeBg
+                  ? activeClass
                   : 'bg-transparent text-[#78716C] hover:border-[#C88C4A] hover:text-[#5C3D2E]'
               }`}
             >

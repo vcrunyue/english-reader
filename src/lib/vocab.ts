@@ -1,4 +1,9 @@
 import type { VocabEntry, VocabMap, Difficulty } from '@/types';
+import { getHighlightClass, getDotColor, getDifficultyLabel } from '@/config/difficulty';
+
+// Re-export under legacy names for backward compatibility
+export { getDotColor as getDifficultyDotColor, getDifficultyLabel };
+export const getDifficultyColor = getHighlightClass;
 
 let vocabCache: VocabMap | null = null;
 
@@ -22,36 +27,6 @@ export function tokenize(text: string): Array<{ word: string; index: number }> {
     tokens.push({ word: match[0].toLowerCase(), index: match.index });
   }
   return tokens;
-}
-
-const DIFFICULTY_COLORS: Record<Difficulty, string> = {
-  cet4: 'bg-[#C8E4C0] hover:bg-[#A8D4A0] px-0.5 -mx-0.5',
-  cet6: 'bg-[#EFDCA8] hover:bg-[#E8D08A] px-0.5 -mx-0.5',
-  postgrad: 'bg-[#ECC8C8] hover:bg-[#E0A8A8] px-0.5 -mx-0.5',
-};
-
-const DIFFICULTY_DOT_COLORS: Record<Difficulty, string> = {
-  cet4: 'bg-[#7CB868]',
-  cet6: 'bg-[#D4A84C]',
-  postgrad: 'bg-[#C86868]',
-};
-
-const DIFFICULTY_LABELS: Record<Difficulty, string> = {
-  cet4: '四级',
-  cet6: '六级',
-  postgrad: '考研',
-};
-
-export function getDifficultyColor(d: Difficulty): string {
-  return DIFFICULTY_COLORS[d];
-}
-
-export function getDifficultyDotColor(d: Difficulty): string {
-  return DIFFICULTY_DOT_COLORS[d];
-}
-
-export function getDifficultyLabel(d: Difficulty): string {
-  return DIFFICULTY_LABELS[d];
 }
 
 export function lookupWord(

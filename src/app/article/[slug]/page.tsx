@@ -5,6 +5,7 @@ import CloseReadingToggle from '@/components/reader/CloseReadingToggle';
 import CloseReadingLegend from '@/components/reader/CloseReadingLegend';
 import DifficultyLegend from '@/components/reader/DifficultyLegend';
 import { getDifficultyLabel } from '@/lib/vocab';
+import { getBadgeClass } from '@/config/difficulty';
 import ArticleReader from './ArticleReader';
 import PanelContainer from './PanelContainer';
 import CloseReadingPanelWrapper from './CloseReadingPanelWrapper';
@@ -50,11 +51,7 @@ export default async function ArticlePage({ params }: Props) {
               <HighlightToggle />
             </div>
           </div>
-          <span className={`text-sm px-2.5 py-1 rounded-md font-zh-serif ${
-            article.difficulty === 'cet4' ? 'bg-[#D4E8D0] text-[#3A5C34]' :
-            article.difficulty === 'cet6' ? 'bg-[#F5E6C8] text-[#5C4A1E]' :
-            'bg-[#F0D3D3] text-[#5C2A2A]'
-          }`}>
+          <span className={`text-sm px-2.5 py-1 rounded-md font-zh-serif ${getBadgeClass(article.difficulty)}`}>
             {getDifficultyLabel(article.difficulty)}
           </span>
         </header>

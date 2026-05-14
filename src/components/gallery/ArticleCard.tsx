@@ -4,14 +4,9 @@ import { useState } from 'react';
 import Link from 'next/link';
 import type { ArticleMeta } from '@/types';
 import { getDifficultyLabel } from '@/lib/vocab';
+import { getBadgeClass } from '@/config/difficulty';
 import { useAppContext } from '@/context/AppContext';
 import { Bookmark } from 'lucide-react';
-
-const DIFFICULTY_STYLES: Record<string, string> = {
-  cet4: 'bg-[#D4E8D0] text-[#3A5C34]',
-  cet6: 'bg-[#F5E6C8] text-[#5C4A1E]',
-  postgrad: 'bg-[#F0D3D3] text-[#5C2A2A]',
-};
 
 const TOPIC_GRADIENTS: Record<string, string> = {
   technology: 'from-[#D4C8B8] to-[#C8B8A8]',
@@ -95,7 +90,7 @@ export default function ArticleCard({ article, layout = 'grid' }: ArticleCardPro
             </div>
             <div className="flex items-center gap-1.5 flex-wrap text-[13px] text-[#78716C]">
               <span
-                className={`inline-block text-[11px] px-1.5 py-0.5 rounded-md font-medium ${DIFFICULTY_STYLES[article.difficulty] ?? ''}`}
+                className={`inline-block text-[11px] px-1.5 py-0.5 rounded-md font-medium ${getBadgeClass(article.difficulty)}`}
               >
                 {getDifficultyLabel(article.difficulty)}
               </span>
@@ -171,7 +166,7 @@ export default function ArticleCard({ article, layout = 'grid' }: ArticleCardPro
           {/* meta row: diff · source · date · read */}
           <div className="flex items-center gap-1.5 flex-wrap text-[13px] text-[#78716C]">
             <span
-              className={`inline-block text-[11px] px-1.5 py-0.5 rounded-md font-medium ${DIFFICULTY_STYLES[article.difficulty] ?? ''}`}
+              className={`inline-block text-[11px] px-1.5 py-0.5 rounded-md font-medium ${getBadgeClass(article.difficulty)}`}
             >
               {getDifficultyLabel(article.difficulty)}
             </span>
