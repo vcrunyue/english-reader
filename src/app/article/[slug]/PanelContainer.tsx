@@ -42,7 +42,7 @@ export default function PanelContainer({ content }: { content: string }) {
           collapsed ? 'w-0 border-l-0' : expanded ? 'w-[360px]' : 'w-[220px]'
         }`}
       >
-        <div className={expanded ? 'w-[360px]' : 'w-[220px]'}>
+        <div className={`h-full ${expanded ? 'w-[360px]' : 'w-[220px]'}`}>
           <WordPanelWrapper content={content} onTabChange={handleTabChange} />
         </div>
       </aside>

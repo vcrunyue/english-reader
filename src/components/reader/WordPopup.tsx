@@ -26,7 +26,7 @@ const GAP_BELOW = 5;
 const GAP_ABOVE = 8;
 const LEFT_SHIFT = 12;
 const VIEWPORT_PAD = 16;
-const FLIP_MARGIN = 8;
+const RIGHT_GAP = 20;
 
 const btnBase = 'flex items-center gap-1 text-xs px-2 py-0.5 rounded-md transition-colors shrink-0';
 
@@ -88,8 +88,9 @@ export default function WordPopup({
     const vh = window.innerHeight;
 
     let x = wordLeft - LEFT_SHIFT;
-    if (x + rect.width > vw - VIEWPORT_PAD) {
-      x = wordLeft - rect.width - FLIP_MARGIN;
+    const cardRight = x + rect.width;
+    if (cardRight > vw - RIGHT_GAP) {
+      x = vw - rect.width - RIGHT_GAP;
     }
     if (x < VIEWPORT_PAD - 12) x = VIEWPORT_PAD - 12;
 
@@ -110,7 +111,7 @@ export default function WordPopup({
   return createPortal(
     <div
       ref={ref}
-      className={`fixed z-50 bg-[#FEFCF5] rounded-xl shadow-[0_0_6px_0_rgba(0,0,0,0.08)] border border-[#E8E4DD] p-3 min-w-[200px] max-w-[280px] ${closing ? 'animate-popup-out' : 'animate-popup-in'}`}
+      className={`fixed z-50 bg-[#FEFCF5] rounded-xl shadow-[0_0_6px_0_rgba(0,0,0,0.08)] border border-[#E8E4DD] p-3 min-w-[200px] max-w-[380px] ${closing ? 'animate-popup-out' : 'animate-popup-in'}`}
       onMouseEnter={closing ? undefined : onMouseEnter}
       onMouseLeave={closing ? undefined : onClose}
       onAnimationEnd={closing ? onAnimationEnd : undefined}
@@ -148,11 +149,10 @@ export default function WordPopup({
       {/* definition lines — one per POS */}
       <div className="mt-1.5 space-y-0.5">
         {defParts.map((part, i) => (
-          <p key={i} className="text-[13px] leading-relaxed">
-            <span className="text-[#5C3D2E] font-bold text-xs mr-1.5 inline-block w-8 shrink-0 text-right">
-              {part.pos}
-            </span>
-            <span className="text-[#78716C]">{part.def}</span>
+          <p key={i} className="leading-relaxed truncate">
+            <span className="text-[#5C3D2E] font-bold text-sm">{part.pos}</span>
+            <span className="text-[#D8D2C8] ml-1.5 mr-1.5">·</span>
+            <span className="font-semibold text-sm text-[#78716C]">{part.def}</span>
           </p>
         ))}
       </div>
