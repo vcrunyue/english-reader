@@ -84,7 +84,7 @@ export default function WordPopup({
     >
       <div className="flex items-center gap-2">
         <span className={`w-2.5 h-2.5 rounded-full shrink-0 ${getDifficultyDotColor(entry.difficulty)}`} />
-        <span className="font-semibold text-base text-[#2D2B28]">{word}</span>
+        <span className="font-semibold text-lg text-[#2D2B28] relative top-[-1px]">{word}</span>
         <button
           onClick={() => onToggleSave(word)}
           className={`ml-auto flex items-center gap-1 text-xs px-2 py-0.5 rounded-md transition-colors shrink-0 ${
