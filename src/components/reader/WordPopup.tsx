@@ -51,7 +51,7 @@ function parseDefinitionParts(pos: string, definition: string): Array<{ pos: str
   // If the entry's primary POS has no definition (def starts with another POS),
   // merge the POS labels so "det." + "pron." → "det., pron."
   if (!firstDef && breakpoints[0].start === 0 && breakpoints.length > 0) {
-    const mergedPos = pos + ' ' + breakpoints[0].pos;
+    const mergedPos = pos + ' &  ' + breakpoints[0].pos;
     const next = breakpoints.length > 1 ? breakpoints[1].start : definition.length;
     parts.push({ pos: mergedPos, def: definition.slice(breakpoints[0].end, next).trim() });
     for (let i = 1; i < breakpoints.length; i++) {
