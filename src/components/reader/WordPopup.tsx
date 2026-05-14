@@ -9,7 +9,7 @@ import { Star } from 'lucide-react';
 interface WordPopupProps {
   word: string;
   entry: VocabEntry;
-  position: { x: number; y: number };
+  wordLeft?: number;
   wordTop?: number;
   wordBottom?: number;
   isSaved: boolean;
@@ -23,7 +23,7 @@ interface WordPopupProps {
 export default function WordPopup({
   word,
   entry,
-  position,
+  wordLeft,
   wordTop,
   wordBottom,
   isSaved,
@@ -41,32 +41,32 @@ export default function WordPopup({
   }, []);
 
   useLayoutEffect(() => {
-    if (!ref.current || wordTop == null || wordBottom == null) return;
+    if (!ref.current || wordLeft == null || wordTop == null || wordBottom == null) return;
     const rect = ref.current.getBoundingClientRect();
     const vw = window.innerWidth;
     const vh = window.innerHeight;
-    let { x } = position;
     const gap = 6;
 
-    // Always calculate y from word position — never depend on pre-adjusted estimate
+    // x: align with word left edge, shifted 4px left
+    let x = wordLeft - 4;
+    if (x + rect.width > vw - 16) x = x - rect.width - 8;
+
+    // y: prefer below word, flip above if it overflows bottom
     let y = wordBottom + gap;
     if (y + rect.height > vh - 16) {
       y = wordTop - rect.height - gap;
     }
 
-    // Right edge overflow → flip left
-    if (x + rect.width > vw - 16) x = x - rect.width - 8;
     if (x < 4) x = 4;
     if (y < 4) y = 4;
     ref.current.style.left = `${x}px`;
     ref.current.style.top = `${y}px`;
-  }, [position, wordTop, wordBottom]);
+  }, [wordLeft, wordTop, wordBottom]);
 
   const content = (
     <div
       ref={ref}
       className={`fixed z-50 bg-[#FEFCF5] rounded-xl shadow-lg border border-[#E8E4DD] p-3 min-w-[200px] max-w-[280px] ${closing ? 'animate-popup-out' : 'animate-popup-in'}`}
-      style={{ left: position.x, top: position.y }}
       onMouseEnter={closing ? undefined : onMouseEnter}
       onMouseLeave={closing ? undefined : onClose}
       onAnimationEnd={closing ? onAnimationEnd : undefined}

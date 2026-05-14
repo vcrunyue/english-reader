@@ -17,8 +17,7 @@ interface ArticleBodyProps {
 interface PopupData {
   word: string;
   entry: VocabEntry;
-  x: number;
-  y: number;
+  wordLeft: number;
   wordTop: number;
   wordBottom: number;
   closing?: boolean;
@@ -139,7 +138,7 @@ export default function ArticleBody({ content, vocab, onParagraphSelect, closeRe
         <WordPopup
           word={popup.word}
           entry={popup.entry}
-          position={{ x: popup.x, y: popup.y }}
+          wordLeft={popup.wordLeft}
           wordTop={popup.wordTop}
           wordBottom={popup.wordBottom}
           isSaved={isWordInCollection(popup.word)}
@@ -190,16 +189,7 @@ function renderTextWithHighlights(
         onMouseEnter={e => {
           clearCloseTimer();
           const rect = e.currentTarget.getBoundingClientRect();
-          const vw = window.innerWidth;
-          const vh = window.innerHeight;
-          let x = rect.left - 4;
-          let y = rect.bottom + 6;
-          // Pre-adjust for viewport edges so popup renders at correct position immediately
-          const estW = 280;
-          const estH = 100;
-          if (x + estW > vw - 16) x = Math.max(4, x - estW - 8);
-          if (y + estH > vh - 16) y = Math.max(4, rect.top - estH - 6);
-          setPopup({ word: part, entry, x, y, wordTop: rect.top, wordBottom: rect.bottom });
+          setPopup({ word: part, entry, wordLeft: rect.left, wordTop: rect.top, wordBottom: rect.bottom });
         }}
         onMouseLeave={scheduleClose}
       >
