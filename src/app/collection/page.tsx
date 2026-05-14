@@ -62,11 +62,12 @@ export default function CollectionPage() {
                 />
                 <div className="flex-1 min-w-0 truncate">
                   <span className="font-medium text-sm text-[#2D2B28]">{w.word}</span>
-                  <span className="text-[13px] text-[#78716C] ml-1.5">
+                  <span className="text-[13px] text-[#78716C]">
+                    {'       '}
                     {w.pos
                       ? parseDefinitionParts(w.pos, w.definition)
                           .map(p => p.pos + ' ' + p.def)
-                          .join('    ')
+                          .join('     ')
                       : w.definition}
                   </span>
                 </div>

@@ -65,10 +65,11 @@ export default function KnownWordsPage() {
               <span className={`w-[9px] h-[9px] rounded-full shrink-0 ${getDifficultyDotColor(entry.difficulty)}`} />
               <div className="flex-1 min-w-0 truncate">
                 <span className="font-medium text-sm text-[#2D2B28]">{word}</span>
-                <span className="text-[13px] text-[#78716C] ml-1.5">
+                <span className="text-[13px] text-[#78716C]">
+                  {'       '}
                   {parseDefinitionParts(entry.pos, entry.definition)
                     .map(p => p.pos + ' ' + p.def)
-                    .join('    ')}
+                    .join('     ')}
                 </span>
               </div>
               <span className={`text-[13px] font-semibold px-2 py-1 rounded-md shrink-0 ${getBadgeClass(entry.difficulty)}`}>

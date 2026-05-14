@@ -49,6 +49,16 @@ export default function WordPanel({
         date: new Date().toISOString().split('T')[0],
         articleTitle: '',
       });
+      // Remove from known if saving to collection
+      onUnmarkKnown(w.word);
+    }
+  };
+
+  const handleMarkKnown = (w: PanelWord) => {
+    onMarkKnown(w.word);
+    // Remove from saved collection if marking as known
+    if (isWordInCollection(w.word)) {
+      removeWordFromCollection(w.word);
     }
   };
 
@@ -104,7 +114,7 @@ export default function WordPanel({
                 <Star size={15} fill={saved ? 'currentColor' : 'none'} />
               </button>
               <button
-                onClick={() => onMarkKnown(w.word)}
+                onClick={() => handleMarkKnown(w)}
                 aria-label="已认识"
                 className="p-1 rounded text-[#78716C] hover:text-[#7CB868]"
               >
