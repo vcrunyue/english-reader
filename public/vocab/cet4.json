@@ -1087,8 +1087,8 @@
   },
   "harm": {
     "word": "harm",
-    "definition": "n&vt. 伤害， 损害",
-    "pos": "",
+    "definition": "vt. 伤害， 损害",
+    "pos": "n.",
     "difficulty": "cet4"
   },
   "imaginary": {
@@ -1987,8 +1987,8 @@
   },
   "hire": {
     "word": "hire",
-    "definition": "n&vt. 租用； 雇用",
-    "pos": "",
+    "definition": "vt. 租用； 雇用",
+    "pos": "n.",
     "difficulty": "cet4"
   },
   "represent": {
@@ -2713,8 +2713,8 @@
   },
   "rescue": {
     "word": "rescue",
-    "definition": "n&vt. 营救， 救援",
-    "pos": "",
+    "definition": "vt. 营救， 救援",
+    "pos": "n.",
     "difficulty": "cet4"
   },
   "monitor": {
@@ -4423,8 +4423,8 @@
   },
   "frown": {
     "word": "frown",
-    "definition": "n&vi. 皱眉， 蹙额",
-    "pos": "",
+    "definition": "vi. 皱眉， 蹙额",
+    "pos": "n.",
     "difficulty": "cet4"
   },
   "decline": {
@@ -4681,8 +4681,8 @@
   },
   "loan": {
     "word": "loan",
-    "definition": "n&v. 贷款， 借",
-    "pos": "",
+    "definition": "v. 贷款， 借",
+    "pos": "n.",
     "difficulty": "cet4"
   },
   "vocabulary": {
@@ -4831,8 +4831,8 @@
   },
   "sideways": {
     "word": "sideways",
-    "definition": "adv&adj. 从一边， 向一边； 在一边； 斜着， 侧身",
-    "pos": "",
+    "definition": "adj. 从一边， 向一边； 在一边； 斜着， 侧身",
+    "pos": "adv.",
     "difficulty": "cet4"
   },
   "pursue": {
@@ -5065,8 +5065,8 @@
   },
   "exchange": {
     "word": "exchange",
-    "definition": "n&v. 交换； 交流； 兑换",
-    "pos": "",
+    "definition": "v. 交换； 交流； 兑换",
+    "pos": "n.",
     "difficulty": "cet4"
   },
   "concentration": {
@@ -5113,8 +5113,8 @@
   },
   "retreat": {
     "word": "retreat",
-    "definition": "n&vi. 退却， 撤退； 退避， 退缩",
-    "pos": "",
+    "definition": "vi. 退却， 撤退； 退避， 退缩",
+    "pos": "n.",
     "difficulty": "cet4"
   },
   "responsible": {
@@ -5545,8 +5545,8 @@
   },
   "interview": {
     "word": "interview",
-    "definition": "n&vt. 接见， 会见； 面谈， 面试； 采访",
-    "pos": "",
+    "definition": "vt. 接见， 会见； 面谈， 面试； 采访",
+    "pos": "n.",
     "difficulty": "cet4"
   },
   "release": {
@@ -6031,8 +6031,8 @@
   },
   "fuss": {
     "word": "fuss",
-    "definition": "n&vi. 忙乱； 大惊小怪， 小题大做； 烦恼， 过于忧虑",
-    "pos": "",
+    "definition": "vi. 忙乱； 大惊小怪， 小题大做； 烦恼， 过于忧虑",
+    "pos": "n.",
     "difficulty": "cet4"
   },
   "ultimately": {
@@ -6967,8 +6967,8 @@
   },
   "resolve": {
     "word": "resolve",
-    "definition": "n&v. 解决， 解答； 决定， 决意",
-    "pos": "",
+    "definition": "v. 解决， 解答； 决定， 决意",
+    "pos": "n.",
     "difficulty": "cet4"
   },
   "refuse": {
@@ -7273,8 +7273,8 @@
   },
   "tour": {
     "word": "tour",
-    "definition": "n&vi. 旅行， 游历",
-    "pos": "",
+    "definition": "vi. 旅行， 游历",
+    "pos": "n.",
     "difficulty": "cet4"
   },
   "get": {
@@ -7789,8 +7789,8 @@
   },
   "defeat": {
     "word": "defeat",
-    "definition": "n&vt. 战胜， 挫败",
-    "pos": "",
+    "definition": "vt. 战胜， 挫败",
+    "pos": "n.",
     "difficulty": "cet4"
   },
   "child": {
@@ -8023,8 +8023,8 @@
   },
   "surrender": {
     "word": "surrender",
-    "definition": "n&v. 交出， 放弃； 投降",
-    "pos": "",
+    "definition": "v. 交出， 放弃； 投降",
+    "pos": "n.",
     "difficulty": "cet4"
   },
   "complicate": {
@@ -9127,8 +9127,8 @@
   },
   "my": {
     "word": "my",
-    "definition": "det. 我的",
-    "pos": "",
+    "definition": "我的",
+    "pos": "det.",
     "difficulty": "cet4"
   },
   "beloved": {
@@ -10525,7 +10525,7 @@
   },
   "her": {
     "word": "her",
-    "definition": "（宾格）她 determiner.. 她的",
+    "definition": "（宾格）她 determiner. 她的",
     "pos": "pron.",
     "difficulty": "cet4"
   },
@@ -11467,8 +11467,8 @@
   },
   "plunge": {
     "word": "plunge",
-    "definition": "n&v. 纵身投入， 猛冲； 猛跌",
-    "pos": "",
+    "definition": "v. 纵身投入， 猛冲； 猛跌",
+    "pos": "n.",
     "difficulty": "cet4"
   },
   "injury": {
@@ -11533,8 +11533,8 @@
   },
   "lot": {
     "word": "lot",
-    "definition": "pron.. 许多，大量 n. 抽签，抓阄",
-    "pos": "",
+    "definition": "许多，大量 n. 抽签，抓阄",
+    "pos": "pron.",
     "difficulty": "cet4"
   },
   "unlikely": {
@@ -11563,8 +11563,8 @@
   },
   "many": {
     "word": "many",
-    "definition": "det.. 许多的 pron. 许多人",
-    "pos": "",
+    "definition": "许多的 pron. 许多人",
+    "pos": "det.",
     "difficulty": "cet4"
   },
   "goal": {
@@ -12853,8 +12853,8 @@
   },
   "gaze": {
     "word": "gaze",
-    "definition": "n&vi. 凝视， 盯， 注视",
-    "pos": "",
+    "definition": "vi. 凝视， 盯， 注视",
+    "pos": "n.",
     "difficulty": "cet4"
   },
   "close": {
@@ -13015,8 +13015,8 @@
   },
   "another": {
     "word": "another",
-    "definition": "det. 再一个的；别的",
-    "pos": "",
+    "definition": "再一个的；别的",
+    "pos": "det.",
     "difficulty": "cet4"
   },
   "bubble": {
@@ -13177,8 +13177,8 @@
   },
   "okay": {
     "word": "okay",
-    "definition": "convention. 对，好",
-    "pos": "",
+    "definition": "对，好",
+    "pos": "convention.",
     "difficulty": "cet4"
   },
   "police": {
@@ -13387,8 +13387,8 @@
   },
   "mention": {
     "word": "mention",
-    "definition": "n&vt. 提及， 说起",
-    "pos": "",
+    "definition": "vt. 提及， 说起",
+    "pos": "n.",
     "difficulty": "cet4"
   },
   "decide": {
@@ -15355,8 +15355,8 @@
   },
   "reform": {
     "word": "reform",
-    "definition": "n&v. 改革， 改良， 改造； 改正， 改过自新",
-    "pos": "",
+    "definition": "v. 改革， 改良， 改造； 改正， 改过自新",
+    "pos": "n.",
     "difficulty": "cet4"
   },
   "radius": {
@@ -15703,8 +15703,8 @@
   },
   "every": {
     "word": "every",
-    "definition": "det. 每一的；每隔…的",
-    "pos": "",
+    "definition": "每一的；每隔…的",
+    "pos": "det.",
     "difficulty": "cet4"
   },
   "a": {
@@ -16267,8 +16267,8 @@
   },
   "most": {
     "word": "most",
-    "definition": "det,pron. 最多的 adv. 最，很",
-    "pos": "",
+    "definition": "pron. 最多的 adv. 最，很",
+    "pos": "det.",
     "difficulty": "cet4"
   },
   "connection": {
@@ -17059,8 +17059,8 @@
   },
   "its": {
     "word": "its",
-    "definition": "det.. 它的",
-    "pos": "",
+    "definition": "它的",
+    "pos": "det.",
     "difficulty": "cet4"
   },
   "carry": {
@@ -17683,8 +17683,8 @@
   },
   "all": {
     "word": "all",
-    "definition": "det. 全部的 pron. 全部",
-    "pos": "",
+    "definition": "全部的 pron. 全部",
+    "pos": "det.",
     "difficulty": "cet4"
   },
   "india": {
@@ -20311,8 +20311,8 @@
   },
   "blend": {
     "word": "blend",
-    "definition": "n&v. 混合",
-    "pos": "",
+    "definition": "v. 混合",
+    "pos": "n.",
     "difficulty": "cet4"
   },
   "electronic": {
@@ -20833,8 +20833,8 @@
   },
   "least": {
     "word": "least",
-    "definition": "det,pron. 最少的 adv. 最少",
-    "pos": "",
+    "definition": "pron. 最少的 adv. 最少",
+    "pos": "det.",
     "difficulty": "cet4"
   },
   "grind": {
@@ -21271,8 +21271,8 @@
   },
   "shiver": {
     "word": "shiver",
-    "definition": "n&vi. 战栗， 颤抖",
-    "pos": "",
+    "definition": "vi. 战栗， 颤抖",
+    "pos": "n.",
     "difficulty": "cet4"
   },
   "contradiction": {
@@ -22921,8 +22921,8 @@
   },
   "enough": {
     "word": "enough",
-    "definition": "det. 足够的 adv. 足够地",
-    "pos": "",
+    "definition": "足够的 adv. 足够地",
+    "pos": "det.",
     "difficulty": "cet4"
   },
   "bath": {
@@ -23077,8 +23077,8 @@
   },
   "each": {
     "word": "each",
-    "definition": "det,pron. 各，各自",
-    "pos": "",
+    "definition": "pron. 各，各自",
+    "pos": "det.",
     "difficulty": "cet4"
   },
   "racial": {
@@ -23647,8 +23647,8 @@
   },
   "debate": {
     "word": "debate",
-    "definition": "n&v. 争论， 辩论",
-    "pos": "",
+    "definition": "v. 争论， 辩论",
+    "pos": "n.",
     "difficulty": "cet4"
   },
   "newspaper": {
@@ -23893,8 +23893,8 @@
   },
   "aboard": {
     "word": "aboard",
-    "definition": "adv&prep. 在船上， 上船",
-    "pos": "",
+    "definition": "prep. 在船上， 上船",
+    "pos": "adv.",
     "difficulty": "cet4"
   },
   "outdoor": {
@@ -24079,8 +24079,8 @@
   },
   "either": {
     "word": "either",
-    "definition": "det,pron. （两者）任何一个",
-    "pos": "",
+    "definition": "pron. （两者）任何一个",
+    "pos": "det.",
     "difficulty": "cet4"
   },
   "atlantic": {
@@ -24301,8 +24301,8 @@
   },
   "weld": {
     "word": "weld",
-    "definition": "n&vt. 焊接， 熔接",
-    "pos": "",
+    "definition": "vt. 焊接， 熔接",
+    "pos": "n.",
     "difficulty": "cet4"
   },
   "hang": {
@@ -25117,8 +25117,8 @@
   },
   "disgust": {
     "word": "disgust",
-    "definition": "n&vt. 厌恶， 憎恶",
-    "pos": "",
+    "definition": "vt. 厌恶， 憎恶",
+    "pos": "n.",
     "difficulty": "cet4"
   },
   "utilize": {
@@ -25381,8 +25381,8 @@
   },
   "supply": {
     "word": "supply",
-    "definition": "n&vt. 供给， 供应",
-    "pos": "",
+    "definition": "vt. 供给， 供应",
+    "pos": "n.",
     "difficulty": "cet4"
   },
   "confidential": {
@@ -25513,8 +25513,8 @@
   },
   "stare": {
     "word": "stare",
-    "definition": "n&vi. 盯， 凝视",
-    "pos": "",
+    "definition": "vi. 盯， 凝视",
+    "pos": "n.",
     "difficulty": "cet4"
   },
   "center": {
@@ -25675,8 +25675,8 @@
   },
   "whichever": {
     "word": "whichever",
-    "definition": "pron&adj. 无论哪个， 无论哪些",
-    "pos": "",
+    "definition": "adj. 无论哪个， 无论哪些",
+    "pos": "pron.",
     "difficulty": "cet4"
   },
   "pluralism": {
@@ -25981,8 +25981,8 @@
   },
   "shrug": {
     "word": "shrug",
-    "definition": "n&v. 耸肩",
-    "pos": "",
+    "definition": "v. 耸肩",
+    "pos": "n.",
     "difficulty": "cet4"
   },
   "coordination": {
@@ -26569,8 +26569,8 @@
   },
   "suicide": {
     "word": "suicide",
-    "definition": "n&v. 自杀",
-    "pos": "",
+    "definition": "v. 自杀",
+    "pos": "n.",
     "difficulty": "cet4"
   },
   "saving": {
@@ -26647,8 +26647,8 @@
   },
   "raid": {
     "word": "raid",
-    "definition": "n&vt. 袭击； 突入查抄， 突入搜捕； 劫掠",
-    "pos": "",
+    "definition": "vt. 袭击； 突入查抄， 突入搜捕； 劫掠",
+    "pos": "n.",
     "difficulty": "cet4"
   },
   "kindergarten": {

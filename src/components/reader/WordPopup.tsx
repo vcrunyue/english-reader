@@ -26,14 +26,14 @@ const GAP_BELOW = 5;
 const GAP_ABOVE = 8;
 const LEFT_SHIFT = 12;
 const VIEWPORT_PAD = 16;
-const RIGHT_GAP = 20;
+const RIGHT_GAP = 30;
 
-const btnBase = 'flex items-center gap-1 text-xs px-2 py-0.5 rounded-md transition-colors shrink-0';
+const btnBase = 'flex items-center gap-1 text-xs px-2 py-0.5 rounded-md transition-colors shrink-0 font-semibold';
 
 // Split a definition string that may contain multiple POS entries
 // e.g. "离弃，丢弃；放弃 n. 放任；纵情" → [{pos:"vt.", def:"离弃，丢弃；放弃"}, {pos:"n.", def:"放任；纵情"}]
 function parseDefinitionParts(pos: string, definition: string): Array<{ pos: string; def: string }> {
-  const POS_RE = /\s+(n\.|vt\.|vi\.|v\.|adj\.|adv\.|a\.|ad\.|prep\.|pron\.|conj\.)\s+/g;
+  const POS_RE = /\s+(n\.|vt\.|vi\.|v\.|adj\.|adv\.|a\.|ad\.|prep\.|pron\.|conj\.|det\.)\s+/g;
 
   const breakpoints: Array<{ pos: string; start: number; end: number }> = [];
   let match: RegExpExecArray | null;
@@ -147,11 +147,11 @@ export default function WordPopup({
       </div>
 
       {/* definition lines — one per POS */}
-      <div className="mt-1.5 space-y-0.5">
+      <div className="mt-1.5 space-y-0.5 ml-0.5">
         {defParts.map((part, i) => (
           <p key={i} className="leading-relaxed truncate">
             <span className="text-[#5C3D2E] font-bold text-sm">{part.pos}</span>
-            <span className="text-[#D8D2C8] ml-1.5 mr-1.5">·</span>
+            <span className="text-[#D8D2C8] ml-[3px] mr-[3px]">·</span>
             <span className="font-semibold text-sm text-[#78716C]">{part.def}</span>
           </p>
         ))}

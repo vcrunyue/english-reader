@@ -193,8 +193,8 @@
   },
   "rape": {
     "word": "rape",
-    "definition": "n&vt. 强奸",
-    "pos": "",
+    "definition": "vt. 强奸",
+    "pos": "n.",
     "difficulty": "cet6"
   },
   "ecological": {
@@ -4777,8 +4777,8 @@
   },
   "gleam": {
     "word": "gleam",
-    "definition": "n&vi. 闪亮， 闪烁； 闪现， 流露",
-    "pos": "",
+    "definition": "vi. 闪亮， 闪烁； 闪现， 流露",
+    "pos": "n.",
     "difficulty": "cet6"
   },
   "negligible": {
@@ -5497,8 +5497,8 @@
   },
   "jog": {
     "word": "jog",
-    "definition": "n&v. 慢跑； 轻轻碰撞",
-    "pos": "",
+    "definition": "v. 慢跑； 轻轻碰撞",
+    "pos": "n.",
     "difficulty": "cet6"
   },
   "vector": {
@@ -5767,8 +5767,8 @@
   },
   "stroll": {
     "word": "stroll",
-    "definition": "n&vi. 散步， 闲逛",
-    "pos": "",
+    "definition": "vi. 散步， 闲逛",
+    "pos": "n.",
     "difficulty": "cet6"
   },
   "triangular": {
@@ -6649,8 +6649,8 @@
   },
   "blush": {
     "word": "blush",
-    "definition": "n&vi. 脸红",
-    "pos": "",
+    "definition": "vi. 脸红",
+    "pos": "n.",
     "difficulty": "cet6"
   },
   "allied": {
@@ -7771,8 +7771,8 @@
   },
   "howl": {
     "word": "howl",
-    "definition": "n&vi. 嗥叫； 呼啸； 吼叫， 哀号",
-    "pos": "",
+    "definition": "vi. 嗥叫； 呼啸； 吼叫， 哀号",
+    "pos": "n.",
     "difficulty": "cet6"
   },
   "aerospace": {
@@ -8155,8 +8155,8 @@
   },
   "veto": {
     "word": "veto",
-    "definition": "n&vt. 否决",
-    "pos": "",
+    "definition": "vt. 否决",
+    "pos": "n.",
     "difficulty": "cet6"
   },
   "denial": {
@@ -8635,8 +8635,8 @@
   },
   "murmur": {
     "word": "murmur",
-    "definition": "n&v. 小声说； 小声抱怨， 咕哝； 发出连续而低沉的声音",
-    "pos": "",
+    "definition": "v. 小声说； 小声抱怨， 咕哝； 发出连续而低沉的声音",
+    "pos": "n.",
     "difficulty": "cet6"
   },
   "burner": {
@@ -10063,8 +10063,8 @@
   },
   "retort": {
     "word": "retort",
-    "definition": "n&v. 反驳， 回嘴",
-    "pos": "",
+    "definition": "v. 反驳， 回嘴",
+    "pos": "n.",
     "difficulty": "cet6"
   },
   "broaden": {
@@ -10165,8 +10165,8 @@
   },
   "boycott": {
     "word": "boycott",
-    "definition": "n&vt. 抵制， 拒绝参与",
-    "pos": "",
+    "definition": "vt. 抵制， 拒绝参与",
+    "pos": "n.",
     "difficulty": "cet6"
   },
   "plunder": {
@@ -10177,8 +10177,8 @@
   },
   "endeavor": {
     "word": "endeavor",
-    "definition": "n&v. 努力， 尽力， 尝试",
-    "pos": "",
+    "definition": "v. 努力， 尽力， 尝试",
+    "pos": "n.",
     "difficulty": "cet6"
   },
   "scramble": {
@@ -10195,14 +10195,14 @@
   },
   "slaughter": {
     "word": "slaughter",
-    "definition": "n&vt. 屠杀， 杀戮； 屠宰",
-    "pos": "",
+    "definition": "vt. 屠杀， 杀戮； 屠宰",
+    "pos": "n.",
     "difficulty": "cet6"
   },
   "tow": {
     "word": "tow",
-    "definition": "n&vt. 拖， 拉， 牵引",
-    "pos": "",
+    "definition": "vt. 拖， 拉， 牵引",
+    "pos": "n.",
     "difficulty": "cet6"
   },
   "clockwise": {
@@ -10273,8 +10273,8 @@
   },
   "reproach": {
     "word": "reproach",
-    "definition": "n&vt. 责备， 批评",
-    "pos": "",
+    "definition": "vt. 责备， 批评",
+    "pos": "n.",
     "difficulty": "cet6"
   },
   "authorize": {
@@ -10483,8 +10483,8 @@
   },
   "swap": {
     "word": "swap",
-    "definition": "n&v. 交换",
-    "pos": "",
+    "definition": "v. 交换",
+    "pos": "n.",
     "difficulty": "cet6"
   },
   "tick": {
@@ -11311,8 +11311,8 @@
   },
   "stab": {
     "word": "stab",
-    "definition": "n&v. 刺， 戳",
-    "pos": "",
+    "definition": "v. 刺， 戳",
+    "pos": "n.",
     "difficulty": "cet6"
   },
   "collaboration": {
@@ -11407,8 +11407,8 @@
   },
   "auction": {
     "word": "auction",
-    "definition": "n&vt. 拍卖",
-    "pos": "",
+    "definition": "vt. 拍卖",
+    "pos": "n.",
     "difficulty": "cet6"
   },
   "refuge": {
@@ -11461,8 +11461,8 @@
   },
   "nurture": {
     "word": "nurture",
-    "definition": "n&vt. 养育， 培育， 滋养",
-    "pos": "",
+    "definition": "vt. 养育， 培育， 滋养",
+    "pos": "n.",
     "difficulty": "cet6"
   },
   "paternity": {
@@ -11803,8 +11803,8 @@
   },
   "yell": {
     "word": "yell",
-    "definition": "n&vi. 号叫， 叫喊",
-    "pos": "",
+    "definition": "vi. 号叫， 叫喊",
+    "pos": "n.",
     "difficulty": "cet6"
   },
   "tribe": {
