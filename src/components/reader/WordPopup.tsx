@@ -33,7 +33,7 @@ const btnBase = 'flex items-center gap-1 text-xs px-2 py-0.5 rounded-md transiti
 // Split a definition string that may contain multiple POS entries
 // e.g. "离弃，丢弃；放弃 n. 放任；纵情" → [{pos:"vt.", def:"离弃，丢弃；放弃"}, {pos:"n.", def:"放任；纵情"}]
 function parseDefinitionParts(pos: string, definition: string): Array<{ pos: string; def: string }> {
-  const POS_RE = /\s+(n\.|vt\.|vi\.|v\.|adj\.|adv\.|a\.|ad\.|prep\.|pron\.|conj\.|det\.)\s+/g;
+  const POS_RE = /(?:^|\s+)(n\.|vt\.|vi\.|v\.|adj\.|adv\.|a\.|ad\.|prep\.|pron\.|conj\.|det\.)\s+/gm;
 
   const breakpoints: Array<{ pos: string; start: number; end: number }> = [];
   let match: RegExpExecArray | null;
@@ -46,12 +46,26 @@ function parseDefinitionParts(pos: string, definition: string): Array<{ pos: str
   }
 
   const parts: Array<{ pos: string; def: string }> = [];
-  parts.push({ pos, def: definition.slice(0, breakpoints[0].start).trim() });
+  let firstDef = definition.slice(0, breakpoints[0].start).trim();
 
-  for (let i = 0; i < breakpoints.length; i++) {
-    const bp = breakpoints[i];
-    const next = i + 1 < breakpoints.length ? breakpoints[i + 1].start : definition.length;
-    parts.push({ pos: bp.pos, def: definition.slice(bp.end, next).trim() });
+  // If the entry's primary POS has no definition (def starts with another POS),
+  // merge the POS labels so "det." + "pron." → "det., pron."
+  if (!firstDef && breakpoints[0].start === 0 && breakpoints.length > 0) {
+    const mergedPos = pos + ' ' + breakpoints[0].pos;
+    const next = breakpoints.length > 1 ? breakpoints[1].start : definition.length;
+    parts.push({ pos: mergedPos, def: definition.slice(breakpoints[0].end, next).trim() });
+    for (let i = 1; i < breakpoints.length; i++) {
+      const bp = breakpoints[i];
+      const n = i + 1 < breakpoints.length ? breakpoints[i + 1].start : definition.length;
+      parts.push({ pos: bp.pos, def: definition.slice(bp.end, n).trim() });
+    }
+  } else {
+    parts.push({ pos, def: firstDef });
+    for (let i = 0; i < breakpoints.length; i++) {
+      const bp = breakpoints[i];
+      const n = i + 1 < breakpoints.length ? breakpoints[i + 1].start : definition.length;
+      parts.push({ pos: bp.pos, def: definition.slice(bp.end, n).trim() });
+    }
   }
 
   return parts.filter(p => p.def);
