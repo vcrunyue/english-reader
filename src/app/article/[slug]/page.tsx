@@ -37,6 +37,7 @@ export default async function ArticlePage({ params }: Props) {
           <a href="/" className="text-sm text-[#78716C] hover:text-[#C88C4A] transition-colors font-zh-serif" aria-label="返回首页">
             ← 返回
           </a>
+          <ArticleBookmarkButton slug={article.slug} />
           <div className="flex items-center gap-5 ml-auto mr-2">
             <div className="flex items-center gap-1.5">
               <span className="text-sm text-[#78716C] font-zh-serif">精读</span>
@@ -49,7 +50,6 @@ export default async function ArticlePage({ params }: Props) {
               <HighlightToggle />
             </div>
           </div>
-          <ArticleBookmarkButton slug={article.slug} />
           <span className={`text-sm px-2.5 py-1 rounded-md font-zh-serif ${
             article.difficulty === 'cet4' ? 'bg-[#D4E8D0] text-[#3A5C34]' :
             article.difficulty === 'cet6' ? 'bg-[#F5E6C8] text-[#5C4A1E]' :

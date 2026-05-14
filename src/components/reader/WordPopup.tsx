@@ -77,8 +77,8 @@ export default function WordPopup({
           {isSaved ? '已收藏' : '收藏'}
         </button>
       </div>
-      <p className="text-[13px] text-[#78716C] mt-[5px] leading-relaxed">
-        <span className="text-[#5C3D2E] font-medium ml-[3px]">{entry.pos}</span>
+      <p className="text-[13px] text-[#78716C] mt-1.5 leading-relaxed">
+        <span className="text-[#5C3D2E] font-medium -mt-px ml-[3px] inline-block">{entry.pos}</span>
         <span className="mx-1.5 text-[#D8D2C8]">·</span>
         {entry.definition}
       </p>

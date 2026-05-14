@@ -66,7 +66,7 @@ export default function ArticleBody({ content, vocab, onParagraphSelect, closeRe
     closeTimerRef.current = setTimeout(() => {
       setPopup(null);
       setFadingOut(false);
-    }, 150);
+    }, 1000);
   }, []);
 
   const headingClasses: Record<string, string> = {
@@ -177,12 +177,16 @@ function renderTextWithHighlights(
         onMouseEnter={e => {
           clearCloseTimer();
           const rect = e.currentTarget.getBoundingClientRect();
-          setPopup({
-            word: part,
-            entry,
-            x: rect.left,
-            y: rect.bottom + 10,
-          });
+          const vw = window.innerWidth;
+          const vh = window.innerHeight;
+          let x = rect.left;
+          let y = rect.bottom + 10;
+          // Pre-adjust for viewport edges so popup renders at correct position immediately
+          const estW = 280;
+          const estH = 100;
+          if (x + estW > vw - 16) x = Math.max(4, x - estW - 8);
+          if (y + estH > vh - 16) y = Math.max(4, y - estH - 8);
+          setPopup({ word: part, entry, x, y });
         }}
         onMouseLeave={scheduleClose}
       >

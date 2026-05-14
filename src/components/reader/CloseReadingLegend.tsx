@@ -19,7 +19,7 @@ export default function CloseReadingLegend() {
     closeRef.current = setTimeout(() => {
       setShow(false);
       setLeaving(false);
-    }, 150);
+    }, 1000);
   };
 
   const animClass = leaving ? 'animate-popup-out' : 'animate-popup-in';
