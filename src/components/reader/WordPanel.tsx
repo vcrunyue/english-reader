@@ -30,22 +30,26 @@ export default function WordPanel({
 }: WordPanelProps) {
   const [tab, setTab] = useState<Tab>('words');
   const [showKnown, setShowKnown] = useState(true);
-  const { saveWordToCollection, isWordInCollection } = useCollection();
+  const { saveWordToCollection, removeWordFromCollection, isWordInCollection } = useCollection();
 
   const handleTabChange = (t: Tab) => {
     setTab(t);
     onTabChange?.(t);
   };
 
-  const handleSave = (w: PanelWord) => {
-    saveWordToCollection({
-      word: w.word,
-      definition: w.entry.definition,
-      pos: w.entry.pos,
-      difficulty: w.entry.difficulty,
-      date: new Date().toISOString().split('T')[0],
-      articleTitle: '',
-    });
+  const handleToggleSave = (w: PanelWord) => {
+    if (isWordInCollection(w.word)) {
+      removeWordFromCollection(w.word);
+    } else {
+      saveWordToCollection({
+        word: w.word,
+        definition: w.entry.definition,
+        pos: w.entry.pos,
+        difficulty: w.entry.difficulty,
+        date: new Date().toISOString().split('T')[0],
+        articleTitle: '',
+      });
+    }
   };
 
   const renderWordRow = (w: PanelWord, isKnown: boolean) => {
@@ -71,7 +75,7 @@ export default function WordPanel({
               {defParts[0].def}
             </p>
           ) : (
-            <div className="text-xs text-[#78716C] space-y-[10px] mt-[4px]">
+            <div className="text-xs text-[#78716C] space-y-[2px] mt-[4px]">
               {defParts.map((part, i) => (
                 <p key={i} className="truncate">
                   <span className="text-[#5C3D2E] font-medium text-[11px] mr-1">{part.pos}</span>
@@ -93,9 +97,8 @@ export default function WordPanel({
           ) : (
             <>
               <button
-                onClick={() => handleSave(w)}
-                disabled={saved}
-                aria-label="收藏"
+                onClick={() => handleToggleSave(w)}
+                aria-label={saved ? '取消收藏' : '收藏'}
                 className={`p-1 rounded ${saved ? 'text-[#C88C4A]' : 'text-[#78716C] hover:text-[#C88C4A]'}`}
               >
                 <Star size={15} fill={saved ? 'currentColor' : 'none'} />

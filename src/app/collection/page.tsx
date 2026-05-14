@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from 'react';
 import { useCollection } from '@/context/CollectionContext';
-import { getDifficultyDotColor, getDifficultyLabel } from '@/lib/vocab';
+import { getDifficultyDotColor, getDifficultyLabel, parseDefinitionParts } from '@/lib/vocab';
 import { getBadgeClass, DIFFICULTY_FILTERS } from '@/config/difficulty';
 import type { Difficulty, SavedWord } from '@/types';
 import { X } from 'lucide-react';
@@ -60,21 +60,19 @@ export default function CollectionPage() {
                 <span
                   className={`w-2.5 h-2.5 rounded-full shrink-0 ${getDifficultyDotColor(w.difficulty)}`}
                 />
-                <div className="flex-1 min-w-0">
+                <div className="flex-1 min-w-0 truncate">
                   <span className="font-medium text-sm text-[#2D2B28]">{w.word}</span>
-                  {w.pos ? (
-                    <p className="text-xs text-[#78716C] truncate mt-[4px]">
-                      <span className="text-[#5C3D2E] font-medium text-[11px] mr-1">{w.pos}</span>
-                      {w.definition}
-                    </p>
-                  ) : (
-                    <p className="text-xs text-[#78716C] truncate mt-[4px]">{w.definition}</p>
-                  )}
+                  <span className="text-[13px] text-[#78716C] ml-1.5">
+                    {w.pos
+                      ? parseDefinitionParts(w.pos, w.definition)
+                          .map(p => p.pos + ' ' + p.def)
+                          .join('    ')
+                      : w.definition}
+                  </span>
                 </div>
-                <span className={`text-[10px] px-1.5 py-0.5 rounded-md ${getBadgeClass(w.difficulty)}`}>
+                <span className={`text-[10px] px-1.5 py-0.5 rounded-md shrink-0 ${getBadgeClass(w.difficulty)}`}>
                   {getDifficultyLabel(w.difficulty)}
                 </span>
-                <span className="text-[10px] text-[#78716C]">{w.date}</span>
                 <button
                   onClick={() => handleRemove(w.word)}
                   className="opacity-0 group-hover:opacity-100 p-1 text-[#78716C] hover:text-red-400 transition-all"

@@ -51,10 +51,13 @@ export default function ArticleBody({ content, vocab, onParagraphSelect, closeRe
           date: new Date().toISOString().split('T')[0],
           articleTitle: '',
         });
+        // Mutual exclusion: if marking as saved, remove from known
+        if (knownWords.has(word.toLowerCase())) {
+          unmarkWordKnown(word);
+        }
       }
-      // Keep popup open so user can also mark as known
     },
-    [popup, saveWordToCollection, removeWordFromCollection, isWordInCollection],
+    [popup, saveWordToCollection, removeWordFromCollection, isWordInCollection, knownWords, unmarkWordKnown],
   );
 
   const handleToggleKnown = useCallback(
@@ -64,10 +67,13 @@ export default function ArticleBody({ content, vocab, onParagraphSelect, closeRe
         unmarkWordKnown(word);
       } else {
         markWordKnown(word);
+        // Mutual exclusion: if marking as known, remove from saved
+        if (isWordInCollection(word)) {
+          removeWordFromCollection(word);
+        }
       }
-      // Don't close popup — user may also want to save
     },
-    [knownWords, markWordKnown, unmarkWordKnown],
+    [knownWords, markWordKnown, unmarkWordKnown, isWordInCollection, removeWordFromCollection],
   );
 
   const clearCloseTimer = useCallback(() => {

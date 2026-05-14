@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from 'react';
 import type { Difficulty } from '@/types';
-import { getDifficultyDotColor, getDifficultyLabel } from '@/lib/vocab';
+import { getDifficultyDotColor, getDifficultyLabel, parseDefinitionParts } from '@/lib/vocab';
 import { getBadgeClass, DIFFICULTY_FILTERS } from '@/config/difficulty';
 import { useVocab } from '@/context/VocabContext';
 import { useKnownWords } from '@/context/KnownWordsContext';
@@ -13,7 +13,7 @@ const btnBase = 'text-sm px-3 py-1.5 rounded-md border border-[#D8D2C8] transiti
 export default function KnownWordsPage() {
   const vocab = useVocab();
   const [difficulty, setDifficulty] = useState<Difficulty | 'all'>('all');
-  const { knownWords, knownWordDates, unmarkWordKnown } = useKnownWords();
+  const { knownWords, unmarkWordKnown } = useKnownWords();
 
   const knownList = useMemo(() => {
     if (!vocab) return [];
@@ -57,21 +57,23 @@ export default function KnownWordsPage() {
           ) : (
             <div className="space-y-1">
               {knownList.map(({ word, entry }) => {
-            const date = knownWordDates[word.toLowerCase()];
             return (
             <div
               key={word}
               className="flex items-center gap-3 py-2.5 px-3 rounded-lg hover:bg-[#F2EFE8] group transition-colors"
             >
               <span className={`w-2.5 h-2.5 rounded-full shrink-0 ${getDifficultyDotColor(entry.difficulty)}`} />
-              <div className="flex-1 min-w-0">
+              <div className="flex-1 min-w-0 truncate">
                 <span className="font-medium text-sm text-[#2D2B28]">{word}</span>
-                <span className="text-[13px] text-[#78716C] ml-2">{entry.definition}</span>
+                <span className="text-[13px] text-[#78716C] ml-1.5">
+                  {parseDefinitionParts(entry.pos, entry.definition)
+                    .map(p => p.pos + ' ' + p.def)
+                    .join('    ')}
+                </span>
               </div>
-              <span className={`text-[10px] px-1.5 py-0.5 rounded-md ${getBadgeClass(entry.difficulty)}`}>
+              <span className={`text-[10px] px-1.5 py-0.5 rounded-md shrink-0 ${getBadgeClass(entry.difficulty)}`}>
                 {getDifficultyLabel(entry.difficulty)}
               </span>
-              {date && <span className="text-[10px] text-[#78716C]">{date}</span>}
               <button
                 onClick={() => unmarkWordKnown(word)}
                 className="opacity-0 group-hover:opacity-100 p-1 text-[#78716C] hover:text-red-400 transition-all"
