@@ -20,9 +20,9 @@ interface WordPopupProps {
   onAnimationEnd?: () => void;
 }
 
-const GAP_BELOW = 4;
-const GAP_ABOVE = 8;
-const LEFT_SHIFT = 8;
+const GAP_BELOW = 5;
+const GAP_ABOVE = 7;
+const LEFT_SHIFT = 12;
 const VIEWPORT_PAD = 16;
 const FLIP_MARGIN = 8;
 
