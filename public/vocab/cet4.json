@@ -7843,8 +7843,8 @@
   },
   "may": {
     "word": "may",
-    "definition": "modal verb. 可能；可以；祝",
-    "pos": "",
+    "definition": "可能；可以；祝",
+    "pos": "modal verb.",
     "difficulty": "cet4"
   },
   "province": {
@@ -20437,8 +20437,8 @@
   },
   "have": {
     "word": "have",
-    "definition": "aux v. （与过去分词连用构成完成时） v. 有；吃",
-    "pos": "",
+    "definition": "（与过去分词连用构成完成时） v. 有；吃",
+    "pos": "aux v.",
     "difficulty": "cet4"
   },
   "boy": {

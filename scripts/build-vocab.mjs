@@ -13,7 +13,7 @@ const SOURCES = [
 ];
 
 // Common part-of-speech prefixes in Chinese-English dictionary definitions
-const POS_RE = /^(n\.|vt\.|vi\.|v\.|adj\.|a\.|adv\.|ad\.|prep\.|pron\.|conj\.|det\.|art\.|num\.|int\.|interj\.|aux\.|modal\.|convention\.)\s+/;
+const POS_RE = /^(n\.|vt\.|vi\.|v\.|adj\.|a\.|adv\.|ad\.|prep\.|pron\.|conj\.|det\.|art\.|num\.|int\.|interj\.|aux\.|aux v\.|modal\.|modal verb\.|convention\.)\s+/;
 
 function parseLine(line) {
   const trimmed = line.trim();

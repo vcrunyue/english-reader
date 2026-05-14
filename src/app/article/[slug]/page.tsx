@@ -9,6 +9,7 @@ import { getBadgeClass } from '@/config/difficulty';
 import ArticleReader from './ArticleReader';
 import PanelContainer from './PanelContainer';
 import CloseReadingPanelWrapper from './CloseReadingPanelWrapper';
+import Link from 'next/link';
 import ArticleBookmarkButton from '@/components/reader/ArticleBookmarkButton';
 import ArticleReadMarker from '@/components/reader/ArticleReadMarker';
 
@@ -35,9 +36,12 @@ export default async function ArticlePage({ params }: Props) {
       <div className="flex-1 flex flex-col min-w-0">
         {/* 顶栏 */}
         <header className="flex items-center gap-4 px-6 py-3 border-b border-[#E8E4DD] bg-[#FEFCF5] sticky top-0 z-10">
-          <a href="/" className="text-sm text-[#78716C] hover:text-[#C88C4A] transition-colors font-zh-serif" aria-label="返回首页">
-            ← 返回
-          </a>
+          <Link
+            href="/"
+            className="text-sm px-2.5 py-1 rounded-md transition-colors duration-200 font-zh-serif font-semibold text-[#78716C] hover:bg-[#EDE9E0] hover:text-[#C88C4A]"
+          >
+            返回
+          </Link>
           <ArticleBookmarkButton slug={article.slug} />
           <div className="flex items-center gap-5 ml-auto mr-2">
             <div className="flex items-center gap-1.5">

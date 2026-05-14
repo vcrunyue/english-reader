@@ -51,7 +51,7 @@ export default function ArticleBody({ content, vocab, onParagraphSelect, closeRe
           articleTitle: '',
         });
       }
-      setPopup(null);
+      // Keep popup open so user can also mark as known
     },
     [popup, saveWordToCollection, removeWordFromCollection, isWordInCollection],
   );
