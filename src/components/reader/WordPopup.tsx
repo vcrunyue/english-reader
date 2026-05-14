@@ -20,7 +20,7 @@ interface WordPopupProps {
   onAnimationEnd?: () => void;
 }
 
-const GAP = 4;
+const GAP = 6;
 const LEFT_SHIFT = 4;
 const VIEWPORT_PAD = 16;
 const FLIP_MARGIN = 8;
@@ -77,7 +77,7 @@ export default function WordPopup({
   return createPortal(
     <div
       ref={ref}
-      className={`fixed z-50 bg-[#FEFCF5] rounded-xl shadow-lg border border-[#E8E4DD] p-3 min-w-[200px] max-w-[280px] ${closing ? 'animate-popup-out' : 'animate-popup-in'}`}
+      className={`fixed z-50 bg-[#FEFCF5] rounded-xl shadow-sm border border-[#E8E4DD] p-3 min-w-[200px] max-w-[280px] ${closing ? 'animate-popup-out' : 'animate-popup-in'}`}
       onMouseEnter={closing ? undefined : onMouseEnter}
       onMouseLeave={closing ? undefined : onClose}
       onAnimationEnd={closing ? onAnimationEnd : undefined}
