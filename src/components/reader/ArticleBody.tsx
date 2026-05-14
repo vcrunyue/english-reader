@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useMemo, useCallback, useRef } from 'react';
+import React, { useState, useEffect, useMemo, useCallback, useRef } from 'react';
 import type { VocabMap, VocabEntry } from '@/types';
 import { useAppContext } from '@/context/AppContext';
 import { lookupWord, getDifficultyColor } from '@/lib/vocab';
@@ -21,6 +21,7 @@ interface PopupData {
   y: number;
   wordTop: number;
   wordBottom: number;
+  closing?: boolean;
 }
 
 export default function ArticleBody({ content, vocab, onParagraphSelect, closeReadingEnabled, selectedParagraph }: ArticleBodyProps) {
@@ -61,8 +62,22 @@ export default function ArticleBody({ content, vocab, onParagraphSelect, closeRe
   }, []);
 
   const scheduleClose = useCallback(() => {
-    closeTimerRef.current = setTimeout(() => setPopup(null), 200);
+    closeTimerRef.current = setTimeout(() => {
+      setPopup(prev => (prev ? { ...prev, closing: true } : null));
+    }, 200);
   }, []);
+
+  const handlePopupAnimationEnd = useCallback(() => {
+    setPopup(null);
+  }, []);
+
+  // Dismiss popup on any scroll
+  useEffect(() => {
+    if (!popup || popup.closing) return;
+    const handleScroll = () => setPopup(null);
+    document.addEventListener('scroll', handleScroll, true);
+    return () => document.removeEventListener('scroll', handleScroll, true);
+  }, [popup]);
 
   const headingClasses: Record<string, string> = {
     h1: 'font-display text-xl',
@@ -128,9 +143,11 @@ export default function ArticleBody({ content, vocab, onParagraphSelect, closeRe
           wordTop={popup.wordTop}
           wordBottom={popup.wordBottom}
           isSaved={isWordInCollection(popup.word)}
+          closing={popup.closing}
           onToggleSave={handleToggleSave}
           onMouseEnter={clearCloseTimer}
           onClose={scheduleClose}
+          onAnimationEnd={handlePopupAnimationEnd}
         />
       )}
     </div>
@@ -175,13 +192,13 @@ function renderTextWithHighlights(
           const rect = e.currentTarget.getBoundingClientRect();
           const vw = window.innerWidth;
           const vh = window.innerHeight;
-          let x = rect.left;
-          let y = rect.bottom + 10;
+          let x = rect.left - 4;
+          let y = rect.bottom + 8;
           // Pre-adjust for viewport edges so popup renders at correct position immediately
           const estW = 280;
           const estH = 100;
           if (x + estW > vw - 16) x = Math.max(4, x - estW - 8);
-          if (y + estH > vh - 16) y = Math.max(4, rect.top - estH - 10);
+          if (y + estH > vh - 16) y = Math.max(4, rect.top - estH - 8);
           setPopup({ word: part, entry, x, y, wordTop: rect.top, wordBottom: rect.bottom });
         }}
         onMouseLeave={scheduleClose}

@@ -13,9 +13,11 @@ interface WordPopupProps {
   wordTop?: number;
   wordBottom?: number;
   isSaved: boolean;
+  closing?: boolean;
   onToggleSave: (word: string) => void;
   onMouseEnter?: () => void;
   onClose: () => void;
+  onAnimationEnd?: () => void;
 }
 
 export default function WordPopup({
@@ -25,9 +27,11 @@ export default function WordPopup({
   wordTop,
   wordBottom,
   isSaved,
+  closing,
   onToggleSave,
   onMouseEnter,
   onClose,
+  onAnimationEnd,
 }: WordPopupProps) {
   const ref = useRef<HTMLDivElement>(null);
   const [mounted, setMounted] = useState(false);
@@ -44,8 +48,8 @@ export default function WordPopup({
     let { x, y } = position;
     // Right edge overflow → flip left
     if (x + rect.width > vw - 16) x = x - rect.width - 8;
-    // Bottom overflow → flip above (10px gap above word)
-    if (y + rect.height > vh - 16 && wordTop != null) y = wordTop - rect.height - 10;
+    // Bottom overflow → flip above (8px gap above word)
+    if (y + rect.height > vh - 16 && wordTop != null) y = wordTop - rect.height - 8;
     // Left edge overflow
     if (x < 4) x = 4;
     // Top edge overflow
@@ -57,10 +61,11 @@ export default function WordPopup({
   const content = (
     <div
       ref={ref}
-      className="fixed z-50 bg-[#FEFCF5] rounded-xl shadow-lg border border-[#E8E4DD] p-3 min-w-[200px] max-w-[280px] animate-popup-in"
+      className={`fixed z-50 bg-[#FEFCF5] rounded-xl shadow-lg border border-[#E8E4DD] p-3 min-w-[200px] max-w-[280px] ${closing ? 'animate-popup-out' : 'animate-popup-in'}`}
       style={{ left: position.x, top: position.y }}
-      onMouseEnter={onMouseEnter}
-      onMouseLeave={onClose}
+      onMouseEnter={closing ? undefined : onMouseEnter}
+      onMouseLeave={closing ? undefined : onClose}
+      onAnimationEnd={closing ? onAnimationEnd : undefined}
     >
       <div className="flex items-center gap-2">
         <span className={`w-2.5 h-2.5 rounded-full shrink-0 ${getDifficultyDotColor(entry.difficulty)}`} />
