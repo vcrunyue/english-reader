@@ -46,6 +46,7 @@ export default function ArticleBody({ content, vocab, onParagraphSelect, closeRe
         saveWordToCollection({
           word,
           definition: popup.entry.definition,
+          pos: popup.entry.pos,
           difficulty: popup.entry.difficulty,
           date: new Date().toISOString().split('T')[0],
           articleTitle: '',

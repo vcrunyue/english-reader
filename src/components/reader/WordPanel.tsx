@@ -41,6 +41,7 @@ export default function WordPanel({
     saveWordToCollection({
       word: w.word,
       definition: w.entry.definition,
+      pos: w.entry.pos,
       difficulty: w.entry.difficulty,
       date: new Date().toISOString().split('T')[0],
       articleTitle: '',
@@ -70,7 +71,7 @@ export default function WordPanel({
               {defParts[0].def}
             </p>
           ) : (
-            <div className="text-xs text-[#78716C] space-y-[2px] mt-[4px]">
+            <div className="text-xs text-[#78716C] space-y-[10px] mt-[4px]">
               {defParts.map((part, i) => (
                 <p key={i} className="truncate">
                   <span className="text-[#5C3D2E] font-medium text-[11px] mr-1">{part.pos}</span>

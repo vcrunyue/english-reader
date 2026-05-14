@@ -32,6 +32,7 @@ export interface SentencePair {
 export interface SavedWord {
   word: string;
   definition: string;
+  pos: string;
   difficulty: Difficulty;
   date: string;
   articleTitle: string;
