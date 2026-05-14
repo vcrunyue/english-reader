@@ -24,7 +24,7 @@ const menuItems = [
 ];
 
 const itemCls =
-  'flex items-center gap-3 ml-[3px] mr-1.5 rounded-lg text-sm font-semibold transition-all duration-[400ms] ease-out whitespace-nowrap pl-2.5 pr-3 py-2';
+  'flex items-center mx-2 rounded-lg text-sm font-semibold transition-all duration-[400ms] ease-out whitespace-nowrap px-3 py-2';
 const inactiveCls = 'text-[#78716C] hover:bg-[#EDE9E0] hover:text-[#5C3D2E] cursor-pointer';
 
 export default function Sidebar() {
@@ -41,7 +41,7 @@ export default function Sidebar() {
         {/* 折叠按钮 */}
         <div
           onClick={() => setCollapsed(!collapsed)}
-          className={`${itemCls} ${inactiveCls}`}
+          className={`${itemCls} ${inactiveCls} ${collapsed ? 'justify-center' : 'gap-3'}`}
           role="button"
           tabIndex={0}
           onKeyDown={e => (e.key === 'Enter' || e.key === ' ') && setCollapsed(!collapsed)}
@@ -67,7 +67,7 @@ export default function Sidebar() {
             <Link
               key={href}
               href={href}
-              className={`${itemCls} ${
+              className={`${itemCls} ${collapsed ? 'justify-center' : 'gap-3'} ${
                 isActive
                   ? 'bg-[#E8DCC8] text-[#5C3D2E] font-bold'
                   : inactiveCls
