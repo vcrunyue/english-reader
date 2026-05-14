@@ -30,6 +30,10 @@ function parseLine(line) {
   // Normalize data quirks: double dots, comma/ampersand-separated compound POS
   let def = rawDef.replace(/\.\./g, '.').replace(/([a-z]+)[,&]([a-z]+\.)/g, '$1. $2');
 
+  // Normalize Chinese punctuation spacing: no space after ，、；、。and between CJK chars
+  def = def.replace(/([，、；。])\s+/g, '$1');
+  def = def.replace(/([一-鿿])\s+([一-鿿])/g, '$1$2');
+
   const posMatch = def.match(POS_RE);
   const pos = posMatch ? posMatch[1] : '';
   const definition = posMatch ? def.slice(posMatch[0].length) : def;
