@@ -2,7 +2,9 @@
 
 import React, { useState, useEffect, useMemo, useCallback, useRef } from 'react';
 import type { VocabMap, VocabEntry } from '@/types';
-import { useAppContext } from '@/context/AppContext';
+import { useKnownWords } from '@/context/KnownWordsContext';
+import { useCollection } from '@/context/CollectionContext';
+import { useReading } from '@/context/ReadingContext';
 import { lookupWord, getDifficultyColor } from '@/lib/vocab';
 import WordPopup from './WordPopup';
 
@@ -24,8 +26,9 @@ interface PopupData {
 }
 
 export default function ArticleBody({ content, vocab, onParagraphSelect, closeReadingEnabled, selectedParagraph }: ArticleBodyProps) {
-  const { knownWords, highlightEnabled, saveWordToCollection, removeWordFromCollection, isWordInCollection } =
-    useAppContext();
+  const { knownWords } = useKnownWords();
+  const { highlightEnabled } = useReading();
+  const { saveWordToCollection, removeWordFromCollection, isWordInCollection } = useCollection();
   const [popup, setPopup] = useState<PopupData | null>(null);
   const closeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 

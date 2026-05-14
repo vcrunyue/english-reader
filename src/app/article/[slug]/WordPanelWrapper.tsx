@@ -3,7 +3,7 @@
 import { useState, useMemo, useCallback } from 'react';
 import { analyzeText } from '@/lib/vocab';
 import { useVocab } from '@/context/VocabContext';
-import { useAppContext } from '@/context/AppContext';
+import { useKnownWords } from '@/context/KnownWordsContext';
 import WordPanel from '@/components/reader/WordPanel';
 
 interface Props {
@@ -14,7 +14,7 @@ interface Props {
 export default function WordPanelWrapper({ content, onTabChange }: Props) {
   const vocab = useVocab();
   const [knownInArticle, setKnownInArticle] = useState<Set<string>>(new Set());
-  const { knownWords, markWordKnown, unmarkWordKnown } = useAppContext();
+  const { knownWords, markWordKnown, unmarkWordKnown } = useKnownWords();
 
   const allWords = useMemo(() => {
     if (!vocab) return [];

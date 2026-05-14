@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import type { VocabEntry } from '@/types';
 import { getDifficultyDotColor } from '@/lib/vocab';
-import { useAppContext } from '@/context/AppContext';
+import { useCollection } from '@/context/CollectionContext';
 import { Star, Check, Eye, EyeOff, Undo2 } from 'lucide-react';
 
 interface PanelWord {
@@ -30,7 +30,7 @@ export default function WordPanel({
 }: WordPanelProps) {
   const [tab, setTab] = useState<Tab>('words');
   const [showKnown, setShowKnown] = useState(true);
-  const { saveWordToCollection, isWordInCollection } = useAppContext();
+  const { saveWordToCollection, isWordInCollection } = useCollection();
 
   const handleTabChange = (t: Tab) => {
     setTab(t);

@@ -1,12 +1,12 @@
 'use client';
 
 import { useMemo } from 'react';
-import { useAppContext } from '@/context/AppContext';
+import { useCollection } from '@/context/CollectionContext';
 import type { ArticleMeta } from '@/types';
 import ArticleCard from '@/components/gallery/ArticleCard';
 
 export default function SavedArticlesContent({ allMetas }: { allMetas: ArticleMeta[] }) {
-  const { savedArticles } = useAppContext();
+  const { savedArticles } = useCollection();
 
   const metas = useMemo(
     () => allMetas.filter(m => m.slug in savedArticles),

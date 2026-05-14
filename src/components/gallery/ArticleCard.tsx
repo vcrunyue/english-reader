@@ -5,7 +5,8 @@ import Link from 'next/link';
 import type { ArticleMeta } from '@/types';
 import { getDifficultyLabel } from '@/lib/vocab';
 import { getBadgeClass } from '@/config/difficulty';
-import { useAppContext } from '@/context/AppContext';
+import { useCollection } from '@/context/CollectionContext';
+import { useReading } from '@/context/ReadingContext';
 import { Bookmark } from 'lucide-react';
 
 const TOPIC_GRADIENTS: Record<string, string> = {
@@ -24,13 +25,9 @@ interface ArticleCardProps {
 }
 
 export default function ArticleCard({ article, layout = 'grid' }: ArticleCardProps) {
-  const {
-    isArticleInCollection,
-    saveArticleToCollection,
-    removeArticleFromCollection,
-    isArticleRead,
-    unmarkArticleRead,
-  } = useAppContext();
+  const { isArticleInCollection, saveArticleToCollection, removeArticleFromCollection } =
+    useCollection();
+  const { isArticleRead, unmarkArticleRead } = useReading();
   const saved = isArticleInCollection(article.slug);
   const read = isArticleRead(article.slug);
   const [imgFailed, setImgFailed] = useState(false);

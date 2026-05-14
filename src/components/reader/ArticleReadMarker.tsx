@@ -1,10 +1,10 @@
 'use client';
 
 import { useEffect } from 'react';
-import { useAppContext } from '@/context/AppContext';
+import { useReading } from '@/context/ReadingContext';
 
 export default function ArticleReadMarker({ slug }: { slug: string }) {
-  const { markArticleRead } = useAppContext();
+  const { markArticleRead } = useReading();
   useEffect(() => { markArticleRead(slug); }, [slug, markArticleRead]);
   return null;
 }

@@ -1,7 +1,9 @@
 import type { Metadata } from 'next';
 import './globals.css';
-import { AppProvider } from '@/context/AppContext';
 import { VocabProvider } from '@/context/VocabContext';
+import { KnownWordsProvider } from '@/context/KnownWordsContext';
+import { CollectionProvider } from '@/context/CollectionContext';
+import { ReadingProvider } from '@/context/ReadingContext';
 import Sidebar from '@/components/layout/Sidebar';
 
 export const metadata: Metadata = {
@@ -24,10 +26,14 @@ export default function RootLayout({
       </head>
       <body className="flex h-screen overflow-hidden bg-[#FEFCF5] text-[#2D2B28] antialiased">
         <VocabProvider>
-          <AppProvider>
-          <Sidebar />
-          <main className="flex-1 overflow-y-auto" style={{ scrollbarGutter: 'stable' }}>{children}</main>
-          </AppProvider>
+          <KnownWordsProvider>
+            <CollectionProvider>
+              <ReadingProvider>
+                <Sidebar />
+                <main className="flex-1 overflow-y-auto" style={{ scrollbarGutter: 'stable' }}>{children}</main>
+              </ReadingProvider>
+            </CollectionProvider>
+          </KnownWordsProvider>
         </VocabProvider>
       </body>
     </html>

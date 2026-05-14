@@ -1,6 +1,6 @@
 'use client';
 
-import { useAppContext } from '@/context/AppContext';
+import { useCollection } from '@/context/CollectionContext';
 import { Bookmark } from 'lucide-react';
 
 interface Props {
@@ -9,7 +9,7 @@ interface Props {
 
 export default function ArticleBookmarkButton({ slug }: Props) {
   const { isArticleInCollection, saveArticleToCollection, removeArticleFromCollection } =
-    useAppContext();
+    useCollection();
   const saved = isArticleInCollection(slug);
 
   const handleToggle = () => {

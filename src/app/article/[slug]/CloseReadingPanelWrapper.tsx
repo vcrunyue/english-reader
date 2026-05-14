@@ -1,6 +1,6 @@
 'use client';
 
-import { useAppContext } from '@/context/AppContext';
+import { useReading } from '@/context/ReadingContext';
 import type { SentencePair } from '@/types';
 import CloseReadingPanel from '@/components/reader/CloseReadingPanel';
 
@@ -9,7 +9,7 @@ interface Props {
 }
 
 export default function CloseReadingPanelWrapper({ translations }: Props) {
-  const { closeReadingEnabled, selectedParagraph } = useAppContext();
+  const { closeReadingEnabled, selectedParagraph } = useReading();
 
   return (
     <div

@@ -1,17 +1,16 @@
 'use client';
 
 import { useState, useMemo } from 'react';
-import { useAppContext } from '@/context/AppContext';
+import { useCollection } from '@/context/CollectionContext';
 import { getDifficultyDotColor, getDifficultyLabel } from '@/lib/vocab';
 import { getBadgeClass, DIFFICULTY_FILTERS } from '@/config/difficulty';
-import type { Difficulty } from '@/types';
+import type { Difficulty, SavedWord } from '@/types';
 import { X } from 'lucide-react';
-import type { SavedWord } from '@/types';
 
 const btnBase = 'text-sm px-3 py-1.5 rounded-md border border-[#D8D2C8] transition-colors duration-200 font-zh-serif';
 
 export default function CollectionPage() {
-  const { savedWords, removeWordFromCollection } = useAppContext();
+  const { savedWords, removeWordFromCollection } = useCollection();
   const [difficulty, setDifficulty] = useState<Difficulty | 'all'>('all');
   const words = Object.values(savedWords);
 

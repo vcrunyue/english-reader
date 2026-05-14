@@ -3,9 +3,9 @@
 import { useState, useMemo } from 'react';
 import type { Difficulty } from '@/types';
 import { getDifficultyDotColor, getDifficultyLabel } from '@/lib/vocab';
-import { useVocab } from '@/context/VocabContext';
 import { getBadgeClass, DIFFICULTY_FILTERS } from '@/config/difficulty';
-import { useAppContext } from '@/context/AppContext';
+import { useVocab } from '@/context/VocabContext';
+import { useKnownWords } from '@/context/KnownWordsContext';
 import { X } from 'lucide-react';
 
 const btnBase = 'text-sm px-3 py-1.5 rounded-md border border-[#D8D2C8] transition-colors duration-200 font-zh-serif';
@@ -13,7 +13,7 @@ const btnBase = 'text-sm px-3 py-1.5 rounded-md border border-[#D8D2C8] transiti
 export default function KnownWordsPage() {
   const vocab = useVocab();
   const [difficulty, setDifficulty] = useState<Difficulty | 'all'>('all');
-  const { knownWords, knownWordDates, unmarkWordKnown } = useAppContext();
+  const { knownWords, knownWordDates, unmarkWordKnown } = useKnownWords();
 
   const knownList = useMemo(() => {
     if (!vocab) return [];

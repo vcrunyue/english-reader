@@ -1,10 +1,10 @@
 'use client';
 
-import { useAppContext } from '@/context/AppContext';
+import { useReading } from '@/context/ReadingContext';
 import Toggle from './Toggle';
 
 export default function CloseReadingToggle() {
-  const { closeReadingEnabled, toggleCloseReading } = useAppContext();
+  const { closeReadingEnabled, toggleCloseReading } = useReading();
   return (
     <Toggle
       enabled={closeReadingEnabled}

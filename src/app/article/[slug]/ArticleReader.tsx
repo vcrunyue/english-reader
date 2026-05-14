@@ -1,12 +1,12 @@
 'use client';
 
 import { useVocab } from '@/context/VocabContext';
-import { useAppContext } from '@/context/AppContext';
+import { useReading } from '@/context/ReadingContext';
 import ArticleBody from '@/components/reader/ArticleBody';
 
 export default function ArticleReader({ content }: { content: string }) {
   const vocab = useVocab();
-  const { closeReadingEnabled, selectedParagraph, selectParagraph } = useAppContext();
+  const { closeReadingEnabled, selectedParagraph, selectParagraph } = useReading();
 
   if (!vocab) {
     return (

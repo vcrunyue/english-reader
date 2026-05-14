@@ -1,10 +1,10 @@
 'use client';
 
-import { useAppContext } from '@/context/AppContext';
+import { useReading } from '@/context/ReadingContext';
 import Toggle from './Toggle';
 
 export default function HighlightToggle() {
-  const { highlightEnabled, toggleHighlight } = useAppContext();
+  const { highlightEnabled, toggleHighlight } = useReading();
   return (
     <Toggle
       enabled={highlightEnabled}
