@@ -65,12 +65,12 @@ export default function WordPanel({
             {w.word}
           </span>
           {defParts.length === 1 ? (
-            <p className="text-xs text-[#78716C] truncate">
+            <p className="text-xs text-[#78716C] truncate mt-[4px]">
               <span className="text-[#5C3D2E] font-medium text-[11px] mr-1">{defParts[0].pos}</span>
               {defParts[0].def}
             </p>
           ) : (
-            <div className="text-xs text-[#78716C] space-y-px mt-0.5">
+            <div className="text-xs text-[#78716C] space-y-[2px] mt-[4px]">
               {defParts.map((part, i) => (
                 <p key={i} className="truncate">
                   <span className="text-[#5C3D2E] font-medium text-[11px] mr-1">{part.pos}</span>
