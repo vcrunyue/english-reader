@@ -46,10 +46,16 @@ export default function WordPopup({
     const vw = window.innerWidth;
     const vh = window.innerHeight;
     let { x, y } = position;
+    const gap = 6;
     // Right edge overflow → flip left
     if (x + rect.width > vw - 16) x = x - rect.width - 8;
-    // Bottom overflow → flip above (8px gap above word)
-    if (y + rect.height > vh - 16 && wordTop != null) y = wordTop - rect.height - 8;
+    // Popup above word: always use precise gap (pre-adjustment used estimated height)
+    // Popup below word: flip above only if it overflows bottom edge
+    if (wordTop != null && wordBottom != null && y < wordBottom) {
+      y = wordTop - rect.height - gap;
+    } else if (y + rect.height > vh - 16 && wordTop != null) {
+      y = wordTop - rect.height - gap;
+    }
     // Left edge overflow
     if (x < 4) x = 4;
     // Top edge overflow
@@ -85,7 +91,7 @@ export default function WordPopup({
       <p className="text-[13px] text-[#78716C] mt-1.5 leading-relaxed">
         <span className="text-[#5C3D2E] font-medium -mt-px ml-[3px] inline-block">{entry.pos}</span>
         <span className="ml-1.5 mr-px text-[#D8D2C8]">·</span>
-        <span className="relative top-[2px]">{entry.definition}</span>
+        <span className="relative top-[1px] -ml-px">{entry.definition}</span>
       </p>
     </div>
   );

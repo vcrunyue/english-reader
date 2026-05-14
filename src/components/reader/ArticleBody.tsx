@@ -193,12 +193,12 @@ function renderTextWithHighlights(
           const vw = window.innerWidth;
           const vh = window.innerHeight;
           let x = rect.left - 4;
-          let y = rect.bottom + 8;
+          let y = rect.bottom + 6;
           // Pre-adjust for viewport edges so popup renders at correct position immediately
           const estW = 280;
           const estH = 100;
           if (x + estW > vw - 16) x = Math.max(4, x - estW - 8);
-          if (y + estH > vh - 16) y = Math.max(4, rect.top - estH - 8);
+          if (y + estH > vh - 16) y = Math.max(4, rect.top - estH - 6);
           setPopup({ word: part, entry, x, y, wordTop: rect.top, wordBottom: rect.bottom });
         }}
         onMouseLeave={scheduleClose}
