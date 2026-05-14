@@ -12,7 +12,6 @@ interface WordPopupProps {
   position: { x: number; y: number };
   isSaved: boolean;
   onToggleSave: (word: string) => void;
-  fadingOut?: boolean;
   onMouseEnter?: () => void;
   onClose: () => void;
 }
@@ -23,7 +22,6 @@ export default function WordPopup({
   position,
   isSaved,
   onToggleSave,
-  fadingOut,
   onMouseEnter,
   onClose,
 }: WordPopupProps) {
@@ -52,12 +50,10 @@ export default function WordPopup({
     ref.current.style.top = `${y}px`;
   }, [position]);
 
-  const animClass = fadingOut ? 'animate-popup-out' : 'animate-popup-in';
-
   const content = (
     <div
       ref={ref}
-      className={`fixed z-50 bg-[#FEFCF5] rounded-xl shadow-lg border border-[#E8E4DD] p-3 min-w-[200px] max-w-[280px] ${animClass}`}
+      className="fixed z-50 bg-[#FEFCF5] rounded-xl shadow-lg border border-[#E8E4DD] p-3 min-w-[200px] max-w-[280px] animate-popup-in"
       style={{ left: position.x, top: position.y }}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onClose}
@@ -79,8 +75,8 @@ export default function WordPopup({
       </div>
       <p className="text-[13px] text-[#78716C] mt-1.5 leading-relaxed">
         <span className="text-[#5C3D2E] font-medium -mt-px ml-[3px] inline-block">{entry.pos}</span>
-        <span className="mx-1.5 text-[#D8D2C8]">·</span>
-        {entry.definition}
+        <span className="ml-1.5 mr-[3px] text-[#D8D2C8]">·</span>
+        <span className="relative top-px">{entry.definition}</span>
       </p>
     </div>
   );

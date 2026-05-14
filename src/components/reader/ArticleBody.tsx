@@ -25,7 +25,6 @@ export default function ArticleBody({ content, vocab, onParagraphSelect, closeRe
   const { knownWords, highlightEnabled, saveWordToCollection, removeWordFromCollection, isWordInCollection } =
     useAppContext();
   const [popup, setPopup] = useState<PopupData | null>(null);
-  const [fadingOut, setFadingOut] = useState(false);
   const closeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const paragraphs = useMemo(
@@ -48,7 +47,6 @@ export default function ArticleBody({ content, vocab, onParagraphSelect, closeRe
         });
       }
       setPopup(null);
-      setFadingOut(false);
     },
     [popup, saveWordToCollection, removeWordFromCollection, isWordInCollection],
   );
@@ -58,15 +56,10 @@ export default function ArticleBody({ content, vocab, onParagraphSelect, closeRe
       clearTimeout(closeTimerRef.current);
       closeTimerRef.current = null;
     }
-    setFadingOut(false);
   }, []);
 
   const scheduleClose = useCallback(() => {
-    setFadingOut(true);
-    closeTimerRef.current = setTimeout(() => {
-      setPopup(null);
-      setFadingOut(false);
-    }, 1000);
+    closeTimerRef.current = setTimeout(() => setPopup(null), 200);
   }, []);
 
   const headingClasses: Record<string, string> = {
@@ -131,7 +124,6 @@ export default function ArticleBody({ content, vocab, onParagraphSelect, closeRe
           entry={popup.entry}
           position={{ x: popup.x, y: popup.y }}
           isSaved={isWordInCollection(popup.word)}
-          fadingOut={fadingOut}
           onToggleSave={handleToggleSave}
           onMouseEnter={clearCloseTimer}
           onClose={scheduleClose}
@@ -180,7 +172,7 @@ function renderTextWithHighlights(
           const vw = window.innerWidth;
           const vh = window.innerHeight;
           let x = rect.left;
-          let y = rect.bottom + 10;
+          let y = rect.bottom + 18;
           // Pre-adjust for viewport edges so popup renders at correct position immediately
           const estW = 280;
           const estH = 100;
