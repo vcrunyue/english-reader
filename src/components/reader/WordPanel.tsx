@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import type { VocabEntry } from '@/types';
-import { getDifficultyDotColor } from '@/lib/vocab';
+import { getDifficultyDotColor, parseDefinitionParts } from '@/lib/vocab';
 import { useCollection } from '@/context/CollectionContext';
 import { Star, Check, Eye, EyeOff, Undo2 } from 'lucide-react';
 
@@ -49,6 +49,7 @@ export default function WordPanel({
 
   const renderWordRow = (w: PanelWord, isKnown: boolean) => {
     const saved = isWordInCollection(w.word);
+    const defParts = parseDefinitionParts(w.entry.pos, w.entry.definition);
     return (
       <div
         key={w.word}
@@ -63,8 +64,21 @@ export default function WordPanel({
           <span className={`text-sm font-medium ${isKnown ? 'text-[#A09888]' : 'text-[#2D2B28]'}`}>
             {w.word}
           </span>
-          <span className="text-[10px] text-[#78716C] ml-1">{w.entry.pos}</span>
-          <p className="text-xs text-[#78716C] truncate">{w.entry.definition}</p>
+          {defParts.length === 1 ? (
+            <p className="text-xs text-[#78716C] truncate">
+              <span className="text-[#5C3D2E] font-medium text-[11px] mr-1">{defParts[0].pos}</span>
+              {defParts[0].def}
+            </p>
+          ) : (
+            <div className="text-xs text-[#78716C] space-y-px mt-0.5">
+              {defParts.map((part, i) => (
+                <p key={i} className="truncate">
+                  <span className="text-[#5C3D2E] font-medium text-[11px] mr-1">{part.pos}</span>
+                  {part.def}
+                </p>
+              ))}
+            </div>
+          )}
         </div>
         <div className="flex items-center gap-1 shrink-0 mt-1 ml-0 opacity-0 group-hover:opacity-100 transition-opacity">
           {isKnown ? (

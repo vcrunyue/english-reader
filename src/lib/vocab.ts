@@ -5,6 +5,49 @@ import { getHighlightClass, getDotColor, getDifficultyLabel } from '@/config/dif
 export { getDotColor as getDifficultyDotColor, getDifficultyLabel };
 export const getDifficultyColor = getHighlightClass;
 
+export interface DefPart {
+  pos: string;
+  def: string;
+}
+
+const POS_BREAK_RE = /(?:^|\s+)(n\.|vt\.|vi\.|v\.|adj\.|adv\.|a\.|ad\.|prep\.|pron\.|conj\.|det\.)\s+/gm;
+
+/** Split a definition string that may contain multiple POS entries */
+export function parseDefinitionParts(pos: string, definition: string): DefPart[] {
+  const breakpoints: Array<{ pos: string; start: number; end: number }> = [];
+  let match: RegExpExecArray | null;
+  while ((match = POS_BREAK_RE.exec(definition)) !== null) {
+    breakpoints.push({ pos: match[1], start: match.index, end: match.index + match[0].length });
+  }
+
+  if (breakpoints.length === 0) {
+    return [{ pos, def: definition.trim() }];
+  }
+
+  const parts: DefPart[] = [];
+  const firstDef = definition.slice(0, breakpoints[0].start).trim();
+
+  if (!firstDef && breakpoints[0].start === 0 && breakpoints.length > 0) {
+    const mergedPos = pos + ' &  ' + breakpoints[0].pos;
+    const next = breakpoints.length > 1 ? breakpoints[1].start : definition.length;
+    parts.push({ pos: mergedPos, def: definition.slice(breakpoints[0].end, next).trim() });
+    for (let i = 1; i < breakpoints.length; i++) {
+      const bp = breakpoints[i];
+      const n = i + 1 < breakpoints.length ? breakpoints[i + 1].start : definition.length;
+      parts.push({ pos: bp.pos, def: definition.slice(bp.end, n).trim() });
+    }
+  } else {
+    parts.push({ pos, def: firstDef });
+    for (let i = 0; i < breakpoints.length; i++) {
+      const bp = breakpoints[i];
+      const n = i + 1 < breakpoints.length ? breakpoints[i + 1].start : definition.length;
+      parts.push({ pos: bp.pos, def: definition.slice(bp.end, n).trim() });
+    }
+  }
+
+  return parts.filter(p => p.def);
+}
+
 let vocabCache: VocabMap | null = null;
 
 export async function loadVocab(): Promise<VocabMap> {
