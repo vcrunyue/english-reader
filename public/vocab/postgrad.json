@@ -1,61 +1,3092 @@
 {
-  "aberration": { "word": "aberration", "definition": "异常；偏差", "pos": "n.", "difficulty": "postgrad" },
-  "abstain": { "word": "abstain", "definition": "戒绝；弃权", "pos": "v.", "difficulty": "postgrad" },
-  "accolade": { "word": "accolade", "definition": "赞扬；荣誉", "pos": "n.", "difficulty": "postgrad" },
-  "acquiesce": { "word": "acquiesce", "definition": "默许；勉强同意", "pos": "v.", "difficulty": "postgrad" },
-  "acrimonious": { "word": "acrimonious", "definition": "尖刻的；激烈的", "pos": "adj.", "difficulty": "postgrad" },
-  "admonish": { "word": "admonish", "definition": "告诫；警告", "pos": "v.", "difficulty": "postgrad" },
-  "adorn": { "word": "adorn", "definition": "装饰；装扮", "pos": "v.", "difficulty": "postgrad" },
-  "adulation": { "word": "adulation", "definition": "奉承；谄媚", "pos": "n.", "difficulty": "postgrad" },
-  "adversary": { "word": "adversary", "definition": "对手；敌手", "pos": "n.", "difficulty": "postgrad" },
-  "alacrity": { "word": "alacrity", "definition": "敏捷；欣然", "pos": "n.", "difficulty": "postgrad" },
-  "amalgamate": { "word": "amalgamate", "definition": "合并；融合", "pos": "v.", "difficulty": "postgrad" },
-  "ambivalent": { "word": "ambivalent", "definition": "矛盾的；犹豫的", "pos": "adj.", "difficulty": "postgrad" },
-  "ameliorate": { "word": "ameliorate", "definition": "改善；改良", "pos": "v.", "difficulty": "postgrad" },
-  "antagonize": { "word": "antagonize", "definition": "对抗；敌对", "pos": "v.", "difficulty": "postgrad" },
-  "antithesis": { "word": "antithesis", "definition": "对立面；对照", "pos": "n.", "difficulty": "postgrad" },
-  "apathy": { "word": "apathy", "definition": "冷漠；无兴趣", "pos": "n.", "difficulty": "postgrad" },
-  "arbitrary": { "word": "arbitrary", "definition": "任意的；武断的", "pos": "adj.", "difficulty": "postgrad" },
-  "arduous": { "word": "arduous", "definition": "艰巨的；费力的", "pos": "adj.", "difficulty": "postgrad" },
-  "articulate": { "word": "articulate", "definition": "清晰表达的；善于表达的", "pos": "adj.", "difficulty": "postgrad" },
-  "ascendancy": { "word": "ascendancy", "definition": "优势；支配地位", "pos": "n.", "difficulty": "postgrad" },
-  "assuage": { "word": "assuage", "definition": "缓和；减轻", "pos": "v.", "difficulty": "postgrad" },
-  "astute": { "word": "astute", "definition": "精明的；敏锐的", "pos": "adj.", "difficulty": "postgrad" },
-  "auspicious": { "word": "auspicious", "definition": "吉利的；有利的", "pos": "adj.", "difficulty": "postgrad" },
-  "austere": { "word": "austere", "definition": "简朴的；严厉的", "pos": "adj.", "difficulty": "postgrad" },
-  "benevolent": { "word": "benevolent", "definition": "仁慈的；慈善的", "pos": "adj.", "difficulty": "postgrad" },
-  "candid": { "word": "candid", "definition": "坦率的；公正的", "pos": "adj.", "difficulty": "postgrad" },
-  "capricious": { "word": "capricious", "definition": "反复无常的", "pos": "adj.", "difficulty": "postgrad" },
-  "catalyst": { "word": "catalyst", "definition": "催化剂", "pos": "n.", "difficulty": "postgrad" },
-  "clandestine": { "word": "clandestine", "definition": "秘密的；暗中的", "pos": "adj.", "difficulty": "postgrad" },
-  "coerce": { "word": "coerce", "definition": "强迫；胁迫", "pos": "v.", "difficulty": "postgrad" },
-  "commensurate": { "word": "commensurate", "definition": "相称的；相当的", "pos": "adj.", "difficulty": "postgrad" },
-  "complacent": { "word": "complacent", "definition": "自满的；得意的", "pos": "adj.", "difficulty": "postgrad" },
-  "conjecture": { "word": "conjecture", "definition": "推测；猜想", "pos": "n.", "difficulty": "postgrad" },
-  "conspicuous": { "word": "conspicuous", "definition": "明显的；显眼的", "pos": "adj.", "difficulty": "postgrad" },
-  "contentious": { "word": "contentious", "definition": "有争议的", "pos": "adj.", "difficulty": "postgrad" },
-  "conundrum": { "word": "conundrum", "definition": "难题；谜题", "pos": "n.", "difficulty": "postgrad" },
-  "cordial": { "word": "cordial", "definition": "热情友好的", "pos": "adj.", "difficulty": "postgrad" },
-  "corroborate": { "word": "corroborate", "definition": "证实；确证", "pos": "v.", "difficulty": "postgrad" },
-  "debacle": { "word": "debacle", "definition": "崩溃；惨败", "pos": "n.", "difficulty": "postgrad" },
-  "debilitate": { "word": "debilitate", "definition": "使虚弱；削弱", "pos": "v.", "difficulty": "postgrad" },
-  "decorum": { "word": "decorum", "definition": "礼仪；得体", "pos": "n.", "difficulty": "postgrad" },
-  "deference": { "word": "deference", "definition": "尊重；遵从", "pos": "n.", "difficulty": "postgrad" },
-  "delineate": { "word": "delineate", "definition": "描绘；勾勒", "pos": "v.", "difficulty": "postgrad" },
-  "detrimental": { "word": "detrimental", "definition": "有害的；不利的", "pos": "adj.", "difficulty": "postgrad" },
-  "dichotomy": { "word": "dichotomy", "definition": "二分法；对立", "pos": "n.", "difficulty": "postgrad" },
-  "diminish": { "word": "diminish", "definition": "减少；缩小", "pos": "v.", "difficulty": "postgrad" },
-  "ebullient": { "word": "ebullient", "definition": "热情洋溢的", "pos": "adj.", "difficulty": "postgrad" },
-  "efficacious": { "word": "efficacious", "definition": "有效的；灵验的", "pos": "adj.", "difficulty": "postgrad" },
-  "egalitarian": { "word": "egalitarian", "definition": "平等主义的", "pos": "adj.", "difficulty": "postgrad" },
-  "elucidate": { "word": "elucidate", "definition": "阐明；说明", "pos": "v.", "difficulty": "postgrad" },
-  "embellish": { "word": "embellish", "definition": "装饰；润色", "pos": "v.", "difficulty": "postgrad" },
-  "empirical": { "word": "empirical", "definition": "经验的；实证的", "pos": "adj.", "difficulty": "postgrad" },
-  "encapsulate": { "word": "encapsulate", "definition": "概括；压缩", "pos": "v.", "difficulty": "postgrad" },
-  "engender": { "word": "engender", "definition": "产生；引起", "pos": "v.", "difficulty": "postgrad" },
-  "ephemeral": { "word": "ephemeral", "definition": "短暂的；转瞬即逝的", "pos": "adj.", "difficulty": "postgrad" },
-  "equivocal": { "word": "equivocal", "definition": "模棱两可的", "pos": "adj.", "difficulty": "postgrad" },
-  "erudite": { "word": "erudite", "definition": "博学的", "pos": "adj.", "difficulty": "postgrad" },
-  "exacerbate": { "word": "exacerbate", "definition": "加剧；恶化", "pos": "v.", "difficulty": "postgrad" },
-  "extrapolate": { "word": "extrapolate", "definition": "推断；推知", "pos": "v.", "difficulty": "postgrad" }
+  "meditation": {
+    "word": "meditation",
+    "definition": "沉思， 冥想， 默念<",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "yellow": {
+    "word": "yellow",
+    "definition": "黄色的；黄皮肤的 n. 黄色；黄种人；黄色颜料 v. 使变黄或发黄",
+    "pos": "adj.",
+    "difficulty": "postgrad"
+  },
+  "doctorate": {
+    "word": "doctorate",
+    "definition": "博士学位；博士头衔",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "very": {
+    "word": "very",
+    "definition": "很，非常；完全 adj. 同一的，正是的，恰好的",
+    "pos": "adv.",
+    "difficulty": "postgrad"
+  },
+  "puppet": {
+    "word": "puppet",
+    "definition": "木偶； 傀儡",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "millimeter": {
+    "word": "millimeter",
+    "definition": "毫米",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "escalate": {
+    "word": "escalate",
+    "definition": "逐步增长或发展， 更紧张；逐步上升， 逐步加强， 扩大",
+    "pos": "v.",
+    "difficulty": "postgrad"
+  },
+  "spirit": {
+    "word": "spirit",
+    "definition": "精神；心灵；情绪；志气；烈酒 v. 鼓励；鼓舞；诱拐",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "success": {
+    "word": "success",
+    "definition": "成功，成就；胜利；大获成功的人或事物",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "woman": {
+    "word": "woman",
+    "definition": "(pl)women妇女，成年女子",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "time": {
+    "word": "time",
+    "definition": "时间；钟点，时刻；次，回",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "marital": {
+    "word": "marital",
+    "definition": "婚姻的； 夫妻的",
+    "pos": "adj.",
+    "difficulty": "postgrad"
+  },
+  "slow": {
+    "word": "slow",
+    "definition": "慢的；减速的；迟钝的 v. 变慢；变萧条 adv. 慢慢地；迟缓地 n. (Slow)人名；(英)斯洛",
+    "pos": "adj.",
+    "difficulty": "postgrad"
+  },
+  "daytime": {
+    "word": "daytime",
+    "definition": "日间，白天",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "succeed": {
+    "word": "succeed",
+    "definition": "成功；继承；继任；兴旺",
+    "pos": "v.",
+    "difficulty": "postgrad"
+  },
+  "successful": {
+    "word": "successful",
+    "definition": "成功的；一帆风顺的",
+    "pos": "adj.",
+    "difficulty": "postgrad"
+  },
+  "sometimes": {
+    "word": "sometimes",
+    "definition": "不时，有时，间或",
+    "pos": "adv.",
+    "difficulty": "postgrad"
+  },
+  "sane": {
+    "word": "sane",
+    "definition": "理智的， 明智的， 清醒的；心智健全的；合情合理的",
+    "pos": "adj.",
+    "difficulty": "postgrad"
+  },
+  "monotonous": {
+    "word": "monotonous",
+    "definition": "单调的",
+    "pos": "adj.",
+    "difficulty": "postgrad"
+  },
+  "inverse": {
+    "word": "inverse",
+    "definition": "倒转的， 反向的 n. 反面；倒数",
+    "pos": "adj.",
+    "difficulty": "postgrad"
+  },
+  "recollect": {
+    "word": "recollect",
+    "definition": "回忆， 追想",
+    "pos": "v.",
+    "difficulty": "postgrad"
+  },
+  "side": {
+    "word": "side",
+    "definition": "边，面，侧 v. 支持",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "advent": {
+    "word": "advent",
+    "definition": "到来， 来临， 出现",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "valley": {
+    "word": "valley",
+    "definition": "山谷；流域；溪谷",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "acrobat": {
+    "word": "acrobat",
+    "definition": "特技演员， 杂技演员",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "supermarket": {
+    "word": "supermarket",
+    "definition": "超级市场",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "malignant": {
+    "word": "malignant",
+    "definition": "恶毒的； 恶性的；致命的 A",
+    "pos": "adj.",
+    "difficulty": "postgrad"
+  },
+  "metaphor": {
+    "word": "metaphor",
+    "definition": "隐喻， 暗喻",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "tomb": {
+    "word": "tomb",
+    "definition": "坟， 冢",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "victory": {
+    "word": "victory",
+    "definition": "胜利",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "voice": {
+    "word": "voice",
+    "definition": "声音；嗓音；发言权；愿望 v. 表达；吐露",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "abdomen": {
+    "word": "abdomen",
+    "definition": "腹部",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "spicy": {
+    "word": "spicy",
+    "definition": "味道浓厚的； 辛辣的； 香的； 多香料的；有刺激性的； 有趣味的",
+    "pos": "adj.",
+    "difficulty": "postgrad"
+  },
+  "evade": {
+    "word": "evade",
+    "definition": "逃避， 躲避， 躲开；回避",
+    "pos": "vt.",
+    "difficulty": "postgrad"
+  },
+  "pyramid": {
+    "word": "pyramid",
+    "definition": "金字塔",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "tomato": {
+    "word": "tomato",
+    "definition": "番茄，西红柿",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "barbecue": {
+    "word": "barbecue",
+    "definition": "金属烤架；烧烤野餐 vt. 在烤架上烧烤",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "university": {
+    "word": "university",
+    "definition": "(综合)大学",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "secret": {
+    "word": "secret",
+    "definition": "秘密；秘诀；机密 adj. 秘密的；机密的",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "speciality": {
+    "word": "speciality",
+    "definition": "特产； 特色菜；专业； 专长",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "agitate": {
+    "word": "agitate",
+    "definition": "鼓动 vt. 使激动， 使不安；搅动， 搅拌 A",
+    "pos": "vi.",
+    "difficulty": "postgrad"
+  },
+  "cohesive": {
+    "word": "cohesive",
+    "definition": "凝聚的；黏着的",
+    "pos": "adj.",
+    "difficulty": "postgrad"
+  },
+  "conspiracy": {
+    "word": "conspiracy",
+    "definition": "共谋， 阴谋",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "sister": {
+    "word": "sister",
+    "definition": "姐妹；（称志同道合者）姐妹；修女；护士 adj. 姐妹般的；同类型的",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "appal": {
+    "word": "appal",
+    "definition": "使惊骇， 使恐怖",
+    "pos": "vt.",
+    "difficulty": "postgrad"
+  },
+  "temperature": {
+    "word": "temperature",
+    "definition": "温度；体温；气温；发烧",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "legacy": {
+    "word": "legacy",
+    "definition": "遗产；遗留之物",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "term": {
+    "word": "term",
+    "definition": "术语；学期；期限；条款；(代数式等的)项 v. 把…叫做",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "tactic": {
+    "word": "tactic",
+    "definition": "(s)策略,战术",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "special": {
+    "word": "special",
+    "definition": "特使，特派人员；特刊；特色菜；专车；特价商品 adj. 特别的；专门的，专用的",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "obsolete": {
+    "word": "obsolete",
+    "definition": "已废弃的， 过时的",
+    "pos": "adj.",
+    "difficulty": "postgrad"
+  },
+  "surprise": {
+    "word": "surprise",
+    "definition": "惊奇，诧异；突然袭击 v. 使惊奇；奇袭 adj. 令人惊讶的",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "paradigm": {
+    "word": "paradigm",
+    "definition": "范例；词形变化表",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "verb": {
+    "word": "verb",
+    "definition": "动词；动词词性；动词性短语或从句 adj. 动词的；有动词性质的；起动词作用的",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "vanity": {
+    "word": "vanity",
+    "definition": "虚荣心， 浮华",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "aspire": {
+    "word": "aspire",
+    "definition": "向往， 有志于",
+    "pos": "vi.",
+    "difficulty": "postgrad"
+  },
+  "metropolis": {
+    "word": "metropolis",
+    "definition": "大都市；首府；重要中心",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "apologise": {
+    "word": "apologise",
+    "definition": "道歉（等于apologize）",
+    "pos": "v.",
+    "difficulty": "postgrad"
+  },
+  "celebrity": {
+    "word": "celebrity",
+    "definition": "名望， 著名， 名声；知名人士",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "caress": {
+    "word": "caress",
+    "definition": "爱抚；接吻 vt. 抚爱， 抚摸",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "panorama": {
+    "word": "panorama",
+    "definition": "概观， 全景； 综述",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "fin": {
+    "word": "fin",
+    "definition": "鱼鳍；鳍状物；尾翅",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "visitor": {
+    "word": "visitor",
+    "definition": "访问者，参观者；视察者；候鸟",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "sense": {
+    "word": "sense",
+    "definition": "感觉，功能；观念；道理；理智 v. 感觉到；检测",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "summer": {
+    "word": "summer",
+    "definition": "夏天，夏季 adj. 夏季的",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "evacuate": {
+    "word": "evacuate",
+    "definition": "疏散， 撤出；排空",
+    "pos": "vt.",
+    "difficulty": "postgrad"
+  },
+  "soldier": {
+    "word": "soldier",
+    "definition": "军人；[昆] 兵蚁；懒汉；一片烤面包 v. 当兵；磨洋工；坚持干；假称害病",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "same": {
+    "word": "same",
+    "definition": "相同的 pron. 同样 adv. 同样地",
+    "pos": "adj.",
+    "difficulty": "postgrad"
+  },
+  "capitalism": {
+    "word": "capitalism",
+    "definition": "资本主义",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "to": {
+    "word": "to",
+    "definition": "(表示方向)到；向；(表示间接关系)给",
+    "pos": "prep.",
+    "difficulty": "postgrad"
+  },
+  "science": {
+    "word": "science",
+    "definition": "科学；技术；学科；理科",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "service": {
+    "word": "service",
+    "definition": "服务，服侍；服役；仪式 adj. 服务性的；耐用的；服现役的 v. 维修，检修；保养",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "search": {
+    "word": "search",
+    "definition": "搜寻；调查；探求 n. 搜寻；探究，查究",
+    "pos": "v.",
+    "difficulty": "postgrad"
+  },
+  "rise": {
+    "word": "rise",
+    "definition": "上升；增强；起立；高耸 n. 上升；高地；增加；出现",
+    "pos": "v.",
+    "difficulty": "postgrad"
+  },
+  "scientist": {
+    "word": "scientist",
+    "definition": "科学家",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "turn": {
+    "word": "turn",
+    "definition": "转动，使旋转；转弯；翻过来；兑换 n. 转弯；变化；(损害或有益于别人的)行为，举动，举止",
+    "pos": "v.",
+    "difficulty": "postgrad"
+  },
+  "understand": {
+    "word": "understand",
+    "definition": "理解；懂；获悉；推断；省略",
+    "pos": "v.",
+    "difficulty": "postgrad"
+  },
+  "student": {
+    "word": "student",
+    "definition": "学生；学者",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "smell": {
+    "word": "smell",
+    "definition": "嗅，闻；有…气味 n. 气味，嗅觉；臭味",
+    "pos": "v.",
+    "difficulty": "postgrad"
+  },
+  "share": {
+    "word": "share",
+    "definition": "分享，分担；分配 n. 份额；股份",
+    "pos": "v.",
+    "difficulty": "postgrad"
+  },
+  "standard": {
+    "word": "standard",
+    "definition": "标准；水准；旗；度量衡标准 adj. 标准的；合规格的；公认为优秀的",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "internet": {
+    "word": "internet",
+    "definition": "因特网",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "stay": {
+    "word": "stay",
+    "definition": "停留；坚持；暂住；停下 n. 逗留；停止；支柱",
+    "pos": "v.",
+    "difficulty": "postgrad"
+  },
+  "teacher": {
+    "word": "teacher",
+    "definition": "教师；导师",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "spend": {
+    "word": "spend",
+    "definition": "度过，消磨（时光）；花费；浪费；用尽 n. 预算",
+    "pos": "v.",
+    "difficulty": "postgrad"
+  },
+  "speak": {
+    "word": "speak",
+    "definition": "说话；演讲；表明；陈述",
+    "pos": "v.",
+    "difficulty": "postgrad"
+  },
+  "soccer": {
+    "word": "soccer",
+    "definition": "英式足球，足球",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "translate": {
+    "word": "translate",
+    "definition": "翻译；转化；解释；转变为；调动",
+    "pos": "v.",
+    "difficulty": "postgrad"
+  },
+  "sleep": {
+    "word": "sleep",
+    "definition": "睡，睡觉 n. 睡眠",
+    "pos": "v.",
+    "difficulty": "postgrad"
+  },
+  "stand": {
+    "word": "stand",
+    "definition": "站立；位于；停滞 n. 站立；立场；看台；停止",
+    "pos": "v.",
+    "difficulty": "postgrad"
+  },
+  "return": {
+    "word": "return",
+    "definition": "返回；报答 n. 返回；归还；回球 adj. 报答的；回程的；返回的",
+    "pos": "v.",
+    "difficulty": "postgrad"
+  },
+  "suitable": {
+    "word": "suitable",
+    "definition": "适当的；相配的",
+    "pos": "adj.",
+    "difficulty": "postgrad"
+  },
+  "strong": {
+    "word": "strong",
+    "definition": "坚强的；强壮的；牢固的；擅长的 adv. 强劲地；猛烈地 n. (Strong)人名；(英)斯特朗",
+    "pos": "adj.",
+    "difficulty": "postgrad"
+  },
+  "usual": {
+    "word": "usual",
+    "definition": "通常的，惯例的；平常的",
+    "pos": "adj.",
+    "difficulty": "postgrad"
+  },
+  "smoke": {
+    "word": "smoke",
+    "definition": "烟；抽烟；无常的事物 v. 冒烟，吸烟；抽烟；弥漫",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "wrong": {
+    "word": "wrong",
+    "definition": "错误地；邪恶地，不正当地 n. 坏事；不公正 adj. 错误的；失常的；不适当的 v. 委屈；无理地对待；诽谤",
+    "pos": "adv.",
+    "difficulty": "postgrad"
+  },
+  "story": {
+    "word": "story",
+    "definition": "故事；小说；新闻报道；来历；假话 vt. 用历史故事画装饰 vi. 说谎",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "wake": {
+    "word": "wake",
+    "definition": "醒来；唤醒；警觉 n. 尾迹；守夜；守丧",
+    "pos": "v.",
+    "difficulty": "postgrad"
+  },
+  "stop": {
+    "word": "stop",
+    "definition": "停止；堵塞；断绝 n. 停止；车站；障碍；逗留",
+    "pos": "v.",
+    "difficulty": "postgrad"
+  },
+  "root": {
+    "word": "root",
+    "definition": "根；根源；词根；祖先 v. 生根；根除",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "sell": {
+    "word": "sell",
+    "definition": "销售；推销；出卖；欺骗 n. 销售；失望；推销术",
+    "pos": "v.",
+    "difficulty": "postgrad"
+  },
+  "warm": {
+    "word": "warm",
+    "definition": "温暖的；热情的 v. 同情；激动；变温暖 n. 取暖；加热",
+    "pos": "adj.",
+    "difficulty": "postgrad"
+  },
+  "step": {
+    "word": "step",
+    "definition": "步，脚步；步骤；步伐；梯级 v. 踏，踩；走",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "southern": {
+    "word": "southern",
+    "definition": "南的；南方的 n. 南方人",
+    "pos": "adj.",
+    "difficulty": "postgrad"
+  },
+  "trouble": {
+    "word": "trouble",
+    "definition": "麻烦；烦恼；故障；动乱 v. 麻烦；使烦恼；折磨",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "size": {
+    "word": "size",
+    "definition": "大小；尺寸 adj. 一定尺寸的 v. 依大小排列",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "labor": {
+    "word": "labor",
+    "definition": "劳动；工作；劳工；分娩 v. 劳动；努力；苦干",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "town": {
+    "word": "town",
+    "definition": "城镇，市镇；市内商业区",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "sit": {
+    "word": "sit",
+    "definition": "坐；位于 n. (Sit)人名；(东南亚国家华语)硕；(罗)西特",
+    "pos": "v.",
+    "difficulty": "postgrad"
+  },
+  "rest": {
+    "word": "rest",
+    "definition": "使休息，使轻松；把…寄托于 n. 休息，静止；休息时间；剩余部分；支架",
+    "pos": "v.",
+    "difficulty": "postgrad"
+  },
+  "shop": {
+    "word": "shop",
+    "definition": "商店；店铺 v. 购物",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "stick": {
+    "word": "stick",
+    "definition": "刺，戳；伸出；粘贴 n. 棍；手杖；呆头呆脑的人",
+    "pos": "v.",
+    "difficulty": "postgrad"
+  },
+  "short": {
+    "word": "short",
+    "definition": "短的；不足的；矮的，低的 n. 短；缺乏；短路；短裤 adv. 不足；突然；唐突地",
+    "pos": "adj.",
+    "difficulty": "postgrad"
+  },
+  "wall": {
+    "word": "wall",
+    "definition": "墙壁，围墙；似墙之物 v. 用墙围住，围以墙 adj. 墙壁的",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "remains": {
+    "word": "remains",
+    "definition": "残余；遗骸",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "shut": {
+    "word": "shut",
+    "definition": "关闭；停业；幽禁 n. 关闭 adj. 关闭的；围绕的",
+    "pos": "v.",
+    "difficulty": "postgrad"
+  },
+  "rose": {
+    "word": "rose",
+    "definition": "玫瑰；粉红色；蔷薇（花）；粉红色的葡萄酒 adj. 玫瑰花的；玫瑰色的；粉红色的；带有玫瑰香味的 vt. 使成玫瑰色，使（面颊）发红；使有玫瑰香味 vi. 起义( rise的过去式)；升起；（数量）增加；休会",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "tree": {
+    "word": "tree",
+    "definition": "树；木料；树状物 v. 把赶上树",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "sport": {
+    "word": "sport",
+    "definition": "运动；游戏；娱乐；运动会；玩笑 v. 游戏 adj. 运动的",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "round": {
+    "word": "round",
+    "definition": "圆；循环；一回合；圆形物 adj. 圆的；完全的；大概的；肥胖的 adv. 在周围；迂回地；朝反方向；挨个 v. 完成；围捕；绕行；弄圆 prep. 附近；绕过；大约；在…周围",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "rich": {
+    "word": "rich",
+    "definition": "富有的；肥沃的；昂贵的 n. (Rich)人名；(丹)里克；(捷)里赫；(英、西)里奇；(葡、法)里什",
+    "pos": "adj.",
+    "difficulty": "postgrad"
+  },
+  "safety": {
+    "word": "safety",
+    "definition": "安全；保险；安全设备；保险装置；安打",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "sex": {
+    "word": "sex",
+    "definition": "性；性别；性行为；色情 v. 引起…的性欲；区别…的性别",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "smile": {
+    "word": "smile",
+    "definition": "微笑 n. 微笑；笑容；喜色",
+    "pos": "v.",
+    "difficulty": "postgrad"
+  },
+  "west": {
+    "word": "west",
+    "definition": "西；西方；西部 adj. 西方的；朝西的 adv. 在西方；向西方；自西方",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "seat": {
+    "word": "seat",
+    "definition": "座位；所在地；职位 v. 使…坐下；可容纳…的；使就职",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "south": {
+    "word": "south",
+    "definition": "南方，南边；南部 adv. 在南方，向南方 adj. 南的，南方的",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "shape": {
+    "word": "shape",
+    "definition": "形状；模型；身材；具体化 v. 形成；塑造，使成形；使符合",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "scene": {
+    "word": "scene",
+    "definition": "场面；情景；景象；事件",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "space": {
+    "word": "space",
+    "definition": "空间；太空；距离 v. 留间隔",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "warn": {
+    "word": "warn",
+    "definition": "警告，提醒；通知 n. (Warn)人名；(英)沃恩；(德)瓦恩",
+    "pos": "v.",
+    "difficulty": "postgrad"
+  },
+  "weak": {
+    "word": "weak",
+    "definition": "[经] 疲软的；虚弱的；无力的；不牢固的",
+    "pos": "adj.",
+    "difficulty": "postgrad"
+  },
+  "servant": {
+    "word": "servant",
+    "definition": "仆人，佣人；公务员；雇工",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "safe": {
+    "word": "safe",
+    "definition": "安全的；可靠的；平安的 n. 保险箱；冷藏室；纱橱",
+    "pos": "adj.",
+    "difficulty": "postgrad"
+  },
+  "fat": {
+    "word": "fat",
+    "definition": "肥的，胖的；油腻的；丰满的 n. 脂肪，肥肉 v. 养肥；在…中加入脂肪",
+    "pos": "adj.",
+    "difficulty": "postgrad"
+  },
+  "style": {
+    "word": "style",
+    "definition": "风格； 文体；式样， 类型",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "straight": {
+    "word": "straight",
+    "definition": "直的；连续的；笔直的；正直的；整齐的；异性恋的 adv. 直接地；不断地；立即；坦率地 n. 直；直线；直男，直女，异性恋者",
+    "pos": "adj.",
+    "difficulty": "postgrad"
+  },
+  "speaker": {
+    "word": "speaker",
+    "definition": "演讲者；扬声器；说话者；说某种语言的人",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "speech": {
+    "word": "speech",
+    "definition": "演讲；讲话；[语] 语音；演说",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "sea": {
+    "word": "sea",
+    "definition": "海；海洋；许多；大量",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "son": {
+    "word": "son",
+    "definition": "儿子；孩子（对年轻人的称呼）；男性后裔",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "superfluous": {
+    "word": "superfluous",
+    "definition": "过剩的， 多余的",
+    "pos": "adj.",
+    "difficulty": "postgrad"
+  },
+  "room": {
+    "word": "room",
+    "definition": "房间；空间；余地；机会；房间里所有的人 v. 为…提供住处；租房，合住；投宿，住宿；留…住宿",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "linguistic": {
+    "word": "linguistic",
+    "definition": "语言的， 语言学的",
+    "pos": "adj.",
+    "difficulty": "postgrad"
+  },
+  "surface": {
+    "word": "surface",
+    "definition": "表面， 面； 外表",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "restaurant": {
+    "word": "restaurant",
+    "definition": "餐馆；[经] 饭店",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "thousand": {
+    "word": "thousand",
+    "definition": "一千；一千个；许许多多 adj. 成千的；无数的",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "wild": {
+    "word": "wild",
+    "definition": "野生的；野蛮的；狂热的；荒凉的 n. 荒野 adv. 疯狂地；胡乱地",
+    "pos": "adj.",
+    "difficulty": "postgrad"
+  },
+  "holder": {
+    "word": "holder",
+    "definition": "持有者， 占有者；支持物",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "theater": {
+    "word": "theater",
+    "definition": "电影院，戏院，剧场；戏剧；手术室",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "rock": {
+    "word": "rock",
+    "definition": "岩石；摇滚乐；暗礁 v. 摇动；使摇晃",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "western": {
+    "word": "western",
+    "definition": "西方的，西部的；有西方特征的 n. 西方人；西部片，西部小说",
+    "pos": "adj.",
+    "difficulty": "postgrad"
+  },
+  "soul": {
+    "word": "soul",
+    "definition": "灵魂；心灵；精神；鬼魂 adj. 美国黑人文化的",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "abound": {
+    "word": "abound",
+    "definition": "富于， 大量存在；充满",
+    "pos": "vi.",
+    "difficulty": "postgrad"
+  },
+  "wait": {
+    "word": "wait",
+    "definition": "等候；推迟；延缓 n. 等待；等候",
+    "pos": "v.",
+    "difficulty": "postgrad"
+  },
+  "sudden": {
+    "word": "sudden",
+    "definition": "突然的， 意外的 n. 突然发生的事",
+    "pos": "adj.",
+    "difficulty": "postgrad"
+  },
+  "tie": {
+    "word": "tie",
+    "definition": "系；约束；打结；与…成平局 n. 领带；平局；鞋带；领结；不分胜负",
+    "pos": "v.",
+    "difficulty": "postgrad"
+  },
+  "super": {
+    "word": "super",
+    "definition": "特级的；极好的 n. 特级品，特大号；临时雇员",
+    "pos": "adj.",
+    "difficulty": "postgrad"
+  },
+  "thirty": {
+    "word": "thirty",
+    "definition": "三十年代 num. 三十 adj. 三十个的",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "sad": {
+    "word": "sad",
+    "definition": "难过的；悲哀的，令人悲痛的；凄惨的，阴郁的（形容颜色）",
+    "pos": "adj.",
+    "difficulty": "postgrad"
+  },
+  "acclaim": {
+    "word": "acclaim",
+    "definition": "向…欢呼， 为…喝彩 n. 称赞",
+    "pos": "vt.",
+    "difficulty": "postgrad"
+  },
+  "worse": {
+    "word": "worse",
+    "definition": "更坏的；更差的；更恶劣的（bad的比较级）；（病情）更重的（ill的比较级） adv. 更糟；更坏；更恶劣地；更坏地 n. 更坏的事；更恶劣的事",
+    "pos": "adj.",
+    "difficulty": "postgrad"
+  },
+  "window": {
+    "word": "window",
+    "definition": "窗；窗口；窗户",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "spell": {
+    "word": "spell",
+    "definition": "拼，拼写；意味着；招致；拼成；迷住；轮值 n. 符咒；一段时间；魅力",
+    "pos": "v.",
+    "difficulty": "postgrad"
+  },
+  "watch": {
+    "word": "watch",
+    "definition": "观察；注视；看守；警戒 n. 手表；监视；守护；值班人",
+    "pos": "v.",
+    "difficulty": "postgrad"
+  },
+  "table": {
+    "word": "table",
+    "definition": "桌子；表格；平地层 v. 制表；搁置；嵌合 adj. 桌子的",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "programme": {
+    "word": "programme",
+    "definition": "计划，规划；节目；程序 v. 编程序；制作节目",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "sunday": {
+    "word": "sunday",
+    "definition": "星期日；礼拜日",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "realise": {
+    "word": "realise",
+    "definition": "认识到，明白",
+    "pos": "v.",
+    "difficulty": "postgrad"
+  },
+  "road": {
+    "word": "road",
+    "definition": "公路，马路；道路；手段 vt. （狗）沿臭迹追逐（猎物） adj. （美）巡回的",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "telephone": {
+    "word": "telephone",
+    "definition": "（美）电话；电话机；电话耳机 v. 打电话",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "fume": {
+    "word": "fume",
+    "definition": "发怒；冒烟 n. 烟； 气； 汽",
+    "pos": "vi.",
+    "difficulty": "postgrad"
+  },
+  "walk": {
+    "word": "walk",
+    "definition": "步行，走；散步 v. 散步；走过",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "practitioner": {
+    "word": "practitioner",
+    "definition": "开业者， 从业者",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "doze": {
+    "word": "doze",
+    "definition": "瞌睡； 假寐 < n. 瞌睡； 假寐",
+    "pos": "vi.",
+    "difficulty": "postgrad"
+  },
+  "shadow": {
+    "word": "shadow",
+    "definition": "阴影；影子；幽灵；庇护；隐蔽处 v. 遮蔽；使朦胧；尾随；预示 adj. 影子内阁的",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "laptop": {
+    "word": "laptop",
+    "definition": "便携式电脑",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "river": {
+    "word": "river",
+    "definition": "河，江",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "eminent": {
+    "word": "eminent",
+    "definition": "杰出的， 显赫的",
+    "pos": "adj.",
+    "difficulty": "postgrad"
+  },
+  "tv": {
+    "word": "tv",
+    "definition": "abbr. 电视（television）",
+    "pos": "",
+    "difficulty": "postgrad"
+  },
+  "till": {
+    "word": "till",
+    "definition": "[地理][水文] 冰碛；放钱的抽屉；备用现金 prep. 直到 conj. 直到为止 v. 耕种；犁",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "winter": {
+    "word": "winter",
+    "definition": "冬季；年岁；萧条期 v. 过冬 adj. 冬天的；越冬的",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "saturday": {
+    "word": "saturday",
+    "definition": "星期六",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "infrastructure": {
+    "word": "infrastructure",
+    "definition": "基础结构； 基础设施 <",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "ton": {
+    "word": "ton",
+    "definition": "吨；很多，大量",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "tired": {
+    "word": "tired",
+    "definition": "疲倦的；厌倦的，厌烦的 v. 疲倦；对…腻烦（tire的过去分词形式）",
+    "pos": "adj.",
+    "difficulty": "postgrad"
+  },
+  "augment": {
+    "word": "augment",
+    "definition": "扩大， 增加， 提高 <",
+    "pos": "vt.",
+    "difficulty": "postgrad"
+  },
+  "station": {
+    "word": "station",
+    "definition": "车站；驻地；地位；身份 v. 配置；安置；驻扎",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "village": {
+    "word": "village",
+    "definition": "村庄；村民；（动物的）群落",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "shy": {
+    "word": "shy",
+    "definition": "害羞的；畏缩的，胆怯的 v. 投；畏缩；惊退；厌恶 n. 投掷；惊跳",
+    "pos": "adj.",
+    "difficulty": "postgrad"
+  },
+  "sir": {
+    "word": "sir",
+    "definition": "先生；（用于姓名前）爵士；阁下；（中小学生对男教师的称呼）先生；老师",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "steward": {
+    "word": "steward",
+    "definition": "乘务员",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "lottery": {
+    "word": "lottery",
+    "definition": "彩票， 抽彩给奖法；碰运气的事 A",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "neighbor": {
+    "word": "neighbor",
+    "definition": "邻居 adj. 邻近的 v. 友好；毗邻而居",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "heroin": {
+    "word": "heroin",
+    "definition": "海洛因",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "speed": {
+    "word": "speed",
+    "definition": "超速，加速；加速，迅速前行；兴隆 n. 速度，速率；迅速，快速；昌盛，繁荣",
+    "pos": "v.",
+    "difficulty": "postgrad"
+  },
+  "thrift": {
+    "word": "thrift",
+    "definition": "节约， 节俭",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "ballot": {
+    "word": "ballot",
+    "definition": "投票选举， 无记名投票 n. 投票表决； 无记名投票；选票",
+    "pos": "v.",
+    "difficulty": "postgrad"
+  },
+  "administer": {
+    "word": "administer",
+    "definition": "掌管， 料理…的事务；实施， 执行；给予， 投",
+    "pos": "vt.",
+    "difficulty": "postgrad"
+  },
+  "september": {
+    "word": "september",
+    "definition": "九月",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "tuesday": {
+    "word": "tuesday",
+    "definition": "星期二",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "southeast": {
+    "word": "southeast",
+    "definition": "东南的；来自东南的 n. 东南；东南地区 adv. 来自东南",
+    "pos": "adj.",
+    "difficulty": "postgrad"
+  },
+  "underlie": {
+    "word": "underlie",
+    "definition": "位于…之下；构成…的基础",
+    "pos": "vt.",
+    "difficulty": "postgrad"
+  },
+  "rake": {
+    "word": "rake",
+    "definition": "耙子， 耙机 vt. 耙；搜索； 探索",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "waste": {
+    "word": "waste",
+    "definition": "浪费；废物；荒地；损耗；地面风化物 v. 浪费；消耗；使荒芜 adj. 废弃的；多余的；荒芜的",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "amiable": {
+    "word": "amiable",
+    "definition": "可爱的； 和蔼的， 亲切的",
+    "pos": "adj.",
+    "difficulty": "postgrad"
+  },
+  "taxi": {
+    "word": "taxi",
+    "definition": "乘出租车；滑行 n. 出租汽车",
+    "pos": "v.",
+    "difficulty": "postgrad"
+  },
+  "season": {
+    "word": "season",
+    "definition": "时期；季节；赛季 v. 给…调味；使适应",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "humiliate": {
+    "word": "humiliate",
+    "definition": "使蒙羞， 使丢脸",
+    "pos": "vt.",
+    "difficulty": "postgrad"
+  },
+  "weigh": {
+    "word": "weigh",
+    "definition": "权衡；考虑；称…重量 n. 权衡；称重量",
+    "pos": "v.",
+    "difficulty": "postgrad"
+  },
+  "sharp": {
+    "word": "sharp",
+    "definition": "急剧的；锋利的；强烈的；敏捷的；刺耳的 adv. 急剧地；锐利地；突然地 n. 尖头；骗子；内行 vt. 磨快；把音调升高 vi. 打扮；升音演奏",
+    "pos": "adj.",
+    "difficulty": "postgrad"
+  },
+  "pharmacy": {
+    "word": "pharmacy",
+    "definition": "药剂学， 制药；药店",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "zoom": {
+    "word": "zoom",
+    "definition": "急速移动；急升， 猛涨 n. 嗡嗡声， 隆隆声",
+    "pos": "vi.",
+    "difficulty": "postgrad"
+  },
+  "treason": {
+    "word": "treason",
+    "definition": "谋反， 通敌， 叛国",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "renovate": {
+    "word": "renovate",
+    "definition": "更新， 修复",
+    "pos": "vt.",
+    "difficulty": "postgrad"
+  },
+  "shampoo": {
+    "word": "shampoo",
+    "definition": "洗发膏， 香波；洗发， 洗头 vt. 洗发， 洗头",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "riddle": {
+    "word": "riddle",
+    "definition": "谜， 谜语",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "zeal": {
+    "word": "zeal",
+    "definition": "热情， 热忱",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "volleyball": {
+    "word": "volleyball",
+    "definition": "排球",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "robe": {
+    "word": "robe",
+    "definition": "长袍， 上衣",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "disc": {
+    "word": "disc",
+    "definition": "唱片； 圆盘， 盘状物",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "thirteen": {
+    "word": "thirteen",
+    "definition": "十三；十三岁；十三个 num. 十三 adj. 十三的；十三个的",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "sugar": {
+    "word": "sugar",
+    "definition": "糖；食糖；甜言蜜语 v. 加糖于；粉饰",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "futile": {
+    "word": "futile",
+    "definition": "无效的， 无用的， 无意义的；没出息的；琐碎的",
+    "pos": "adj.",
+    "difficulty": "postgrad"
+  },
+  "soup": {
+    "word": "soup",
+    "definition": "汤，羹；马力 v. 加速；增加马力",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "lateral": {
+    "word": "lateral",
+    "definition": "侧面的； 旁边的",
+    "pos": "adj.",
+    "difficulty": "postgrad"
+  },
+  "vase": {
+    "word": "vase",
+    "definition": "瓶；花瓶",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "rumor": {
+    "word": "rumor",
+    "definition": "传闻， 谣言",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "gallop": {
+    "word": "gallop",
+    "definition": "奔驰， 飞跑 n. 奔驰， 飞跑",
+    "pos": "vi.",
+    "difficulty": "postgrad"
+  },
+  "song": {
+    "word": "song",
+    "definition": "歌曲；歌唱；诗歌；鸣声",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "strenuous": {
+    "word": "strenuous",
+    "definition": "费劲的， 费力的；辛苦的， 艰苦的；精力充沛的， 积极的， 热心的",
+    "pos": "adj.",
+    "difficulty": "postgrad"
+  },
+  "torrent": {
+    "word": "torrent",
+    "definition": "激流， 山洪",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "bowling": {
+    "word": "bowling",
+    "definition": "保龄球运动",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "anecdote": {
+    "word": "anecdote",
+    "definition": "短故事； 轶事， 奇闻",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "plight": {
+    "word": "plight",
+    "definition": "困境， 苦境",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "soft": {
+    "word": "soft",
+    "definition": "软的，柔软的；温柔的，温和的；软弱的；笨的 adv. 柔软地；温和地 n. 柔性；柔软的东西；柔软部分",
+    "pos": "adj.",
+    "difficulty": "postgrad"
+  },
+  "kin": {
+    "word": "kin",
+    "definition": "家属； 亲戚； 血缘关系 A；家族",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "madame": {
+    "word": "madame",
+    "definition": "（法语）夫人；太太",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "soap": {
+    "word": "soap",
+    "definition": "肥皂 v. 将肥皂涂在……上；对……拍马屁（俚语）",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "blackmail": {
+    "word": "blackmail",
+    "definition": "勒索，敲诈；勒索所得之款 v. 勒索，敲诈",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "waterfall": {
+    "word": "waterfall",
+    "definition": "瀑布",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "honorable": {
+    "word": "honorable",
+    "definition": "可敬的；荣誉的， 光荣的",
+    "pos": "adj.",
+    "difficulty": "postgrad"
+  },
+  "skirt": {
+    "word": "skirt",
+    "definition": "裙子 v. 绕过，回避；位于…边缘",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "clergy": {
+    "word": "clergy",
+    "definition": "牧师， 圣职者， 神职人员",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "whatsoever": {
+    "word": "whatsoever",
+    "definition": "任何",
+    "pos": "adv.",
+    "difficulty": "postgrad"
+  },
+  "sock": {
+    "word": "sock",
+    "definition": "短袜；一击 v. 重击；给……穿袜 adv. 正着地；不偏不倚地 adj. 非常成功的",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "stupid": {
+    "word": "stupid",
+    "definition": "愚蠢的；麻木的；乏味的 n. 傻瓜，笨蛋",
+    "pos": "adj.",
+    "difficulty": "postgrad"
+  },
+  "sprout": {
+    "word": "sprout",
+    "definition": "抽条， 发芽 n. 芽， 幼苗",
+    "pos": "vi.",
+    "difficulty": "postgrad"
+  },
+  "skate": {
+    "word": "skate",
+    "definition": "滑冰；滑过 n. 溜冰；冰鞋",
+    "pos": "v.",
+    "difficulty": "postgrad"
+  },
+  "audit": {
+    "word": "audit",
+    "definition": "审计， 核对；旁听",
+    "pos": "vt.",
+    "difficulty": "postgrad"
+  },
+  "weekend": {
+    "word": "weekend",
+    "definition": "周末，周末休假；周末聚会 adj. 周末的，周末用的 v. 度周末",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "auditorium": {
+    "word": "auditorium",
+    "definition": "礼堂；观众席",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "credential": {
+    "word": "credential",
+    "definition": "证书；凭据；国书",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "sob": {
+    "word": "sob",
+    "definition": "哭泣， 呜咽 n. 哭泣， 呜咽",
+    "pos": "vi.",
+    "difficulty": "postgrad"
+  },
+  "highland": {
+    "word": "highland",
+    "definition": "高地， 高原",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "tobacco": {
+    "word": "tobacco",
+    "definition": "烟草，烟叶；烟草制品；抽烟",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "ski": {
+    "word": "ski",
+    "definition": "滑雪 n. 雪橇",
+    "pos": "vi.",
+    "difficulty": "postgrad"
+  },
+  "encyclopedia": {
+    "word": "encyclopedia",
+    "definition": "百科全书",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "sly": {
+    "word": "sly",
+    "definition": "狡猾的； 偷偷摸摸的",
+    "pos": "adj.",
+    "difficulty": "postgrad"
+  },
+  "intrude": {
+    "word": "intrude",
+    "definition": "侵入， 闯入， 打扰；把强加于",
+    "pos": "v.",
+    "difficulty": "postgrad"
+  },
+  "snow": {
+    "word": "snow",
+    "definition": "雪，积雪；下雪 v. 降雪",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "shilling": {
+    "word": "shilling",
+    "definition": "先令",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "feat": {
+    "word": "feat",
+    "definition": "功绩， 壮举",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "sun": {
+    "word": "sun",
+    "definition": "太阳 v. 使晒",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "tight": {
+    "word": "tight",
+    "definition": "紧的；密封的；绷紧的；麻烦的；严厉的；没空的；吝啬的 adv. 紧紧地；彻底地 n. (Tight)人名；(英)泰特",
+    "pos": "adj.",
+    "difficulty": "postgrad"
+  },
+  "wine": {
+    "word": "wine",
+    "definition": "酒，葡萄酒；紫红色 v. 喝酒",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "doorway": {
+    "word": "doorway",
+    "definition": "门口",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "tiger": {
+    "word": "tiger",
+    "definition": "老虎；凶暴的人",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "wipe": {
+    "word": "wipe",
+    "definition": "擦；消除；涂上 n. 擦拭；用力打",
+    "pos": "v.",
+    "difficulty": "postgrad"
+  },
+  "typhoon": {
+    "word": "typhoon",
+    "definition": "台风",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "pneumonia": {
+    "word": "pneumonia",
+    "definition": "肺炎",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "wash": {
+    "word": "wash",
+    "definition": "洗涤；洗的衣服；化妆水；冲积物 v. 洗涤；洗刷；冲走；拍打",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "ruler": {
+    "word": "ruler",
+    "definition": "尺；统治者；[测] 划线板，划线的人",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "rubbish": {
+    "word": "rubbish",
+    "definition": "垃圾，废物；废话 adj. 毫无价值的",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "bin": {
+    "word": "bin",
+    "definition": "大箱子",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "goodby": {
+    "word": "goodby",
+    "definition": "再见（等于goodbye） n. (Goodby)人名；(英)古德拜",
+    "pos": "int.",
+    "difficulty": "postgrad"
+  },
+  "razor": {
+    "word": "razor",
+    "definition": "剃刀",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "tonight": {
+    "word": "tonight",
+    "definition": "在今晚 n. 今晚",
+    "pos": "adv.",
+    "difficulty": "postgrad"
+  },
+  "harbor": {
+    "word": "harbor",
+    "definition": "港口， 海港；避难所， 藏身处 vt. 隐匿； 窝藏， 包庇",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "zoo": {
+    "word": "zoo",
+    "definition": "动物园",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "vegetable": {
+    "word": "vegetable",
+    "definition": "蔬菜；植物；植物人 adj. 蔬菜的；植物的",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "spoon": {
+    "word": "spoon",
+    "definition": "匙，勺子；一杓的量 v. 用匙舀；使成匙状",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "affluent": {
+    "word": "affluent",
+    "definition": "丰富的； 富裕的",
+    "pos": "adj.",
+    "difficulty": "postgrad"
+  },
+  "cyberspace": {
+    "word": "cyberspace",
+    "definition": "计算机世界， 网络空间",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "pub": {
+    "word": "pub",
+    "definition": "酒馆；客栈",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "cab": {
+    "word": "cab",
+    "definition": "出租汽车； 轻便马车；司机室， 驾驶室 A",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "tablet": {
+    "word": "tablet",
+    "definition": "药片；碑， 匾； 平板",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "quilt": {
+    "word": "quilt",
+    "definition": "被子",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "housework": {
+    "word": "housework",
+    "definition": "家务事",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "gut": {
+    "word": "gut",
+    "definition": "本能的， 直觉的 n. 肠； 肠线 vt. 毁坏的内部；取出…的内脏",
+    "pos": "adj.",
+    "difficulty": "postgrad"
+  },
+  "anguish": {
+    "word": "anguish",
+    "definition": "极度痛苦 n. 极度痛苦",
+    "pos": "v.",
+    "difficulty": "postgrad"
+  },
+  "tongue": {
+    "word": "tongue",
+    "definition": "舌头；语言 v. 舔；斥责；用舌吹",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "sing": {
+    "word": "sing",
+    "definition": "唱歌；歌颂；鸣叫；呼号 n. 演唱；鸣声；呼啸声",
+    "pos": "v.",
+    "difficulty": "postgrad"
+  },
+  "erase": {
+    "word": "erase",
+    "definition": "擦掉；删去",
+    "pos": "vt.",
+    "difficulty": "postgrad"
+  },
+  "jewelry": {
+    "word": "jewelry",
+    "definition": "珠宝",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "postcard": {
+    "word": "postcard",
+    "definition": "明信片",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "sheep": {
+    "word": "sheep",
+    "definition": "羊，绵羊；胆小鬼",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "stool": {
+    "word": "stool",
+    "definition": "凳子",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "analytic": {
+    "word": "analytic",
+    "definition": "分析的； 分解的",
+    "pos": "adj.",
+    "difficulty": "postgrad"
+  },
+  "wonderful": {
+    "word": "wonderful",
+    "definition": "极好的，精彩的，绝妙的；奇妙的；美妙；胜；神妙",
+    "pos": "adj.",
+    "difficulty": "postgrad"
+  },
+  "obsession": {
+    "word": "obsession",
+    "definition": "牵挂， 惦念；迷住， 入迷； 困扰；萦绕于心的事物或人；固执的念头 <",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "southwest": {
+    "word": "southwest",
+    "definition": "西南方 adj. 西南的 adv. 往西南；来自西南",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "statute": {
+    "word": "statute",
+    "definition": "法规， 章程， 规则",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "aluminum": {
+    "word": "aluminum",
+    "definition": "铝",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "rubber": {
+    "word": "rubber",
+    "definition": "橡胶；橡皮；合成橡胶；按摩师 adj. 橡胶制成的 v. 涂橡胶于；用橡胶制造",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "outskirts": {
+    "word": "outskirts",
+    "definition": "郊区",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "axe": {
+    "word": "axe",
+    "definition": "斧",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "squirrel": {
+    "word": "squirrel",
+    "definition": "松鼠",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "sarcastic": {
+    "word": "sarcastic",
+    "definition": "讽刺的， 挖苦的， 嘲笑的",
+    "pos": "adj.",
+    "difficulty": "postgrad"
+  },
+  "tomorrow": {
+    "word": "tomorrow",
+    "definition": "明天；未来 adv. 明天；未来地（等于to-morrow）",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "ship": {
+    "word": "ship",
+    "definition": "运送，乘船；以船运送 n. 船；舰；太空船",
+    "pos": "v.",
+    "difficulty": "postgrad"
+  },
+  "pail": {
+    "word": "pail",
+    "definition": "提桶",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "spear": {
+    "word": "spear",
+    "definition": "矛， 枪； 渔叉",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "amplifier": {
+    "word": "amplifier",
+    "definition": "放大器； 扩音机",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "shoe": {
+    "word": "shoe",
+    "definition": "鞋；蹄铁；外胎 v. 给……穿上鞋；穿……鞋",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "awe": {
+    "word": "awe",
+    "definition": "敬畏； 惊惧 vt. 使敬畏； 使惊惧",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "spaceship": {
+    "word": "spaceship",
+    "definition": "宇宙飞船",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "witch": {
+    "word": "witch",
+    "definition": "施巫术， 迷惑 n. 女巫， 巫婆",
+    "pos": "v.",
+    "difficulty": "postgrad"
+  },
+  "fax": {
+    "word": "fax",
+    "definition": "传真 n. 传真",
+    "pos": "v.",
+    "difficulty": "postgrad"
+  },
+  "pickup": {
+    "word": "pickup",
+    "definition": "拾起， 获得",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "yesterday": {
+    "word": "yesterday",
+    "definition": "昨天；往昔 adv. 昨天",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "roof": {
+    "word": "roof",
+    "definition": "屋顶；最高处，顶部；最高限度 v. 给…盖屋顶，覆盖",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "benign": {
+    "word": "benign",
+    "definition": "良性的， 无危险的 A <；慈祥的， 善良的",
+    "pos": "adj.",
+    "difficulty": "postgrad"
+  },
+  "upstairs": {
+    "word": "upstairs",
+    "definition": "在楼上，向楼上；上楼；往楼上 adj. 楼上的 n. 楼上",
+    "pos": "adv.",
+    "difficulty": "postgrad"
+  },
+  "vest": {
+    "word": "vest",
+    "definition": "背心， 马甲； 汗衫， 内衣",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "scarf": {
+    "word": "scarf",
+    "definition": "围巾； 头巾",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "sociable": {
+    "word": "sociable",
+    "definition": "友善的， 友好的；好交际的， 合群的",
+    "pos": "adj.",
+    "difficulty": "postgrad"
+  },
+  "infrared": {
+    "word": "infrared",
+    "definition": "红外线的 n. 红外线",
+    "pos": "adj.",
+    "difficulty": "postgrad"
+  },
+  "whisky": {
+    "word": "whisky",
+    "definition": "威士忌酒",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "litre": {
+    "word": "litre",
+    "definition": "升",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "irrigate": {
+    "word": "irrigate",
+    "definition": "灌溉；冲洗",
+    "pos": "vt.",
+    "difficulty": "postgrad"
+  },
+  "skin": {
+    "word": "skin",
+    "definition": "皮肤；外皮 v. 剥皮",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "obstruction": {
+    "word": "obstruction",
+    "definition": "【律】阻碍；妨碍；障碍",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "thief": {
+    "word": "thief",
+    "definition": "小偷，贼",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "turkey": {
+    "word": "turkey",
+    "definition": "火鸡",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "hypocrisy": {
+    "word": "hypocrisy",
+    "definition": "伪善， 虚伪",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "wet": {
+    "word": "wet",
+    "definition": "[气象][物] 潮湿的；有雨的 n. 雨天；湿气 v. 弄湿",
+    "pos": "adj.",
+    "difficulty": "postgrad"
+  },
+  "sand": {
+    "word": "sand",
+    "definition": "沙；沙地；沙洲；沙滩；沙子 v. 撒沙于；以沙掩盖；用砂纸等擦平或磨光某物；使撒沙似地布满；给…掺沙子",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "snowstorm": {
+    "word": "snowstorm",
+    "definition": "暴风雪 A",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "salt": {
+    "word": "salt",
+    "definition": "盐；风趣，刺激性 adj. 咸水的；含盐的，咸味的；盐腌的；猥亵的 v. 用盐腌；给…加盐；将盐撒在道路上使冰或雪融化",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "throw": {
+    "word": "throw",
+    "definition": "投；抛；掷 n. 投掷；冒险",
+    "pos": "v.",
+    "difficulty": "postgrad"
+  },
+  "stamp": {
+    "word": "stamp",
+    "definition": "邮票；印记；标志；跺脚 v. 铭记；标出；盖章于…；贴邮票于…；用脚踩踏",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "stomach": {
+    "word": "stomach",
+    "definition": "胃；腹部；胃口 v. 忍受；吃下",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "poster": {
+    "word": "poster",
+    "definition": "招贴， 海报， 广告",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "buffet": {
+    "word": "buffet",
+    "definition": "自助餐",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "sophomore": {
+    "word": "sophomore",
+    "definition": "二年级学生",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "swarm": {
+    "word": "swarm",
+    "definition": "云集； 充满 n. 群， 蜂群",
+    "pos": "vi.",
+    "difficulty": "postgrad"
+  },
+  "wood": {
+    "word": "wood",
+    "definition": "木材；木制品；树林 vi. 收集木材 vt. 植林于；给…添加木柴",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "slipper": {
+    "word": "slipper",
+    "definition": "便鞋， 拖鞋",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "supper": {
+    "word": "supper",
+    "definition": "晚餐，晚饭；夜宵",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "lapse": {
+    "word": "lapse",
+    "definition": "终止， 失效；陷入…状态 A n. 失误， 疏忽；行为失检， 失足；流逝； 间隔",
+    "pos": "vi.",
+    "difficulty": "postgrad"
+  },
+  "telegraph": {
+    "word": "telegraph",
+    "definition": "打电报传达， 电告 n. 电报机； 电报",
+    "pos": "v.",
+    "difficulty": "postgrad"
+  },
+  "wreath": {
+    "word": "wreath",
+    "definition": "花环， 花圈",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "shopkeeper": {
+    "word": "shopkeeper",
+    "definition": "店主",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "opt": {
+    "word": "opt",
+    "definition": "选择， 挑选",
+    "pos": "vi.",
+    "difficulty": "postgrad"
+  },
+  "satire": {
+    "word": "satire",
+    "definition": "讽刺； 讽刺作品",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "locker": {
+    "word": "locker",
+    "definition": "储物柜， 有锁的橱柜",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "feudal": {
+    "word": "feudal",
+    "definition": "封建的",
+    "pos": "adj.",
+    "difficulty": "postgrad"
+  },
+  "snake": {
+    "word": "snake",
+    "definition": "蛇；阴险的人 v. 迂回前进",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "twinkle": {
+    "word": "twinkle",
+    "definition": "/",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "zebra": {
+    "word": "zebra",
+    "definition": "斑马 <",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "ride": {
+    "word": "ride",
+    "definition": "骑马；乘车；依靠；漂浮 n. 骑；乘坐；交通工具；可供骑行的路；（乘坐汽车等的）旅行；乘骑；（乘车或骑车的）短途旅程；供乘骑的游乐设施",
+    "pos": "v.",
+    "difficulty": "postgrad"
+  },
+  "rice": {
+    "word": "rice",
+    "definition": "稻；米饭 v. 把…捣成米糊状",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "jargon": {
+    "word": "jargon",
+    "definition": "行话， 术语",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "trousers": {
+    "word": "trousers",
+    "definition": "裤子，长裤",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "psychiatry": {
+    "word": "psychiatry",
+    "definition": "精神病学；精神病治疗法",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "textbook": {
+    "word": "textbook",
+    "definition": "教科书，课本",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "tall": {
+    "word": "tall",
+    "definition": "高的；长的；过分的；夸大的 adv. 夸大地 n. (Tall)人名；(马里、阿拉伯)塔勒；(芬、罗、瑞典)塔尔；(英)托尔；(土)塔勒",
+    "pos": "adj.",
+    "difficulty": "postgrad"
+  },
+  "peanut": {
+    "word": "peanut",
+    "definition": "花生",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "strawberry": {
+    "word": "strawberry",
+    "definition": "草莓",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "fiber": {
+    "word": "fiber",
+    "definition": "纤维， 纤维质",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "wife": {
+    "word": "wife",
+    "definition": "妻子，已婚妇女；夫人",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "shout": {
+    "word": "shout",
+    "definition": "呼喊；喊叫；大声说 n. 呼喊；呼叫",
+    "pos": "v.",
+    "difficulty": "postgrad"
+  },
+  "dynasty": {
+    "word": "dynasty",
+    "definition": "王朝， 朝代",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "panda": {
+    "word": "panda",
+    "definition": "熊猫；猫熊",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "sweat": {
+    "word": "sweat",
+    "definition": "出汗 n. 汗",
+    "pos": "v.",
+    "difficulty": "postgrad"
+  },
+  "cosy": {
+    "word": "cosy",
+    "definition": "温暖而舒适的",
+    "pos": "adj.",
+    "difficulty": "postgrad"
+  },
+  "traitor": {
+    "word": "traitor",
+    "definition": "叛徒， 卖国贼",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "harassment": {
+    "word": "harassment",
+    "definition": "骚扰， 扰乱； 烦恼， 烦乱",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "tram": {
+    "word": "tram",
+    "definition": "有轨电车 <",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "mosaic": {
+    "word": "mosaic",
+    "definition": "马赛克 <；镶嵌画",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "smog": {
+    "word": "smog",
+    "definition": "烟雾 <",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "excerpt": {
+    "word": "excerpt",
+    "definition": "摘录， 选录， 节录",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "ebb": {
+    "word": "ebb",
+    "definition": "退； 退潮， 落潮；衰退 n. 退潮， 落潮",
+    "pos": "vi.",
+    "difficulty": "postgrad"
+  },
+  "thursday": {
+    "word": "thursday",
+    "definition": "星期四",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "zigzag": {
+    "word": "zigzag",
+    "definition": "之字形的 v. 成之字形， 曲折盘旋 A n. 之字形",
+    "pos": "adj.",
+    "difficulty": "postgrad"
+  },
+  "swim": {
+    "word": "swim",
+    "definition": "游泳；漂浮；浸；眩晕 n. 游泳；漂浮；眩晕 adj. 游泳时穿戴的",
+    "pos": "v.",
+    "difficulty": "postgrad"
+  },
+  "trip": {
+    "word": "trip",
+    "definition": "绊倒；远足；犯错误；轻快地走 n. 旅行；绊倒；差错",
+    "pos": "v.",
+    "difficulty": "postgrad"
+  },
+  "numb": {
+    "word": "numb",
+    "definition": "麻木的， 失去感觉的 vt. 使麻木",
+    "pos": "adj.",
+    "difficulty": "postgrad"
+  },
+  "despatch": {
+    "word": "despatch",
+    "definition": "派遣， 调遣； 发送 n. 急件， 快信；新闻报道",
+    "pos": "vt.",
+    "difficulty": "postgrad"
+  },
+  "pavement": {
+    "word": "pavement",
+    "definition": "人行道",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "peep": {
+    "word": "peep",
+    "definition": "偷看， 窥视",
+    "pos": "vi.",
+    "difficulty": "postgrad"
+  },
+  "humor": {
+    "word": "humor",
+    "definition": "幽默， 诙谐",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "browse": {
+    "word": "browse",
+    "definition": "吃嫩叶或草 A；浏览 n. 嫩叶， 嫩芽；吃草， 放牧；浏览 A",
+    "pos": "vi.",
+    "difficulty": "postgrad"
+  },
+  "plumber": {
+    "word": "plumber",
+    "definition": "管子工， 铅管工， 水暖工",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "paddle": {
+    "word": "paddle",
+    "definition": "桨 vt. 用桨划",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "weight": {
+    "word": "weight",
+    "definition": "重量，重力；负担；砝码；重要性 v. 加重量于，使变重",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "toy": {
+    "word": "toy",
+    "definition": "玩具；小装饰品；不值钱的东西 v. 玩弄；调情；随随便便地对待 adj. 作为玩具的；玩物似的",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "shake": {
+    "word": "shake",
+    "definition": "动摇；摇动；震动；握手 n. 摇动；哆嗦",
+    "pos": "v.",
+    "difficulty": "postgrad"
+  },
+  "shine": {
+    "word": "shine",
+    "definition": "发出光；反射光，闪耀；出类拔萃，表现突出；露出；照耀；显露；出众 n. 光亮，光泽；好天气；擦亮；晴天；擦皮鞋；鬼把戏或诡计",
+    "pos": "v.",
+    "difficulty": "postgrad"
+  },
+  "obstruct": {
+    "word": "obstruct",
+    "definition": "妨碍， 阻止 A；阻塞， 截断",
+    "pos": "vt.",
+    "difficulty": "postgrad"
+  },
+  "chancellor": {
+    "word": "chancellor",
+    "definition": "大臣； 总理；首席法官；大学校长",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "downtown": {
+    "word": "downtown",
+    "definition": "往闹市区；在市区 adj. 市中心的 n. 市中心区；三分线以外",
+    "pos": "adv.",
+    "difficulty": "postgrad"
+  },
+  "tea": {
+    "word": "tea",
+    "definition": "茶叶；茶树；茶点 vt. 给…沏茶 vi. 喝茶；进茶点",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "shirt": {
+    "word": "shirt",
+    "definition": "衬衫；汗衫，内衣",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "eyebrow": {
+    "word": "eyebrow",
+    "definition": "眉毛",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "kilo": {
+    "word": "kilo",
+    "definition": "千克",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "weekday": {
+    "word": "weekday",
+    "definition": "平日，普通日；工作日",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "tumour": {
+    "word": "tumour",
+    "definition": "肿瘤， 肿块",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "swan": {
+    "word": "swan",
+    "definition": "天鹅",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "resumé": {
+    "word": "resumé",
+    "definition": "简历",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "fantastical": {
+    "word": "fantastical",
+    "definition": "奇异的， 幻想的， 异想天开的；极好的",
+    "pos": "adj.",
+    "difficulty": "postgrad"
+  },
+  "state": {
+    "word": "state",
+    "definition": "状态， 情况；国， 州 vt. 陈述， 说明；规定",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "scenario": {
+    "word": "scenario",
+    "definition": "情境 “；剧本",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "thirst": {
+    "word": "thirst",
+    "definition": "渴， 口渴；渴望， 热望",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "lyric": {
+    "word": "lyric",
+    "definition": "抒情的 n. 抒情诗；歌词",
+    "pos": "adj.",
+    "difficulty": "postgrad"
+  },
+  "complementary": {
+    "word": "complementary",
+    "definition": "补充的； 辅助的",
+    "pos": "adj.",
+    "difficulty": "postgrad"
+  },
+  "plaintiff": {
+    "word": "plaintiff",
+    "definition": "原告",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "analog": {
+    "word": "analog",
+    "definition": "类似物； 模拟 A",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "diabetes": {
+    "word": "diabetes",
+    "definition": "糖尿病； 多尿症",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "industrialise": {
+    "word": "industrialise",
+    "definition": "使工业化",
+    "pos": "vt.",
+    "difficulty": "postgrad"
+  },
+  "gasolene": {
+    "word": "gasolene",
+    "definition": "汽油",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "fascinated": {
+    "word": "fascinated",
+    "definition": "兴奋的， 着迷的",
+    "pos": "adj.",
+    "difficulty": "postgrad"
+  },
+  "scattered": {
+    "word": "scattered",
+    "definition": "离散的， 分散的",
+    "pos": "adj.",
+    "difficulty": "postgrad"
+  },
+  "fertiliser": {
+    "word": "fertiliser",
+    "definition": "肥料",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "bail": {
+    "word": "bail",
+    "definition": "保释 vt. 保释 <；帮助脱离困境<",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "by-pass": {
+    "word": "by-pass",
+    "definition": "旁路， 迂回的旁道； 搭桥术； 旁通管",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "defer": {
+    "word": "defer",
+    "definition": "推迟， 延期",
+    "pos": "v.",
+    "difficulty": "postgrad"
+  },
+  "portfolio": {
+    "word": "portfolio",
+    "definition": "公文包；文件夹； 作品集；投资组合",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "habitat": {
+    "word": "habitat",
+    "definition": "栖息地； 住处",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "utilise": {
+    "word": "utilise",
+    "definition": "利用",
+    "pos": "vt.",
+    "difficulty": "postgrad"
+  },
+  "biased": {
+    "word": "biased",
+    "definition": "有偏见的； 结果偏倚的",
+    "pos": "adj.",
+    "difficulty": "postgrad"
+  },
+  "stagnant": {
+    "word": "stagnant",
+    "definition": "因停滞或不流动而发臭的；不景气的",
+    "pos": "adj.",
+    "difficulty": "postgrad"
+  },
+  "toil": {
+    "word": "toil",
+    "definition": "艰难地进行， 费力地做 n. 艰辛， 辛苦",
+    "pos": "v.",
+    "difficulty": "postgrad"
+  },
+  "vs.": {
+    "word": "vs.",
+    "definition": "与…相对， 与…相比；以…为对手， 对",
+    "pos": "prep.",
+    "difficulty": "postgrad"
+  },
+  "allegiance": {
+    "word": "allegiance",
+    "definition": "拥护； 忠诚",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "characterise": {
+    "word": "characterise",
+    "definition": "表示…的特性； 描述…的特性",
+    "pos": "vt.",
+    "difficulty": "postgrad"
+  },
+  "gage": {
+    "word": "gage",
+    "definition": "标准尺寸， 规格； 量规， 量表",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "physiology": {
+    "word": "physiology",
+    "definition": "生理学",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "licence": {
+    "word": "licence",
+    "definition": "许可证， 执照 vt. 准许， 认可",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "overhaul": {
+    "word": "overhaul",
+    "definition": "彻底检修；改革A vt. 彻底检修；赶上， 超过",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "a.": {
+    "word": "a.",
+    "definition": "天主教徒",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "genre": {
+    "word": "genre",
+    "definition": "体载， 类型",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "criticise": {
+    "word": "criticise",
+    "definition": "批评， 评论",
+    "pos": "v.",
+    "difficulty": "postgrad"
+  },
+  "fatigued": {
+    "word": "fatigued",
+    "definition": "疲乏的",
+    "pos": "adj.",
+    "difficulty": "postgrad"
+  },
+  "rehearse": {
+    "word": "rehearse",
+    "definition": "排练；预演",
+    "pos": "v.",
+    "difficulty": "postgrad"
+  },
+  "dependence": {
+    "word": "dependence",
+    "definition": "依靠， 依赖； 信任",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "turmoil": {
+    "word": "turmoil",
+    "definition": "混乱， 骚动",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "censorship": {
+    "word": "censorship",
+    "definition": "审查制度 <",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "organise": {
+    "word": "organise",
+    "definition": "组织， 编组",
+    "pos": "vt.",
+    "difficulty": "postgrad"
+  },
+  "daunt": {
+    "word": "daunt",
+    "definition": "使气馁， 使畏缩",
+    "pos": "vt.",
+    "difficulty": "postgrad"
+  },
+  "blog": {
+    "word": "blog",
+    "definition": "博客， 日志",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "salient": {
+    "word": "salient",
+    "definition": "显著的， 突出的A",
+    "pos": "adj.",
+    "difficulty": "postgrad"
+  },
+  "emphasise": {
+    "word": "emphasise",
+    "definition": "强调， 着重",
+    "pos": "vt.",
+    "difficulty": "postgrad"
+  },
+  "hormone": {
+    "word": "hormone",
+    "definition": "激素， 荷尔蒙",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "encyclopaedia": {
+    "word": "encyclopaedia",
+    "definition": "百科全书",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "franchise": {
+    "word": "franchise",
+    "definition": "特许权；选举权；经销权 vt. 特许",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "judgment": {
+    "word": "judgment",
+    "definition": "审判， 判决；判断力， 识别力； 看法， 意见",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "ethic": {
+    "word": "ethic",
+    "definition": "道德准则， 行为准则， 伦理标准；",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "genetics": {
+    "word": "genetics",
+    "definition": "遗传学",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "redeem": {
+    "word": "redeem",
+    "definition": "赎回；挽回；救赎",
+    "pos": "vt.",
+    "difficulty": "postgrad"
+  },
+  "pebble": {
+    "word": "pebble",
+    "definition": "卵石",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "civilisation": {
+    "word": "civilisation",
+    "definition": "文明， 文化",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "summarise": {
+    "word": "summarise",
+    "definition": "概括， 总结",
+    "pos": "v.",
+    "difficulty": "postgrad"
+  },
+  "dynamical": {
+    "word": "dynamical",
+    "definition": "动力的， 电动的；有生气的",
+    "pos": "adj.",
+    "difficulty": "postgrad"
+  },
+  "embryo": {
+    "word": "embryo",
+    "definition": "胚， 胚胎 <；事物的萌芽期",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "marathon": {
+    "word": "marathon",
+    "definition": "马拉松式的 n. 马拉松赛跑；马拉松式的活动",
+    "pos": "adj.",
+    "difficulty": "postgrad"
+  },
+  "endorse": {
+    "word": "endorse",
+    "definition": "赞同， 认可；代言；背书； 在背面签名<",
+    "pos": "vt.",
+    "difficulty": "postgrad"
+  },
+  "dinosaur": {
+    "word": "dinosaur",
+    "definition": "恐龙；过时的人或事物",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "credentials": {
+    "word": "credentials",
+    "definition": "证明书； 证件；资格",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "debut": {
+    "word": "debut",
+    "definition": "初次登台；处女作 vt. 面世， 首次推出",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "nostalgic": {
+    "word": "nostalgic",
+    "definition": "怀旧的",
+    "pos": "adj.",
+    "difficulty": "postgrad"
+  },
+  "appall": {
+    "word": "appall",
+    "definition": "使惊骇， 使恐怖",
+    "pos": "vt.",
+    "difficulty": "postgrad"
+  },
+  "sympathise": {
+    "word": "sympathise",
+    "definition": "同情， 体谅； 共鸣， 同感",
+    "pos": "vi.",
+    "difficulty": "postgrad"
+  },
+  "generalise": {
+    "word": "generalise",
+    "definition": "归纳， 概括；推广， 普及",
+    "pos": "v.",
+    "difficulty": "postgrad"
+  },
+  "culprit": {
+    "word": "culprit",
+    "definition": "罪犯",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "specialise": {
+    "word": "specialise",
+    "definition": "专攻； 专用于； 专业化",
+    "pos": "vi.",
+    "difficulty": "postgrad"
+  },
+  "deplore": {
+    "word": "deplore",
+    "definition": "悲悼， 哀叹；谴责",
+    "pos": "vt.",
+    "difficulty": "postgrad"
+  },
+  "zip": {
+    "word": "zip",
+    "definition": "拉链 vt. 用拉链拉上或扣上",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "favorite": {
+    "word": "favorite",
+    "definition": "特别喜欢的， 中意的 n. 最喜欢的人或物",
+    "pos": "adj.",
+    "difficulty": "postgrad"
+  },
+  "archeology": {
+    "word": "archeology",
+    "definition": "考古学",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "invariable": {
+    "word": "invariable",
+    "definition": "始终如一的， 不变的； 恒定的",
+    "pos": "adj.",
+    "difficulty": "postgrad"
+  },
+  "endeavour": {
+    "word": "endeavour",
+    "definition": "努力， 尽力； 力图 n. 努力， 尽力； 力图",
+    "pos": "vi.",
+    "difficulty": "postgrad"
+  },
+  "instalment": {
+    "word": "instalment",
+    "definition": "分期付款， 分期交付；一集； 一期",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "civilise": {
+    "word": "civilise",
+    "definition": "使文明， 教化",
+    "pos": "vt.",
+    "difficulty": "postgrad"
+  },
+  "archaeology": {
+    "word": "archaeology",
+    "definition": "考古学",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "carbohydrate": {
+    "word": "carbohydrate",
+    "definition": "碳水化合物",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "vapor": {
+    "word": "vapor",
+    "definition": "蒸汽",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "statical": {
+    "word": "statical",
+    "definition": "静态的； 静力的",
+    "pos": "adj.",
+    "difficulty": "postgrad"
+  },
+  "outing": {
+    "word": "outing",
+    "definition": "远足， 郊游， 短途旅行",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "ape": {
+    "word": "ape",
+    "definition": "猿 < vt. 模仿",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "fabulous": {
+    "word": "fabulous",
+    "definition": "寓言式的；极为巨大的；极好的",
+    "pos": "adj.",
+    "difficulty": "postgrad"
+  },
+  "organisation": {
+    "word": "organisation",
+    "definition": "组织， 机构； 体制， 结构",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "repeated": {
+    "word": "repeated",
+    "definition": "重复的， 再三的 <",
+    "pos": "adj.",
+    "difficulty": "postgrad"
+  },
+  "mobilise": {
+    "word": "mobilise",
+    "definition": "动员",
+    "pos": "vt.",
+    "difficulty": "postgrad"
+  },
+  "taboo": {
+    "word": "taboo",
+    "definition": "禁忌， 忌讳；禁止 A",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "whiskey": {
+    "word": "whiskey",
+    "definition": "威士忌酒",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "glamour": {
+    "word": "glamour",
+    "definition": "魅力， 诱惑力",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "centimeter": {
+    "word": "centimeter",
+    "definition": "厘米",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "trolly": {
+    "word": "trolly",
+    "definition": "手推车， 小车；〈英〉无轨电车； 〈美〉有轨电车",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "afterwards": {
+    "word": "afterwards",
+    "definition": "后来， 以后",
+    "pos": "adv.",
+    "difficulty": "postgrad"
+  },
+  "grown-up": {
+    "word": "grown-up",
+    "definition": "成长的； 成熟的； 成人的 n. 成年人",
+    "pos": "adj.",
+    "difficulty": "postgrad"
+  },
+  "recognise": {
+    "word": "recognise",
+    "definition": "认出， 识别；承认",
+    "pos": "vt.",
+    "difficulty": "postgrad"
+  },
+  "faithfully": {
+    "word": "faithfully",
+    "definition": "忠诚地， 如实地",
+    "pos": "adv.",
+    "difficulty": "postgrad"
+  },
+  "contagious": {
+    "word": "contagious",
+    "definition": "传染性的， 会蔓延的",
+    "pos": "adj.",
+    "difficulty": "postgrad"
+  },
+  "passerby": {
+    "word": "passerby",
+    "definition": "过路人， 行人 A <",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "guild": {
+    "word": "guild",
+    "definition": "协会， 行会",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "freelance": {
+    "word": "freelance",
+    "definition": "自由职业的",
+    "pos": "adj.",
+    "difficulty": "postgrad"
+  },
+  "manoeuvre": {
+    "word": "manoeuvre",
+    "definition": "演习；谨慎地运用技巧移动， 运动；熟练而巧妙地引导某人",
+    "pos": "v.",
+    "difficulty": "postgrad"
+  },
+  "vaccine": {
+    "word": "vaccine",
+    "definition": "疫苗",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "highjack": {
+    "word": "highjack",
+    "definition": "劫持",
+    "pos": "vt.",
+    "difficulty": "postgrad"
+  },
+  "botany": {
+    "word": "botany",
+    "definition": "植物学",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "behaviour": {
+    "word": "behaviour",
+    "definition": "行为， 举止；特性； 运转情况 A",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "hygiene": {
+    "word": "hygiene",
+    "definition": "卫生",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  },
+  "glacier": {
+    "word": "glacier",
+    "definition": "冰河， 冰川",
+    "pos": "n.",
+    "difficulty": "postgrad"
+  }
 }
