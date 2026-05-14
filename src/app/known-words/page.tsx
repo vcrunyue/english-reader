@@ -60,18 +60,18 @@ export default function KnownWordsPage() {
             return (
             <div
               key={word}
-              className="flex items-center gap-3 py-2.5 px-3 rounded-lg hover:bg-[#F2EFE8] group transition-colors"
+              className="flex items-center gap-3 py-2.5 pl-[7px] pr-3 rounded-lg hover:bg-[#F2EFE8] group transition-colors"
             >
-              <span className={`w-2.5 h-2.5 rounded-full shrink-0 ${getDifficultyDotColor(entry.difficulty)}`} />
+              <span className={`w-3 h-3 rounded-full shrink-0 ${getDifficultyDotColor(entry.difficulty)}`} />
               <div className="flex-1 min-w-0 truncate">
                 <span className="font-medium text-sm text-[#2D2B28]">{word}</span>
                 <span className="text-[13px] text-[#78716C] ml-1.5">
                   {parseDefinitionParts(entry.pos, entry.definition)
                     .map(p => p.pos + ' ' + p.def)
-                    .join('    ')}
+                    .join('    ')}
                 </span>
               </div>
-              <span className={`text-[10px] px-1.5 py-0.5 rounded-md shrink-0 ${getBadgeClass(entry.difficulty)}`}>
+              <span className={`text-[11px] font-semibold px-1.5 py-0.5 rounded-md shrink-0 ${getBadgeClass(entry.difficulty)}`}>
                 {getDifficultyLabel(entry.difficulty)}
               </span>
               <button

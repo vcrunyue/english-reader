@@ -55,10 +55,10 @@ export default function CollectionPage() {
                 .map((w: SavedWord) => (
               <div
                 key={w.word}
-                className="flex items-center gap-3 py-2.5 px-3 rounded-lg hover:bg-[#F2EFE8] group transition-colors"
+                className="flex items-center gap-3 py-2.5 pl-[7px] pr-3 rounded-lg hover:bg-[#F2EFE8] group transition-colors"
               >
                 <span
-                  className={`w-2.5 h-2.5 rounded-full shrink-0 ${getDifficultyDotColor(w.difficulty)}`}
+                  className={`w-3 h-3 rounded-full shrink-0 ${getDifficultyDotColor(w.difficulty)}`}
                 />
                 <div className="flex-1 min-w-0 truncate">
                   <span className="font-medium text-sm text-[#2D2B28]">{w.word}</span>
@@ -66,11 +66,11 @@ export default function CollectionPage() {
                     {w.pos
                       ? parseDefinitionParts(w.pos, w.definition)
                           .map(p => p.pos + ' ' + p.def)
-                          .join('    ')
+                          .join('    ')
                       : w.definition}
                   </span>
                 </div>
-                <span className={`text-[10px] px-1.5 py-0.5 rounded-md shrink-0 ${getBadgeClass(w.difficulty)}`}>
+                <span className={`text-[11px] font-semibold px-1.5 py-0.5 rounded-md shrink-0 ${getBadgeClass(w.difficulty)}`}>
                   {getDifficultyLabel(w.difficulty)}
                 </span>
                 <button
