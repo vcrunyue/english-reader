@@ -9,9 +9,9 @@ import { Star } from 'lucide-react';
 interface WordPopupProps {
   word: string;
   entry: VocabEntry;
-  wordLeft?: number;
-  wordTop?: number;
-  wordBottom?: number;
+  wordLeft: number;
+  wordTop: number;
+  wordBottom: number;
   isSaved: boolean;
   closing?: boolean;
   onToggleSave: (word: string) => void;
@@ -19,6 +19,11 @@ interface WordPopupProps {
   onClose: () => void;
   onAnimationEnd?: () => void;
 }
+
+const GAP = 6;
+const LEFT_SHIFT = 4;
+const VIEWPORT_PAD = 16;
+const FLIP_MARGIN = 8;
 
 export default function WordPopup({
   word,
@@ -34,36 +39,42 @@ export default function WordPopup({
   onAnimationEnd,
 }: WordPopupProps) {
   const ref = useRef<HTMLDivElement>(null);
-  const [mounted, setMounted] = useState(false);
+  const [ready, setReady] = useState(false);
 
+  // Single effect: handles both initial mount and repositioning
   useLayoutEffect(() => {
-    setMounted(true);
-  }, []);
+    if (!ready) {
+      setReady(true);
+      return;
+    }
+    const el = ref.current;
+    if (!el) return;
 
-  useLayoutEffect(() => {
-    if (!ref.current || wordLeft == null || wordTop == null || wordBottom == null) return;
-    const rect = ref.current.getBoundingClientRect();
+    const rect = el.getBoundingClientRect();
     const vw = window.innerWidth;
     const vh = window.innerHeight;
-    const gap = 6;
 
-    // x: align with word left edge, shifted 4px left
-    let x = wordLeft - 4;
-    if (x + rect.width > vw - 16) x = x - rect.width - 8;
-
-    // y: prefer below word, flip above if it overflows bottom
-    let y = wordBottom + gap;
-    if (y + rect.height > vh - 16) {
-      y = wordTop - rect.height - gap;
+    // x: left-align with word, shifted LEFT_SHIFT px left
+    let x = wordLeft - LEFT_SHIFT;
+    if (x + rect.width > vw - VIEWPORT_PAD) {
+      x = wordLeft - rect.width - FLIP_MARGIN;
     }
+    if (x < VIEWPORT_PAD - 12) x = VIEWPORT_PAD - 12;
 
-    if (x < 4) x = 4;
-    if (y < 4) y = 4;
-    ref.current.style.left = `${x}px`;
-    ref.current.style.top = `${y}px`;
-  }, [wordLeft, wordTop, wordBottom]);
+    // y: prefer below word, flip above if overflow
+    let y = wordBottom + GAP;
+    if (y + rect.height > vh - VIEWPORT_PAD) {
+      y = wordTop - rect.height - GAP;
+    }
+    if (y < VIEWPORT_PAD - 12) y = VIEWPORT_PAD - 12;
 
-  const content = (
+    el.style.left = `${x}px`;
+    el.style.top = `${y}px`;
+  }, [ready, wordLeft, wordTop, wordBottom]);
+
+  if (!ready) return null;
+
+  return createPortal(
     <div
       ref={ref}
       className={`fixed z-50 bg-[#FEFCF5] rounded-xl shadow-lg border border-[#E8E4DD] p-3 min-w-[200px] max-w-[280px] ${closing ? 'animate-popup-out' : 'animate-popup-in'}`}
@@ -91,9 +102,7 @@ export default function WordPopup({
         <span className="ml-1.5 mr-px text-[#D8D2C8]">·</span>
         <span className="relative top-[1px] -ml-[2px]">{entry.definition}</span>
       </p>
-    </div>
+    </div>,
+    document.body,
   );
-
-  if (!mounted) return null;
-  return createPortal(content, document.body);
 }
