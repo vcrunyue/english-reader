@@ -19,6 +19,8 @@ interface PopupData {
   entry: VocabEntry;
   x: number;
   y: number;
+  wordTop: number;
+  wordBottom: number;
 }
 
 export default function ArticleBody({ content, vocab, onParagraphSelect, closeReadingEnabled, selectedParagraph }: ArticleBodyProps) {
@@ -123,6 +125,8 @@ export default function ArticleBody({ content, vocab, onParagraphSelect, closeRe
           word={popup.word}
           entry={popup.entry}
           position={{ x: popup.x, y: popup.y }}
+          wordTop={popup.wordTop}
+          wordBottom={popup.wordBottom}
           isSaved={isWordInCollection(popup.word)}
           onToggleSave={handleToggleSave}
           onMouseEnter={clearCloseTimer}
@@ -172,13 +176,13 @@ function renderTextWithHighlights(
           const vw = window.innerWidth;
           const vh = window.innerHeight;
           let x = rect.left;
-          let y = rect.bottom + 18;
+          let y = rect.bottom + 10;
           // Pre-adjust for viewport edges so popup renders at correct position immediately
           const estW = 280;
           const estH = 100;
           if (x + estW > vw - 16) x = Math.max(4, x - estW - 8);
-          if (y + estH > vh - 16) y = Math.max(4, y - estH - 8);
-          setPopup({ word: part, entry, x, y });
+          if (y + estH > vh - 16) y = Math.max(4, rect.top - estH - 10);
+          setPopup({ word: part, entry, x, y, wordTop: rect.top, wordBottom: rect.bottom });
         }}
         onMouseLeave={scheduleClose}
       >

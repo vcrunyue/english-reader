@@ -10,6 +10,8 @@ interface WordPopupProps {
   word: string;
   entry: VocabEntry;
   position: { x: number; y: number };
+  wordTop?: number;
+  wordBottom?: number;
   isSaved: boolean;
   onToggleSave: (word: string) => void;
   onMouseEnter?: () => void;
@@ -20,6 +22,8 @@ export default function WordPopup({
   word,
   entry,
   position,
+  wordTop,
+  wordBottom,
   isSaved,
   onToggleSave,
   onMouseEnter,
@@ -40,8 +44,8 @@ export default function WordPopup({
     let { x, y } = position;
     // Right edge overflow → flip left
     if (x + rect.width > vw - 16) x = x - rect.width - 8;
-    // Bottom overflow → flip above
-    if (y + rect.height > vh - 16) y = y - rect.height - 8;
+    // Bottom overflow → flip above (10px gap above word)
+    if (y + rect.height > vh - 16 && wordTop != null) y = wordTop - rect.height - 10;
     // Left edge overflow
     if (x < 4) x = 4;
     // Top edge overflow
@@ -75,8 +79,8 @@ export default function WordPopup({
       </div>
       <p className="text-[13px] text-[#78716C] mt-1.5 leading-relaxed">
         <span className="text-[#5C3D2E] font-medium -mt-px ml-[3px] inline-block">{entry.pos}</span>
-        <span className="ml-1.5 mr-[3px] text-[#D8D2C8]">·</span>
-        <span className="relative top-px">{entry.definition}</span>
+        <span className="ml-1.5 mr-px text-[#D8D2C8]">·</span>
+        <span className="relative top-[2px]">{entry.definition}</span>
       </p>
     </div>
   );
