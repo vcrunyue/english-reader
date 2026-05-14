@@ -4,7 +4,7 @@ import { useLayoutEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import type { VocabEntry } from '@/types';
 import { getDifficultyDotColor } from '@/lib/vocab';
-import { Star } from 'lucide-react';
+import { Star, Check } from 'lucide-react';
 
 interface WordPopupProps {
   word: string;
@@ -13,8 +13,10 @@ interface WordPopupProps {
   wordTop: number;
   wordBottom: number;
   isSaved: boolean;
+  isKnown: boolean;
   closing?: boolean;
   onToggleSave: (word: string) => void;
+  onToggleKnown: (word: string) => void;
   onMouseEnter?: () => void;
   onClose: () => void;
   onAnimationEnd?: () => void;
@@ -26,6 +28,35 @@ const LEFT_SHIFT = 12;
 const VIEWPORT_PAD = 16;
 const FLIP_MARGIN = 8;
 
+const btnBase = 'flex items-center gap-1 text-xs px-2 py-0.5 rounded-md transition-colors shrink-0';
+
+// Split a definition string that may contain multiple POS entries
+// e.g. "离弃，丢弃；放弃 n. 放任；纵情" → [{pos:"vt.", def:"离弃，丢弃；放弃"}, {pos:"n.", def:"放任；纵情"}]
+function parseDefinitionParts(pos: string, definition: string): Array<{ pos: string; def: string }> {
+  const POS_RE = /\s+(n\.|vt\.|vi\.|v\.|adj\.|adv\.|a\.|ad\.|prep\.|pron\.|conj\.)\s+/g;
+
+  const breakpoints: Array<{ pos: string; start: number; end: number }> = [];
+  let match: RegExpExecArray | null;
+  while ((match = POS_RE.exec(definition)) !== null) {
+    breakpoints.push({ pos: match[1], start: match.index, end: match.index + match[0].length });
+  }
+
+  if (breakpoints.length === 0) {
+    return [{ pos, def: definition.trim() }];
+  }
+
+  const parts: Array<{ pos: string; def: string }> = [];
+  parts.push({ pos, def: definition.slice(0, breakpoints[0].start).trim() });
+
+  for (let i = 0; i < breakpoints.length; i++) {
+    const bp = breakpoints[i];
+    const next = i + 1 < breakpoints.length ? breakpoints[i + 1].start : definition.length;
+    parts.push({ pos: bp.pos, def: definition.slice(bp.end, next).trim() });
+  }
+
+  return parts.filter(p => p.def);
+}
+
 export default function WordPopup({
   word,
   entry,
@@ -33,8 +64,10 @@ export default function WordPopup({
   wordTop,
   wordBottom,
   isSaved,
+  isKnown,
   closing,
   onToggleSave,
+  onToggleKnown,
   onMouseEnter,
   onClose,
   onAnimationEnd,
@@ -42,7 +75,6 @@ export default function WordPopup({
   const ref = useRef<HTMLDivElement>(null);
   const [ready, setReady] = useState(false);
 
-  // Single effect: handles both initial mount and repositioning
   useLayoutEffect(() => {
     if (!ready) {
       setReady(true);
@@ -55,14 +87,12 @@ export default function WordPopup({
     const vw = window.innerWidth;
     const vh = window.innerHeight;
 
-    // x: left-align with word, shifted LEFT_SHIFT px left
     let x = wordLeft - LEFT_SHIFT;
     if (x + rect.width > vw - VIEWPORT_PAD) {
       x = wordLeft - rect.width - FLIP_MARGIN;
     }
     if (x < VIEWPORT_PAD - 12) x = VIEWPORT_PAD - 12;
 
-    // y: prefer below word (4px), flip above (8px) if overflow
     let y = wordBottom + GAP_BELOW;
     if (y + rect.height > vh - VIEWPORT_PAD) {
       y = wordTop - rect.height - GAP_ABOVE;
@@ -75,6 +105,8 @@ export default function WordPopup({
 
   if (!ready) return null;
 
+  const defParts = parseDefinitionParts(entry.pos, entry.definition);
+
   return createPortal(
     <div
       ref={ref}
@@ -83,26 +115,47 @@ export default function WordPopup({
       onMouseLeave={closing ? undefined : onClose}
       onAnimationEnd={closing ? onAnimationEnd : undefined}
     >
+      {/* header: dot + word + buttons */}
       <div className="flex items-center gap-2">
         <span className={`w-2.5 h-2.5 rounded-full shrink-0 ${getDifficultyDotColor(entry.difficulty)}`} />
         <span className="font-semibold text-lg text-[#2D2B28] relative top-[-1px]">{word}</span>
-        <button
-          onClick={() => onToggleSave(word)}
-          className={`ml-auto flex items-center gap-1 text-xs px-2 py-0.5 rounded-md transition-colors shrink-0 ${
-            isSaved
-              ? 'bg-[#EDE9E0] text-[#C88C4A] hover:bg-[#E8DCC8]'
-              : 'bg-[#EDE9E0] text-[#78716C] hover:bg-[#E8DCC8] hover:text-[#5C3D2E]'
-          }`}
-        >
-          <Star size={11} fill={isSaved ? 'currentColor' : 'none'} />
-          {isSaved ? '已收藏' : '收藏'}
-        </button>
+        <div className="ml-auto flex items-center gap-1">
+          <button
+            onClick={() => onToggleKnown(word)}
+            className={`${btnBase} ${
+              isKnown
+                ? 'bg-[#EDE9E0] text-[#7CB868] hover:bg-[#E8DCC8]'
+                : 'bg-[#EDE9E0] text-[#78716C] hover:bg-[#E8DCC8] hover:text-[#5C3D2E]'
+            }`}
+          >
+            <Check size={11} />
+            {isKnown ? '已认识' : '认识'}
+          </button>
+          <button
+            onClick={() => onToggleSave(word)}
+            className={`${btnBase} ${
+              isSaved
+                ? 'bg-[#EDE9E0] text-[#C88C4A] hover:bg-[#E8DCC8]'
+                : 'bg-[#EDE9E0] text-[#78716C] hover:bg-[#E8DCC8] hover:text-[#5C3D2E]'
+            }`}
+          >
+            <Star size={11} fill={isSaved ? 'currentColor' : 'none'} />
+            {isSaved ? '已收藏' : '收藏'}
+          </button>
+        </div>
       </div>
-      <p className="text-[13px] text-[#78716C] mt-1.5 leading-relaxed">
-        <span className="text-[#5C3D2E] font-bold text-sm -mt-px ml-[3px] inline-block">{entry.pos}</span>
-        <span className="ml-1.5 mr-px text-[#D8D2C8]">·</span>
-        <span className="relative top-[1px] -ml-[4px] font-semibold text-sm">{entry.definition}</span>
-      </p>
+
+      {/* definition lines — one per POS */}
+      <div className="mt-1.5 space-y-0.5">
+        {defParts.map((part, i) => (
+          <p key={i} className="text-[13px] leading-relaxed">
+            <span className="text-[#5C3D2E] font-bold text-xs mr-1.5 inline-block w-8 shrink-0 text-right">
+              {part.pos}
+            </span>
+            <span className="text-[#78716C]">{part.def}</span>
+          </p>
+        ))}
+      </div>
     </div>,
     document.body,
   );

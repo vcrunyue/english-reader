@@ -26,7 +26,7 @@ interface PopupData {
 }
 
 export default function ArticleBody({ content, vocab, onParagraphSelect, closeReadingEnabled, selectedParagraph }: ArticleBodyProps) {
-  const { knownWords } = useKnownWords();
+  const { knownWords, markWordKnown, unmarkWordKnown } = useKnownWords();
   const { highlightEnabled } = useReading();
   const { saveWordToCollection, removeWordFromCollection, isWordInCollection } = useCollection();
   const [popup, setPopup] = useState<PopupData | null>(null);
@@ -54,6 +54,19 @@ export default function ArticleBody({ content, vocab, onParagraphSelect, closeRe
       setPopup(null);
     },
     [popup, saveWordToCollection, removeWordFromCollection, isWordInCollection],
+  );
+
+  const handleToggleKnown = useCallback(
+    (word: string) => {
+      const lower = word.toLowerCase();
+      if (knownWords.has(lower)) {
+        unmarkWordKnown(word);
+      } else {
+        markWordKnown(word);
+      }
+      // Don't close popup — user may also want to save
+    },
+    [knownWords, markWordKnown, unmarkWordKnown],
   );
 
   const clearCloseTimer = useCallback(() => {
@@ -146,8 +159,10 @@ export default function ArticleBody({ content, vocab, onParagraphSelect, closeRe
           wordTop={popup.wordTop}
           wordBottom={popup.wordBottom}
           isSaved={isWordInCollection(popup.word)}
+          isKnown={knownWords.has(popup.word)}
           closing={popup.closing}
           onToggleSave={handleToggleSave}
+          onToggleKnown={handleToggleKnown}
           onMouseEnter={clearCloseTimer}
           onClose={scheduleClose}
           onAnimationEnd={handlePopupAnimationEnd}
