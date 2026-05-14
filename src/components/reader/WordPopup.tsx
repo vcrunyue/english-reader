@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useLayoutEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import type { VocabEntry } from '@/types';
 import { getDifficultyDotColor } from '@/lib/vocab';
@@ -11,7 +11,8 @@ interface WordPopupProps {
   entry: VocabEntry;
   position: { x: number; y: number };
   isSaved: boolean;
-  onSave: (word: string) => void;
+  onToggleSave: (word: string) => void;
+  fadingOut?: boolean;
   onMouseEnter?: () => void;
   onClose: () => void;
 }
@@ -21,35 +22,42 @@ export default function WordPopup({
   entry,
   position,
   isSaved,
-  onSave,
+  onToggleSave,
+  fadingOut,
   onMouseEnter,
   onClose,
 }: WordPopupProps) {
   const ref = useRef<HTMLDivElement>(null);
   const [mounted, setMounted] = useState(false);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     setMounted(true);
   }, []);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!ref.current) return;
     const rect = ref.current.getBoundingClientRect();
     const vw = window.innerWidth;
     const vh = window.innerHeight;
     let { x, y } = position;
-    if (x + rect.width > vw - 16) x = vw - rect.width - 16;
+    // Right edge overflow → flip left
+    if (x + rect.width > vw - 16) x = x - rect.width - 8;
+    // Bottom overflow → flip above
     if (y + rect.height > vh - 16) y = y - rect.height - 8;
-    if (x < 0) x = 4;
-    if (y < 0) y = 4;
+    // Left edge overflow
+    if (x < 4) x = 4;
+    // Top edge overflow
+    if (y < 4) y = 4;
     ref.current.style.left = `${x}px`;
     ref.current.style.top = `${y}px`;
   }, [position]);
 
+  const animClass = fadingOut ? 'animate-popup-out' : 'animate-popup-in';
+
   const content = (
     <div
       ref={ref}
-      className="fixed z-50 bg-[#FEFCF5] rounded-xl shadow-lg border border-[#E8E4DD] p-3 min-w-[200px] max-w-[280px] animate-popup-in"
+      className={`fixed z-50 bg-[#FEFCF5] rounded-xl shadow-lg border border-[#E8E4DD] p-3 min-w-[200px] max-w-[280px] ${animClass}`}
       style={{ left: position.x, top: position.y }}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onClose}
@@ -58,11 +66,10 @@ export default function WordPopup({
         <span className={`w-2.5 h-2.5 rounded-full shrink-0 ${getDifficultyDotColor(entry.difficulty)}`} />
         <span className="font-semibold text-sm text-[#2D2B28]">{word}</span>
         <button
-          onClick={() => onSave(word)}
-          disabled={isSaved}
+          onClick={() => onToggleSave(word)}
           className={`ml-auto flex items-center gap-1 text-xs px-2 py-0.5 rounded-md transition-colors shrink-0 ${
             isSaved
-              ? 'bg-[#EDE9E0] text-[#C88C4A]'
+              ? 'bg-[#EDE9E0] text-[#C88C4A] hover:bg-[#E8DCC8]'
               : 'bg-[#EDE9E0] text-[#78716C] hover:bg-[#E8DCC8] hover:text-[#5C3D2E]'
           }`}
         >
@@ -70,8 +77,8 @@ export default function WordPopup({
           {isSaved ? '已收藏' : '收藏'}
         </button>
       </div>
-      <p className="text-[13px] text-[#78716C] mt-1.5 leading-relaxed">
-        <span className="text-[#5C3D2E] font-medium">{entry.pos}</span>
+      <p className="text-[13px] text-[#78716C] mt-[5px] leading-relaxed">
+        <span className="text-[#5C3D2E] font-medium ml-[3px]">{entry.pos}</span>
         <span className="mx-1.5 text-[#D8D2C8]">·</span>
         {entry.definition}
       </p>

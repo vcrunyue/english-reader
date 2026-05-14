@@ -5,16 +5,24 @@ import { HelpCircle } from 'lucide-react';
 
 export default function CloseReadingLegend() {
   const [show, setShow] = useState(false);
+  const [leaving, setLeaving] = useState(false);
   const closeRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const handleMouseEnter = () => {
     if (closeRef.current) clearTimeout(closeRef.current);
+    setLeaving(false);
     setShow(true);
   };
 
   const handleMouseLeave = () => {
-    closeRef.current = setTimeout(() => setShow(false), 200);
+    setLeaving(true);
+    closeRef.current = setTimeout(() => {
+      setShow(false);
+      setLeaving(false);
+    }, 150);
   };
+
+  const animClass = leaving ? 'animate-popup-out' : 'animate-popup-in';
 
   return (
     <span className="relative inline-flex items-center -ml-0.5" onMouseLeave={handleMouseLeave}>
@@ -29,7 +37,7 @@ export default function CloseReadingLegend() {
 
       {show && (
         <div
-          className="absolute left-1/2 -translate-x-1/2 top-full mt-2 z-50 bg-[#FEFCF5] border border-[#E8E4DD] rounded-xl shadow-lg p-3 min-w-[220px] animate-popup-in"
+          className={`absolute left-1/2 -translate-x-1/2 top-full mt-2 z-50 bg-[#FEFCF5] border border-[#E8E4DD] rounded-xl shadow-lg p-3 min-w-[220px] ${animClass}`}
           onMouseEnter={handleMouseEnter}
         >
           <p className="text-sm font-medium text-[#2D2B28] mb-2 font-zh-serif">精读模式</p>

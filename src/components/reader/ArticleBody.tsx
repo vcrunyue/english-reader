@@ -22,9 +22,10 @@ interface PopupData {
 }
 
 export default function ArticleBody({ content, vocab, onParagraphSelect, closeReadingEnabled, selectedParagraph }: ArticleBodyProps) {
-  const { knownWords, highlightEnabled, saveWordToCollection, isWordInCollection } =
+  const { knownWords, highlightEnabled, saveWordToCollection, removeWordFromCollection, isWordInCollection } =
     useAppContext();
   const [popup, setPopup] = useState<PopupData | null>(null);
+  const [fadingOut, setFadingOut] = useState(false);
   const closeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const paragraphs = useMemo(
@@ -32,19 +33,24 @@ export default function ArticleBody({ content, vocab, onParagraphSelect, closeRe
     [content],
   );
 
-  const handleSave = useCallback(
+  const handleToggleSave = useCallback(
     (word: string) => {
       if (!popup) return;
-      saveWordToCollection({
-        word,
-        definition: popup.entry.definition,
-        difficulty: popup.entry.difficulty,
-        date: new Date().toISOString().split('T')[0],
-        articleTitle: '',
-      });
+      if (isWordInCollection(word)) {
+        removeWordFromCollection(word);
+      } else {
+        saveWordToCollection({
+          word,
+          definition: popup.entry.definition,
+          difficulty: popup.entry.difficulty,
+          date: new Date().toISOString().split('T')[0],
+          articleTitle: '',
+        });
+      }
       setPopup(null);
+      setFadingOut(false);
     },
-    [popup, saveWordToCollection],
+    [popup, saveWordToCollection, removeWordFromCollection, isWordInCollection],
   );
 
   const clearCloseTimer = useCallback(() => {
@@ -52,10 +58,15 @@ export default function ArticleBody({ content, vocab, onParagraphSelect, closeRe
       clearTimeout(closeTimerRef.current);
       closeTimerRef.current = null;
     }
+    setFadingOut(false);
   }, []);
 
   const scheduleClose = useCallback(() => {
-    closeTimerRef.current = setTimeout(() => setPopup(null), 200);
+    setFadingOut(true);
+    closeTimerRef.current = setTimeout(() => {
+      setPopup(null);
+      setFadingOut(false);
+    }, 150);
   }, []);
 
   const headingClasses: Record<string, string> = {
@@ -120,9 +131,10 @@ export default function ArticleBody({ content, vocab, onParagraphSelect, closeRe
           entry={popup.entry}
           position={{ x: popup.x, y: popup.y }}
           isSaved={isWordInCollection(popup.word)}
-          onSave={handleSave}
+          fadingOut={fadingOut}
+          onToggleSave={handleToggleSave}
           onMouseEnter={clearCloseTimer}
-          onClose={() => setPopup(null)}
+          onClose={scheduleClose}
         />
       )}
     </div>
