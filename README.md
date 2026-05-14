@@ -1,6 +1,9 @@
 <p align="center">
   <h1 align="center">English Reader</h1>
   <p align="center">面向中国大学生和高中生的智能英文阅读学习工具</p>
+  <p align="center">
+    <a href="https://read.vcrunyue.top"><b>read.vcrunyue.top</b></a>
+  </p>
 </p>
 
 <p align="center">
@@ -40,24 +43,6 @@ English Reader 是一个网页端的英文阅读辅助工具。读真实英文�
 
 ---
 
-## 快速开始
-
-```bash
-# 克隆项目
-git clone https://github.com/vcrunyue/english-reader.git
-cd english-reader
-
-# 安装依赖
-npm install
-
-# 启动开发服务器
-npm run dev
-```
-
-浏览器打开 [http://localhost:3000](http://localhost:3000)。
-
----
-
 ## 使用指南
 
 ### 阅读文章
@@ -77,38 +62,13 @@ npm run dev
 
 ### 管理词汇
 
-| 页面 | 路径 | 用途 |
-|------|------|------|
-| 开始学习 | `/` | 文章浏览与筛选 |
-| 生词收藏 | `/collection` | 所有收藏的生词，按难度筛选 |
-| 熟词收藏 | `/known-words` | 已标记认识的词汇，不再高亮 |
-| 文章收藏 | `/saved-articles` | 收藏的文章列表 |
-| 导入文章 | `/import` | 粘贴文本 / 输入 URL 导入文章 |
-
----
-
-## 添加新文章
-
-文章以 Markdown 文件存放在 `content/articles/` 目录，YAML 头部定义元信息：
-
-```markdown
----
-title: "文章标题"
-source: "文章来源（如 BBC News）"
-difficulty: "cet6"
-topic: "technology"
-date: "2026-04-15"
-coverImage: "/covers/my-article.jpg"   # 可选
----
-
-正文段落，用空行分隔。
-
-§ 中文翻译行，以 § 开头，紧跟在对应英文段落后。
-```
-
-- `difficulty`: `cet4` / `cet6` / `postgrad`
-- `topic`: `technology` / `environment` / `science` 或其他自定义主题
-- `§` 翻译行可选 —— 有则为精读模式提供对照，无则自动分句
+| 页面 | 用途 |
+|------|------|
+| 开始学习 | 文章浏览与筛选 |
+| 生词收藏 | 所有收藏的生词，按难度筛选 |
+| 熟词收藏 | 已标记认识的词汇，不再高亮 |
+| 文章收藏 | 收藏的文章列表 |
+| 导入文章 | 粘贴文本 / 输入 URL 导入文章 |
 
 ---
 
@@ -142,17 +102,6 @@ src/
 
 content/articles/         # 内置文章（Markdown）
 public/vocab/             # 四六级 / 考研词汇对照表（JSON）
-```
-
----
-
-## 开发命令
-
-```bash
-npm run dev        # 启动开发服务器
-npm run build      # 生产构建
-npm run lint       # ESLint 代码检查
-npm run typecheck  # TypeScript 类型检查
 ```
 
 ---
