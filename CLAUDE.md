@@ -48,3 +48,7 @@ english-reader/
 - 文章通过 SSG 在构建时预渲染
 - 词汇匹配在客户端根据静态 JSON 表完成
 - 悬浮弹窗定位使用 floating UI（防止超出视口）
+
+## 工作流程
+
+- 每次代码修改完成后，自动执行 `git add` + `git commit` + `git push` 推送到 GitHub，无需等待用户确认
