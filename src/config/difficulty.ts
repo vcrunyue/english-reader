@@ -46,10 +46,10 @@ export const DIFFICULTY_STYLE: Record<Difficulty, DifficultyStyle> = {
   },
 };
 
-/** Full highlight class for inline text: background + hover + padding */
+/** Full highlight class for inline text: background + hover + rounded */
 export function getHighlightClass(d: Difficulty): string {
   const s = DIFFICULTY_STYLE[d];
-  return `${s.highlightBg} ${s.highlightHoverBg} px-0.5 rounded-[3px]`;
+  return `${s.highlightBg} ${s.highlightHoverBg} rounded-[3px]`;
 }
 
 export function getDotColor(d: Difficulty): string {

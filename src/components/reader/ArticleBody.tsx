@@ -198,12 +198,12 @@ function renderTextWithHighlights(
     }
 
     if (!enabled) {
-      return <span key={i}>{part}</span>;
+      return <span key={i} className="px-0.5">{part}</span>;
     }
 
     const entry = lookupWord(part, vocab, known);
     if (!entry) {
-      return <span key={i}>{part}</span>;
+      return <span key={i} className="px-0.5">{part}</span>;
     }
 
     const colorClass = getDifficultyColor(entry.difficulty);
@@ -211,7 +211,7 @@ function renderTextWithHighlights(
     return (
       <span
         key={i}
-        className={`relative cursor-pointer ${colorClass}`}
+        className={`px-0.5 relative cursor-pointer ${colorClass}`}
         onMouseEnter={e => {
           clearCloseTimer();
           const rect = e.currentTarget.getBoundingClientRect();
