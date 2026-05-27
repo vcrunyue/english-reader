@@ -19,13 +19,13 @@ export default function FilterBar({
   onSourceChange,
 }: FilterBarProps) {
   const btnBase =
-    'text-sm px-3 py-1.5 rounded-md border border-[#D8D2C8] transition-colors duration-200 font-zh-serif';
+    'text-xs sm:text-sm px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-md border border-[#D8D2C8] transition-colors duration-200 font-zh-serif whitespace-nowrap';
 
   return (
-    <div className="flex flex-col gap-3">
+    <div className="flex flex-col gap-2 sm:gap-3">
       {/* 难度行 */}
-      <div className="flex items-center gap-2.5">
-        <span className="text-[15px] text-[#78716C] font-bold w-10 shrink-0 font-zh-serif -mt-px ml-0.5">
+      <div className="flex items-center gap-2 sm:gap-2.5">
+        <span className="text-[13px] sm:text-[15px] text-[#78716C] font-bold shrink-0 font-zh-serif">
           难度
         </span>
         {DIFFICULTY_FILTERS.map(({ key, label, activeClass }) => {
@@ -47,8 +47,8 @@ export default function FilterBar({
       </div>
 
       {/* 来源行 */}
-      <div className="flex items-center gap-2.5 flex-wrap">
-        <span className="text-[15px] text-[#78716C] font-bold w-10 shrink-0 font-zh-serif -mt-px ml-0.5">
+      <div className="flex items-center gap-2 sm:gap-2.5 overflow-x-auto">
+        <span className="text-[13px] sm:text-[15px] text-[#78716C] font-bold shrink-0 font-zh-serif">
           来源
         </span>
         {['all', ...sources].map(s => {

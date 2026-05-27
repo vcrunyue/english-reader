@@ -108,8 +108,11 @@ export default function FilterableGallery({ articles }: { articles: ArticleMeta[
 
       {/* 显示行 */}
       <div className="flex items-center gap-2.5 flex-wrap">
-        <span className="text-[15px] text-[#78716C] font-bold w-10 shrink-0 font-zh-serif -mt-px ml-0.5">
+        <span className="text-[15px] text-[#78716C] font-bold w-10 shrink-0 font-zh-serif -mt-px ml-0.5 lg:inline hidden">
           显示
+        </span>
+        <span className="text-[15px] text-[#78716C] font-bold shrink-0 font-zh-serif -mt-px inline lg:hidden">
+          排序
         </span>
         {VIEW_OPTIONS.map(({ key, label }) => {
           const active = view === key;
@@ -117,7 +120,7 @@ export default function FilterableGallery({ articles }: { articles: ArticleMeta[
             <button
               key={key}
               onClick={() => setView(key)}
-              className={`${btnBase} ${active ? activeCls : inactiveCls}`}
+              className={`${btnBase} ${active ? activeCls : inactiveCls} hidden lg:inline`}
             >
               {label}
             </button>
@@ -154,7 +157,7 @@ export default function FilterableGallery({ articles }: { articles: ArticleMeta[
 
       {/* list view */}
       {view === 'list' && (
-        <div className="flex flex-col gap-3 !mt-[27px]">
+        <div className="flex flex-col gap-2 !mt-[27px]">
           {filtered.map((article, i) => (
             <div
               key={`${generation}-${article.slug}`}

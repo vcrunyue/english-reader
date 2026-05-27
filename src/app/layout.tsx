@@ -5,6 +5,7 @@ import { KnownWordsProvider } from '@/context/KnownWordsContext';
 import { CollectionProvider } from '@/context/CollectionContext';
 import { ReadingProvider } from '@/context/ReadingContext';
 import Sidebar from '@/components/layout/Sidebar';
+import MobileBottomNav from '@/components/layout/MobileBottomNav';
 
 export const metadata: Metadata = {
   title: 'English Reader',
@@ -30,7 +31,8 @@ export default function RootLayout({
             <CollectionProvider>
               <ReadingProvider>
                 <Sidebar />
-                <main className="flex-1 overflow-y-auto" style={{ scrollbarGutter: 'stable' }}>{children}</main>
+                <main className="flex-1 overflow-y-auto pb-14 lg:pb-0" style={{ scrollbarGutter: 'stable' }}>{children}</main>
+                <MobileBottomNav />
               </ReadingProvider>
             </CollectionProvider>
           </KnownWordsProvider>
