@@ -1,6 +1,5 @@
 'use client';
 
-import { useState } from 'react';
 import Link from 'next/link';
 import type { ArticleMeta } from '@/types';
 import { getDifficultyLabel } from '@/lib/vocab';
@@ -27,12 +26,9 @@ interface ArticleCardProps {
 export default function ArticleCard({ article, layout = 'grid' }: ArticleCardProps) {
   const { isArticleInCollection, saveArticleToCollection, removeArticleFromCollection } =
     useCollection();
-  const { isArticleRead, unmarkArticleRead } = useReading();
+  const { isArticleRead } = useReading();
   const saved = isArticleInCollection(article.slug);
   const read = isArticleRead(article.slug);
-  const [imgFailed, setImgFailed] = useState(false);
-
-  const hasCover = !!article.coverImage && !imgFailed;
 
   const handleToggle = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -42,12 +38,6 @@ export default function ArticleCard({ article, layout = 'grid' }: ArticleCardPro
     } else {
       saveArticleToCollection(article.slug);
     }
-  };
-
-  const handleReadToggle = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    e.preventDefault();
-    unmarkArticleRead(article.slug);
   };
 
   // ---------- list layout ----------
@@ -60,22 +50,13 @@ export default function ArticleCard({ article, layout = 'grid' }: ArticleCardPro
         >
           {/* cover — hidden on mobile */}
           <div className="w-28 shrink-0 overflow-hidden hidden sm:block">
-            {hasCover ? (
-              <img
-                src={article.coverImage}
-                alt=""
-                className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                onError={() => setImgFailed(true)}
-              />
-            ) : (
-              <div
-                className={`h-full min-h-[6rem] bg-gradient-to-br ${getGradient(article.topic)} flex items-center justify-center transition-transform duration-300 group-hover:scale-105`}
-              >
-                <span className="text-white/70 text-lg font-display">
-                  {(article.source || '?').slice(0, 2).toUpperCase()}
-                </span>
-              </div>
-            )}
+            <div
+              className={`h-full min-h-[6rem] bg-gradient-to-br ${getGradient(article.topic)} flex items-center justify-center transition-transform duration-300 group-hover:scale-105`}
+            >
+              <span className="text-white/70 text-lg font-display">
+                {(article.source || '?').slice(0, 2).toUpperCase()}
+              </span>
+            </div>
           </div>
 
           {/* info */}
@@ -101,15 +82,16 @@ export default function ArticleCard({ article, layout = 'grid' }: ArticleCardPro
 
         {/* bookmark — always visible on mobile, hover on desktop */}
         <button
+          type="button"
           onClick={handleToggle}
-          className={`absolute top-1.5 right-1.5 sm:top-2 sm:right-2 z-10 p-1 sm:p-1.5 rounded-full transition-all duration-200 ${
+          className={`absolute top-1.5 right-1.5 sm:top-2 sm:right-2 z-10 inline-flex min-h-11 min-w-11 items-center justify-center rounded-full transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C88C4A] ${
             saved
               ? 'text-[#C88C4A] sm:opacity-100 sm:bg-[#FEFCF5]/90 sm:shadow-sm'
-              : 'text-[#D8D2C8] sm:opacity-0 sm:group-hover:opacity-100 sm:bg-[#FEFCF5]/80 sm:text-[#78716C] sm:hover:text-[#C88C4A] sm:hover:bg-[#FEFCF5] sm:shadow-sm'
+              : 'text-[#D8D2C8] sm:opacity-0 sm:group-hover:opacity-100 sm:group-focus-within:opacity-100 sm:focus-visible:opacity-100 sm:bg-[#FEFCF5]/80 sm:text-[#78716C] sm:hover:text-[#C88C4A] sm:hover:bg-[#FEFCF5] sm:shadow-sm'
           }`}
           aria-label={saved ? '取消收藏' : '收藏文章'}
         >
-          <Bookmark size={14} fill={saved ? 'currentColor' : 'none'} />
+          <Bookmark aria-hidden="true" size={14} fill={saved ? 'currentColor' : 'none'} />
         </button>
       </div>
     );
@@ -124,22 +106,13 @@ export default function ArticleCard({ article, layout = 'grid' }: ArticleCardPro
       >
         {/* cover */}
         <div className="h-24 overflow-hidden shrink-0">
-          {hasCover ? (
-            <img
-              src={article.coverImage}
-              alt=""
-              className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-              onError={() => setImgFailed(true)}
-            />
-          ) : (
-            <div
-              className={`h-full bg-gradient-to-br ${getGradient(article.topic)} flex items-center justify-center transition-transform duration-300 group-hover:scale-105`}
-            >
-              <span className="text-white/70 text-2xl font-display">
-                {(article.source || '?').slice(0, 2).toUpperCase()}
-              </span>
-            </div>
-          )}
+          <div
+            className={`h-full bg-gradient-to-br ${getGradient(article.topic)} flex items-center justify-center transition-transform duration-300 group-hover:scale-105`}
+          >
+            <span className="text-white/70 text-2xl font-display">
+              {(article.source || '?').slice(0, 2).toUpperCase()}
+            </span>
+          </div>
         </div>
 
         {/* body */}
@@ -163,13 +136,7 @@ export default function ArticleCard({ article, layout = 'grid' }: ArticleCardPro
             {read && (
               <>
                 <span className="text-[#D8D2C8]">·</span>
-                <button
-                  onClick={handleReadToggle}
-                  className="text-[#A0A090] hover:text-[#78716C] transition-colors"
-                  aria-label="标为未读"
-                >
-                  已读
-                </button>
+                <span className="text-[#A0A090] font-zh-serif font-bold">已读</span>
               </>
             )}
           </div>
@@ -178,15 +145,16 @@ export default function ArticleCard({ article, layout = 'grid' }: ArticleCardPro
 
       {/* bookmark */}
       <button
+        type="button"
         onClick={handleToggle}
-        className={`absolute top-2 right-2 z-10 p-1.5 rounded-full transition-all duration-200 ${
+        className={`absolute top-2 right-2 z-10 inline-flex min-h-11 min-w-11 items-center justify-center rounded-full transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C88C4A] ${
           saved
             ? 'opacity-100 bg-[#FEFCF5]/90 text-[#C88C4A] shadow-sm'
-            : 'opacity-0 group-hover:opacity-100 bg-[#FEFCF5]/80 text-[#78716C] hover:text-[#C88C4A] hover:bg-[#FEFCF5] shadow-sm'
+            : 'opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 focus-visible:opacity-100 bg-[#FEFCF5]/80 text-[#78716C] hover:text-[#C88C4A] hover:bg-[#FEFCF5] shadow-sm'
         }`}
         aria-label={saved ? '取消收藏' : '收藏文章'}
       >
-        <Bookmark size={15} fill={saved ? 'currentColor' : 'none'} />
+        <Bookmark aria-hidden="true" size={15} fill={saved ? 'currentColor' : 'none'} />
       </button>
     </div>
   );

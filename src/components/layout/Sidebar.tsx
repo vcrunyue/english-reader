@@ -39,27 +39,30 @@ export default function Sidebar() {
     >
       <nav className="flex-1 py-3 space-y-1.5">
         {/* 折叠按钮 */}
-        <div
+        <button
+          type="button"
           onClick={() => setCollapsed(!collapsed)}
-          className={`${itemCls} ${inactiveCls} ${collapsed ? 'justify-center' : 'gap-3'}`}
-          role="button"
-          tabIndex={0}
-          onKeyDown={e => (e.key === 'Enter' || e.key === ' ') && setCollapsed(!collapsed)}
+          className={`${itemCls} min-h-11 ${
+            collapsed
+              ? '!mx-[5px] h-11 w-11 min-w-11 shrink-0 justify-center !px-0 !py-0 group text-[#78716C] hover:text-[#5C3D2E] cursor-pointer'
+              : `${inactiveCls} gap-3`
+          }`}
           aria-label={collapsed ? '展开侧边栏' : '收起侧边栏'}
+          title={collapsed ? '展开侧边栏' : '收起侧边栏'}
         >
           {collapsed ? (
-            <ChevronRight size={18} className="shrink-0" />
+            <span className="flex h-9 w-[37px] items-center justify-center rounded-lg transition-colors group-hover:bg-[#EDE9E0]">
+              <ChevronRight size={18} className="shrink-0" />
+            </span>
           ) : (
-            <ChevronLeft size={18} className="shrink-0" />
+            <>
+              <ChevronLeft size={18} className="shrink-0" />
+              <span className="transition-all duration-[400ms] ease-out opacity-100 w-auto delay-150">
+                收起边栏
+              </span>
+            </>
           )}
-          <span
-            className={`transition-all duration-[400ms] ease-out ${
-              collapsed ? 'opacity-0 w-0 overflow-hidden delay-0' : 'opacity-100 w-auto delay-150'
-            }`}
-          >
-            收起边栏
-          </span>
-        </div>
+        </button>
 
         {menuItems.map(({ href, label, icon: Icon }) => {
           const isActive = pathname === href;

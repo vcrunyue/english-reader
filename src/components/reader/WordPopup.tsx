@@ -1,12 +1,14 @@
 'use client';
 
-import { useLayoutEffect, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import type { VocabEntry } from '@/types';
 import { getDifficultyDotColor, parseDefinitionParts } from '@/lib/vocab';
-import { Star, Check } from 'lucide-react';
+import { Star, Check, X } from 'lucide-react';
 
 interface WordPopupProps {
+  id: string;
+  trigger: HTMLButtonElement;
   word: string;
   entry: VocabEntry;
   wordLeft: number;
@@ -15,10 +17,13 @@ interface WordPopupProps {
   isSaved: boolean;
   isKnown: boolean;
   closing?: boolean;
+  focusOnOpen?: boolean;
   onToggleSave: (word: string) => void;
   onToggleKnown: (word: string) => void;
   onMouseEnter?: () => void;
+  onMouseLeave: () => void;
   onClose: () => void;
+  onAnchorDisconnect: () => void;
   onAnimationEnd?: () => void;
 }
 
@@ -26,11 +31,62 @@ const GAP_BELOW = 5;
 const GAP_ABOVE = 8;
 const LEFT_SHIFT = 12;
 const VIEWPORT_PAD = 16;
-const RIGHT_GAP = 30;
 
-const btnBase = 'flex items-center gap-1 text-xs px-2 py-0.5 rounded-md transition-colors shrink-0 font-semibold';
+const btnBase = 'group flex min-h-11 min-w-11 shrink-0 items-center justify-center p-0 text-xs font-semibold';
+const actionSurface = 'inline-flex h-7 items-center justify-center gap-1 rounded-md px-1.5 transition-colors';
+
+function clampPopupX(anchorLeft: number, width: number, viewportWidth: number): number {
+  const furthestRight = Math.max(VIEWPORT_PAD, viewportWidth - width - VIEWPORT_PAD);
+  return Math.min(Math.max(anchorLeft - LEFT_SHIFT, VIEWPORT_PAD), furthestRight);
+}
+
+function choosePopupY(
+  anchorTop: number,
+  anchorBottom: number,
+  height: number,
+  viewportHeight: number,
+): number {
+  const lowestTop = Math.max(VIEWPORT_PAD, viewportHeight - height - VIEWPORT_PAD);
+  const below = anchorBottom + GAP_BELOW;
+  if (below + height <= viewportHeight - VIEWPORT_PAD) {
+    return Math.min(Math.max(below, VIEWPORT_PAD), lowestTop);
+  }
+
+  return Math.min(
+    Math.max(VIEWPORT_PAD, anchorTop - height - GAP_ABOVE),
+    lowestTop,
+  );
+}
+
+function positionPopup(
+  element: HTMLDivElement,
+  trigger: HTMLButtonElement,
+): boolean {
+  if (!trigger.isConnected) {
+    return false;
+  }
+
+  const anchorRect = trigger.getBoundingClientRect();
+  const rect = element.getBoundingClientRect();
+  const viewportWidth = window.visualViewport?.width ?? window.innerWidth;
+  const viewportHeight = window.visualViewport?.height ?? window.innerHeight;
+  const x = clampPopupX(anchorRect.left, rect.width, viewportWidth);
+  const y = choosePopupY(
+    anchorRect.top,
+    anchorRect.bottom,
+    rect.height,
+    viewportHeight,
+  );
+
+  element.style.left = `${x}px`;
+  element.style.top = `${y}px`;
+  element.style.visibility = 'visible';
+  return true;
+}
 
 export default function WordPopup({
+  id,
+  trigger,
   word,
   entry,
   wordLeft,
@@ -39,82 +95,141 @@ export default function WordPopup({
   isSaved,
   isKnown,
   closing,
+  focusOnOpen,
   onToggleSave,
   onToggleKnown,
   onMouseEnter,
+  onMouseLeave,
   onClose,
+  onAnchorDisconnect,
   onAnimationEnd,
 }: WordPopupProps) {
   const ref = useRef<HTMLDivElement>(null);
-  const [ready, setReady] = useState(false);
+  const firstActionRef = useRef<HTMLButtonElement>(null);
+  const lastFocusedTriggerRef = useRef<HTMLButtonElement | null>(null);
 
   useLayoutEffect(() => {
-    if (!ready) {
-      setReady(true);
-      return;
-    }
     const el = ref.current;
     if (!el) return;
 
-    const rect = el.getBoundingClientRect();
-    const vw = window.innerWidth;
-    const vh = window.innerHeight;
+    const reposition = () => {
+      if (!positionPopup(el, trigger)) {
+        onAnchorDisconnect();
+        return false;
+      }
+      return true;
+    };
+    if (!reposition()) return;
 
-    let x = wordLeft - LEFT_SHIFT;
-    const cardRight = x + rect.width;
-    if (cardRight > vw - RIGHT_GAP) {
-      x = vw - rect.width - RIGHT_GAP;
+    if (focusOnOpen && lastFocusedTriggerRef.current !== trigger) {
+      const firstAction = firstActionRef.current;
+      if (firstAction) {
+        firstAction.focus();
+        lastFocusedTriggerRef.current = trigger;
+      }
     }
-    if (x < VIEWPORT_PAD - 12) x = VIEWPORT_PAD - 12;
 
-    let y = wordBottom + GAP_BELOW;
-    if (y + rect.height > vh - VIEWPORT_PAD) {
-      y = wordTop - rect.height - GAP_ABOVE;
-    }
-    if (y < VIEWPORT_PAD - 12) y = VIEWPORT_PAD - 12;
+    const resizeObserver =
+      typeof ResizeObserver === 'undefined' ? null : new ResizeObserver(reposition);
+    const visualViewport = window.visualViewport;
+    resizeObserver?.observe(el);
+    resizeObserver?.observe(trigger);
+    window.addEventListener('resize', reposition);
+    visualViewport?.addEventListener('resize', reposition);
 
-    el.style.left = `${x}px`;
-    el.style.top = `${y}px`;
-  }, [ready, wordLeft, wordTop, wordBottom]);
+    return () => {
+      resizeObserver?.disconnect();
+      window.removeEventListener('resize', reposition);
+      visualViewport?.removeEventListener('resize', reposition);
+    };
+  }, [
+    focusOnOpen,
+    isKnown,
+    isSaved,
+    onAnchorDisconnect,
+    trigger,
+    wordLeft,
+    wordTop,
+    wordBottom,
+  ]);
 
-  if (!ready) return null;
+  useEffect(() => {
+    if (closing) return;
+
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key !== 'Escape') return;
+      event.preventDefault();
+      onClose();
+    };
+
+    document.addEventListener('keydown', handleEscape);
+    return () => document.removeEventListener('keydown', handleEscape);
+  }, [closing, onClose]);
 
   const defParts = parseDefinitionParts(entry.pos, entry.definition);
 
   return createPortal(
     <div
+      id={id}
       ref={ref}
-      className={`fixed z-50 bg-[#FEFCF5] rounded-xl shadow-[0_0_6px_0_rgba(0,0,0,0.08)] border border-[#E8E4DD] p-3 min-w-[200px] max-w-[380px] ${closing ? 'animate-popup-out' : 'animate-popup-in'}`}
+      role="dialog"
+      aria-label={`${word} 的释义`}
+      style={{ left: 0, top: 0, visibility: 'hidden' }}
+      className={`fixed z-50 max-h-[calc(100dvh-2rem)] min-w-[200px] max-w-[calc(100vw-2rem)] overflow-y-auto rounded-xl border border-[#E8E4DD] bg-[#FEFCF5] p-3 shadow-[0_0_6px_0_rgba(0,0,0,0.08)] sm:max-w-[380px] ${closing ? 'animate-popup-out' : 'animate-popup-in'}`}
       onMouseEnter={closing ? undefined : onMouseEnter}
-      onMouseLeave={closing ? undefined : onClose}
+      onMouseLeave={
+        closing
+          ? undefined
+          : event => {
+              if (event.currentTarget.contains(document.activeElement)) return;
+              onMouseLeave();
+            }
+      }
       onAnimationEnd={closing ? onAnimationEnd : undefined}
     >
       {/* header: dot + word + buttons */}
-      <div className="flex items-center gap-2">
-        <span className={`w-2.5 h-2.5 rounded-full shrink-0 ${getDifficultyDotColor(entry.difficulty)}`} />
+      <div className="flex flex-wrap items-center gap-2">
+        <span aria-hidden="true" className={`w-2.5 h-2.5 rounded-full shrink-0 ${getDifficultyDotColor(entry.difficulty)}`} />
         <span className="font-semibold text-lg text-[#2D2B28] relative top-[-1px]">{word}</span>
-        <div className="ml-auto flex items-center gap-1">
+        <div className="ml-auto flex flex-wrap items-center justify-end gap-1">
           <button
+            ref={firstActionRef}
+            type="button"
+            aria-label={isKnown ? `将 ${word} 标记为不认识` : `将 ${word} 标记为认识`}
             onClick={() => onToggleKnown(word)}
-            className={`${btnBase} ${
-              isKnown
-                ? 'bg-[#EDE9E0] text-[#7CB868] hover:bg-[#E8DCC8]'
-                : 'bg-[#EDE9E0] text-[#78716C] hover:bg-[#E8DCC8] hover:text-[#5C3D2E]'
-            }`}
+            className={btnBase}
           >
-            <Check size={11} />
-            {isKnown ? '已认识' : '认识'}
+            <span className={`${actionSurface} ${
+              isKnown
+                ? 'bg-[#EDE9E0] text-[#7CB868] group-hover:bg-[#E8DCC8]'
+                : 'bg-[#EDE9E0] text-[#78716C] group-hover:bg-[#E8DCC8] group-hover:text-[#5C3D2E]'
+            }`}>
+              <Check aria-hidden="true" size={11} />
+              {isKnown ? '已认识' : '认识'}
+            </span>
           </button>
           <button
+            type="button"
+            aria-label={isSaved ? `取消收藏 ${word}` : `收藏 ${word}`}
             onClick={() => onToggleSave(word)}
-            className={`${btnBase} ${
-              isSaved
-                ? 'bg-[#EDE9E0] text-[#C88C4A] hover:bg-[#E8DCC8]'
-                : 'bg-[#EDE9E0] text-[#78716C] hover:bg-[#E8DCC8] hover:text-[#5C3D2E]'
-            }`}
+            className={btnBase}
           >
-            <Star size={11} fill={isSaved ? 'currentColor' : 'none'} />
-            {isSaved ? '已收藏' : '收藏'}
+            <span className={`${actionSurface} ${
+              isSaved
+                ? 'bg-[#EDE9E0] text-[#C88C4A] group-hover:bg-[#E8DCC8]'
+                : 'bg-[#EDE9E0] text-[#78716C] group-hover:bg-[#E8DCC8] group-hover:text-[#5C3D2E]'
+            }`}>
+              <Star aria-hidden="true" size={11} fill={isSaved ? 'currentColor' : 'none'} />
+              {isSaved ? '已收藏' : '收藏'}
+            </span>
+          </button>
+          <button
+            type="button"
+            aria-label="关闭释义"
+            onClick={onClose}
+            className="flex min-h-11 min-w-11 shrink-0 items-center justify-center rounded-md text-[#78716C] transition-colors hover:bg-[#E8DCC8] hover:text-[#5C3D2E]"
+          >
+            <X aria-hidden="true" size={16} />
           </button>
         </div>
       </div>

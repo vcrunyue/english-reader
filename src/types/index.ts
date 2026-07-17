@@ -6,7 +6,6 @@ export interface ArticleMeta {
   source: string;
   difficulty: Difficulty;
   topic: string;
-  coverImage?: string;
   date: string;
   wordCount: number;
 }

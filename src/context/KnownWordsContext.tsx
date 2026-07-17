@@ -1,7 +1,8 @@
 'use client';
 
-import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
+import React, { createContext, useContext, useState, useCallback } from 'react';
 import { getKnownWords, addKnownWord, removeKnownWord } from '@/lib/storage';
+import { useClientReady } from '@/hooks/use-client-ready';
 
 interface KnownWordsContextType {
   knownWords: Set<string>;
@@ -12,35 +13,60 @@ interface KnownWordsContextType {
 
 const KnownWordsContext = createContext<KnownWordsContextType | null>(null);
 
-export function KnownWordsProvider({ children }: { children: React.ReactNode }) {
-  const [knownWords, setKnownWords] = useState<Set<string>>(new Set());
-  const [knownWordDates, setKnownWordDates] = useState<Record<string, string>>({});
+const EMPTY_KNOWN_WORDS: KnownWordsContextType = {
+  knownWords: new Set(),
+  knownWordDates: {},
+  markWordKnown: () => undefined,
+  unmarkWordKnown: () => undefined,
+};
 
-  useEffect(() => {
+export function KnownWordsProvider({ children }: { children: React.ReactNode }) {
+  const ready = useClientReady();
+
+  if (!ready) {
+    return (
+      <KnownWordsContext.Provider value={EMPTY_KNOWN_WORDS}>
+        {children}
+      </KnownWordsContext.Provider>
+    );
+  }
+
+  return <HydratedKnownWordsProvider>{children}</HydratedKnownWordsProvider>;
+}
+
+function HydratedKnownWordsProvider({ children }: { children: React.ReactNode }) {
+  const [{ knownWords, knownWordDates }, setKnownWordState] = useState(() => {
     const dates = getKnownWords();
-    setKnownWords(new Set(Object.keys(dates)));
-    setKnownWordDates(dates);
-  }, []);
+    return {
+      knownWords: new Set(Object.keys(dates)),
+      knownWordDates: dates,
+    };
+  });
 
   const markWordKnown = useCallback((word: string) => {
     addKnownWord(word);
     const lower = word.toLowerCase();
-    setKnownWords(prev => new Set(prev).add(lower));
-    setKnownWordDates(prev => ({ ...prev, [lower]: new Date().toISOString().split('T')[0] }));
+    setKnownWordState(prev => ({
+      knownWords: new Set(prev.knownWords).add(lower),
+      knownWordDates: {
+        ...prev.knownWordDates,
+        [lower]: new Date().toISOString().split('T')[0],
+      },
+    }));
   }, []);
 
   const unmarkWordKnown = useCallback((word: string) => {
     removeKnownWord(word);
     const lower = word.toLowerCase();
-    setKnownWords(prev => {
-      const next = new Set(prev);
+    setKnownWordState(prev => {
+      const next = new Set(prev.knownWords);
       next.delete(lower);
-      return next;
-    });
-    setKnownWordDates(prev => {
-      const next = { ...prev };
-      delete next[lower];
-      return next;
+      const nextDates = { ...prev.knownWordDates };
+      delete nextDates[lower];
+      return {
+        knownWords: next,
+        knownWordDates: nextDates,
+      };
     });
   }, []);
 
