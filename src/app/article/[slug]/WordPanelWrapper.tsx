@@ -4,6 +4,7 @@ import { useState, useMemo, useCallback } from 'react';
 import { analyzeText } from '@/lib/vocab';
 import { useVocab } from '@/context/VocabContext';
 import { useKnownWords } from '@/context/KnownWordsContext';
+import { PageState } from '@/components/feedback/PageState';
 import WordPanel from '@/components/reader/WordPanel';
 
 interface Props {
@@ -12,7 +13,7 @@ interface Props {
 }
 
 export default function WordPanelWrapper({ content, onTabChange }: Props) {
-  const vocab = useVocab();
+  const { vocab, error, retry } = useVocab();
   const [knownInArticle, setKnownInArticle] = useState<Set<string>>(new Set());
   const { knownWords, markWordKnown, unmarkWordKnown } = useKnownWords();
 
@@ -50,6 +51,31 @@ export default function WordPanelWrapper({ content, onTabChange }: Props) {
     },
     [unmarkWordKnown],
   );
+
+  if (error) {
+    return (
+      <div className="p-3 [&_section]:px-4 [&_section]:py-6 [&_h2]:text-lg">
+        <PageState
+          title="词表加载失败"
+          description={`${error} 本机学习记录没有受到影响。`}
+          action={{ label: '重新加载', onClick: retry }}
+          tone="error"
+        />
+      </div>
+    );
+  }
+
+  if (!vocab) {
+    return (
+      <div className="p-3 [&_section]:px-4 [&_section]:py-6 [&_h2]:text-lg">
+        <PageState
+          title="正在加载词表"
+          description="词表准备好后会显示本文生词。"
+          tone="loading"
+        />
+      </div>
+    );
+  }
 
   return (
     <WordPanel

@@ -1,13 +1,14 @@
+import { PageState } from '@/components/feedback/PageState';
+
 export default function StatsPage() {
   return (
-    <div className="max-w-2xl mx-auto px-8 py-10">
-      <h1 className="font-display text-4xl text-[#2D2B28] mb-10">学习统计</h1>
-      <div className="border-2 border-dashed border-[#D8D2C8] rounded-xl p-12 text-center">
-        <p className="text-[#78716C] mb-2 font-zh-serif">学习统计功能即将上线</p>
-        <p className="text-[13px] text-[#A8A29E] font-zh-serif">
-          后续将展示阅读天数、累积词汇量、收藏统计等数据
-        </p>
-      </div>
+    <div className="mx-auto max-w-2xl px-4 py-6 sm:px-8 sm:py-10">
+      <h1 className="mb-6 font-display text-3xl text-[#2D2B28] sm:mb-10 sm:text-4xl">学习统计</h1>
+      <PageState
+        title="本地学习统计将在阶段 1 提供"
+        description="当前阶段尚未生成统计数据，后续会基于本机阅读记录进行汇总。"
+        tone="empty"
+      />
     </div>
   );
 }

@@ -1,16 +1,34 @@
 'use client';
 
-import { useState, useMemo, useCallback, useEffect } from 'react';
+import { useState, useMemo, useCallback } from 'react';
 import type { ArticleMeta, Difficulty } from '@/types';
 import { useCollection } from '@/context/CollectionContext';
 import ArticleCard from '@/components/gallery/ArticleCard';
 import FilterBar from '@/components/gallery/FilterBar';
+import { useClientReady } from '@/hooks/use-client-ready';
+import { PageState } from '@/components/feedback/PageState';
 
 type ViewMode = 'grid' | 'list';
 type SortMode = 'default' | 'wordCount' | 'random';
 
+interface GalleryPreferences {
+  difficulty: Difficulty | 'all';
+  source: string;
+  view: ViewMode;
+  sort: SortMode;
+}
+
+const FILTER_KEY = 'eng_filter_state_saved';
+
+const DEFAULT_PREFERENCES: GalleryPreferences = {
+  difficulty: 'all',
+  source: 'all',
+  view: 'grid',
+  sort: 'default',
+};
+
 const btnBase =
-  'text-sm px-3 py-1.5 rounded-md border border-[#D8D2C8] transition-colors duration-200 font-zh-serif';
+  'min-h-11 text-sm px-3 py-1.5 rounded-md border border-[#D8D2C8] transition-colors duration-200 font-zh-serif';
 
 const activeCls = 'bg-[#EDE9E0] text-[#5C3D2E]';
 const inactiveCls = 'bg-transparent text-[#78716C] hover:border-[#C88C4A] hover:text-[#5C3D2E]';
@@ -26,16 +44,72 @@ const SORT_OPTIONS: Array<{ key: SortMode; label: string }> = [
   { key: 'random', label: '随机' },
 ];
 
-function shuffleArray<T>(arr: T[]): T[] {
+function readPreferences(key: string): GalleryPreferences {
+  try {
+    const saved = localStorage.getItem(key);
+    if (!saved) return DEFAULT_PREFERENCES;
+    const parsed = JSON.parse(saved) as unknown;
+    if (!parsed || typeof parsed !== 'object' || Array.isArray(parsed)) {
+      return DEFAULT_PREFERENCES;
+    }
+    const values = parsed as Record<string, unknown>;
+    return {
+      difficulty:
+        values.difficulty === 'all' ||
+        values.difficulty === 'cet4' ||
+        values.difficulty === 'cet6' ||
+        values.difficulty === 'postgrad'
+          ? values.difficulty
+          : DEFAULT_PREFERENCES.difficulty,
+      source:
+        typeof values.source === 'string' && values.source.trim().length > 0
+          ? values.source
+          : DEFAULT_PREFERENCES.source,
+      view:
+        values.view === 'grid' || values.view === 'list'
+          ? values.view
+          : DEFAULT_PREFERENCES.view,
+      sort:
+        values.sort === 'default' || values.sort === 'wordCount' || values.sort === 'random'
+          ? values.sort
+          : DEFAULT_PREFERENCES.sort,
+    };
+  } catch {
+    return DEFAULT_PREFERENCES;
+  }
+}
+
+function shuffleArray<T>(arr: T[], seed: number): T[] {
   const a = [...arr];
+  let state = seed >>> 0;
   for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
+    state = (state * 1664525 + 1013904223) >>> 0;
+    const j = Math.floor((state / 4294967296) * (i + 1));
     [a[i], a[j]] = [a[j], a[i]];
   }
   return a;
 }
 
 export default function SavedArticlesContent({ allMetas }: { allMetas: ArticleMeta[] }) {
+  const ready = useClientReady();
+  const initial = ready ? readPreferences(FILTER_KEY) : DEFAULT_PREFERENCES;
+
+  return (
+    <HydratedSavedArticlesContent
+      key={ready ? 'client' : 'server'}
+      allMetas={allMetas}
+      initial={initial}
+    />
+  );
+}
+
+function HydratedSavedArticlesContent({
+  allMetas,
+  initial,
+}: {
+  allMetas: ArticleMeta[];
+  initial: GalleryPreferences;
+}) {
   const { savedArticles } = useCollection();
 
   // only show articles that are saved
@@ -46,11 +120,9 @@ export default function SavedArticlesContent({ allMetas }: { allMetas: ArticleMe
     [allMetas, savedArticles],
   );
 
-  const [difficulty, setDifficulty] = useState<Difficulty | 'all'>('all');
-  const [source, setSource] = useState('all');
-  const [view, setView] = useState<ViewMode>('grid');
-  const [sort, setSort] = useState<SortMode>('default');
+  const [preferences, setPreferences] = useState(initial);
   const [randomSeed, setRandomSeed] = useState(0);
+  const { difficulty, source, view, sort } = preferences;
 
   const sources = useMemo(
     () => [...new Set(savedMetas.map(a => a.source))],
@@ -69,55 +141,56 @@ export default function SavedArticlesContent({ allMetas }: { allMetas: ArticleMe
         result = [...result].sort((a, b) => b.wordCount - a.wordCount);
         break;
       case 'random':
-        result = shuffleArray(result);
+        result = shuffleArray(result, randomSeed);
         break;
     }
 
     return result;
   }, [savedMetas, difficulty, source, sort, randomSeed]);
 
+  const updatePreferences = useCallback((updates: Partial<GalleryPreferences>) => {
+    const next = { ...preferences, ...updates };
+    setPreferences(next);
+    try {
+      localStorage.setItem(FILTER_KEY, JSON.stringify(next));
+    } catch {
+      // Keep the in-memory preference when storage is unavailable.
+    }
+  }, [preferences]);
+
   const handleSort = useCallback((key: SortMode) => {
-    setSort(key);
+    updatePreferences({ sort: key });
     if (key === 'random') setRandomSeed(s => s + 1);
-  }, []);
+  }, [updatePreferences]);
+
+  const resetFilters = useCallback(() => {
+    updatePreferences({ difficulty: 'all', source: 'all' });
+  }, [updatePreferences]);
 
   const generation = `${difficulty}|${source}|${sort}|${randomSeed}`;
-
-  const FILTER_KEY = 'eng_filter_state_saved';
-
-  useEffect(() => {
-    try {
-      const saved = localStorage.getItem(FILTER_KEY);
-      if (saved) {
-        const s = JSON.parse(saved);
-        setDifficulty(s.difficulty ?? 'all');
-        setSource(s.source ?? 'all');
-        setView(s.view ?? 'grid');
-        setSort(s.sort ?? 'default');
-      }
-    } catch { /* ignore */ }
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem(FILTER_KEY, JSON.stringify({ difficulty, source, view, sort }));
-  }, [difficulty, source, view, sort]);
 
   const count = Object.keys(savedArticles).length;
 
   return (
-    <div className="max-w-7xl mx-auto px-8 py-10">
-      <h1 className="font-display text-4xl text-[#2D2B28] mb-10">文章收藏</h1>
+    <div className="mx-auto max-w-7xl px-4 py-6 sm:px-8 sm:py-10">
+      <h1 className="mb-6 font-display text-3xl text-[#2D2B28] sm:mb-10 sm:text-4xl">文章收藏</h1>
 
       {count === 0 && (
-        <p className="text-[#78716C] text-center py-12 font-zh-serif">
-          还没有收藏的文章。在文章列表或阅读页面点击收藏按钮即可收藏。
-        </p>
+        <PageState
+          title="还没有收藏文章"
+          description="在文章列表或阅读页面点击收藏，就能在这里继续阅读。"
+          action={{ label: '开始阅读', href: '/' }}
+          tone="empty"
+        />
       )}
 
       {count > 0 && savedMetas.length === 0 && (
-        <p className="text-[#78716C] text-center py-12 font-zh-serif">
-          收藏的文章暂无数据，可能已被移除。
-        </p>
+        <PageState
+          title="收藏的文章已不在内容库"
+          description="本机仍保留收藏记录，但对应文章可能已经被移除。"
+          action={{ label: '返回文章列表', href: '/' }}
+          tone="empty"
+        />
       )}
 
       {savedMetas.length > 0 && (
@@ -126,8 +199,8 @@ export default function SavedArticlesContent({ allMetas }: { allMetas: ArticleMe
             selectedDifficulty={difficulty}
             selectedSource={source}
             sources={sources}
-            onDifficultyChange={setDifficulty}
-            onSourceChange={setSource}
+            onDifficultyChange={value => updatePreferences({ difficulty: value })}
+            onSourceChange={value => updatePreferences({ source: value })}
           />
 
           <div className="flex items-center gap-2.5 flex-wrap">
@@ -139,7 +212,9 @@ export default function SavedArticlesContent({ allMetas }: { allMetas: ArticleMe
               return (
                 <button
                   key={key}
-                  onClick={() => setView(key)}
+                  type="button"
+                  onClick={() => updatePreferences({ view: key })}
+                  aria-pressed={active}
                   className={`${btnBase} ${active ? activeCls : inactiveCls}`}
                 >
                   {label}
@@ -151,7 +226,9 @@ export default function SavedArticlesContent({ allMetas }: { allMetas: ArticleMe
               return (
                 <button
                   key={key}
+                  type="button"
                   onClick={() => handleSort(key)}
+                  aria-pressed={active}
                   className={`${btnBase} ${active ? activeCls : inactiveCls}`}
                 >
                   {label}
@@ -189,7 +266,12 @@ export default function SavedArticlesContent({ allMetas }: { allMetas: ArticleMe
           )}
 
           {filtered.length === 0 && (
-            <p className="text-[#78716C] text-center py-12 font-zh-serif">没有匹配的文章</p>
+            <PageState
+              title="没有匹配的收藏文章"
+              description="当前筛选条件下没有收藏文章，可以清除筛选后重新查看。"
+              action={{ label: '清除筛选', onClick: resetFilters }}
+              tone="empty"
+            />
           )}
         </div>
       )}

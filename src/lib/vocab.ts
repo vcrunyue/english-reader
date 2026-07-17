@@ -50,12 +50,20 @@ export function parseDefinitionParts(pos: string, definition: string): DefPart[]
 
 let vocabCache: VocabMap | null = null;
 
+async function fetchVocab(path: string): Promise<VocabMap> {
+  const response = await fetch(path);
+  if (!response.ok) {
+    throw new Error(`词表资源加载失败: ${path}`);
+  }
+  return response.json() as Promise<VocabMap>;
+}
+
 export async function loadVocab(): Promise<VocabMap> {
   if (vocabCache) return vocabCache as VocabMap;
   const [cet4, cet6, postgrad] = await Promise.all([
-    fetch('/vocab/cet4.json').then(r => r.json()),
-    fetch('/vocab/cet6.json').then(r => r.json()),
-    fetch('/vocab/postgrad.json').then(r => r.json()),
+    fetchVocab('/vocab/cet4.json'),
+    fetchVocab('/vocab/cet6.json'),
+    fetchVocab('/vocab/postgrad.json'),
   ]);
   const merged: VocabMap = { ...cet4, ...cet6, ...postgrad };
   vocabCache = merged;

@@ -1,13 +1,14 @@
+import { PageState } from '@/components/feedback/PageState';
+
 export default function ImportPage() {
   return (
-    <div className="max-w-2xl mx-auto px-8 py-10">
-      <h1 className="font-display text-4xl text-[#2D2B28] mb-10">导入文章</h1>
-      <div className="border-2 border-dashed border-[#D8D2C8] rounded-xl p-12 text-center">
-        <p className="text-[#78716C] mb-2 font-zh-serif">文章导入功能即将上线</p>
-        <p className="text-[13px] text-[#A8A29E] font-zh-serif">
-          后续将支持粘贴文章文本或输入 URL 自动抓取内容
-        </p>
-      </div>
+    <div className="mx-auto max-w-2xl px-4 py-6 sm:px-8 sm:py-10">
+      <h1 className="mb-6 font-display text-3xl text-[#2D2B28] sm:mb-10 sm:text-4xl">导入文章</h1>
+      <PageState
+        title="本地文章导入将在阶段 1 提供"
+        description="当前阶段先完成质量与阅读体验基线，尚未开放文章导入。"
+        tone="empty"
+      />
     </div>
   );
 }

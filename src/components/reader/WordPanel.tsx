@@ -95,28 +95,31 @@ export default function WordPanel({
             </div>
           )}
         </div>
-        <div className="flex items-center gap-1 shrink-0 mt-1 ml-0 opacity-0 group-hover:opacity-100 transition-opacity">
+        <div className="ml-0 mt-1 flex shrink-0 items-center gap-1 opacity-100 transition-opacity lg:opacity-0 lg:group-hover:opacity-100 lg:group-focus-within:opacity-100">
           {isKnown ? (
             <button
+              type="button"
               onClick={() => onUnmarkKnown(w.word)}
               aria-label="移回生词"
-              className="p-1 rounded text-[#78716C] hover:text-[#C88C4A]"
+              className="inline-flex min-h-11 min-w-11 items-center justify-center rounded text-[#78716C] hover:text-[#C88C4A] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C88C4A]"
             >
               <Undo2 size={15} />
             </button>
           ) : (
             <>
               <button
+                type="button"
                 onClick={() => handleToggleSave(w)}
                 aria-label={saved ? '取消收藏' : '收藏'}
-                className={`p-1 rounded ${saved ? 'text-[#C88C4A]' : 'text-[#78716C] hover:text-[#C88C4A]'}`}
+                className={`inline-flex min-h-11 min-w-11 items-center justify-center rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C88C4A] ${saved ? 'text-[#C88C4A]' : 'text-[#78716C] hover:text-[#C88C4A]'}`}
               >
                 <Star size={15} fill={saved ? 'currentColor' : 'none'} />
               </button>
               <button
+                type="button"
                 onClick={() => handleMarkKnown(w)}
                 aria-label="已认识"
-                className="p-1 rounded text-[#78716C] hover:text-[#7CB868]"
+                className="inline-flex min-h-11 min-w-11 items-center justify-center rounded text-[#78716C] hover:text-[#7CB868] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C88C4A]"
               >
                 <Check size={15} />
               </button>

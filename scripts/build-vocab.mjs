@@ -5,13 +5,6 @@ import { fileURLToPath } from 'url';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const PUBLIC_VOCAB = join(__dirname, '..', 'public', 'vocab');
 
-// Input: TXT files (word \t definition)
-const SOURCES = [
-  { file: 'cet4_raw.txt', difficulty: 'cet4' },
-  { file: 'cet6_raw.txt', difficulty: 'cet6' },
-  { file: 'postgrad_raw.txt', difficulty: 'postgrad' },
-];
-
 // Common part-of-speech prefixes in Chinese-English dictionary definitions
 const POS_RE = /^(n\.|vt\.|vi\.|v\.|adj\.|a\.|adv\.|ad\.|prep\.|pron\.|conj\.|det\.|art\.|num\.|int\.|interj\.|aux\.|aux v\.|modal\.|modal verb\.|convention\.)\s+/;
 

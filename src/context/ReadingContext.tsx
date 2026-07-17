@@ -1,6 +1,7 @@
 'use client';
 
-import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
+import React, { createContext, useContext, useState, useCallback } from 'react';
+import { useClientReady } from '@/hooks/use-client-ready';
 import {
   getHighlightEnabled,
   setHighlightEnabled,
@@ -12,6 +13,7 @@ import {
 } from '@/lib/storage';
 
 interface ReadingContextType {
+  ready: boolean;
   highlightEnabled: boolean;
   toggleHighlight: () => void;
   closeReadingEnabled: boolean;
@@ -26,17 +28,39 @@ interface ReadingContextType {
 
 const ReadingContext = createContext<ReadingContextType | null>(null);
 
-export function ReadingProvider({ children }: { children: React.ReactNode }) {
-  const [highlightEnabled, setHighlightEnabledState] = useState(true);
-  const [closeReadingEnabled, setCloseReadingEnabledState] = useState(false);
-  const [selectedParagraph, setSelectedParagraph] = useState(0);
-  const [readArticles, setReadArticles] = useState<Record<string, string>>({});
+const EMPTY_READING: ReadingContextType = {
+  ready: false,
+  highlightEnabled: true,
+  toggleHighlight: () => undefined,
+  closeReadingEnabled: false,
+  toggleCloseReading: () => undefined,
+  selectedParagraph: 0,
+  selectParagraph: () => undefined,
+  readArticles: {},
+  markArticleRead: () => undefined,
+  unmarkArticleRead: () => undefined,
+  isArticleRead: () => false,
+};
 
-  useEffect(() => {
-    setReadArticles(getReadArticles());
-    setHighlightEnabledState(getHighlightEnabled());
-    setCloseReadingEnabledState(getCloseReadingEnabled());
-  }, []);
+export function ReadingProvider({ children }: { children: React.ReactNode }) {
+  const ready = useClientReady();
+
+  if (!ready) {
+    return (
+      <ReadingContext.Provider value={EMPTY_READING}>
+        {children}
+      </ReadingContext.Provider>
+    );
+  }
+
+  return <HydratedReadingProvider>{children}</HydratedReadingProvider>;
+}
+
+function HydratedReadingProvider({ children }: { children: React.ReactNode }) {
+  const [highlightEnabled, setHighlightEnabledState] = useState(() => getHighlightEnabled());
+  const [closeReadingEnabled, setCloseReadingEnabledState] = useState(() => getCloseReadingEnabled());
+  const [selectedParagraph, setSelectedParagraph] = useState(0);
+  const [readArticles, setReadArticles] = useState<Record<string, string>>(() => getReadArticles());
 
   const toggleHighlight = useCallback(() => {
     setHighlightEnabledState(prev => {
@@ -84,6 +108,7 @@ export function ReadingProvider({ children }: { children: React.ReactNode }) {
   return (
     <ReadingContext.Provider
       value={{
+        ready: true,
         highlightEnabled,
         toggleHighlight,
         closeReadingEnabled,

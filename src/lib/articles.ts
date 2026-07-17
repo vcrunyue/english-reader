@@ -3,6 +3,9 @@ import path from 'path';
 import matter from 'gray-matter';
 import type { Article, ArticleMeta, SentencePair } from '@/types';
 import { splitEnglishSentences } from './translate';
+import { parseArticleContent } from './article-content';
+
+export { stripTranslationLines } from './article-content';
 
 const articlesDir = path.join(process.cwd(), 'content/articles');
 
@@ -10,7 +13,6 @@ function countWords(text: string): number {
   const words = text.match(/\b[a-zA-Z]+\b/g);
   return words ? words.length : 0;
 }
-
 export function getAllArticleMetas(): ArticleMeta[] {
   if (!fs.existsSync(articlesDir)) return [];
   const files = fs.readdirSync(articlesDir).filter(f => f.endsWith('.md'));
@@ -27,7 +29,6 @@ export function getAllArticleMetas(): ArticleMeta[] {
       source: data.source ?? '',
       difficulty: (['cet4', 'cet6', 'postgrad'].includes(data.difficulty) ? data.difficulty : 'cet4') as ArticleMeta['difficulty'],
       topic: data.topic ?? '',
-      coverImage: data.coverImage ?? null,
       date: data.date ?? '',
       wordCount: countWords(cleanContent),
     };
@@ -48,7 +49,6 @@ export function getArticleBySlug(slug: string): Article | null {
     source: data.source ?? '',
     difficulty: (['cet4', 'cet6', 'postgrad'].includes(data.difficulty) ? data.difficulty : 'cet4') as ArticleMeta['difficulty'],
     topic: data.topic ?? '',
-    coverImage: data.coverImage ?? null,
     date: data.date ?? '',
     wordCount: countWords(cleanContent),
     content,
@@ -64,7 +64,9 @@ export function getAllArticleSlugs(): string[] {
 }
 
 export function extractTranslations(content: string): SentencePair[][] {
-  const paragraphs = content.split(/\n\n+/).filter(p => p.trim());
+  const paragraphs = parseArticleContent(content)
+    .filter(block => block.type === 'paragraph')
+    .map(block => block.text);
   return paragraphs.map(para => {
     const lines = para.split(/\n/).map(l => l.trim()).filter(l => l && !l.startsWith('#'));
     const hasTranslations = lines.some(l => l.startsWith('§'));
@@ -89,11 +91,4 @@ export function extractTranslations(content: string): SentencePair[][] {
     const text = lines.join(' ');
     return splitEnglishSentences(text).map(en => ({ en, zh: '' }));
   }).filter(para => para.length > 0);
-}
-
-export function stripTranslationLines(content: string): string {
-  return content
-    .split(/\n/)
-    .filter(line => !line.trim().startsWith('§'))
-    .join('\n');
 }

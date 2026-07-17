@@ -6,12 +6,13 @@ import { getDifficultyDotColor, getDifficultyLabel, parseDefinitionParts } from 
 import { getBadgeClass, DIFFICULTY_FILTERS } from '@/config/difficulty';
 import { useVocab } from '@/context/VocabContext';
 import { useKnownWords } from '@/context/KnownWordsContext';
+import { PageState } from '@/components/feedback/PageState';
 import { X } from 'lucide-react';
 
-const btnBase = 'text-sm px-3 py-1.5 rounded-md border border-[#D8D2C8] transition-colors duration-200 font-zh-serif';
+const btnBase = 'min-h-11 text-sm px-3 py-1.5 rounded-md border border-[#D8D2C8] transition-colors duration-200 font-zh-serif';
 
 export default function KnownWordsPage() {
-  const vocab = useVocab();
+  const { vocab, error, retry } = useVocab();
   const [difficulty, setDifficulty] = useState<Difficulty | 'all'>('all');
   const { knownWords, unmarkWordKnown } = useKnownWords();
 
@@ -29,8 +30,21 @@ export default function KnownWordsPage() {
     <div className="max-w-2xl mx-auto px-8 py-10">
       <h1 className="font-display text-4xl text-[#2D2B28] mb-10">熟词收藏</h1>
 
-      {!vocab && (
-        <p className="text-[#78716C] text-center py-12 font-zh-serif">加载中...</p>
+      {error && (
+        <PageState
+          title="词表加载失败"
+          description={`${error} 保存在本机的熟词记录没有受到影响。`}
+          action={{ label: '重新加载词表', onClick: retry }}
+          tone="error"
+        />
+      )}
+
+      {!error && !vocab && (
+        <PageState
+          title="正在加载词表"
+          description="词表准备好后即可查看和管理熟词。"
+          tone="loading"
+        />
       )}
 
       {vocab && knownWords.size === 0 && (
@@ -41,11 +55,13 @@ export default function KnownWordsPage() {
 
       {vocab && knownWords.size > 0 && (
         <>
-          <div className="flex gap-2 mb-6">
+          <div className="mb-6 flex flex-wrap gap-2" role="group" aria-label="按难度筛选">
             {DIFFICULTY_FILTERS.map(({ key, label, activeClass }) => (
               <button
                 key={key}
+                type="button"
                 onClick={() => setDifficulty(key)}
+                aria-pressed={difficulty === key}
                 className={`${btnBase} ${difficulty === key ? activeClass : 'text-[#78716C] hover:bg-[#EDE9E0]'}`}
               >
                 {label}
@@ -76,8 +92,9 @@ export default function KnownWordsPage() {
                 {getDifficultyLabel(entry.difficulty)}
               </span>
               <button
+                type="button"
                 onClick={() => unmarkWordKnown(word)}
-                className="opacity-0 group-hover:opacity-100 p-1 text-[#78716C] hover:text-red-400 transition-all"
+                className="inline-flex min-h-11 min-w-11 items-center justify-center rounded text-[#78716C] opacity-100 transition-all hover:text-red-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C88C4A] lg:opacity-0 lg:group-hover:opacity-100 lg:group-focus-within:opacity-100"
                 aria-label="移出熟词"
               >
                 <X size={14} />

@@ -1,7 +1,8 @@
 'use client';
 
-import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
+import React, { createContext, useContext, useState, useCallback } from 'react';
 import type { SavedWord } from '@/types';
+import { useClientReady } from '@/hooks/use-client-ready';
 import {
   getSavedWords,
   saveWord,
@@ -24,14 +25,34 @@ interface CollectionContextType {
 
 const CollectionContext = createContext<CollectionContextType | null>(null);
 
-export function CollectionProvider({ children }: { children: React.ReactNode }) {
-  const [savedWords, setSavedWords] = useState<Record<string, SavedWord>>({});
-  const [savedArticles, setSavedArticles] = useState<Record<string, string>>({});
+const EMPTY_COLLECTION: CollectionContextType = {
+  savedWords: {},
+  saveWordToCollection: () => undefined,
+  removeWordFromCollection: () => undefined,
+  isWordInCollection: () => false,
+  savedArticles: {},
+  saveArticleToCollection: () => undefined,
+  removeArticleFromCollection: () => undefined,
+  isArticleInCollection: () => false,
+};
 
-  useEffect(() => {
-    setSavedWords(getSavedWords());
-    setSavedArticles(getSavedArticles());
-  }, []);
+export function CollectionProvider({ children }: { children: React.ReactNode }) {
+  const ready = useClientReady();
+
+  if (!ready) {
+    return (
+      <CollectionContext.Provider value={EMPTY_COLLECTION}>
+        {children}
+      </CollectionContext.Provider>
+    );
+  }
+
+  return <HydratedCollectionProvider>{children}</HydratedCollectionProvider>;
+}
+
+function HydratedCollectionProvider({ children }: { children: React.ReactNode }) {
+  const [savedWords, setSavedWords] = useState<Record<string, SavedWord>>(() => getSavedWords());
+  const [savedArticles, setSavedArticles] = useState<Record<string, string>>(() => getSavedArticles());
 
   const saveWordToCollection = useCallback((word: SavedWord) => {
     saveWord(word);

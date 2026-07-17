@@ -48,7 +48,6 @@ export function getKnownWords(): Record<string, string> {
     const migrated: Record<string, string> = {};
     const d = today();
     for (const w of parsed) migrated[w] = d;
-    writeJSON(STORAGE_KEYS.knownWords, migrated);
     return migrated;
   }
   return parsed as Record<string, string>;
@@ -95,7 +94,11 @@ export function isWordSaved(word: string): boolean {
 
 export function getHighlightEnabled(): boolean {
   if (typeof window === 'undefined') return true;
-  return localStorage.getItem(STORAGE_KEYS.highlightEnabled) !== 'false';
+  try {
+    return localStorage.getItem(STORAGE_KEYS.highlightEnabled) !== 'false';
+  } catch {
+    return true;
+  }
 }
 
 export function setHighlightEnabled(enabled: boolean): void {
@@ -106,7 +109,11 @@ export function setHighlightEnabled(enabled: boolean): void {
 
 export function getCloseReadingEnabled(): boolean {
   if (typeof window === 'undefined') return false;
-  return localStorage.getItem(STORAGE_KEYS.closeReadingEnabled) === 'true';
+  try {
+    return localStorage.getItem(STORAGE_KEYS.closeReadingEnabled) === 'true';
+  } catch {
+    return false;
+  }
 }
 
 export function setCloseReadingEnabled(enabled: boolean): void {
